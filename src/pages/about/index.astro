@@ -174,7 +174,7 @@ const headings = [
       }
     ]}
   />
-  <ToolSection
+  <!-- <ToolSection
     class='mb-5'
     title='Other Used Tools'
     tools={[
@@ -184,27 +184,27 @@ const headings = [
         href: 'https://www.doubao.com/',
         icon: import('@/assets/tools/doubao.svg?raw')
       },
-      {
-        name: 'ima.copilot',
-        description: 'AI-powered knowledge base',
-        href: 'https://github.com/features/preview/copilot-x',
-        icon: import('@/assets/tools/ima.svg?raw')
-      },
-      {
-        name: 'Cherry Studio',
-        description: 'All-in-one AI service aggregator',
-        href: 'https://www.cherry-ai.com',
-        icon: import('@/assets/tools/cherry-studio.svg?raw')
-      }
+      // {
+      //   name: 'ima.copilot',
+      //   description: 'AI-powered knowledge base',
+      //   href: 'https://github.com/features/preview/copilot-x',
+      //   icon: import('@/assets/tools/ima.svg?raw')
+      // },
+      // {
+      //   name: 'Cherry Studio',
+      //   description: 'All-in-one AI service aggregator',
+      //   href: 'https://www.cherry-ai.com',
+      //   icon: import('@/assets/tools/ima.svg?raw')
+      // }
     ]}
-  />
+  /> -->
 
   {/* social-networks */}
   <h2 id='social-networks'>Social Networks</h2>
-  <p>
+  <!-- <p>
     Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
     dissentiunt, cu meliore fuisset mei, vel quod voluptua ne.
-  </p>
+  </p> -->
   <Substats
     stats={[
       {
@@ -230,43 +230,49 @@ const headings = [
       //   text: 'followers',
       //   api: 'weibo/5501674056'
       // },
-      {
-        platform: 'Steam',
-        icon: 'steam',
-        color: '#50769d',
-        link: 'https://steamcommunity.com/id/cworld',
-        text: 'games',
-        api: 'steamgames/76561199021278120'
-      }
+      // {
+      //   platform: 'Steam',
+      //   icon: 'steam',
+      //   color: '#50769d',
+      //   link: 'https://steamcommunity.com/id/cworld',
+      //   text: 'games',
+      //   api: 'steamgames/76561199021278120'
+      // }
     ]}
   />
 
   {/* gossips */}
   <h2 id='gossips'>Gossips</h2>
-  <Collapse title='Lorem ipsum'>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
-    possit voluptatum.
+  <Collapse title='随便聊聊'>
+    这里是一些关于我的小八卦、碎碎念或者日常感想。<br />
+    也许是最近喜欢的书、电影，或者是一些有趣的生活琐事。<br />
+    你有什么想知道的，也可以留言告诉我哦！
   </Collapse>
 
   {/* about-blog */}
   <h2 id='about-blog'>About Blog</h2>
-  <p>Website history:</p>
+  <p>Write history:</p>
   <Timeline
     events={[
       {
-        date: '2024-04-29',
-        content:
-          'Website refactored using <a href="https://astro.build/" target="_blank">Astro</a> and <a href="https://github.com/srleom/astro-theme-resume" target="_blank">Astro Theme Resume</a>'
+        date: '2023-03-13',
+        content: 'Started writing Markdown notes in Youdao Note'
       },
       {
-        date: '2024-07-26',
-        content:
-          'Website abstracted as a theme and published on <a href="https://github.com/cworld1/astro-theme-pure"target="_blank">Github</a>'
+        date: '2023-10-23',
+        content: 'Started writing notes on Luogu'
       },
       {
-        date: '2024-07-27',
-        content: 'Began writing website docs'
+        date: '2024-01-10',
+        content: 'Built my first Hexo blog'
+      },
+      {
+        date: '2024-01-12',
+        content: 'Tried to build a digital garden'
+      },
+      {
+        date: '2025-10-06',
+        content: 'Started this Astro blog'
       }
     ]}
   />
