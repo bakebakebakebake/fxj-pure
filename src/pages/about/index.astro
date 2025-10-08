@@ -14,14 +14,16 @@ const headings = [
 ---
 
 <PageLayout title='About' {headings} comment>
-  <p>Developer / Designer</p>
+  <p>Developer / ACMer</p>
   <p>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
-    possit voluptatum.
+    一位小菜鸡，正在学习中...<br>
+    西南石油大学就读于计算机科学与技术专业。<br>
+    就业方向在后端开发方向。<br>
+    我的兴趣主要是在算法竞赛/数学/优化/理解本质上。<br>
+    <Spoiler>谁说后端方向就不能体会理解其本质的乐趣了呢！</Spoiler>
   </p>
   <p>
-    My motto: Stay hungry, Stay foolish. <Spoiler>这里可以夹私货，比如为什么要演奏春日影！</Spoiler>
+    My motto: Anyway, Pace yourself. <Spoiler>不管怎样，调整好自己的节奏！</Spoiler>
   </p>
   <Button title='Sponsor Me' class='w-fit' href='/projects#sponsorship' variant='ahead' />
 
@@ -40,7 +42,7 @@ const headings = [
   {/* tools */}
   <h2 id='tools'>Tools</h2>
   <p>Current support tools as follow:</p>
-  <ToolSection
+  <!-- <ToolSection
     class='mb-5'
     title='Design'
     tools={[
@@ -69,7 +71,7 @@ const headings = [
         icon: import('@/assets/tools/premiere.svg?raw')
       }
     ]}
-  />
+  /> -->
   <ToolSection
     class='mb-5'
     title='Productivity'
@@ -81,20 +83,26 @@ const headings = [
         icon: import('@/assets/tools/chrome.svg?raw')
       },
       {
-        name: 'Firefox',
+        name: 'Edge',
         description: 'Browser',
-        href: 'https://www.mozilla.org/en-US/firefox',
-        icon: import('@/assets/tools/firefox.svg?raw')
+        href: 'https://www.microsoft.com/en-us/edge',
+        icon: import('@/assets/tools/edge.svg?raw')
       },
+      // {
+      //   name: 'Firefox',
+      //   description: 'Browser',
+      //   href: 'https://www.mozilla.org/en-US/firefox',
+      //   icon: import('@/assets/tools/firefox.svg?raw')
+      // },
       {
-        name: 'Notion',
-        description: 'Note Taking',
-        href: 'https://www.notion.so/',
-        icon: import('@/assets/tools/notion.svg?raw')
+        name: 'Obsidian',
+        description: 'All-in-one Daliy Note Taking',
+        href: 'https://www.obsidian.md/',
+        icon: import('@/assets/tools/obsidian.svg?raw')
       },
       {
         name: 'Typora',
-        description: 'Markdown Editor',
+        description: 'Markdown Reader for single file',
         href: 'https://typora.io/',
         icon: import('@/assets/tools/typora.svg?raw')
       }
@@ -111,32 +119,44 @@ const headings = [
         icon: import('@/assets/tools/vscode.svg?raw')
       },
       {
-        name: 'Neovim',
-        description: 'IDE',
-        href: 'https://neovim.io/',
-        icon: import('@/assets/tools/neovim.svg?raw')
+        name: 'Cursor',
+        description: 'AI IDE(for Tab Mode)',
+        href: 'https://www.cursor.com/',
+        icon: import('@/assets/tools/cursor.svg?raw')
       },
       {
-        name: 'Sublime Text',
+        name: 'IntelliJ IDEA',
         description: 'IDE',
-        href: 'https://www.sublimetext.com/',
-        icon: import('@/assets/tools/sublime.svg?raw')
+        href: 'https://www.jetbrains.com/idea/',
+        icon: import('@/assets/tools/IDEA.svg?raw')
       }
+      // {
+      //   name: 'Neovim',
+      //   description: 'IDE',
+      //   href: 'https://neovim.io/',
+      //   icon: import('@/assets/tools/neovim.svg?raw')
+      // },
+      // {
+      //   name: 'Sublime Text',
+      //   description: 'IDE',
+      //   href: 'https://www.sublimetext.com/',
+      //   icon: import('@/assets/tools/sublime.svg?raw')
+      // }
     ]}
   />
   <ToolSection
     class='mb-5'
     title='Environment'
     tools={[
+      // {
+      //   name: 'Arch Linux',
+      //   description: 'Linux Distribution',
+      //   href: 'https://archlinux.org/',
+      //   icon: import('@/assets/tools/archlinux.svg?raw')
+      // },
       {
-        name: 'Arch Linux',
-        description: 'Linux Distribution',
-        href: 'https://archlinux.org/',
-        icon: import('@/assets/tools/archlinux.svg?raw')
-      },
-      {
-        name: 'Ubuntu 24.04 LTS',
-        description: 'Linux Distribution',
+        name: 'Ubuntu 22.04 LTS',
+        description: 'Linux Distribution(WSL)',
         href: 'https://ubuntu.com/',
         icon: import('@/assets/tools/ubuntu.svg?raw')
       },
@@ -147,10 +167,34 @@ const headings = [
         icon: import('@/assets/tools/apple.svg?raw')
       },
       {
-        name: 'Windows 11',
-        description: 'Framework Laptop 16',
+        name: 'Windows 11 Pro Workstation 24H2',
+        description: 'Lenovo Legion',
         href: 'https://news.microsoft.com/windows11-general-availability/',
         icon: import('@/assets/tools/windows11.svg?raw')
+      }
+    ]}
+  />
+  <ToolSection
+    class='mb-5'
+    title='Other Used Tools'
+    tools={[
+      {
+        name: 'Doubao CLI',
+        description: 'Easy for daily use',
+        href: 'https://www.doubao.com/',
+        icon: import('@/assets/tools/doubao.svg?raw')
+      },
+      {
+        name: 'ima.copilot',
+        description: 'AI-powered knowledge base',
+        href: 'https://github.com/features/preview/copilot-x',
+        icon: import('@/assets/tools/ima.svg?raw')
+      },
+      {
+        name: 'Cherry Studio',
+        description: 'All-in-one AI service aggregator',
+        href: 'https://www.cherry-ai.com',
+        icon: import('@/assets/tools/cherry-studio.svg?raw')
       }
     ]}
   />
@@ -166,26 +210,26 @@ const headings = [
       {
         platform: 'GitHub',
         icon: 'github',
-        link: 'https://github.com/cworld1',
+        link: 'https://github.com/bakebakebakebake',
         text: 'followers',
-        api: 'github/cworld1'
+        api: 'github/bakebakebakebake'
       },
-      {
-        platform: 'Telegram',
-        icon: 'telegram',
-        color: '#2ca5e0',
-        link: 'https://t.me/cworld0_cn',
-        text: 'subscribers',
-        api: 'telegram/cworld0_cn'
-      },
-      {
-        platform: 'Weibo',
-        icon: 'weibo',
-        color: '#e71f19',
-        link: 'https://weibo.com/cworld0',
-        text: 'followers',
-        api: 'weibo/5501674056'
-      },
+      // {
+      //   platform: 'Telegram',
+      //   icon: 'telegram',
+      //   color: '#2ca5e0',
+      //   link: 'https://t.me/cworld0_cn',
+      //   text: 'subscribers',
+      //   api: 'telegram/cworld0_cn'
+      // },
+      // {
+      //   platform: 'Weibo',
+      //   icon: 'weibo',
+      //   color: '#e71f19',
+      //   link: 'https://weibo.com/cworld0',
+      //   text: 'followers',
+      //   api: 'weibo/5501674056'
+      // },
       {
         platform: 'Steam',
         icon: 'steam',

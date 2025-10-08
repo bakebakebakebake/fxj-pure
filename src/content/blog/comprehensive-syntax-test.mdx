@@ -1,0 +1,534 @@
+---
+title: 'Astro Pure 主题完整语法测试'
+description: '全面测试 Markdown、MDX、组件、代码高亮、diff 等所有语法功能'
+publishDate: '2025-10-06T00:00:00Z'
+tags: ['测试', 'Markdown', 'MDX', '组件', '语法', '代码高亮']
+heroImage: { src: './syntax-test/test.jpeg', alt: 'an image targetting my article', color: '#F2E1CD' }
+---
+
+import { 
+  Button, 
+  Card, 
+  Collapse, 
+  Spoiler, 
+  Label, 
+  Icon, 
+  Timeline, 
+  Steps, 
+  Tabs, 
+  TabItem, 
+  Aside,
+  CardList
+} from 'astro-pure/user'
+
+# Astro Pure 主题完整语法测试
+
+> 本文全面测试 Astro Theme Pure 支持的所有 Markdown、MDX 语法和组件功能。
+
+## 1. 基础 Markdown 语法
+
+### 1.1 文本格式
+
+**粗体文本** 和 *斜体文本* 以及 ***粗斜体***
+
+~~删除线文本~~
+
+`行内代码`
+
+==高亮文本==
+
+### 1.2 列表
+
+**无序列表：**
+- 项目 1
+- 项目 2
+  - 子项目 2.1
+  - 子项目 2.2
+- 项目 3
+
+**有序列表：**
+1. 第一项
+2. 第二项
+3. 第三项
+
+**任务列表：**
+- [x] 已完成的任务
+- [ ] 未完成的任务
+- [ ] 待办事项
+
+### 1.3 链接和图片
+
+[访问 FXJ Wiki](https://fxj.wiki)
+
+[访问 Astro 官网](https://astro.build)
+
+### 1.4 引用
+
+> 这是一个引用块
+> 
+> 可以包含多行内容
+> 
+> — 冯相杰
+
+### 1.5 分隔线
+
+---
+
+## 2. 代码高亮和语法
+
+### 2.1 JavaScript 代码
+
+```javascript
+// JavaScript 代码示例
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+console.log(fibonacci(10)); // 输出: 55
+```
+
+### 2.2 Python 代码
+
+```python
+# Python 代码示例
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+
+print(quick_sort([3, 6, 8, 10, 1, 2, 1]))
+```
+
+### 2.3 TypeScript 代码
+
+```typescript
+// TypeScript 代码示例
+interface User {
+  name: string;
+  age: number;
+  email?: string;
+}
+
+const user: User = {
+  name: '冯相杰',
+  age: 25,
+  email: 'fxj@example.com'
+};
+
+function greet(user: User): string {
+  return `Hello, ${user.name}!`;
+}
+
+console.log(greet(user));
+```
+
+### 2.4 代码 Diff 对比
+
+```diff
+// 代码修改对比示例
+- function oldFunction() {
+-   console.log('这是旧代码');
+-   return 'old';
+- }
++ function newFunction() {
++   console.log('这是新代码');
++   return 'new';
++ }
+
+// 添加新功能
++ function addedFunction() {
++   return '新增的功能';
++ }
+```
+
+### 2.5 带行号的代码
+
+```javascript {1,3-5}
+// 高亮第1行和第3-5行
+function example() {
+  const message = 'Hello World';
+  console.log(message);
+  return message;
+}
+```
+
+### 2.6 代码块标题
+
+```javascript title="utils.js"
+// 带标题的代码块
+export function formatDate(date) {
+  return new Intl.DateTimeFormat('zh-CN').format(date);
+}
+```
+
+## 3. 表格
+
+| 功能 | 支持 | 备注 |
+|------|------|------|
+| Markdown | ✅ | 完全支持 |
+| MDX | ✅ | 支持组件 |
+| LaTeX 数学公式 | ✅ | 使用 KaTeX |
+| 代码高亮 | ✅ | Shiki |
+| 搜索功能 | ✅ | Pagefind |
+| 评论系统 | ✅ | Waline |
+
+## 4. 用户组件测试
+
+### 4.1 Button 按钮组件
+
+<Button href="https://fxj.wiki" variant="ahead">
+  访问首页
+</Button>
+
+<Button variant="normal">
+  普通按钮
+</Button>
+
+### 4.2 Card 卡片组件
+
+<Card 
+  heading="卡片标题" 
+  subheading="这是一个卡片组件示例"
+  date="2025-10-06"
+>
+  卡片内容可以包含任何 Markdown 或 HTML 内容。
+  
+  - 支持列表
+  - 支持 **格式化**
+  - 支持 `代码`
+</Card>
+
+### 4.3 Collapse 折叠组件
+
+<Collapse title="点击展开详细内容">
+这是折叠内容，点击标题可以展开或折叠。
+
+可以包含多行内容：
+- 列表项 1
+- 列表项 2
+- 列表项 3
+
+```javascript
+console.log('代码也可以放在折叠内容中');
+```
+</Collapse>
+
+### 4.4 Spoiler 剧透组件
+
+<Spoiler>这是一段被隐藏的内容，需要点击才能查看！</Spoiler>
+
+### 4.5 Label 标签组件
+
+<Label title="GitHub">
+  <Icon name="github" class="size-5" slot="icon" />
+</Label>
+
+<Label title="中国">
+  <Icon name="location" class="size-5" slot="icon" />
+</Label>
+
+<Label title="邮箱">
+  <Icon name="mail" class="size-5" slot="icon" />
+</Label>
+
+### 4.6 Timeline 时间线组件
+
+<Timeline
+  events={[
+    {
+      date: '2025-10-06',
+      content: '博客正式上线，使用 Astro Theme Pure 搭建'
+    },
+    {
+      date: '2025-10-05',
+      content: '完成域名配置 fxj.wiki'
+    },
+    {
+      date: '2025-10-04',
+      content: '开始搭建个人博客'
+    }
+  ]}
+/>
+
+### 4.7 Steps 步骤组件
+
+<Steps>
+
+1. **第一步：准备环境**
+   
+   安装 Node.js 和 npm
+
+2. **第二步：创建项目**
+   
+   ```bash
+   npm create astro@latest -- --template cworld1/astro-theme-pure
+   ```
+
+3. **第三步：启动开发服务器**
+   
+   ```bash
+   npm run dev
+   ```
+
+4. **第四步：开始写作**
+   
+   在 `src/content/blog/` 目录下创建文章
+
+</Steps>
+
+### 4.8 Tabs 标签页组件
+
+<Tabs>
+<TabItem label="JavaScript">
+
+```javascript
+// JavaScript 示例
+const message = 'Hello from JavaScript!';
+console.log(message);
+```
+
+</TabItem>
+<TabItem label="Python">
+
+```python
+# Python 示例
+message = "Hello from Python!"
+print(message)
+```
+
+</TabItem>
+<TabItem label="TypeScript">
+
+```typescript
+// TypeScript 示例
+const message: string = 'Hello from TypeScript!';
+console.log(message);
+```
+
+</TabItem>
+</Tabs>
+
+### 4.9 Aside 提示框组件
+
+<Aside type="tip">
+这是一个提示框，用于显示重要信息或技巧。
+</Aside>
+
+<Aside type="note">
+这是一个普通提示框。
+</Aside>
+
+<Aside type="caution">
+这是一个警告框，用于提醒注意事项。
+</Aside>
+
+<Aside type="danger">
+这是一个危险警告框，用于重要警告。
+</Aside>
+
+### 4.10 CardList 卡片列表组件
+
+<CardList
+  title="项目列表"
+  list={[
+    {
+      title: 'FXJ Wiki',
+      link: 'https://fxj.wiki',
+      description: '个人博客主页'
+    },
+    {
+      title: 'Docs',
+      link: 'https://docs.fxj.wiki',
+      description: '技术文档站点'
+    },
+    {
+      title: 'Notes',
+      link: 'https://notes.fxj.wiki',
+      description: '学习笔记站点'
+    }
+  ]}
+/>
+
+## 5. LaTeX 数学公式
+
+### 5.1 行内公式
+
+这是行内公式示例：$E = mc^2$，爱因斯坦的质能方程。
+
+勾股定理：$a^2 + b^2 = c^2$
+
+### 5.2 块级公式
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+
+$$
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n
+$$
+
+二次方程求根公式：
+
+$$
+x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}
+$$
+
+## 6. 特殊语法
+
+### 6.1 脚注
+
+这是一个包含脚注的段落[^1]。
+
+这是另一个脚注[^2]。
+
+[^1]: 这是第一个脚注的内容。
+[^2]: 这是第二个脚注的内容，可以包含更多信息。
+
+### 6.2 键盘按键
+
+按下 <kbd>Ctrl</kbd> + <kbd>C</kbd> 复制文本。
+
+按下 <kbd>Ctrl</kbd> + <kbd>V</kbd> 粘贴文本。
+
+### 6.3 上标和下标
+
+H<sub>2</sub>O 是水的化学式。
+
+E=mc<sup>2</sup> 是质能方程。
+
+## 7. 告示框
+
+:::note
+这是一个提示框，用于显示重要信息。
+:::
+
+:::tip
+这是一个技巧提示框。
+:::
+
+:::caution
+这是一个警告框。
+:::
+
+:::danger
+这是一个危险警告框。
+:::
+
+## 8. HTML 支持
+
+<div style="background: linear-gradient(to right, #ff7e5f, #feb47b); padding: 20px; border-radius: 8px; color: white;">
+  <h3>HTML 内容</h3>
+  <p>Markdown 中可以直接使用 HTML 标签！</p>
+  <ul>
+    <li>支持自定义样式</li>
+    <li>支持复杂布局</li>
+    <li>支持交互元素</li>
+  </ul>
+</div>
+
+## 9. Emoji 支持
+
+🎉 🚀 💻 📝 ✨ 🔥 👍 ❤️ 🎨 🌟 💡 🔧 📚 🎯
+
+## 10. 复杂组合示例
+
+### 10.1 嵌套组件
+
+<Collapse title="查看复杂示例">
+  <Card heading="嵌套卡片" subheading="在折叠组件中的卡片">
+    <Timeline
+      events={[
+        {
+          date: '2025-10-06',
+          content: '这是一个嵌套的时间线组件'
+        }
+      ]}
+    />
+    
+    <Button variant="normal">嵌套按钮</Button>
+  </Card>
+</Collapse>
+
+### 10.2 代码和组件的组合
+
+<Tabs>
+<TabItem label="完整示例">
+
+```javascript
+// 完整的组件使用示例
+import { Button, Card, Timeline } from 'astro-pure/user'
+
+export function MyComponent() {
+  return (
+    <div>
+      <Card heading="标题" subheading="副标题">
+        <Timeline events={[
+          { date: '2025-10-06', content: '事件内容' }
+        ]} />
+        <Button variant="ahead">按钮</Button>
+      </Card>
+    </div>
+  )
+}
+```
+
+</TabItem>
+<TabItem label="简化版本">
+
+```javascript
+// 简化版本
+<Button>简单按钮</Button>
+```
+
+</TabItem>
+</Tabs>
+
+## 11. 总结
+
+Astro Theme Pure 支持：
+
+### ✅ 基础功能
+1. 完整的 Markdown 语法
+2. MDX 组件集成
+3. LaTeX 数学公式（KaTeX）
+4. 代码高亮（Shiki）
+5. 代码 Diff 对比
+6. 响应式设计
+7. 暗黑模式
+8. 搜索功能
+
+### ✅ 用户组件
+1. **Button** - 按钮组件
+2. **Card** - 卡片组件
+3. **Collapse** - 折叠组件
+4. **Spoiler** - 剧透组件
+5. **Label** - 标签组件
+6. **Icon** - 图标组件
+7. **Timeline** - 时间线组件
+8. **Steps** - 步骤组件
+9. **Tabs/TabItem** - 标签页组件
+10. **Aside** - 提示框组件（支持：note, tip, caution, danger）
+11. **CardList** - 卡片列表组件
+
+### ✅ 高级功能
+1. 代码行号高亮
+2. 代码块标题
+3. 脚注支持
+4. 键盘按键显示
+5. 上标下标
+6. HTML 直接嵌入
+7. Emoji 支持
+8. 组件嵌套组合
+
+这是一个功能强大且美观的博客主题！🎨
+
+---
+
+<Aside type="tip">
+**提示：** 本文档展示了 Astro Theme Pure 的所有主要功能。您可以根据需要选择合适的功能来丰富您的博客内容。
+</Aside>

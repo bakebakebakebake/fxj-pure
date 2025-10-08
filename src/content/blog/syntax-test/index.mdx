@@ -1,0 +1,269 @@
+---
+title: 'Astro Pure 主题语法测试'
+description: '测试 Markdown、MDX、组件等各种语法功能'
+publishDate: '2025-10-06T00:00:00Z'
+tags: ['测试', 'Markdown', 'MDX', '语法']
+heroImage: { src: './test.jpeg', alt: 'an image targetting my article', color: '#E63946' }
+---
+
+import { Button, Card, Collapse, Spoiler, Label, Icon } from 'astro-pure/user'
+
+# Astro Pure 主题语法测试
+
+> 本文用于测试 Astro Theme Pure 支持的各种 Markdown 和 MDX 语法功能。
+
+## 1. 基础 Markdown 语法
+
+### 1.1 文本格式
+
+**粗体文本** 和 *斜体文本* 以及 ***粗斜体***
+
+~~删除线文本~~
+
+`行内代码`
+
+### 1.2 列表
+
+**无序列表：**
+- 项目 1
+- 项目 2
+  - 子项目 2.1
+  - 子项目 2.2
+- 项目 3
+
+**有序列表：**
+1. 第一项
+2. 第二项
+3. 第三项
+
+**任务列表：**
+- [x] 已完成的任务
+- [ ] 未完成的任务
+- [ ] 待办事项
+
+### 1.3 链接和图片
+
+[访问 FXJ Wiki](https://fxj.wiki)
+
+[访问 Astro 官网](https://astro.build)
+
+### 1.4 引用
+
+> 这是一个引用块
+> 
+> 可以包含多行内容
+> 
+> — 冯相杰
+
+### 1.5 分隔线
+
+---
+
+## 2. 代码块
+
+### 2.1 JavaScript 代码
+
+```javascript
+// JavaScript 代码示例
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+console.log(fibonacci(10)); // 输出: 55
+```
+
+### 2.2 Python 代码
+
+```python
+# Python 代码示例
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+
+print(quick_sort([3, 6, 8, 10, 1, 2, 1]))
+```
+
+### 2.3 TypeScript 代码
+
+```typescript
+// TypeScript 代码示例
+interface User {
+  name: string;
+  age: number;
+  email?: string;
+}
+
+const user: User = {
+  name: '冯相杰',
+  age: 25,
+  email: 'fxj@example.com'
+};
+
+function greet(user: User): string {
+  return `Hello, ${user.name}!`;
+}
+
+console.log(greet(user));
+```
+
+## 3. 表格
+
+| 功能 | 支持 | 备注 |
+|------|------|------|
+| Markdown | ✅ | 完全支持 |
+| MDX | ✅ | 支持组件 |
+| LaTeX 数学公式 | ✅ | 使用 KaTeX |
+| 代码高亮 | ✅ | Shiki |
+| 搜索功能 | ✅ | Pagefind |
+| 评论系统 | ✅ | Waline |
+
+## 4. MDX 组件测试
+
+### 4.1 Button 按钮组件
+
+<Button href="https://fxj.wiki" variant="ahead">
+  访问首页
+</Button>
+
+<Button variant="normal">
+  普通按钮
+</Button>
+
+### 4.2 Card 卡片组件
+
+<Card 
+  heading="卡片标题" 
+  subheading="这是一个卡片组件示例"
+  date="2025-10-06"
+>
+  卡片内容可以包含任何 Markdown 或 HTML 内容。
+  
+  - 支持列表
+  - 支持 **格式化**
+  - 支持 `代码`
+</Card>
+
+### 4.3 Collapse 折叠组件
+
+<Collapse title="点击展开详细内容">
+这是折叠内容，点击标题可以展开或折叠。
+
+可以包含多行内容：
+- 列表项 1
+- 列表项 2
+- 列表项 3
+
+```javascript
+console.log('代码也可以放在折叠内容中');
+```
+</Collapse>
+
+### 4.4 Spoiler 剧透组件
+
+<Spoiler>这是一段被隐藏的内容，需要点击才能查看！</Spoiler>
+
+### 4.5 Label 标签组件
+
+<Label title="GitHub">
+  <Icon name="github" class="size-5" slot="icon" />
+</Label>
+
+<Label title="中国">
+  <Icon name="location" class="size-5" slot="icon" />
+</Label>
+
+## 5. LaTeX 数学公式
+
+### 5.1 行内公式
+
+这是行内公式示例：$E = mc^2$，爱因斯坦的质能方程。
+
+勾股定理：$a^2 + b^2 = c^2$
+
+### 5.2 块级公式
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+
+$$
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n
+$$
+
+二次方程求根公式：
+
+$$
+x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}
+$$
+
+## 6. 特殊语法
+
+### 6.1 脚注
+
+这是一个包含脚注的段落[^1]。
+
+这是另一个脚注[^2]。
+
+[^1]: 这是第一个脚注的内容。
+[^2]: 这是第二个脚注的内容，可以包含更多信息。
+
+### 6.2 高亮文本
+
+这是 ==高亮文本== 的示例。
+
+### 6.3 键盘按键
+
+按下 <kbd>Ctrl</kbd> + <kbd>C</kbd> 复制文本。
+
+按下 <kbd>Ctrl</kbd> + <kbd>V</kbd> 粘贴文本。
+
+## 7. 告示框
+
+:::note
+这是一个提示框，用于显示重要信息。
+:::
+
+:::tip
+这是一个技巧提示框。
+:::
+
+:::warning
+这是一个警告框。
+:::
+
+:::danger
+这是一个危险警告框。
+:::
+
+## 8. HTML 支持
+
+<div style="background: linear-gradient(to right,rgb(157, 208, 143), #feb47b); padding: 20px; border-radius: 8px; color: white;">
+  <h3>HTML 内容</h3>
+  <p>Markdown 中可以直接使用 HTML 标签！</p>
+</div>
+
+## 9. Emoji 支持
+
+🎉 🚀 💻 📝 ✨ 🔥 👍 ❤️ 
+
+## 10. 总结
+
+Astro Theme Pure 支持：
+
+1. ✅ 完整的 Markdown 语法
+2. ✅ MDX 组件集成
+3. ✅ LaTeX 数学公式（KaTeX）
+4. ✅ 代码高亮（Shiki）
+5. ✅ 丰富的用户组件
+6. ✅ 响应式设计
+7. ✅ 暗黑模式
+8. ✅ 搜索功能
+
+这是一个功能强大且美观的博客主题！🎨
+
