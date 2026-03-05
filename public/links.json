@@ -15,6 +15,78 @@
           "intro": "求知若愚，虚怀若谷",
           "link": "https://cworld0.com/",
           "avatar": "https://cravatar.cn/avatar/1ffe42aa45a6b1444a786b1f32dfa8aa?s=200"
+        },
+        {
+          "name": "Anthony Fu",
+          "intro": "开源工具作者，博客与项目记录",
+          "link": "https://antfu.me/",
+          "avatar": "https://antfu.me/favicon.svg"
+        },
+        {
+          "name": "DIYgod",
+          "intro": "写代码是热爱，写到世界充满爱",
+          "link": "https://diygod.cc/",
+          "avatar": "https://diygod.cc/favicon.ico"
+        },
+        {
+          "name": "Huli's blog",
+          "intro": "前端、JavaScript 与资安技术博客",
+          "link": "https://blog.huli.tw/",
+          "avatar": "https://blog.huli.tw/img/lidemy_logo.png"
+        },
+        {
+          "name": "苏洋博客",
+          "intro": "记录点滴成长，分享技术经验",
+          "link": "https://soulteary.com/",
+          "avatar": "https://soulteary.com/favicon.ico"
+        },
+        {
+          "name": "Barret李靖",
+          "intro": "想法、随笔、思考与个人笔记",
+          "link": "https://www.barretlee.com/",
+          "avatar": "https://www.barretlee.com/favicon.ico"
+        },
+        {
+          "name": "廖雪峰",
+          "intro": "原创中文精品教程与技术内容",
+          "link": "https://www.liaoxuefeng.com/",
+          "avatar": "https://www.liaoxuefeng.com/static/logo.svg"
+        },
+        {
+          "name": "张洪Heo",
+          "intro": "产品设计师、独立开发者、设计与科技博主",
+          "link": "https://blog.zhheo.com/",
+          "avatar": "https://blog.zhheo.com/img/favicon4.0.webp"
+        },
+        {
+          "name": "Tianli's Blog",
+          "intro": "长期写作的技术博主与独立站作者",
+          "link": "https://blog.tianli0.top/",
+          "avatar": "https://blog.tianli0.top/favicon.ico"
+        },
+        {
+          "name": "Ghost_chu's Blog",
+          "intro": "技术实践、折腾记录与长期博客写作",
+          "link": "https://www.ghostchu.com/",
+          "avatar": "https://cdn.ghostchu.com/wp-content/uploads/2025/03/20250320014647498-32x32.jpg"
+        },
+        {
+          "name": "静かな森",
+          "intro": "独立开发、技术写作与个人系统设计",
+          "link": "https://innei.in/",
+          "avatar": "https://innei.in/innei.svg"
+        },
+        {
+          "name": "银河渡舟",
+          "intro": "持续更新的个人技术与思考博客",
+          "link": "https://suborbit.net/",
+          "avatar": "https://suborbit.net/favicon.ico"
+        },
+        {
+          "name": "Airing 的博客",
+          "intro": "哲学硕士、小学老师与终端全栈",
+          "link": "https://blog.ursb.me/",
+          "avatar": "https://i.typlog.com/airing/8295017098_392123.ico"
         }
       ]
     },
