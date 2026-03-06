@@ -57,6 +57,8 @@ export function vitePluginUserConfig(
     collectionConfigImportPath = resolve(fileURLToPath(srcDir), './content/config.ts')
   }
 
+  const collectionConfigImport = JSON.stringify(collectionConfigImportPath)
+
   /** Map of virtual module names to their code contents as strings. */
   const modules = {
     'virtual:config': `export default ${JSON.stringify(opts)}`,
@@ -82,7 +84,7 @@ export function vitePluginUserConfig(
       : 'export const logos = {};',
     'virtual:collection-config': `let userCollections;
 			try {
-				userCollections = (await import(${resolveId('./content/config.ts', srcDir)})).collections;
+				userCollections = (await import(${collectionConfigImport})).collections;
 			} catch {}
 			export const collections = userCollections;`
   } satisfies Record<string, string>
