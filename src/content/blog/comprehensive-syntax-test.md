@@ -1,10 +1,19 @@
 ---
-title: 'Astro Pure 主题完整语法测试'
-description: '全面测试 Markdown、Obsidian、AnyBlock 和代码高亮的兼容效果'
-publishDate: '2025-10-06T00:00:00Z'
+title: Astro Pure 主题完整语法测试
+description: 全面测试 Markdown、Obsidian、AnyBlock 和代码高亮的兼容效果
+publishDate: 2025-10-06T00:00:00Z
 draft: true
-tags: ['测试', 'Markdown', 'Obsidian', 'AnyBlock', '语法', '代码高亮']
-heroImage: { src: './syntax-test/test.jpeg', alt: 'an image targetting my article', color: '#F2E1CD' }
+tags:
+  - 测试
+  - Markdown
+  - Obsidian
+  - AnyBlock
+  - 语法
+  - 代码高亮
+heroImage:
+  src: ./syntax-test/test.jpeg
+  alt: an image targetting my article
+  color: " #F2E1CD "
 ---
 	
 # Astro Pure 主题完整语法测试
