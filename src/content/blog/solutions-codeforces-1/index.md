@@ -717,7 +717,7 @@ void solve() {
 坑点：
 
 - `__builtin_popcount()` 参数是 `unsigned int`，对于 long long 不适用
-- 当数据范围超 int 之后，都需要 `1ll&lt;&lt;i` 这样，养成习惯
+- 当数据范围超 int 之后，都需要 `1ll<<i` 这样，养成习惯
 - 需要特判一下只有一个二进制位是 1 的情况，因为去掉一位之后就是 0 了，而题目要求正整数。需要去掉
 
 ```cpp
@@ -810,7 +810,7 @@ void solve() {
 
 2. 如果 $a$ 和 $b$ 在同一位置的位不同，则在该位置上，无论是在 $a \oplus x$ 还是在 $b \oplus x$ 中都会有一个1，取决于 $x$ 在该位置上是什么。
 
-假设 $a$ &lt; $b$，如果不是的话，我们将交换它们。然后在最高的位置上，位不同，$a$ 中有一个 0，$b$ 中有一个 1。
+假设 $a$ < $b$，如果不是的话，我们将交换它们。然后在最高的位置上，位不同，$a$ 中有一个 0，$b$ 中有一个 1。
 
 位不同则有 $2$ 个选择
 
@@ -941,18 +941,18 @@ void solve() {
 
 > [!NOTE]-  求树每个点对应的的深度：(BFS)
 > ```cpp
-> queue&lt; int &gt;q;vector&lt; int &gt; dis(n + 1), vis(n + 1);
+> queue< int >q;vector< int > dis(n + 1), vis(n + 1);
 > q.push(1);vis[1] = 1;
-> while (q.size()) \{
+> while (q.size()) {
 > 	int now = q.front();q.pop();
-> 	for (auto i : g[now]) \{
+> 	for (auto i : g[now]) {
 > 		if (vis[i])continue;
 > 		vis[i] = 1;
 > 		dis[i] = dis[now] + 1;
 > 		q.push(i);
-> 	\}
-> \}
-> for (int i = 1;i &lt;= n;i++)cout &lt;&lt; dis[i] + 1 &lt;&lt; " ";
+> 	}
+> }
+> for (int i = 1;i <= n;i++)cout << dis[i] + 1 << " ";
 > ```
 > 
 

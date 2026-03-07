@@ -10,10 +10,9 @@ tags:
   - AnyBlock
   - 语法
   - 代码高亮
-heroImage:
-  src: ./syntax-test/test.jpeg
-  alt: an image targetting my article
-  color: " #F2E1CD "
+heroImageSrc: ./syntax-test/test.jpeg
+heroImageAlt: an image targetting my article
+heroImageColor: '#F2E1CD'
 ---
 	
 # Astro Pure 主题完整语法测试

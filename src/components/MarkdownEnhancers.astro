@@ -352,6 +352,61 @@
       });
   };
 
+  const stripInlineCommentText = (root) => {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+
+    let currentNode = walker.nextNode();
+    while (currentNode) {
+      textNodes.push(currentNode);
+      currentNode = walker.nextNode();
+    }
+
+    textNodes.forEach((node) => {
+      const value = node.textContent ?? '';
+      const nextValue = value.replace(/%%[\s\S]*?%%/gu, '');
+      if (nextValue !== value) node.textContent = nextValue;
+    });
+  };
+
+  const removeEmptyParagraphs = (root) => {
+    root.querySelectorAll('p').forEach((paragraph) => {
+      if (!paragraph.textContent?.trim() && !paragraph.querySelector('img, video, audio, iframe, a')) {
+        paragraph.remove();
+      }
+    });
+  };
+
+  const stripCommentBlocks = (parent) => {
+    let inCommentBlock = false;
+
+    [...parent.children].forEach((child) => {
+      const text = child.textContent?.trim() ?? '';
+
+      if (!inCommentBlock && text.startsWith('%%')) {
+        child.remove();
+        if (!text.endsWith('%%')) inCommentBlock = true;
+        return;
+      }
+
+      if (inCommentBlock) {
+        child.remove();
+        if (text.endsWith('%%')) inCommentBlock = false;
+        return;
+      }
+
+      stripInlineCommentText(child);
+      stripCommentBlocks(child);
+    });
+  };
+
+  const removeCommentArtifacts = () => {
+    const container = getContainer();
+    stripInlineCommentText(container);
+    stripCommentBlocks(container);
+    removeEmptyParagraphs(container);
+  };
+
   const upgradeTabs = () => {
     document.querySelectorAll('.obsidian-tabs').forEach((node) => {
       if (node.tagName.toLowerCase() === 'obsidian-tabs') return;
@@ -363,6 +418,7 @@
   };
 
   const enhanceMarkdown = () => {
+    removeCommentArtifacts();
     renderCallouts();
     renderAnyBlockSelectors();
     renderEmbedParagraphs();

@@ -4,7 +4,9 @@ description: '测试 Markdown、Obsidian 与 AnyBlock 的基础语法功能'
 publishDate: '2025-10-06T00:00:00Z'
 draft: true
 tags: ['测试', 'Markdown', 'Obsidian', '语法']
-heroImage: { src: './test.jpeg', alt: 'an image targetting my article', color: '#E63946' }
+heroImageSrc: './test.jpeg'
+heroImageAlt: 'an image targetting my article'
+heroImageColor: '#E63946'
 ---
 
 # Astro Pure 主题语法测试

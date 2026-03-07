@@ -803,9 +803,9 @@ void solve() {
 > 
 > $P=1,Q=\frac{a_{1}+b_{1}}{a_{1}}\to f_{1}=Pf_{2}+Q$
 > 
-> $>$ $f_{2}=\frac{a^2}{(a+b)^2}f_{3}+\frac{2ab}{(a+b)^2}f_{2}+\frac{b^2}{(a+b)^2}f_{1}+1\to (a+b)^2f_{2}=a^2f_{3}+b^2\left( f_{2}+\frac{a_{1}+b_{1}}{a_{1}} \right)+(a+b)^2$
-> $>$ 
-> $>$ $f_{2}=f_{3}+\frac{b_{2}^2}{a_{2}^2}\times \frac{a_{1}+b_{1}}{a_{1}}+\frac{(a_{2}+b_{2})^2}{a_{2}^2}$
+> > $f_{2}=\frac{a^2}{(a+b)^2}f_{3}+\frac{2ab}{(a+b)^2}f_{2}+\frac{b^2}{(a+b)^2}f_{1}+1\to (a+b)^2f_{2}=a^2f_{3}+b^2\left( f_{2}+\frac{a_{1}+b_{1}}{a_{1}} \right)+(a+b)^2$
+> > 
+> > $f_{2}=f_{3}+\frac{b_{2}^2}{a_{2}^2}\times \frac{a_{1}+b_{1}}{a_{1}}+\frac{(a_{2}+b_{2})^2}{a_{2}^2}$
 > 
 > $(a_{i}+b_{i})^2f_{i}=a_{i}^2f_{i+1}+b_{i}^2f_{i-1}+(a_{i}+b_{i})^2$，这时的 $f_{i-1}=Pf_{i}+Q$ 已经得到了，所以 $f_{i}$ 的式子是可求的了。
 > 
@@ -1177,7 +1177,7 @@ void solve() {
 
 ### Solution
 
-可以参考小学哥的题解：[题解 | 小红的括号串\_牛客博客](https://blog.nowcoder.net/n/1d8f5a27daee4b8f9eaee4999e339bfe)  -$>$具体数学 P301
+可以参考小学哥的题解：[题解 | 小红的括号串\_牛客博客](https://blog.nowcoder.net/n/1d8f5a27daee4b8f9eaee4999e339bfe)  ->具体数学 P301
 
 新知识：Raney 引理：若 $\displaystyle \sum\limits_{i=1}^mx_{i}=1$ ，则其所有循环位移中恰好有一个满足所有的前缀和都是正数。
 

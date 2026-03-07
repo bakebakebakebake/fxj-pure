@@ -30,10 +30,58 @@ const selectorMap = new Map<string, 'tabs' | 'timeline' | 'card'>([
 
 export default function rehypeObsidianBlocks() {
   return function transformer(tree: Root) {
+    stripCommentArtifacts(tree)
     transformCallouts(tree)
     transformAnyBlockContainers(tree)
     transformEmbedParagraphs(tree)
+    stripCommentArtifacts(tree)
   }
+}
+
+function stripCommentArtifacts(tree: Root) {
+  stripInlineComments(tree)
+  walkCommentArtifacts(tree)
+}
+
+function stripInlineComments(parent: Root | Element) {
+  const nextChildren: RootContent[] = []
+
+  for (const node of parent.children) {
+    if (node.type === 'text') {
+      const value = node.value.replace(/%%[\s\S]*?%%/gu, '')
+      if (value.length) nextChildren.push({ ...node, value })
+      continue
+    }
+
+    if (isParentElement(node)) stripInlineComments(node)
+    nextChildren.push(node)
+  }
+
+  parent.children = nextChildren
+}
+
+function walkCommentArtifacts(parent: Root | Element) {
+  const nextChildren: RootContent[] = []
+  let inCommentBlock = false
+
+  for (const node of parent.children) {
+    const text = extractText(node).trim()
+
+    if (!inCommentBlock && startsCommentBlock(text)) {
+      if (!endsCommentBlock(text)) inCommentBlock = true
+      continue
+    }
+
+    if (inCommentBlock) {
+      if (endsCommentBlock(text)) inCommentBlock = false
+      continue
+    }
+
+    if (isParentElement(node)) walkCommentArtifacts(node)
+    nextChildren.push(node)
+  }
+
+  parent.children = nextChildren
 }
 
 function transformCallouts(tree: Root) {
@@ -511,4 +559,12 @@ function normalizeAnyBlockSelector(input: string) {
   const token = input.trim().slice(1, -1).split('|')[0]?.trim()
   if (!token) return null
   return selectorMap.get(token.toLowerCase()) ?? selectorMap.get(token)
+}
+
+function startsCommentBlock(value: string) {
+  return value.startsWith('%%')
+}
+
+function endsCommentBlock(value: string) {
+  return value.endsWith('%%')
 }

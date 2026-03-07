@@ -109,7 +109,7 @@ void solve() {
 > 
 > 答案小于等于 $2\times 10^{18}$ 的证明如下：不失一般性，设 $N < M$。设 $N$，$M$ 的最大公约数为 $g$，$N=ng$，$M=mg$（$1\leq n < m$，$n$，$m$ 是整数）。则有
 > $$
-> \left\lfloor \frac{X}{N}\right\rfloor+\left\lfloor \frac{X}{M}\right\rfloor-2\times \left\lfloor \frac{X}{L}\right\rfloor$>$\frac{X}{N}+\frac{X}{M}-\frac{2X}{L}-2=\frac{(m+n-2)X}{gnm}-2
+> \left\lfloor \frac{X}{N}\right\rfloor+\left\lfloor \frac{X}{M}\right\rfloor-2\times \left\lfloor \frac{X}{L}\right\rfloor>\frac{X}{N}+\frac{X}{M}-\frac{2X}{L}-2=\frac{(m+n-2)X}{gnm}-2
 > $$
 > 当 $X=2\times 10^{18}$ 时，在问题的限制下有 $\frac{m+n-2}{n}\geq 1$，$\frac{X}{gm}\geq 2\times 10^{10}$，因此有
 > $$

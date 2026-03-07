@@ -398,29 +398,29 @@ public class VolatileAtomicityDemo {
 > 
 > 使用 `synchronized` 改进：
 > ```java
-> public synchronized void increase() \{
+> public synchronized void increase() {
 >     inc++;
-> \}
+> }
 > ```
 > 使用 `AtomicInteger` 改进：
 > ```java
 > public AtomicInteger inc = new AtomicInteger();
 > 
-> public void increase() \{
+> public void increase() {
 >     inc.getAndIncrement();
-> \}
+> }
 > ```
 > 使用 `ReentrantLock` 改进：
 > ```java
 > Lock lock = new ReentrantLock();
-> public void increase() \{
+> public void increase() {
 >     lock.lock();
->     try \{
+>     try {
 >         inc++;
->     \} finally \{
+>     } finally {
 >         lock.unlock();
->     \}
-> \}
+>     }
+> }
 > ```
 
 ### 乐观锁和悲观锁
@@ -698,16 +698,16 @@ public ReentrantLock(boolean fair) {
 > - 由于 `synchronized` 锁是可重入的，同一个线程在调用 `method1() ` 时可以直接获得当前对象的锁，执行 `method2()` 的时候可以再次获取这个对象的锁，不会产生死锁问题。
 > - 假如 `synchronized` 是不可重入锁的话，由于该对象的锁已被当前线程所持有且无法释放，这就导致线程在执行 `method2()`时获取锁失败，会出现死锁问题。
 > ```java
-> public class SynchronizedDemo \{
->     public synchronized void method1() \{
+> public class SynchronizedDemo {
+>     public synchronized void method1() {
 >         System.out.println("方法1");
 >         method2();
->     \}
+>     }
 > 
->     public synchronized void method2() \{
+>     public synchronized void method2() {
 >         System.out.println("方法2");
->     \}
-> \}
+>     }
+> }
 > ```
 
 区别体现在：

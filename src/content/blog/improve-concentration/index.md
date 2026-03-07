@@ -8,7 +8,8 @@ tags:
   - Mind
   - Mood
 language: 'English'
-heroImage: { src: './thumbnail.jpg', color: '#9698C1' }
+heroImageSrc: './thumbnail.jpg'
+heroImageColor: '#9698C1'
 ---
 
 You're trying to concentrate, but your mind is wandering or you're easily distracted. What happened to the laser-sharp focus you once enjoyed? As we age, we tend to have more difficulty filtering out stimuli that are not relevant to the task at hand.

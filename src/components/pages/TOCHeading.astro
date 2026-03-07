@@ -1,0 +1,59 @@
+---
+import { type TocItem } from '@/plugins/toc'
+import { cn } from 'astro-pure/utils'
+
+interface Props {
+  heading: TocItem
+}
+
+const {
+  heading: { depth, slug, subheadings, text: rawText }
+} = Astro.props
+
+const text = rawText.endsWith('#') ? rawText.slice(0, -1) : rawText
+const hasChildren = subheadings.length > 0
+---
+
+<li class='toc-node' data-depth={depth} data-slug={slug} data-has-children={hasChildren || undefined}>
+  <div class='toc-row relative flex items-start'>
+    <span
+      class='toc-progress absolute start-0 top-0 h-full w-[2px] rounded transition-colors duration-300 [&.highlight-bg]:bg-primary [&.is-read]:bg-input'
+    ></span>
+    <div class='toc-item-shell ms-2 flex min-w-0 flex-1 items-start gap-1'>
+    {
+      hasChildren ? (
+        <button
+          type='button'
+          class='toc-toggle z-10 mt-1 inline-flex size-5 flex-none items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground'
+          aria-label={`Toggle section: ${text}`}
+          aria-expanded='false'
+        >
+          <span class='toc-toggle-icon block text-xs leading-none'>▸</span>
+        </button>
+      ) : (
+        <span class='toc-toggle-spacer inline-flex size-5 flex-none'></span>
+      )
+    }
+    <a
+      aria-label={`Scroll to section: ${text}`}
+      class={cn(
+        'toc-item line-clamp-2 min-w-0 flex-1 px-3 py-1 text-foreground/75 transition-all hover:text-foreground [&.is-active]:font-medium [&.is-active]:text-primary [&.is-read]:text-input',
+        depth > 2 && 'ps-6',
+        depth > 3 && 'ps-9',
+        depth > 4 && 'ps-12',
+        depth > 5 && 'ps-15'
+      )}
+      href={`#${slug}`}>{text}</a
+    >
+    </div>
+  </div>
+  {
+    hasChildren && (
+      <ul class='toc-sublist' hidden>
+        {subheadings.map((subheading) => (
+          <Astro.self heading={subheading} />
+        ))}
+      </ul>
+    )
+  }
+</li>

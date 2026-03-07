@@ -64,6 +64,8 @@ const selectorMap = new Map<string, 'tabs' | 'timeline' | 'card'>([
 
 export default function remarkObsidian() {
   return function transformer(tree: Root, file: { path?: string }) {
+    stripCommentBlocks(tree)
+
     visit(tree, 'html', (node: { value: string }, index, parent) => {
       if (!parent || index === undefined) return
       if (/^<!--\s*steps\s*-->$/i.test(node.value)) {
@@ -83,14 +85,17 @@ export default function remarkObsidian() {
 
     visit(tree, 'image', (node: Image) => {
       const parsed = parseImageMeta(node.url)
-      if (!parsed) return
-
-      node.url = parsed.url
       node.data ??= {}
+      if (parsed) node.url = parsed.url
       node.data.hProperties = {
         ...(node.data.hProperties ?? {}),
-        className: [...toClassNames(node.data.hProperties?.className), ...parsed.classNames],
-        ...(parsed.width ? { width: parsed.width } : {})
+        className: [
+          ...toClassNames(node.data.hProperties?.className),
+          'zoomable',
+          ...(parsed?.classNames ?? [])
+        ],
+        style: joinStyles(node.data.hProperties?.style, parsed?.style),
+        ...(parsed?.width ? { width: parsed.width } : {})
       }
     })
 
@@ -104,6 +109,29 @@ export default function remarkObsidian() {
       return index + replacements.length
     })
   }
+}
+
+function stripCommentBlocks(tree: Root) {
+  const nextChildren: Root['children'] = []
+  let inCommentBlock = false
+
+  for (const node of tree.children) {
+    const plainText = extractPlainText(node).trim()
+
+    if (!inCommentBlock && plainText.startsWith('%%')) {
+      inCommentBlock = !plainText.endsWith('%%')
+      continue
+    }
+
+    if (inCommentBlock) {
+      if (plainText.endsWith('%%')) inCommentBlock = false
+      continue
+    }
+
+    nextChildren.push(node)
+  }
+
+  tree.children = nextChildren
 }
 
 function collectNoteEntries(): NoteEntry[] {
@@ -247,6 +275,7 @@ function replaceInlineSyntax(value: string, filePath?: string) {
             ...toClassNames(imageNode.data?.hProperties?.className),
             ...parsed.classNames
           ],
+          style: joinStyles(imageNode.data?.hProperties?.style, parsed.style),
           ...(parsed.width ? { width: parsed.width } : {})
         }
       }
@@ -391,6 +420,9 @@ function parseImageMeta(url: string) {
   return {
     url: pathPart,
     classNames: className ? [className] : [],
+    style: isWidthMeta(queryWidth)
+      ? `width:min(100%, ${Number(queryWidth)}px);max-width:${Number(queryWidth)}px;height:auto;`
+      : '',
     width: isWidthMeta(queryWidth) ? Number(queryWidth) : undefined
   }
 }
@@ -421,6 +453,23 @@ function escapeHtml(value: string) {
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
+}
+
+function extractPlainText(node: unknown): string {
+  if (!node || typeof node !== 'object') return ''
+  if ('value' in node && typeof node.value === 'string') return node.value
+  if ('children' in node && Array.isArray(node.children)) {
+    return node.children.map((child) => extractPlainText(child)).join('')
+  }
+  return ''
+}
+
+function joinStyles(...styles: unknown[]) {
+  return styles
+    .flatMap((style) => (typeof style === 'string' ? [style] : []))
+    .map((style) => style.trim())
+    .filter(Boolean)
+    .join(';')
 }
 
 export function normalizeAnyBlockSelector(input: string) {

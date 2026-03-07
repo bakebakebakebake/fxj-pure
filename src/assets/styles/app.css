@@ -37,6 +37,21 @@ html {
   --input: 240 5.9% 90%;
   --ring: 240 5.9% 10%;
   --radius: 0.5rem;
+  --content-code-bg: 220 25% 96%;
+  --content-code-fg: 224 26% 18%;
+  --content-inline-code-bg: 214 28% 92%;
+  --content-inline-code-fg: 220 35% 20%;
+  --content-quote-bg: 210 30% 97%;
+  --content-quote-fg: 224 20% 22%;
+  --content-quote-border: 205 60% 70%;
+  --obsidian-note: 215 35% 52%;
+  --obsidian-note-bg: 215 100% 97%;
+  --obsidian-tip: 162 55% 38%;
+  --obsidian-tip-bg: 155 50% 96%;
+  --obsidian-caution: 36 92% 48%;
+  --obsidian-caution-bg: 43 100% 96%;
+  --obsidian-danger: 356 72% 55%;
+  --obsidian-danger-bg: 0 100% 97%;
 }
 .dark {
   --background: 240 20.54% 5.2%;
@@ -58,6 +73,21 @@ html {
   --border: 240 3.7% 19.9%;
   --input: 240 3.7% 15.9%;
   --ring: 240 4.9% 83.9%;
+  --content-code-bg: 240 5% 12%;
+  --content-code-fg: 214 32% 90%;
+  --content-inline-code-bg: 235 18% 18%;
+  --content-inline-code-fg: 214 30% 92%;
+  --content-quote-bg: 236 16% 10%;
+  --content-quote-fg: 220 16% 88%;
+  --content-quote-border: 205 42% 60%;
+  --obsidian-note: 214 80% 78%;
+  --obsidian-note-bg: 215 28% 14%;
+  --obsidian-tip: 154 62% 70%;
+  --obsidian-tip-bg: 156 26% 13%;
+  --obsidian-caution: 42 92% 70%;
+  --obsidian-caution-bg: 35 35% 15%;
+  --obsidian-danger: 352 85% 78%;
+  --obsidian-danger-bg: 351 28% 14%;
 }
 :root {
   --un-default-border-color: hsl(var(--border) / 1);
@@ -108,6 +138,7 @@ mark {
 .obsidian-image-left,
 .obsidian-image-right {
   display: block;
+  border-radius: 1rem;
 }
 
 .obsidian-image-center {
@@ -122,24 +153,90 @@ mark {
   margin-inline: auto 0;
 }
 
+#content :where(pre, .astro-code) {
+  background: hsl(var(--content-code-bg)) !important;
+  color: hsl(var(--content-code-fg)) !important;
+  border: 1px solid hsl(var(--border) / 1);
+  border-radius: 1rem;
+  box-shadow: none;
+}
+
+#content :where(.astro-code, .astro-code pre, .astro-code code, .astro-code .line) {
+  background: hsl(var(--content-code-bg)) !important;
+}
+
+#content :where(.astro-code pre code::before, .astro-code pre code .line::before) {
+  background: hsl(var(--content-code-bg)) !important;
+  box-shadow: none !important;
+}
+
+#content :where(.astro-code [data-language], .astro-code [data-line-numbers]) {
+  background: hsl(var(--content-code-bg)) !important;
+}
+
+#content :where(pre, .astro-code) code {
+  color: inherit !important;
+}
+
+#content :where(:not(pre) > code) {
+  background: hsl(var(--content-inline-code-bg));
+  color: hsl(var(--content-inline-code-fg));
+  border: 1px solid hsl(var(--border) / 0.9);
+}
+
+#content :where(blockquote):not(.obsidian-callout):not(.aside) {
+  margin-block: 1.25rem;
+  border-inline-start: 4px solid hsl(var(--content-quote-border));
+  border-radius: 0 1rem 1rem 0;
+  background: hsl(var(--content-quote-bg));
+  color: hsl(var(--content-quote-fg));
+  padding: 1rem 1.1rem;
+}
+
+#content :where(blockquote):not(.obsidian-callout):not(.aside) :where(p, li) {
+  color: inherit;
+}
+
+#content :where(blockquote):not(.obsidian-callout):not(.aside) :where(pre, .astro-code) {
+  margin-block: 0.9rem;
+}
+
+#content :where(blockquote):not(.obsidian-callout):not(.aside) :where(:not(pre) > code) {
+  background: hsl(var(--content-inline-code-bg));
+  color: hsl(var(--content-inline-code-fg));
+}
+
 .aside > .aside-container,
 .obsidian-callout > .aside-container {
-  --un-bg-opacity: 0.07;
+  color: hsl(var(--foreground) / 1);
+  background: hsl(var(--obsidian-note-bg));
+  border-color: hsl(var(--obsidian-note));
 }
 
 .aside > .aside-container.aside-tip,
 .obsidian-callout > .aside-container.aside-tip {
-  --primary: 234 60% 60%;
+  --primary: var(--obsidian-tip);
+  background: hsl(var(--obsidian-tip-bg));
+  border-color: hsl(var(--obsidian-tip));
+}
+
+.aside > .aside-container.aside-note,
+.obsidian-callout > .aside-container.aside-note {
+  --primary: var(--obsidian-note);
 }
 
 .aside > .aside-container.aside-caution,
 .obsidian-callout > .aside-container.aside-caution {
-  --primary: 41 90% 50%;
+  --primary: var(--obsidian-caution);
+  background: hsl(var(--obsidian-caution-bg));
+  border-color: hsl(var(--obsidian-caution));
 }
 
 .aside > .aside-container.aside-danger,
 .obsidian-callout > .aside-container.aside-danger {
-  --primary: 339 90% 60%;
+  --primary: var(--obsidian-danger);
+  background: hsl(var(--obsidian-danger-bg));
+  border-color: hsl(var(--obsidian-danger));
 }
 
 .aside-content > :first-child,
@@ -154,26 +251,51 @@ mark {
 
 .obsidian-collapse {
   background: hsl(var(--background) / 1);
+  color: hsl(var(--foreground) / 1);
+}
+
+.obsidian-collapse.aside-note {
+  border-color: hsl(var(--obsidian-note) / 0.28);
+  background: hsl(var(--obsidian-note-bg));
 }
 
 .obsidian-collapse.aside-tip {
-  border-color: hsl(234 60% 60% / 0.25);
+  border-color: hsl(var(--obsidian-tip) / 0.28);
+  background: hsl(var(--obsidian-tip-bg));
 }
 
 .obsidian-collapse.aside-caution {
-  border-color: hsl(41 90% 50% / 0.25);
+  border-color: hsl(var(--obsidian-caution) / 0.28);
+  background: hsl(var(--obsidian-caution-bg));
 }
 
 .obsidian-collapse.aside-danger {
-  border-color: hsl(339 90% 60% / 0.25);
+  border-color: hsl(var(--obsidian-danger) / 0.28);
+  background: hsl(var(--obsidian-danger-bg));
 }
 
 .obsidian-collapse-summary {
   list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .obsidian-collapse-summary::-webkit-details-marker {
   display: none;
+}
+
+.obsidian-collapse-summary::after {
+  content: '▸';
+  color: hsl(var(--muted-foreground) / 1);
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.obsidian-collapse[open] .obsidian-collapse-summary::after {
+  transform: rotate(90deg);
 }
 
 .obsidian-tabs {
@@ -226,6 +348,35 @@ mark {
   display: grid;
   gap: 1rem;
   margin-block: 1.5rem;
+}
+
+.obsidian-timeline {
+  margin-block: 1.5rem;
+}
+
+.obsidian-timeline ul {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+}
+
+.obsidian-timeline li {
+  align-items: flex-start;
+  padding: 0.2rem 0 0.2rem 0.15rem;
+}
+
+.obsidian-timeline samp {
+  color: hsl(var(--foreground) / 0.82);
+}
+
+.obsidian-timeline li > div:last-child > div {
+  border-radius: 0.9rem;
+  background: hsl(var(--muted) / 0.55);
+  padding: 0.2rem 0.85rem 0.7rem;
+}
+
+#content img.zoomable {
+  cursor: zoom-in;
 }
 
 @media (min-width: 768px) {
