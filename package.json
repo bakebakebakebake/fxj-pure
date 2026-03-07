@@ -11,6 +11,8 @@
     "build": "astro-pure check && astro check && astro build",
     "preview": "astro preview",
     "sync": "astro sync",
+    "migrate:blog:obsidian": "node scripts/migrate-blog-to-obsidian.mjs",
+    "sync:obsidian-config": "node scripts/sync-obsidian-config.mjs",
     "check": "astro check",
     "astro": "astro",
     "pure": "astro-pure",

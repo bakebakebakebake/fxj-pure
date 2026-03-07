@@ -2,6 +2,7 @@
 import { Footer, Header, ThemeProvider } from 'astro-pure/components/basic'
 import type { SiteMeta } from 'astro-pure/types'
 import BaseHead from '@/components/BaseHead.astro'
+import MarkdownEnhancers from '@/components/MarkdownEnhancers.astro'
 import config from '@/site-config'
 import Analytics from '@vercel/analytics/astro'
 
@@ -58,6 +59,7 @@ const {
         ) !important;
       }
     </style>
+    <MarkdownEnhancers />
 
   </body>
 </html>

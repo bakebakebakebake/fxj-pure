@@ -38,5 +38,7 @@ old_blog
 ignore.*
 bunfig.toml
 /src/content/blog/test.*
+/src/content/.obsidian/
+/src/content/.trash/
 /test/
 CLAUDE.md

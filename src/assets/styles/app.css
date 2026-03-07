@@ -73,3 +73,163 @@ a {
     color: hsl(var(--primary) / var(--un-text-opacity, 1));
   }
 }
+
+mark {
+  background-color: hsl(var(--primary) / 0.16);
+  color: hsl(var(--foreground) / 1);
+  border-radius: 0.25rem;
+  padding-inline: 0.2rem;
+}
+
+.broken-link {
+  color: hsl(var(--destructive) / 1);
+  text-decoration: dashed underline;
+}
+
+.obsidian-note-embed-card {
+  display: grid;
+  gap: 0.5rem;
+  margin-block: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid hsl(var(--border) / 1);
+  border-radius: 1rem;
+  background: hsl(var(--muted) / 0.6);
+}
+
+.obsidian-note-embed-label {
+  margin: 0;
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground) / 1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.obsidian-image-center,
+.obsidian-image-left,
+.obsidian-image-right {
+  display: block;
+}
+
+.obsidian-image-center {
+  margin-inline: auto;
+}
+
+.obsidian-image-left {
+  margin-inline: 0 auto;
+}
+
+.obsidian-image-right {
+  margin-inline: auto 0;
+}
+
+.aside > .aside-container,
+.obsidian-callout > .aside-container {
+  --un-bg-opacity: 0.07;
+}
+
+.aside > .aside-container.aside-tip,
+.obsidian-callout > .aside-container.aside-tip {
+  --primary: 234 60% 60%;
+}
+
+.aside > .aside-container.aside-caution,
+.obsidian-callout > .aside-container.aside-caution {
+  --primary: 41 90% 50%;
+}
+
+.aside > .aside-container.aside-danger,
+.obsidian-callout > .aside-container.aside-danger {
+  --primary: 339 90% 60%;
+}
+
+.aside-content > :first-child,
+.obsidian-callout .aside-content > :first-child {
+  margin-top: 0;
+}
+
+.aside-content > :last-child,
+.obsidian-callout .aside-content > :last-child {
+  margin-bottom: 0;
+}
+
+.obsidian-collapse {
+  background: hsl(var(--background) / 1);
+}
+
+.obsidian-collapse.aside-tip {
+  border-color: hsl(234 60% 60% / 0.25);
+}
+
+.obsidian-collapse.aside-caution {
+  border-color: hsl(41 90% 50% / 0.25);
+}
+
+.obsidian-collapse.aside-danger {
+  border-color: hsl(339 90% 60% / 0.25);
+}
+
+.obsidian-collapse-summary {
+  list-style: none;
+}
+
+.obsidian-collapse-summary::-webkit-details-marker {
+  display: none;
+}
+
+.obsidian-tabs {
+  display: block;
+  margin-block: 1.5rem;
+}
+
+.obsidian-tabs .tablist-wrapper {
+  overflow-x: auto;
+}
+
+.obsidian-tabs [role='tablist'] {
+  display: flex;
+  list-style: none;
+  border-bottom: 2px solid hsl(var(--border) / 1);
+  padding: 0;
+  margin: 0;
+}
+
+.obsidian-tabs .tab {
+  margin-bottom: -2px;
+}
+
+.obsidian-tabs [role='tab'] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.2rem 1.25rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid hsl(var(--border) / 1);
+  color: hsl(var(--foreground) / 1);
+  white-space: nowrap;
+  font: inherit;
+  cursor: pointer;
+}
+
+.obsidian-tabs [role='tab'].is-active,
+.obsidian-tabs [role='tab'][aria-selected='true'] {
+  color: hsl(var(--primary) / 1);
+  border-color: hsl(var(--primary) / 1);
+  font-weight: 600;
+}
+
+.obsidian-tabs [role='tabpanel'] {
+  margin-top: 1rem;
+}
+
+.obsidian-card-grid {
+  display: grid;
+  gap: 1rem;
+  margin-block: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .obsidian-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}

@@ -1,0 +1,423 @@
+---
+title: 'AtCoder 题解整理 1：数论、二分与表示'
+description: '以原题解记录为主，收录 ABC 340 F、341 D、346 D/E/F、356 D/E/F。'
+publishDate: '2026-03-06'
+tags:
+  - 算法竞赛
+  - 题解整理
+  - AtCoder
+  - 数论
+  - 二分
+  - 状态表示
+language: '中文'
+---
+
+> [!note] 说明
+> 这篇以 Obsidian 里原来的 AtCoder 题解为主体，只补了分节、收录范围和站点兼容所需的少量清理；题意、思路、代码和原来的备注尽量原样保留。
+
+## 收录范围
+
+- `ABC 340 F`
+- `ABC 341 D`
+- `ABC 346 D`
+- `ABC 346 E`
+- `ABC 346 F`
+- `ABC 356 D`
+- `ABC 356 E`
+- `ABC 356 F`
+
+## ABC 340 F - S = 1
+给你整数 $X$ 和 $Y$ ($x,y$ 不同时为 $0$)。  
+请找出一对满足以下所有条件的整数 $(A, B)$。不存在则输出 `-1`。
+
+- $-10^{18} \leq A, B \leq 10^{18}$
+- 顶点位于 $xy$ 平面上点 $(0, 0), (X, Y), (A, B)$ 的三角形的面积为 $1$.
+
+### Solution
+易得：$(X,Y),(A,B)$ 构成的直线方程：$(Y-B)x-(X-A)y+BX-AY=0$
+
+则到 $(0,0)$ 的距离为：$\frac{\mid BX-AY\mid}{\sqrt{ (x-a)^2+(y-b)^2 }}$
+
+则三角形的面积：$\frac{\mid BX-AY\mid}{2}=1$
+
+$\to\mid BX-AY\mid=2$
+
+设 $g = \gcd(X, Y)$。（注意：$\gcd(a, b)$ 定义为 $\vert a \vert$ 和 $\vert b \vert$ 的最大公约数。）
+
+>扩展欧几里得算法，给定一个整数对 $(a, b)$ 作为输入，找到一个整数对 $(x, y)$，使得 $ax + by = \pm \mathrm{gcd}(a, b)$，时间复杂度为 $\mathrm{O}(\log \min(|a|, |b|))$。（这里，整数对 $x, y$ 保证是满足 $\max(|x|, |y|) \leq \max(|a|, |b|)$ 的整数。）
+
+通过将 $(Y, -X)$ 作为扩展欧几里得算法的输入，可以获得一对 $(c, d)$，找到 $\mid cY-dY\mid=g$ 的一组可行整数解
+
+将 $(c,d)\times \frac{2}{g}\to \mid AY-BY\mid=2$  $,g\leq 2$ (保证 $\frac{2}{g}$ 是整数)
+
+```cpp
+pair<ll, ll> extgcd(ll a, ll b) {
+    if (!b) return {1, 0};
+    ll x, y;
+    tie(y, x) = extgcd(b, a % b);
+    y -= a / b * x;
+    return {x, y};
+}
+void solve() {
+    ll x, y;cin >> x >> y;
+    if (abs(__gcd(x, y)) > 2) {
+        cout << "-1\n";return;
+    }
+    auto [c, d] = extgcd(y, -x);
+    c *= 2 / abs(__gcd(x, y)), d *= 2 / abs(__gcd(x, y));
+    cout << c << " " << d << '\n';
+}
+```
+
+## ABC 341 D - Only one of two
+给出 $n,m,k(1\leq n\neq m\leq 10^8,1\leq k\leq 10^{10})$，数组 $a$ 由 $n$ 的倍数和 $m$ 的倍数且不包含 $n\times m$ 的倍数组成的序列求 $a[k]$
+
+```cpp
+#define int long long
+void solve() {
+    int N, M, K;
+    cin >> N >> M >> K;
+    int low = 1, high = 1e18, ans = -1;
+
+    while (low <= high) {
+        int mid = (high + low) / 2;
+        //lcm(a,b)=(a / __gcd(a, b)) * b
+        int count = mid / N + mid / M - 2 * (mid / ((N / __gcd(N, M)) * M));
+        if (count >= K) {
+            ans = mid;
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+    cout << ans << '\n';
+}
+```
+### Solution
+<span style="color:#92d050">二分</span>
+
+能被 $N$ 和 $M$ 中的一者整除的数有 $\lfloor \frac{X}{N}\rfloor+\lfloor \frac{X}{M}\rfloor-2\times \lfloor \frac{X}{L}\rfloor$ 个。
+
+官方题解：
+
+> 将 $N$，$M$ 的最小公倍数记为 $L$。  
+> 则在正整数 $X$ 以下中，能被 $N$ 和 $M$ 同时整除的数有 $\lfloor \frac{X}{L}\rfloor$ 个。因此，在 $1$ 到 $X$ 之间，能被 $N$ 和 $M$ 中的一者整除的数有 $\lfloor \frac{X}{N}\rfloor+\lfloor \frac{X}{M}\rfloor-2\times \lfloor \frac{X}{L}\rfloor$ 个。
+> 
+> 此外，由于这个数目是关于 $X$ 单调递增的，因此“答案要求在 $X$ 以下”和“在 $1$ 到 $X$ 之间，能被 $N$ 和 $M$ 中的一者整除的数至少有 $K$ 个”即 $\lfloor \frac{X}{N}\rfloor+\lfloor \frac{X}{M}\rfloor-2\times \lfloor \frac{X}{L}\rfloor\geq K$ 是等价的。
+> 
+> 因此，可以利用二分搜索来解决这个问题。在这个问题的限制下，答案一定不会超过 $2\times 10^{18}$，因此可以将搜索范围设为 0 到 $2\times 10^{18}$。
+> 
+> 答案小于等于 $2\times 10^{18}$ 的证明如下：不失一般性，设 $N < M$。设 $N$，$M$ 的最大公约数为 $g$，$N=ng$，$M=mg$（$1\leq n < m$，$n$，$m$ 是整数）。则有
+> $$
+> \left\lfloor \frac{X}{N}\right\rfloor+\left\lfloor \frac{X}{M}\right\rfloor-2\times \left\lfloor \frac{X}{L}\right\rfloor$>$\frac{X}{N}+\frac{X}{M}-\frac{2X}{L}-2=\frac{(m+n-2)X}{gnm}-2
+> $$
+> 当 $X=2\times 10^{18}$ 时，在问题的限制下有 $\frac{m+n-2}{n}\geq 1$，$\frac{X}{gm}\geq 2\times 10^{10}$，因此有
+> $$
+> \frac{X}{N}+\frac{X}{M}-\frac{2X}{L}-2=\frac{(m+n-2)X}{gnm}-2\geq 2\times 10^{10}-2
+> $$
+> 因此，在问题的限制下，在 $X$ 以下一定至少有 $2\times 10^{10}-2$ 个符合条件的数，特别地也就至少有 $K$ 个符合条件的数。实际上，对于当前限制，上限为 $N=5\times 10^{7}$，$M=10^{8}$，$K=10^{10}$ 时，答案为 $10^{18}-5\times 10^{7}$。
+> 
+> 具体来说，可以首先设定 $L=0, R=2\times 10^{18}$，然后只要 $R-L\geq 2$，就重复以下步骤：
+> 
+> 1. 设 $X=\lfloor \frac{L+R}{2}\rfloor$。
+> 2. 判断 $\lfloor \frac{X}{N}\rfloor+\lfloor \frac{X}{M}\rfloor-2\times \lfloor \frac{X}{L}\rfloor\geq K$，如果成立，则设 $R=X$，否则设 $L=X$。
+> 
+> 最终得到的 $R$ 就是答案。
+> 
+> 在固定 $X$ 时，判断 $\lfloor \frac{X}{N}\rfloor+\lfloor \frac{X}{M}\rfloor-2\times \lfloor \frac{X}{L}\rfloor\geq K$ 的复杂度为 $O(1)$，而重复的次数最多也只有 $60$ 次，因此非常高效。因此，这个问题可以用二分搜索很好地解决。
+
+## ABC 346 D - Gomamayo Sequence
+给你一个长度为 $N$ 的字符串 $S$ ，它由 `0` 和 `1` 组成。
+
+长度为 $N$ 的字符串 $T$ 由 `0` 和 `1` 组成，当且仅当它满足以下条件时，它是一个**好的字符串：
+
+- 恰好有一个整数 $i$ 使得 $1 \leq i \leq N - 1$ 与 $T$ 中的 $i$ -3 和 $(i + 1)$ -3 字符相同。
+
+对于每个 $i = 1,2,\ldots, N$ ，您可以选择是否执行一次下面的操作：
+
+- 如果 $S$ 的 $i$ 个字符是 "0"，则将其替换为 "1"，反之亦然。如果执行此操作，代价为 $C_{i}$ 。
+
+求使 $S$ 成为一个好字符串所需的最小总成本。
+
+### Solution
+前缀后缀和
+
+可以知道，除了 $i,i+1$ 位是相同的，其他位均为 $01$ 交错的字符串。分为 $1010\dots00|11\dots1010\dots$ 和 $0101...00|11\dots0101\dots$ 两种情况，分别处理出前缀和后缀，则这时的答案为 $pre[i][0]+suf[i+1][0]$ 或 $pre[i][1]+suf[i+1][1]$ (分别代表第 $i,i+1$ 位同时为 0 或 1 且其他位为 $01$ 交替字符串时所需的代价)，取最小值即可。
+```cpp
+#define int long long
+void solve() {
+    int n;cin >> n;string s;cin >> s;vector<int> a(n + 1);s = ' ' + s;
+    for (int i = 1;i <= n;i++)cin >> a[i];
+    vector<array<int, 2>> f(n + 2), g(n + 2);
+    for (int i = 1;i <= n;i++) {
+        f[i][0] = f[i - 1][1] + (s[i] == '0' ? 0 : a[i]);
+        f[i][1] = f[i - 1][0] + (s[i] == '1' ? 0 : a[i]);
+    }
+    int ans = 1e18;
+    for (int i = n;i >= 2;i--) {
+        g[i][0] = g[i + 1][1] + (s[i] == '0' ? 0 : a[i]);
+        g[i][1] = g[i + 1][0] + (s[i] == '1' ? 0 : a[i]);
+        ans = min(ans, f[i - 1][0] + g[i][0]);
+        ans = min(ans, f[i - 1][1] + g[i][1]);
+    }
+    cout << ans << '\n';
+}
+```
+
+## ABC 346 E - Paint
+有一个行数为 $H$ 列数为 $W$ 的网格。初始时，所有单元格都涂有颜色 $0$ 。
+
+您将按照 $i = 1, 2, \ldots, M$ 的顺序执行以下操作。
+
+- 如果是 $T_{i} = 1$ ，则使用颜色 $X _{i}$ 重新绘制 $A_{i}$ /-th **行**中的所有单元格。
+    
+- 如果是 $T_{i}  = 2$ ，则用颜色 $X_{i}$ 重新绘制 $A_{i}$ /th **列**中的所有单元格。
+    
+
+完成所有操作后，针对网格中存在的每种颜色 $i$ ，找出被涂上颜色 $i$ 的单元格数量。
+
+### Solution
+逆向思维
+
+从后往前遍历，就不需要讨论的非常复杂，且后面的一定是最终的，不用担心被覆盖的问题。
+
+```cpp
+#define int long long
+void solve() {
+    int n, m, q;cin >> n >> m >> q;
+    vector<int> t(q + 1), a(q + 1), x(q + 1), visn(n + 1), vism(m + 1);
+    for (int i = 1;i <= q;i++) {
+        cin >> t[i] >> a[i] >> x[i];
+    }
+    int n1 = n, m1 = m;
+    vector<int> cnt(2e5 + 1);
+    for (int i = q;i >= 1;i--) {
+        if (t[i] == 1) {
+            if (!visn[a[i]]) {
+                n1--;
+                visn[a[i]] = 1;
+                cnt[x[i]] += m1;
+            }
+        } else {
+            if (!vism[a[i]]) {
+                m1--;
+                vism[a[i]] = 1;
+                cnt[x[i]] += n1;
+            }
+        }
+    }
+    cnt[0] += n1 * m1;
+    vector<pair<int, int>> ans;
+    for (int i = 0;i <= 2e5;i++) {
+        if (cnt[i]) {
+            ans.push_back({i,cnt[i]});
+        }
+    }
+    cout << ans.size() << '\n';
+    for (auto [x, y] : ans)cout << x << " " << y << '\n';
+}
+```
+
+## ABC 346 F - SSttrriinngg in StringString
+对于长度为 $n$ 的字符串 $X$，我们用 $f(X,k)$ 表示重复 $k$ 次字符串 $X$ 得到的字符串，用 $g(X,k)$ 表示重复 $k$ 次 $X$ 的第一个字符、第二个字符，直到第 $n$ 个字符得到的字符串。
+
+例如，如果 $X=$ `abc`，那么 $f(X,2)=$ `abcabc`，$g(X,3)=$ `aaabbbccc`。同时，对于任意字符串 $X$，$f(X,0)$ 和 $g(X,0)$ 都是空字符串。
+
+给定正整数 $N$ 以及字符串 $S$ 和 $T$。找出最大的非负整数 $k$，满足 $g(T,k)$ 是 $f(S,N)$ 的一个（不一定连续的）子序列。
+
+> $g(T,0)$ 始终是 $f(S,N)$ 的子序列。
+
+$(n\leq 10^{12},1\leq \mid s\mid,\mid t\mid \leq 10^5 )$
+
+### Solution
+二分+贪心
+
+> [!NOTE]- 官方题解
+> 固定 k 并考虑如何确定 g (T，k)是否为 f (S，N)的子串。
+> 
+> 让 s 为 S 的长度，t 为 T 的长度，$X[: i]$表示字符串 X 的前 i 个字符。T 中的每个字符也包含在 S 中（否则，答案显然为0）。
+> 
+> 让我们依次找到以下值，以 i=1,2，...，t 的顺序：
+> 
+> - $\mathrm{iter}_i$：最小的 j，使得 $g (T[: i],k)$ 是 $f (S,N)[: j]$ 的子串。
+> 
+> 最终，通过比较从 N×s 得到的 $\mathrm{iter}_t$，我们得到答案。根据 $\mathrm{iter}_i$ 找到 $\mathrm{iter}_{i+1}$ 相当于找出 T 的第（i+1）个字符在 f (S，N)的第（$\mathrm{iter}_i+1$）个字符（包括它自己）之后的第 k 次出现的位置，因此这个问题可以归结为处理以下查询 k 次：
+> 
+> - $\mathrm{query}(a,b,c)$：给定正整数 a 和 b 以及字符 c，在 f (S，N)的第 a 个字符（包括它自己）之后，找到字符 c 的第 b 次出现的位置。
+> 
+> 假设 c 在 S 中出现了 $\mathrm{cnt}_c$ 次。如果 a 大于 s，则通过 $\mathrm{query}(a,b,c)=\mathrm{query}(a-s,b,c)+s$ 将其简化为 a≤s 的情况。如果 b 大于 $\mathrm{cnt}_c$，则通过 $\mathrm{query}(a,b,c)=\mathrm{query}(a+s,b-\mathrm{cnt}_c,c)$ 将其简化为 b≤ $\mathrm{cnt}_c$ 的情况。
+> 
+> 因此，只需处理满足条件 a≤s，b≤ $\mathrm{cnt}_c$ 的查询。如果满足这些条件，则 $\mathrm{query}(a,b,c)$ 的答案不大于 2 s。通过为每个字符预先计算其在 f (S，2)中出现的位置，可以快速处理查询。
+> 
+> 因此，包括最初提到的对 k 的二进制搜索，问题可以在总共 $O(s\sigma+t\log Ns)$ 或 $O(s+\sigma+t\log s\log Ns)$ 的时间内解决（其中 $\sigma$ 为字母表的大小）。
+
+实现时就是把每个字符在 `S + S` 中出现的位置预处理出来，这样一次 `query(a,b,c)` 就能在常数次跳转后定位到答案；二分的判定也就随之落地。
+
+$a[i][j]$ 代表的是字符串取前 $i$ 个字符中的各字母个数。
+
+$x-1$ 的原因是当刚好整除的时候，会进位一位，到时候 z 记录的就是下一个周期的相应字符下标了，但是实际上应该记录的是上一个周期该字母的最后一个位置
+```cpp OMG_wc 
+#include <bits/stdc++.h>
+using namespace std;
+using LL = long long;
+const int INF = 0x3f3f3f3f;
+const LL mod = 1e9 + 7;
+const int N = 200005;
+
+char s[N], t[N];
+int a[N][26];
+vector<int> b[26];
+int main() {
+    LL n;
+    scanf("%lld%s%s", &n, s + 1, t + 1);
+    int m = strlen(s + 1);
+    for (int i = 1; i <= m; i++) {
+        for (int j = 0; j < 26; j++) a[i][j] = a[i - 1][j];
+        a[i][s[i] - 'a']++;
+        b[s[i] - 'a'].push_back(i);
+    }
+    LL l = 1, r = 1e17 + 500;
+    while (l < r) {
+        LL mid = l + r >> 1;
+        LL k = 0, z = 0;
+        int ok = 0;
+        for (int i = 1; t[i] && k < n; i++) {
+            int c = a[m][t[i] - 'a'];//在s字符串中这个字母的个数<->int c = b[t[i] - 'a'].size();
+            if (c == 0) {//若没有这个字符，则直接结束(这个mid作为答案不符合要求，答案应该更小)
+                k = n;break;
+            }
+            LL x = a[z][t[i] - 'a'] + mid;
+            k += (x - 1) / c;
+            x = (x - 1) % c + 1;
+            z = b[t[i] - 'a'][x - 1];//记录在满足条件的最后一个周期中的下标
+        }
+        if (k >= n)
+        //若已经经过超过了n轮，还没能将t字符串走完，则证明无法满足要求，这种二分的目标是找出第一个满足k>=n的下标
+            r = mid;
+        else
+            l = mid + 1;
+    }
+    printf("%lld\n", l - 1);
+    return 0;
+}
+```
+
+## ABC 356 D - Masked Popcount
+给定整数 $N$ 和 $M$ ，计算和 $\displaystyle \sum_{k=0}^{N}$ $\rm{popcount}$ $(k \mathbin{\&} M)$ .  modulo $998244353$ 。
+
+位运算：
+根据 $\&$ 的性质，只有两个都为 1 时 $\text{popcount}$ 才会增加，所以只需要枚举 $M$ 为 1 的位
+
+区间 $[0,n]$ 之间若在第 $i$ 位，发现是 $2^n$ 个 0 和 $2^n$ 个 1 交替的(即周期位 $2^{i+1}$)，可以先算出 $n$ 覆盖了多少个周期，在最后一个周期内又覆盖了多少个 1
+
+很容易计算：对于第 $i$ 位：$\displaystyle \text{ans=}\lfloor{\frac{n}{2^{i+1}}}\rfloor+[(n \bmod 2^{i+1})-2^i][n \bmod 2^{i+1}>2^i]$
+
+ $n+1$ 是因为这里算的个数是将 0 算入了，则后面少算了一位需要补上。
+```cpp
+#define int long long
+constexpr int mod = 998244353;
+void solve() {
+    int n, m;cin >> n >> m;
+    int sum = 0;
+    n++;
+    for (int i = 0;i <= __lg(m);i++) {
+        if ((m >> i) & 1) {
+            int x = n / (1ll << (i + 1));
+            int y = n % (1ll << (i + 1));
+            sum = (sum + x * (1ll << i) + max(y - (1ll << i), 0ll)) % mod;
+        }
+    }
+    cout << sum << '\n';
+}
+```
+
+## ABC 356 E - Max/Min
+给定 $A$ 数组，计算：$\displaystyle \sum\limits_{i=1}^{N}\sum\limits_{j=i+1}^{N} \lfloor{\frac{\max(A_{i},A_{j})}{\min(A_{i},A_{j})}}\rfloor$ 
+
+当某个数字相同的个数为 $x$ 时，答案就是 $\frac{x(x-1)}{2}$
+
+当两个数不同时，对于 $x$,当 $y\in[kx,(k+1)x-1]$ 答案就是 $k$。
+
+先用一个数组 $c_{i}$ 表示 $i$ 在 $a$ 数组中有多少个，用 $s_{i}$ 表示 $c_{i}$ 前缀和 $s_{r}-s_{l-1}$ 表示在 $[l,r]$ 中的数字个数
+
+对于每个 $x\in[1,M]$，枚举 $x$ 的倍数，看区间 $[kx,(k+1)x-1]$，即 $V=s_{(k+1)x-1}-s_{kx-1}$，对于这种情况：$V\times k\times c_{x}$
+
+jiangly: 
+```cpp
+void solve() {
+    int n;cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    const int M = *max_element(a.begin(), a.end());
+
+    vector<int> c(M + 1);
+    for (auto x : a) {
+        c[x]++;
+    }
+
+    vector<int> s(M + 1);
+    for (int i = 1; i <= M; i++) {
+        s[i] = s[i - 1] + c[i];
+    }
+
+    int ans = 0;
+    for (int x = 1; x <= M; x++) {
+        ans += c[x] * (c[x] - 1) / 2;
+        for (int y = x; y <= M; y += x) {
+            int v = s[min(y + x - 1, M)] - s[max(x, y - 1)];
+            ans += c[x] * v * (y / x);
+        }
+    }
+    cout << ans << "\n";
+}
+```
+
+## ABC 356 F - Distance Component Size Query
+
+给你一个整数 $K$ 。对于初始为空的集合 $S$ ，请依次处理以下两种类型的 $Q$ 查询：
+
+- `1 x`: 给出一个整数 $x$ 。如果 $x$ 在 $S$ 中，则从 $S$ 中删除 $x$ 。否则，在 $S$ 中加入 $x$ 。
+- `2 x`: 给出一个在 $S$ 中的整数 $x$ 。考虑一个图，图中的顶点是 $S$ 中的数，且当且仅当两个数之间的绝对差最多为 $K$ 时，这两个数之间有一条边。请打印包含 $x$ 的连通部分中的顶点数。
+
+\_pbds 中的平衡树 
+
+主要思路就是建立两个集合，一个记录现在的集合，一个记录缩点后的集合。
+
+>缩点就是将每个联通块且将最大的数字缩成一个点。
+
+这样之后若要查询 x 连通块的大小，则就是这个连通块在第一个集合中的位置减去上一个连通块在第一个集合中的位置。
+```cpp
+ordered_set<int> s1;set<int> s2;  // s1是所有点的点集  s2会把一个连通块的点缩成最大那个点
+// （s1要求rank，所以必须用PBDS,s2普通set也可以）
+
+void solve() {
+    ll q, k;cin >> q >> k;
+    // 这里插几个哨兵是为了方便出题，边界上的prev next 就能统一了
+    s1.insert(-4e18), s1.insert(4e18);
+    s2.insert(-4e18), s2.insert(4e18);
+    while (q--) {
+        ll op, x;cin >> op >> x;
+        if (op == 1) {
+            if (s1.find(x) == s1.end()) {
+                auto it = s1.insert(x).first;
+                ll w1 = *prev(it), w2 = *next(it);  // x左右两个点编号
+                if (x - w1 <= k) s2.erase(w1);
+                if (w2 - x <= k)
+                    ;  // x就不用插入s2了
+                else
+                    s2.insert(x);
+            } else {
+                auto it = s1.find(x);
+                ll w1 = *prev(it), w2 = *next(it);  // x左右两个点编号
+                s1.erase(x), s2.erase(x);           // x在s2里不存在也没影响
+                if (w2 - w1 > k) s2.insert(w1);     // 让w1复活 （原来是活的也不影响）
+            }
+        } else {
+            auto it = s2.lower_bound(x);  // 找到x所在连通块最大的点
+            cout << s1.order_of_key(*it) - s1.order_of_key(*prev(it)) << '\n';
+        }
+    }
+}
+```

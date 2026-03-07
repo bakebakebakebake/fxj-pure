@@ -1,0 +1,310 @@
+---
+title: '从卷积到反演：莫比乌斯反演在做什么'
+description: '以原始数论笔记为主，补回狄利克雷卷积、莫比乌斯函数、反演使用方式与常见等式。'
+publishDate: '2026-03-06'
+tags:
+  - 算法
+  - 数论
+  - 莫比乌斯反演
+  - 狄利克雷卷积
+  - 积性函数
+language: '中文'
+---
+
+> [!note] 说明
+> 这篇继续按“原笔记为主、补结构不硬改内容”的方式整理。你原来这部分已经有卷积定义、莫比乌斯函数和反演公式，这次主要把它们之间的关系补顺：为什么会出现卷积、为什么要引入 μ、反演时到底该怎么下手。
+
+## 收录内容
+
+- `狄利克雷卷积`
+- `莫比乌斯函数`
+- `莫比乌斯反演`
+- `常见卷积关系和做题入口`
+
+## 先记结论：这篇到底在解决什么
+
+做到这里，数论题常常会出现一种结构：
+
+- 你真正想求的是某个函数 $g(n)$；
+- 但题目先给出来的往往是“把 $g$ 在所有因子上累加后的结果” $f(n)$；
+- 也就是类似
+  $$
+  f(n)=\sum_{d\mid n} g(d)
+  $$
+  这样的式子。
+
+这时最自然的问题就是：
+
+- 已知“累加后的量”，怎么倒推原函数？
+
+莫比乌斯反演干的就是这件事。它不是凭空来的技巧，而是把“按因子求和”这件事先写成卷积，再用 $\mu * 1 = \epsilon$ 把它消掉。
+
+<!--steps-->
+
+1. 先识别结构：看题目里的求和是不是在按“因子 / 倍数”展开，例如 <code>{"\sum_{d|n}"}</code>、<code>{"\sum_{d|\gcd(i,j)}"}</code> 这类。
+2. 把式子写成卷积：若能写成 <code>f = g * 1</code>、<code>f = g * id</code> 之类，就已经离反演很近了。
+3. 找反函数：最常用的就是 <code>{"\mu * 1 = \epsilon"}</code>。左右同时卷一个 <code>{"\mu"}</code>，原函数就能被剥出来。
+
+## 狄利克雷卷积
+
+狄利克雷生成函数形式：
+
+$$
+F(x)=\sum_{n=1}^{\infty} \frac{a_n}{n^x}
+$$
+
+乘法运算：
+
+$$
+F(x)G(x)=\sum_{n=1}^{\infty} \frac{1}{n^x}\sum_{d\mid n} a_d b_{\frac{n}{d}}
+$$
+
+这和普通生成函数里“乘法对应卷积”是同一种味道，只不过普通卷积按的是“下标和”，这里按的是“因子拆分”。
+
+> [!NOTE]
+> $>$ 积性函数：$f(1)=1$，且当 $\gcd(a,b)=1$ 时，$f(ab)=f(a)f(b)$
+>
+> 欧拉函数和莫比乌斯函数都是积性函数。
+>
+> 对于欧拉函数有性质：$\displaystyle \sum_{d|n}\varphi(d)=n$
+>
+> 对于莫比乌斯函数有性质：$\displaystyle \sum_{d|n}\mu(d)=[n=1]$
+>
+> 对于二者之间的联系：$\displaystyle \sum_{d|n}\mu(d) \frac{n}{d}=\varphi(n)$
+
+定义狄利克雷卷积：
+
+$$
+(f * g)(n)=\sum_{d\mid n} f(d)g\left(\frac{n}{d}\right)=\sum_{d\mid n} f\left(\frac{n}{d}\right)g(d)
+$$
+
+> 符合交换律、结合律、分配律。
+
+三个常用函数：
+
+- 元函数：$\epsilon(n)=[n=1]$
+- 常数函数：$1(n)=1$
+- 恒等函数：$id(n)=n$
+
+有：$f * \epsilon = f$，但 $f * 1 \ne f$。
+
+常用卷积关系：
+
+- $\displaystyle \sum_{d\mid n}\mu(d)=[n=1] \leftrightarrow \mu * 1 = \epsilon$
+- $\displaystyle \sum_{d\mid n}\varphi(d)=n \leftrightarrow \varphi * 1 = id$
+- $\displaystyle \sum_{d\mid n}\mu(d) \frac{n}{d}=\varphi(n) \leftrightarrow \mu * id = \varphi$
+
+### 为什么它跟普通卷积很像
+
+如果把普通卷积记成：
+
+$$
+c_n=\sum_{i=0}^n a_i b_{n-i}
+$$
+
+那么狄利克雷卷积其实只是把“加和拆分”换成了“因子拆分”：
+
+$$
+c_n=\sum_{d\mid n} a_d b_{n/d}
+$$
+
+所以这整条线最该记住的不是名字，而是：
+
+- 只要题目的结构是“一个数被所有因子贡献”，就该往狄利克雷卷积上想；
+- 一旦能写成卷积，很多等式就会突然变得规整很多。
+
+> [!note]- 这三个卷积关系最好背到看到就能认出来
+> 1. $\mu * 1 = \epsilon$
+>    - 这是莫比乌斯反演的核心。
+> 2. $\varphi * 1 = id$
+>    - 因为 $\sum_{d|n}\varphi(d)=n$。
+> 3. $\mu * id = \varphi$
+>    - 可以直接由前两个关系推出，也经常在求 `lcm / gcd` 类和式时出现。
+>
+> 真正做题时，看到一个式子先别急着反演，先问自己：它是不是能改写成上面这几个标准卷积关系之一。
+
+## 莫比乌斯函数
+
+由欧拉函数过来。
+
+莫比乌斯函数的定义，设 $n$ 是一个合数，$p_1$ 是 $n$ 的最小质因子，
+
+$$
+n'=\frac{n}{p_1}
+$$
+
+有：
+
+$$
+\mu(n)=
+\begin{cases}
+0 & n' \bmod p_1 = 0 \\
+-\mu(n') & \text{otherwise}
+\end{cases}
+$$
+
+若 $n$ 是质数，有 $\mu(n)=-1$。
+
+即：
+
+$$
+\mu(n)=
+\begin{cases}
+1 & n=1 \\
+0 & \text{含相同质因子} \\
+(-1)^s & s=\text{不同质因子的个数}
+\end{cases}
+$$
+
+这三种情况可以直接理解成：
+
+- $n=1$：定义值是 $1$；
+- 只要出现平方因子，$\mu(n)=0$；
+- 如果是平方自由数，就只看不同质因子个数的奇偶性。
+
+### 为什么 μ 会成为反演主角
+
+因为它正好满足：
+
+$$
+\sum_{d\mid n} \mu(d) = [n=1]
+$$
+
+翻成卷积语言就是：
+
+$$
+\mu * 1 = \epsilon
+$$
+
+而 $\epsilon$ 在卷积里扮演的就是“单位元”。
+
+所以只要你看到某个式子能写成
+
+$$
+f = g * 1
+$$
+
+那就可以马上在两边同时卷一个 $\mu$：
+
+$$
+\mu * f = \mu * g * 1 = g * (\mu * 1) = g * \epsilon = g
+$$
+
+这一步其实就是莫比乌斯反演的本体。
+
+## 莫比乌斯反演
+
+> [!NOTE]+ 前置
+> 定义狄利克雷卷积：
+>
+> $$
+> (f * g)(n)=\sum_{d\mid n} f(d)g\left(\frac{n}{d}\right)=\sum_{d\mid n} f\left(\frac{n}{d}\right)g(d)
+> $$
+>
+> $>$ 符合交换律、结合律、分配律。
+>
+> 三个常用函数：
+>
+> - 元函数：$\epsilon(n)=[n=1]$
+> - 常数函数：$1(n)=1$
+> - 恒等函数：$id(n)=n$
+>
+> 有：$f * \epsilon = f$，$f * 1 \ne f$
+>
+> 常用卷积关系：
+>
+> - $\displaystyle \sum_{d\mid n}\mu(d)=[n=1]\leftrightarrow \mu * 1 = \epsilon$
+> - $\displaystyle \sum_{d\mid n}\varphi(d)=n\leftrightarrow \varphi * 1 = id$
+> - $\displaystyle \sum_{d\mid n}\mu(d) \frac{n}{d}=\varphi(n)\leftrightarrow \mu * id = \varphi$
+
+### 反演公式
+
+$$
+f(n)=\sum_{d\mid n} g(d)
+\leftrightarrow
+g(n)=\sum_{d\mid n} \mu(d) f\left(\frac{n}{d}\right)
+$$
+
+> $f(n),g(n)$ 均为积性函数时，$f(n)$ 称为 $g(n)$ 的莫比乌斯变换，$g(n)$ 称为 $f(n)$ 的莫比乌斯逆变换。
+
+### 这条公式到底怎么来的
+
+如果
+
+$$
+f = g * 1
+$$
+
+那么左右同卷一个 $\mu$：
+
+$$
+\mu * f = \mu * g * 1 = g * (\mu * 1) = g * \epsilon = g
+$$
+
+写回求和形式，就是：
+
+$$
+g(n)=\sum_{d\mid n} \mu(d) f\left(\frac{n}{d}\right)
+$$
+
+所以我现在更习惯把反演理解成：
+
+- 先把“按因子累加”写成卷积；
+- 再用 $\mu$ 把卷进去的 $1$ 消掉。
+
+### 做题时的常见入口
+
+<!--steps-->
+
+1. 先改写成“标准因子和”：尽量把题目里那坨式子整理成 <code>{"f(n)=\sum_{d|n} g(d)"}</code> 或 <code>f=g*1</code> 的样子。
+2. 再决定是直接反演还是继续化简：很多题不是把反演公式一套就结束，而是还要配合整除分块、线性筛、前缀和一起做。
+3. 看答案式里需要哪个函数：如果最后跑出来的是 <code>μ</code>、<code>φ</code>、积性函数前缀和，那通常还得继续往筛法和整除分块上接。
+
+## 一个最常见的套路感受
+
+例如已知
+
+$$
+F(n)=\sum_{d\mid n} G(d)
+$$
+
+想求 $G(n)$，那就是直接反演：
+
+$$
+G(n)=\sum_{d\mid n} \mu(d)F\left(\frac{n}{d}\right)
+$$
+
+而如果题目写成的是“按倍数求和”，比如
+
+$$
+F(n)=\sum_{k\ge 1} G(kn)
+$$
+
+那也常常能通过换元，最后转成“按因子 / 倍数统计”的形式，再去考虑是否反演。
+
+所以真正做题时别死盯公式字面，要先看它是不是本质上的“因子贡献被揉在一起了”。
+
+## 练习
+
+- [P1829 Crash 的数字表格 / JZPTAB](https://www.luogu.com.cn/problem/P1829)
+  - 求 $\displaystyle \sum_{i=1}^n\sum_{j=1}^m \operatorname{lcm}(i,j) \bmod 20101009$
+- [P2522 [HAOI 2011] Problem b](https://www.luogu.com.cn/problem/P2522)
+  - 求 $\displaystyle \sum_{i=x}^n\sum_{j=y}^m [\gcd(i,j)=k]$
+- [LCMSUM](https://vjudge.net/problem/SPOJ-LCMSUM)
+  - 求 $\displaystyle \sum_{i=1}^n \operatorname{lcm}(i,n)$
+- [LibreOJ 2185](https://loj.ac/problem/2185)
+  - 求 $\displaystyle \sum_{i=1}^n\sum_{j=1}^m d(i,j)$
+
+这些题的共同点就在于：
+
+- 最终都会出现按因子枚举；
+- 反演本身往往不是终点，而是中间那一步“把关系拆开”；
+- 拆开以后，通常还要接线性筛、积性函数前缀和或者整除分块。
+
+## 最后怎么记这篇
+
+我现在会把这条线压成一句话：
+
+- 普通卷积处理“下标和”；
+- 狄利克雷卷积处理“因子拆分”；
+- 莫比乌斯反演则是把“按因子累加后混在一起的量”重新拆开。

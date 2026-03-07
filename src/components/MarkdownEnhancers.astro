@@ -1,0 +1,379 @@
+<script is:inline>
+  class ObsidianTabs extends HTMLElement {
+    connectedCallback() {
+      const tabs = [...this.querySelectorAll('button[role="tab"]')];
+      const panels = [...this.querySelectorAll(':scope > [role="tabpanel"]')];
+      if (!tabs.length || !panels.length) return;
+
+      const activate = (nextIndex) => {
+        tabs.forEach((tab, index) => {
+          tab.setAttribute('aria-selected', index === nextIndex ? 'true' : 'false');
+          tab.classList.toggle('is-active', index === nextIndex);
+        });
+        panels.forEach((panel, index) => {
+          if (index === nextIndex) panel.removeAttribute('hidden');
+          else panel.setAttribute('hidden', 'true');
+        });
+      };
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activate(index));
+        tab.addEventListener('keydown', (event) => {
+          if (!(event instanceof KeyboardEvent)) return;
+          const nextIndex =
+            event.key === 'ArrowLeft'
+              ? Math.max(index - 1, 0)
+              : event.key === 'ArrowRight'
+                ? Math.min(index + 1, tabs.length - 1)
+                : event.key === 'Home'
+                  ? 0
+                  : event.key === 'End'
+                    ? tabs.length - 1
+                    : index;
+          if (nextIndex !== index) {
+            event.preventDefault();
+            activate(nextIndex);
+            tabs[nextIndex]?.focus();
+          }
+        });
+      });
+    }
+  }
+
+  if (!customElements.get('obsidian-tabs')) {
+    customElements.define('obsidian-tabs', ObsidianTabs);
+  }
+
+  const calloutTypeMap = {
+    note: 'note',
+    abstract: 'note',
+    info: 'note',
+    todo: 'note',
+    tip: 'tip',
+    hint: 'tip',
+    important: 'tip',
+    success: 'tip',
+    warning: 'caution',
+    caution: 'caution',
+    attention: 'caution',
+    question: 'caution',
+    example: 'note',
+    cite: 'note',
+    danger: 'danger',
+    error: 'danger',
+    fail: 'danger'
+  };
+
+  const selectorMap = {
+    tabs: 'tabs',
+    list2tab: 'tabs',
+    标签页: 'tabs',
+    timeline: 'timeline',
+    list2timeline: 'timeline',
+    时间线: 'timeline',
+    card: 'card',
+    list2card: 'card',
+    卡片: 'card'
+  };
+
+  const getContainer = () => document.querySelector('#content') ?? document.body;
+
+  const nextMeaningfulSibling = (node) => {
+    let current = node.nextSibling;
+    while (current) {
+      if (current.nodeType === Node.TEXT_NODE && !current.textContent?.trim()) {
+        current = current.nextSibling;
+        continue;
+      }
+      return current;
+    }
+    return null;
+  };
+
+  const createElement = (tag, className, text) => {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text) element.textContent = text;
+    return element;
+  };
+
+  const readSelector = (text) => {
+    const match = text.trim().match(/^\[([^\]]+)\]$/u);
+    if (!match) return null;
+    const [rawName] = match[1].split('|');
+    const token = rawName?.trim();
+    if (!token) return null;
+    return selectorMap[token.toLowerCase()] ?? selectorMap[token] ?? null;
+  };
+
+  const splitParagraphText = (paragraph) => {
+    const rawText = paragraph.textContent?.replace(/\r/g, '') ?? '';
+    const [firstLine, ...restLines] = rawText.split('\n');
+    return {
+      firstLine: firstLine.trim(),
+      restText: restLines.join('\n').trim()
+    };
+  };
+
+  const renderCallouts = () => {
+    getContainer()
+      .querySelectorAll('blockquote')
+      .forEach((blockquote) => {
+        if (blockquote.dataset.obsidianEnhanced === 'true') return;
+
+        const firstParagraph = [...blockquote.children].find((child) => child.tagName?.toLowerCase() === 'p');
+        if (!firstParagraph) return;
+
+        const { firstLine, restText } = splitParagraphText(firstParagraph);
+        const match = firstLine.match(/^\[!([a-zA-Z-]+)\]([+-])?\s*(.*)$/u);
+        if (!match) return;
+
+        const rawType = match[1].toLowerCase();
+        const type = calloutTypeMap[rawType] ?? 'note';
+        const foldMarker = match[2] ?? '';
+        const title = (match[3] || rawType).trim();
+        const bodyChildren = [];
+
+        if (restText) {
+          bodyChildren.push(createElement('p', '', restText));
+        }
+
+        [...blockquote.children].forEach((child, index) => {
+          if (index === 0) return;
+          bodyChildren.push(child.cloneNode(true));
+        });
+
+        let replacement;
+        if (foldMarker === '+' || foldMarker === '-') {
+          replacement = createElement(
+            'details',
+            `obsidian-collapse not-prose my-4 rounded-xl border px-3 py-2 sm:px-4 aside-${type}`
+          );
+          if (foldMarker === '+') replacement.open = true;
+          const summary = createElement(
+            'summary',
+            'obsidian-collapse-summary cursor-pointer font-medium',
+            title
+          );
+          const body = createElement('div', 'obsidian-collapse-body mt-3');
+          bodyChildren.forEach((child) => body.appendChild(child));
+          replacement.append(summary, body);
+        } else {
+          replacement = createElement(
+            'aside',
+            'obsidian-callout aside my-3 overflow-hidden rounded-xl border'
+          );
+          const container = createElement(
+            'div',
+            `aside-container border-l-8 border-primary px-4 py-3 bg-primary aside-${type}`
+          );
+          const heading = createElement(
+            'p',
+            'callout-title not-prose flex items-center gap-x-2 font-medium text-primary',
+            title
+          );
+          const body = createElement('div', 'aside-content mt-2');
+          bodyChildren.forEach((child) => body.appendChild(child));
+          container.append(heading, body);
+          replacement.appendChild(container);
+        }
+
+        replacement.dataset.obsidianEnhanced = 'true';
+        blockquote.replaceWith(replacement);
+      });
+  };
+
+  const extractItemLead = (item) => {
+    const children = [...item.children].filter(
+      (child) => !(child.nodeType === Node.TEXT_NODE && !child.textContent?.trim())
+    );
+    const firstParagraph = children.find((child) => child.tagName?.toLowerCase() === 'p');
+    const bodyChildren = [];
+
+    if (firstParagraph) {
+      const { firstLine, restText } = splitParagraphText(firstParagraph);
+      if (restText) bodyChildren.push(createElement('p', '', restText));
+      children.forEach((child) => {
+        if (child === firstParagraph) return;
+        bodyChildren.push(child.cloneNode(true));
+      });
+      return {
+        label: firstLine || 'Item',
+        bodyChildren: bodyChildren.length ? bodyChildren : [createElement('p', '', firstLine || 'Item')]
+      };
+    }
+
+    return {
+      label: item.textContent?.trim() || 'Item',
+      bodyChildren: [createElement('p', '', item.textContent?.trim() || 'Item')]
+    };
+  };
+
+  const createTabsBlock = (panels) => {
+    const root = createElement('div', 'obsidian-tabs not-prose');
+    const tabListWrapper = createElement('div', 'tablist-wrapper not-content');
+    const tabList = document.createElement('ul');
+    tabList.className = 'my-0';
+    tabList.setAttribute('role', 'tablist');
+
+    panels.forEach((panel, index) => {
+      const li = createElement('li', 'tab');
+      li.setAttribute('role', 'presentation');
+      const button = createElement('button', index === 0 ? 'is-active' : '', panel.label);
+      button.type = 'button';
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+      button.dataset.panel = `ob-tab-panel-${index}`;
+      li.appendChild(button);
+      tabList.appendChild(li);
+    });
+
+    tabListWrapper.appendChild(tabList);
+    root.appendChild(tabListWrapper);
+
+    panels.forEach((panel, index) => {
+      const tabPanel = createElement('div', '', '');
+      tabPanel.id = `ob-tab-panel-${index}`;
+      tabPanel.setAttribute('role', 'tabpanel');
+      if (index !== 0) tabPanel.setAttribute('hidden', 'true');
+      panel.bodyChildren.forEach((child) => tabPanel.appendChild(child));
+      root.appendChild(tabPanel);
+    });
+
+    return root;
+  };
+
+  const createTimelineBlock = (list) => {
+    const root = createElement('div', 'obsidian-timeline not-prose');
+    const ul = createElement('ul', 'ps-0 sm:ps-2');
+    const items = [...list.children].filter((child) => child.tagName?.toLowerCase() === 'li');
+
+    items.forEach((item, index) => {
+      const { label, bodyChildren } = extractItemLead(item);
+      const li = createElement(
+        'li',
+        'group relative flex list-none gap-x-3 rounded-full ps-0 sm:gap-x-2'
+      );
+      li.appendChild(
+        createElement(
+          'span',
+          'z-10 my-2 ms-2 h-3 w-3 min-w-3 rounded-full border-2 border-muted-foreground'
+        )
+      );
+
+      if (index !== items.length - 1) {
+        const line = createElement('span', 'absolute start-[12px] top-[20px] w-1 bg-border');
+        line.style.height = 'calc(100% - 4px)';
+        li.appendChild(line);
+      }
+
+      const content = createElement('div', 'flex gap-2 max-sm:flex-col');
+      content.appendChild(
+        createElement(
+          'samp',
+          'w-fit grow-0 rounded-md py-1 text-sm max-sm:bg-primary-foreground max-sm:px-2 sm:min-w-[82px] sm:text-right',
+          label
+        )
+      );
+      const body = document.createElement('div');
+      bodyChildren.forEach((child) => body.appendChild(child));
+      content.appendChild(body);
+      li.appendChild(content);
+      ul.appendChild(li);
+    });
+
+    root.appendChild(ul);
+    return root;
+  };
+
+  const createCardGrid = (list) => {
+    const root = createElement('div', 'obsidian-card-grid not-prose');
+    [...list.children]
+      .filter((child) => child.tagName?.toLowerCase() === 'li')
+      .forEach((item) => {
+        const { label, bodyChildren } = extractItemLead(item);
+        const article = createElement('article', 'obsidian-card rounded-2xl border bg-muted px-5 py-3');
+        article.appendChild(createElement('h3', 'text-lg font-medium', label));
+        const body = createElement('div', 'mt-2');
+        bodyChildren.forEach((child) => body.appendChild(child));
+        article.appendChild(body);
+        root.appendChild(article);
+      });
+    return root;
+  };
+
+  const renderAnyBlockSelectors = () => {
+    getContainer()
+      .querySelectorAll('p')
+      .forEach((paragraph) => {
+        if (paragraph.dataset.obsidianEnhanced === 'true') return;
+        const selector = readSelector(paragraph.textContent ?? '');
+        if (!selector) return;
+
+        const target = nextMeaningfulSibling(paragraph);
+        if (!(target instanceof HTMLElement)) return;
+
+        let replacement = null;
+        if ((selector === 'timeline' || selector === 'card' || selector === 'tabs') && target.tagName === 'UL') {
+          replacement =
+            selector === 'timeline'
+              ? createTimelineBlock(target)
+              : selector === 'card'
+                ? createCardGrid(target)
+                : createTabsBlock(
+                    [...target.children]
+                      .filter((child) => child.tagName?.toLowerCase() === 'li')
+                      .map((item) => extractItemLead(item))
+                  );
+        }
+
+        if (!replacement) return;
+        replacement.dataset.obsidianEnhanced = 'true';
+        target.remove();
+        paragraph.replaceWith(replacement);
+      });
+  };
+
+  const renderEmbedParagraphs = () => {
+    getContainer()
+      .querySelectorAll('p')
+      .forEach((paragraph) => {
+        if (paragraph.dataset.obsidianEnhanced === 'true') return;
+        if (paragraph.childNodes.length !== 1) return;
+        const onlyChild = paragraph.firstElementChild;
+        if (!(onlyChild instanceof HTMLAnchorElement)) return;
+        if (!onlyChild.classList.contains('obsidian-note-embed')) return;
+
+        const wrapper = createElement('div', 'obsidian-note-embed-card not-prose');
+        wrapper.appendChild(createElement('p', 'obsidian-note-embed-label', 'Embedded note'));
+        wrapper.appendChild(onlyChild.cloneNode(true));
+        wrapper.dataset.obsidianEnhanced = 'true';
+        paragraph.replaceWith(wrapper);
+      });
+  };
+
+  const upgradeTabs = () => {
+    document.querySelectorAll('.obsidian-tabs').forEach((node) => {
+      if (node.tagName.toLowerCase() === 'obsidian-tabs') return;
+      const replacement = document.createElement('obsidian-tabs');
+      for (const attr of [...node.attributes]) replacement.setAttribute(attr.name, attr.value);
+      replacement.innerHTML = node.innerHTML;
+      node.replaceWith(replacement);
+    });
+  };
+
+  const enhanceMarkdown = () => {
+    renderCallouts();
+    renderAnyBlockSelectors();
+    renderEmbedParagraphs();
+    upgradeTabs();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enhanceMarkdown, { once: true });
+  } else {
+    enhanceMarkdown();
+  }
+
+  document.addEventListener('astro:page-load', enhanceMarkdown);
+</script>
