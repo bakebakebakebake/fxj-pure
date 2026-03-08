@@ -9,6 +9,8 @@ tags:
   - 数据结构
   - 持久化
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/nenad-kaevik-eDNfp_tpdFo-unsplash.jpg
+heroImageColor: "#979996"
 ---
 
 > [!note] 说明

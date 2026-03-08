@@ -10,6 +10,8 @@ tags:
   - 线程池
   - CompletableFuture
 language: 中文
+heroImageSrc: '/Users/xjf/Downloads/jessica-lewis-thepaintedsquare-1tsaxPdyTLk-unsplash.jpg'
+heroImageColor: ' #b56c36 '
 ---
 
 > [!note] 说明

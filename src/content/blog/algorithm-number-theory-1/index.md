@@ -9,6 +9,8 @@ tags:
   - 欧几里得算法
   - 同余
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/bekky-bekks-VcQkZl4Wf1Y-unsplash.jpg
+heroImageColor: " #4a7273 "
 ---
 
 > [!note] 说明
@@ -283,10 +285,9 @@ for (int i = 1; i <= n; ++i) inv[i] = sv[i] * s[i - 1] % p;
 ```
 
 ### 6 一些练习题
-#### 6.1 [乘法逆元 - OI Wiki](https://oi.wiki/math/number-theory/inverse/#%E9%80%86%E5%85%83%E7%BB%83%E4%B9%A0%E9%A2%98) 这里有几道题
-#### 6.2 B3645 数列前缀和 2 - 洛谷 
-[链接](https://www.luogu.com.cn/problem/B3645)
-#### 6.3 [B3646 数列前缀和 3 - 洛谷](https://www.luogu.com.cn/problem/B3646)
+- [乘法逆元 - OI Wiki](https://oi.wiki/math/number-theory/inverse/#%E9%80%86%E5%85%83%E7%BB%83%E4%B9%A0%E9%A2%98) 这里有几道题
+- B3645 数列前缀和 2 - 洛谷  [链接](https://www.luogu.com.cn/problem/B3645)
+- [B3646 数列前缀和 3 - 洛谷](https://www.luogu.com.cn/problem/B3646)
 
 ## 中国剩余定理
 

@@ -10,6 +10,8 @@ tags:
   - 图论
   - 数据结构
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/nikita-fursenko-5_a-QqK6680-unsplash.jpg
+heroImageColor: " #98adca "
 ---
 
 > [!note] 说明

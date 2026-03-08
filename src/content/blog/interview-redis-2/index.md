@@ -10,6 +10,8 @@ tags:
   - 消息队列
   - 高可用
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/sean-pollock-PhYq704ffdA-unsplash.jpg
+heroImageColor: " #3e4f64 "
 ---
 
 > [!note] 说明

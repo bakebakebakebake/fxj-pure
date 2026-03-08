@@ -10,6 +10,8 @@ tags:
   - 位运算
   - 贪心
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/pawel-czerwinski-mv3APn9e7SU-unsplash.jpg
+heroImageColor: " #0077b3 "
 ---
 
 > [!note] 说明

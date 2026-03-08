@@ -9,6 +9,8 @@ tags:
   - NTT
   - 形式幂级数
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/claudio-luiz-castro-_R95VMWyn7A-unsplash.jpg
+heroImageColor: " #005fb8 "
 ---
 
 > [!note] 说明

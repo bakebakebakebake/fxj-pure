@@ -8,6 +8,8 @@ tags:
   - Nim
   - SG函数
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/amanda-jones-P787-xixGio-unsplash.jpg
+heroImageColor: " #730102 "
 ---
 
 > [!note] 说明

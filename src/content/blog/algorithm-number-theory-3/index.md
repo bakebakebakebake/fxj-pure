@@ -9,6 +9,8 @@ tags:
   - 狄利克雷卷积
   - 积性函数
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/franco-debartolo-v3E6teZ_KUM-unsplash.jpg
+heroImageColor: "#8d6540"
 ---
 
 > [!note] 说明

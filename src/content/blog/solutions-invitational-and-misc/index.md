@@ -1,7 +1,7 @@
 ---
-title: '邀请赛与补遗：郑州、昆明、HDU 与洛谷'
-description: '以原题解记录为主，收录郑州邀请赛、昆明邀请赛、HDU 2973 与洛谷 B3645。'
-publishDate: '2026-03-06'
+title: 邀请赛与补遗：郑州、昆明、HDU 与洛谷
+description: 以原题解记录为主，收录郑州邀请赛、昆明邀请赛、HDU 2973 与洛谷 B3645。
+publishDate: 2026-03-06
 tags:
   - 算法竞赛
   - 题解整理
@@ -9,7 +9,9 @@ tags:
   - HDU
   - 洛谷
   - 思维题
-language: '中文'
+language: 中文
+heroImageSrc: /Users/xjf/Downloads/brianna-parks-OkiElXd_EDQ-unsplash.jpg
+heroImageColor: "#6e8059"
 ---
 
 > [!note] 说明

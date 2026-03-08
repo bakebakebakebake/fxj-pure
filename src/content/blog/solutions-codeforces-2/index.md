@@ -10,6 +10,8 @@ tags:
   - 字符串
   - 思维转化
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/salvatore-andrea-santacroce-AmKua5hKI38-unsplash.jpg
+heroImageColor: " #9fd0cb "
 ---
 
 > [!note] 说明

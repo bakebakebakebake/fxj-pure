@@ -12,6 +12,8 @@ tags:
 language: 中文
 draft: false
 comment: true
+heroImageSrc: /Users/xjf/Downloads/salah-regouane-TATJUx-08kE-unsplash.jpg
+heroImageColor: " #252934 "
 ---
 
 

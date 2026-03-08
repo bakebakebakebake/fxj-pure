@@ -10,6 +10,8 @@ tags:
   - 反射
   - SPI
 language: 中文
+heroImageSrc: '/Users/xjf/Downloads/jonas-jacobsson-RFHFV7lVQBY-unsplash.jpg'
+heroImageColor: '#b56c36'
 ---
 
 > [!note] 说明

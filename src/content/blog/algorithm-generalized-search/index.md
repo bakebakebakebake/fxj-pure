@@ -8,6 +8,8 @@ tags:
   - DFS
   - BFS
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/susan-q-yin-Ctaj_HCqW84-unsplash.jpg
+heroImageColor: " #88736b "
 ---
 
 > [!note] 说明

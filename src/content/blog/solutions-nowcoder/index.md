@@ -10,6 +10,8 @@ tags:
   - 图论
   - 构造
 language: 中文
+heroImageSrc: /Users/xjf/Downloads/eugene-golovesov-dxp8NcWrqGM-unsplash.jpg
+heroImageColor: " #9cbfe7 "
 ---
 
 > [!note] 说明
