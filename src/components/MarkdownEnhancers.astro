@@ -106,6 +106,40 @@
     return selectorMap[token.toLowerCase()] ?? selectorMap[token] ?? null;
   };
 
+  const parseCalloutMarker = (paragraph) => {
+    const firstNode = paragraph.firstChild;
+    if (!firstNode || firstNode.nodeType !== Node.TEXT_NODE) return null;
+
+    const normalized = (firstNode.textContent || '').replace(/\r/g, '');
+    const match = normalized.match(/^\[!([a-zA-Z-]+)\]([+-])?\s*/u);
+    if (!match) return null;
+
+    const rawType = match[1].toLowerCase();
+    const foldMarker = match[2] ?? '';
+    const remainder = normalized.slice(match[0].length);
+    const [titleLead, ...introLines] = remainder.split('\n');
+    const titleNodes = [];
+
+    if (titleLead.trim()) {
+      titleNodes.push(document.createTextNode(titleLead.trim()));
+    }
+
+    [...paragraph.childNodes].slice(1).forEach((child) => {
+      titleNodes.push(child.cloneNode(true));
+    });
+
+    if (!titleNodes.length) {
+      titleNodes.push(document.createTextNode(rawType));
+    }
+
+    return {
+      rawType,
+      foldMarker,
+      titleNodes,
+      introText: introLines.join('\n').trim()
+    };
+  };
+
   const splitParagraphText = (paragraph) => {
     const rawText = paragraph.textContent?.replace(/\r/g, '') ?? '';
     const [firstLine, ...restLines] = rawText.split('\n');
@@ -124,18 +158,15 @@
         const firstParagraph = [...blockquote.children].find((child) => child.tagName?.toLowerCase() === 'p');
         if (!firstParagraph) return;
 
-        const { firstLine, restText } = splitParagraphText(firstParagraph);
-        const match = firstLine.match(/^\[!([a-zA-Z-]+)\]([+-])?\s*(.*)$/u);
-        if (!match) return;
+        const parsedMarker = parseCalloutMarker(firstParagraph);
+        if (!parsedMarker) return;
 
-        const rawType = match[1].toLowerCase();
+        const { rawType, foldMarker, titleNodes, introText } = parsedMarker;
         const type = calloutTypeMap[rawType] ?? 'note';
-        const foldMarker = match[2] ?? '';
-        const title = (match[3] || rawType).trim();
         const bodyChildren = [];
 
-        if (restText) {
-          bodyChildren.push(createElement('p', '', restText));
+        if (introText) {
+          bodyChildren.push(createElement('p', '', introText));
         }
 
         [...blockquote.children].forEach((child, index) => {
@@ -152,9 +183,9 @@
           if (foldMarker === '+') replacement.open = true;
           const summary = createElement(
             'summary',
-            'obsidian-collapse-summary not-prose cursor-pointer font-medium',
-            title
+            'obsidian-collapse-summary not-prose cursor-pointer font-medium'
           );
+          titleNodes.forEach((node) => summary.appendChild(node));
           const body = createElement('div', 'obsidian-collapse-body mt-3');
           bodyChildren.forEach((child) => body.appendChild(child));
           replacement.append(summary, body);
@@ -169,9 +200,9 @@
           );
           const heading = createElement(
             'p',
-            'callout-title not-prose flex items-center gap-x-2 font-medium text-primary',
-            title
+            'callout-title not-prose flex items-center gap-x-2 font-medium text-primary'
           );
+          titleNodes.forEach((node) => heading.appendChild(node));
           const body = createElement('div', 'aside-content mt-2');
           bodyChildren.forEach((child) => body.appendChild(child));
           container.append(heading, body);

@@ -349,9 +349,14 @@ void solve() {
 ## CF 1907 Div.3 D - Jumping Through Segments
 
 求一个最小的移动距离 $k$ 使得能满足每次移动后都能在目标的 $[l, r]$ 区间内。 
- $\text{example 1 }\boxed{\begin{align}&5\\&1 &5\\&3 &4\\&5 &6\\&8 &10\\&0 &1\end{align}}\to \min(k) \text{ is }8-1=7.$
- 
-$\text{example 2 }\boxed{\begin{align}&3\\&3 &8\\&10 &18\\&6 &11\end{align}}\min(k)\text{ is } \frac{10}{2}=5$ 
+
+$$
+\text{example 1 }\boxed{\begin{aligned}&5\\&1 &5\\&3 &4\\&5 &6\\&8 &10\\&0 &1\end{aligned}}\to \min(k) \text{ is }8-1=7.
+$$
+
+$$
+\text{example 2 }\boxed{\begin{aligned}&3\\&3 &8\\&10 &18\\&6 &11\end{aligned}}\min(k)\text{ is } \frac{10}{2}=5
+$$
 
 在 $\text{example 2}$ 中玩家可以采取以下行动：
 
@@ -425,6 +430,7 @@ int main()
 n | 0 | 1 | 2 | 3| 4|5|6|7|8|9
 -- | -- | -- | --| --| -- | --| --| --| --| --
 ans |1 | 3 | 6|10| 15|21 |28 |36 |45 |55 |
+
 $n\geq 10,ans(n)=\prod ans(n\text{的各位数字})$ 
 
 `int x=n%10,ans *= (x + 1) * (x + 2) / 2,n/=10;`
@@ -533,7 +539,8 @@ sq dq kq
 
 ### Solution
 <span style="color:#c00000">根号分治</span>
-设置一个阈值: $$w=\sqrt\{ n \}$$
+
+设置一个阈值: $$w=\sqrt{ n }$$
 
 当 $d>w$,直接暴力做(因为这时的运算次数很少了)
 

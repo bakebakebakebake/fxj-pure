@@ -156,10 +156,14 @@ function transformEmbedParagraphs(tree: Root) {
   walkEmbedParagraphs(tree)
 }
 
-function createCallout(type: 'note' | 'tip' | 'caution' | 'danger', title: string, bodyChildren: RootContent[]) {
+function createCallout(
+  type: 'note' | 'tip' | 'caution' | 'danger',
+  titleChildren: RootContent[],
+  bodyChildren: RootContent[]
+) {
   return h('aside.obsidian-callout.aside.my-3.overflow-hidden.rounded-xl.border', [
     h(`div.aside-container.border-l-8.border-primary.px-4.py-3.bg-primary.aside-${type}`, [
-      h('p.callout-title.not-prose.flex.items-center.gap-x-2.font-medium.text-primary', title),
+      h('p.callout-title.not-prose.flex.items-center.gap-x-2.font-medium.text-primary', titleChildren),
       h('div.aside-content.mt-2', bodyChildren)
     ])
   ]) as RootContent
@@ -167,7 +171,7 @@ function createCallout(type: 'note' | 'tip' | 'caution' | 'danger', title: strin
 
 function createCollapse(
   type: 'note' | 'tip' | 'caution' | 'danger',
-  title: string,
+  titleChildren: RootContent[],
   bodyChildren: RootContent[],
   open: boolean
 ) {
@@ -175,7 +179,7 @@ function createCollapse(
     `details.obsidian-collapse.my-4.overflow-hidden.rounded-xl.border.px-3.py-2.sm:px-4.aside-${type}`,
     open ? { open: true } : {},
     [
-      h('summary.obsidian-collapse-summary.not-prose.cursor-pointer.font-medium', title),
+      h('summary.obsidian-collapse-summary.not-prose.cursor-pointer.font-medium', titleChildren),
       h('div.obsidian-collapse-body.mt-3', bodyChildren)
     ]
   ) as RootContent
@@ -501,19 +505,15 @@ function renderCallout(node: Element) {
   const firstParagraph = contentChildren.find((child): child is Element => isElement(child, 'p'))
   if (!firstParagraph) return null
 
-  const paragraphText = extractText(firstParagraph)
-  const [markerLine, ...restLines] = paragraphText.split('\n')
-  const match = markerLine.match(/^\[!([a-zA-Z-]+)\]([+-])?\s*(.*)$/u)
-  if (!match) return null
+  const parsedMarker = parseCalloutMarker(firstParagraph)
+  if (!parsedMarker) return null
 
-  const rawType = match[1].toLowerCase()
+  const { rawType, foldMarker, introText, titleChildren } = parsedMarker
   const type = calloutTypeMap[rawType] ?? 'note'
-  const foldMarker = match[2] ?? ''
-  const title = (match[3] || rawType).trim()
   const bodyChildren: RootContent[] = []
 
-  if (restLines.join('\n').trim()) {
-    bodyChildren.push(h('p', restLines.join('\n').trim()) as RootContent)
+  if (introText) {
+    bodyChildren.push(h('p', introText) as RootContent)
   }
 
   const firstParagraphIndex = contentChildren.indexOf(firstParagraph)
@@ -523,8 +523,42 @@ function renderCallout(node: Element) {
   }
 
   return foldMarker === '+' || foldMarker === '-'
-    ? createCollapse(type, title, bodyChildren, foldMarker === '+')
-    : createCallout(type, title, bodyChildren)
+    ? createCollapse(type, titleChildren, bodyChildren, foldMarker === '+')
+    : createCallout(type, titleChildren, bodyChildren)
+}
+
+function parseCalloutMarker(paragraph: Element) {
+  const firstChild = paragraph.children[0]
+  if (!firstChild || firstChild.type !== 'text') return null
+
+  const normalized = firstChild.value.replace(/\r/g, '')
+  const match = normalized.match(/^\[!([a-zA-Z-]+)\]([+-])?\s*/u)
+  if (!match) return null
+
+  const rawType = match[1].toLowerCase()
+  const foldMarker = match[2] ?? ''
+  const remainder = normalized.slice(match[0].length)
+  const [titleLead, ...introLines] = remainder.split('\n')
+  const titleChildren: RootContent[] = []
+
+  if (titleLead.trim()) {
+    titleChildren.push({ type: 'text', value: titleLead.trim() })
+  }
+
+  for (const child of paragraph.children.slice(1)) {
+    titleChildren.push(child)
+  }
+
+  if (!titleChildren.length) {
+    titleChildren.push({ type: 'text', value: rawType })
+  }
+
+  return {
+    rawType,
+    foldMarker,
+    titleChildren,
+    introText: introLines.join('\n').trim()
+  }
 }
 
 function walkEmbedParagraphs(parent: Root | Element) {

@@ -65,6 +65,7 @@ const selectorMap = new Map<string, 'tabs' | 'timeline' | 'card'>([
 export default function remarkObsidian() {
   return function transformer(tree: Root, file: { path?: string }) {
     stripCommentBlocks(tree)
+    normalizeMathBlocks(tree)
 
     visit(tree, 'html', (node: { value: string }, index, parent) => {
       if (!parent || index === undefined) return
@@ -109,6 +110,30 @@ export default function remarkObsidian() {
       return index + replacements.length
     })
   }
+}
+
+function normalizeMathBlocks(tree: Root) {
+  visit(tree, 'inlineMath', (node: { value: string }) => {
+    node.value = normalizeKatexMath(node.value, true)
+  })
+
+  visit(tree, 'math', (node: { value: string }) => {
+    node.value = normalizeKatexMath(node.value, false)
+  })
+}
+
+function normalizeKatexMath(value: string, isInline: boolean) {
+  let next = value
+    .replace(/\\begin\{align\*\}/gu, '\\begin{aligned}')
+    .replace(/\\end\{align\*\}/gu, '\\end{aligned}')
+    .replace(/\\begin\{align\}/gu, '\\begin{aligned}')
+    .replace(/\\end\{align\}/gu, '\\end{aligned}')
+
+  if (isInline && /\\begin\{aligned\}/u.test(next) && !/\\displaystyle/u.test(next)) {
+    next = `\\displaystyle ${next}`
+  }
+
+  return next
 }
 
 function stripCommentBlocks(tree: Root) {
