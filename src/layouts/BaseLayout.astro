@@ -61,6 +61,7 @@ function withChinesePath(pathname: string) {
         <div class='inline-flex items-center rounded-full border bg-muted/60 p-1 text-xs text-muted-foreground backdrop-blur'>
           <a
             href={withChinesePath(Astro.url.pathname)}
+            data-locale-switch='zh'
             class:list={[
               'rounded-full px-3 py-1 transition-colors',
               locale === 'zh' ? 'bg-background text-foreground shadow-sm' : 'hover:text-foreground'
@@ -70,6 +71,7 @@ function withChinesePath(pathname: string) {
           </a>
           <a
             href={withEnglishPath(Astro.url.pathname)}
+            data-locale-switch='en'
             class:list={[
               'rounded-full px-3 py-1 transition-colors',
               locale === 'en' ? 'bg-background text-foreground shadow-sm' : 'hover:text-foreground'
@@ -100,19 +102,52 @@ function withChinesePath(pathname: string) {
     <MarkdownEnhancers />
     <script is:inline>
       (function () {
-        const pathname = window.location.pathname;
-        const currentLocale = pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'zh';
-        localStorage.setItem('preferred-locale', currentLocale);
+        const LOCALE_KEY = 'preferred-locale';
+        const LOCALE_EXPLICIT_KEY = 'preferred-locale-explicit';
+        const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
+        const localeLinks = document.querySelectorAll('[data-locale-switch]');
 
-        if (pathname !== '/') return;
-        if (sessionStorage.getItem('fxj-root-redirected')) return;
+        for (const link of localeLinks) {
+          link.addEventListener('click', (event) => {
+            const locale = event.currentTarget?.getAttribute('data-locale-switch');
+            if (locale === 'zh' || locale === 'en') {
+              localStorage.setItem(LOCALE_KEY, locale);
+              localStorage.setItem(LOCALE_EXPLICIT_KEY, '1');
+            }
+          });
+        }
 
-        const saved = localStorage.getItem('preferred-locale');
-        const browserLocale = (navigator.language || '').toLowerCase().startsWith('en') ? 'en' : 'zh';
-        const target = saved || browserLocale;
-        if (target === 'en') {
-          sessionStorage.setItem('fxj-root-redirected', '1');
-          window.location.replace('/en');
+        if (pathname.startsWith('/docs')) return;
+
+        const isExplicitPreference = localStorage.getItem(LOCALE_EXPLICIT_KEY) === '1';
+        const saved = localStorage.getItem(LOCALE_KEY);
+        const savedLocale =
+          isExplicitPreference && (saved === 'zh' || saved === 'en') ? saved : null;
+
+        if (!isExplicitPreference && saved) {
+          localStorage.removeItem(LOCALE_KEY);
+        }
+
+        const browserLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+        const browserLocale = browserLanguage.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+        const preferredLocale = savedLocale || browserLocale;
+
+        const toEnglishPath = (path) => {
+          if (path === '/' || path === '') return '/en';
+          if (path === '/en' || path.startsWith('/en/')) return path;
+          return `/en${path}`;
+        };
+
+        const toChinesePath = (path) => {
+          if (path === '/en') return '/';
+          if (path.startsWith('/en/')) return path.slice(3) || '/';
+          return path;
+        };
+
+        const preferredPath = preferredLocale === 'en' ? toEnglishPath(pathname) : toChinesePath(pathname);
+
+        if (preferredPath !== pathname) {
+          window.location.replace(preferredPath);
         }
       })();
     </script>

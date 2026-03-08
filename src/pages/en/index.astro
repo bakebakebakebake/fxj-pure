@@ -12,7 +12,7 @@ import { getLocalizedBlogPreviews, sortLocalizedBlogByDate } from '@/utils/blog'
 
 const MAX_POSTS = 10
 const allPostsByDate = sortLocalizedBlogByDate(await getLocalizedBlogPreviews('en')).slice(0, MAX_POSTS)
-const rssUrl = 'https://fxj.wiki/en/rss.xml'
+const rssUrl = Astro.site ? new URL('/en/rss.xml', Astro.site).toString() : '/en/rss.xml'
 ---
 
 <PageLayout meta={{ title: 'Home', description: 'FXJ Wiki in English' }} highlightColor='#659EB9'>

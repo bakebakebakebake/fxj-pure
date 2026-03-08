@@ -13,7 +13,7 @@ import config from '@/site-config'
 const MAX_POSTS = 10
 const allPosts = await getBlogCollection()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
-const rssUrl = 'https://fxj.wiki/rss.xml'
+const rssUrl = Astro.site ? new URL('/rss.xml', Astro.site).toString() : '/rss.xml'
 ---
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#659EB9'>
