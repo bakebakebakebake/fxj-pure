@@ -1,0 +1,125 @@
+---
+import { Button, Collapse, Icon, Timeline } from 'astro-pure/user'
+import PageLayout from '@/layouts/CommonPage.astro'
+import Substats from '@/components/about/Substats.astro'
+import ToolSection from '@/components/about/ToolSection.astro'
+
+const headings = [
+  { depth: 2, slug: 'focus', text: 'Focus' },
+  { depth: 2, slug: 'tools', text: 'Tools' },
+  { depth: 2, slug: 'social-networks', text: 'Social Networks' },
+  { depth: 2, slug: 'website-services', text: 'Current Site Services' },
+  { depth: 2, slug: 'future-services', text: 'Planned Services' },
+  { depth: 2, slug: 'about-blog', text: 'About Blog' }
+]
+---
+
+<PageLayout title='About' {headings} comment>
+  <p>Developer / ACMer</p>
+  <p>
+    This site is where I collect algorithm editorials, backend notes, system fundamentals and
+    long-form learning records. The goal is not fast posting, but durable writing.
+  </p>
+  <Button title='View projects' class='w-fit' href='/en/projects' variant='ahead' />
+
+  <h2 id='focus'>Focus</h2>
+  <ul>
+    <li>Contest problem solving, editorial writing and post-contest review.</li>
+    <li>Java backend fundamentals: JUC, JVM, databases, cache and engineering practices.</li>
+    <li>Classic CS topics including OS, networking and database systems.</li>
+    <li>Obsidian / Markdown / Astro based knowledge workflows.</li>
+  </ul>
+
+  <h2 id='tools'>Tools</h2>
+  <ToolSection
+    class='mb-5'
+    title='Productivity'
+    tools={[
+      { name: 'Obsidian', description: 'Knowledge base and notes', href: 'https://obsidian.md/', icon: import('@/assets/tools/obsidian.svg?raw') },
+      { name: 'Typora', description: 'Single-file Markdown editor', href: 'https://typora.io/', icon: import('@/assets/tools/typora.svg?raw') },
+      { name: 'Notion', description: 'Planning and workspace management', href: 'https://www.notion.so/', icon: import('@/assets/tools/notion.svg?raw') },
+      { name: 'Chrome', description: 'Daily browser', href: 'https://www.google.com/chrome/', icon: import('@/assets/tools/chrome.svg?raw') },
+      { name: 'Edge', description: 'Secondary browser', href: 'https://www.microsoft.com/edge', icon: import('@/assets/tools/edge.svg?raw') },
+      { name: 'Firefox', description: 'Compatibility checks', href: 'https://www.mozilla.org/firefox/', icon: import('@/assets/tools/firefox.svg?raw') }
+    ]}
+  />
+  <ToolSection
+    class='mb-5'
+    title='Development'
+    tools={[
+      { name: 'VS Code', description: 'General coding', href: 'https://code.visualstudio.com/', icon: import('@/assets/tools/vscode.svg?raw') },
+      { name: 'Cursor', description: 'AI-assisted IDE', href: 'https://www.cursor.com/', icon: import('@/assets/tools/cursor.svg?raw') },
+      { name: 'IntelliJ IDEA', description: 'Java IDE', href: 'https://www.jetbrains.com/idea/', icon: import('@/assets/tools/IDEA.svg?raw') },
+      { name: 'ChatGPT', description: 'Reasoning and drafting support', href: 'https://chat.openai.com/', icon: import('@/assets/tools/chatgpt.svg?raw') },
+      { name: 'Doubao', description: 'Chinese AI assistant', href: 'https://www.doubao.com/', icon: import('@/assets/tools/doubao.svg?raw') }
+    ]}
+  />
+  <ToolSection
+    class='mb-5'
+    title='Environment'
+    tools={[
+      { name: 'macOS', description: 'Primary laptop environment', href: 'https://www.apple.com/macos/', icon: import('@/assets/tools/apple.svg?raw') },
+      { name: 'Ubuntu (WSL)', description: 'CLI-heavy development environment', href: 'https://ubuntu.com/', icon: import('@/assets/tools/ubuntu.svg?raw') },
+      { name: 'Windows 11', description: 'Secondary workstation', href: 'https://www.microsoft.com/windows/windows-11', icon: import('@/assets/tools/windows11.svg?raw') }
+    ]}
+  />
+
+  <h2 id='social-networks'>Social Networks</h2>
+  <Substats
+    stats={[
+      { platform: 'GitHub', icon: 'github', link: 'https://github.com/bakebakebakebake', text: 'followers', api: 'github/bakebakebakebake' }
+    ]}
+  />
+  <div class='not-prose mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3'>
+    <a class='rounded-xl border px-4 py-3 no-underline transition-colors hover:bg-muted' href='https://www.zhihu.com/people/4-95-22-83' target='_blank' rel='noreferrer'>
+      <div class='flex items-center gap-3'>
+        <Icon name='zhihu' class='size-5 text-[#1677ff]' />
+        <div><div class='font-medium text-foreground'>Zhihu</div><p class='m-0 text-sm text-muted-foreground'>Q&A, ideas and saved content.</p></div>
+      </div>
+    </a>
+    <a class='rounded-xl border px-4 py-3 no-underline transition-colors hover:bg-muted' href='https://space.bilibili.com/2071277173' target='_blank' rel='noreferrer'>
+      <div class='flex items-center gap-3'>
+        <Icon name='bilibili' class='size-5 text-[#00a1d6]' />
+        <div><div class='font-medium text-foreground'>Bilibili</div><p class='m-0 text-sm text-muted-foreground'>Learning videos and saved references.</p></div>
+      </div>
+    </a>
+    <a class='rounded-xl border px-4 py-3 no-underline transition-colors hover:bg-muted' href='https://x.com/fxj_go/likes' target='_blank' rel='noreferrer'>
+      <div class='flex items-center gap-3'>
+        <Icon name='x' class='size-5' />
+        <div><div class='font-medium text-foreground'>X</div><p class='m-0 text-sm text-muted-foreground'>English-speaking tech stream.</p></div>
+      </div>
+    </a>
+  </div>
+
+  <h2 id='website-services'>Current Site Services</h2>
+  <ul>
+    <li><strong>FXJ Wiki</strong>: main site for blog, archives, tags and search.</li>
+    <li><strong>Docs</strong>: reusable docs and theme-related notes.</li>
+    <li><strong>Notes</strong>: a more knowledge-base-like writing space.</li>
+    <li><strong>Pages</strong>: archived earlier GitHub Pages content.</li>
+    <li><strong>Waline</strong>: comment system and pageview service.</li>
+  </ul>
+
+  <h2 id='future-services'>Planned Services</h2>
+  <Collapse title='Status'>
+    Planned uptime dashboard with incidents and historical availability. The preferred direction is
+    <strong>Upptime</strong>.
+  </Collapse>
+  <Collapse title='Share'>
+    Planned share portal for cloud files. The preferred direction is
+    <strong>onedrive-cf-index-ng</strong>.
+  </Collapse>
+  <Collapse title='Analytics'>
+    Planned Umami panel so analytics and comment admin can be kept separate.
+  </Collapse>
+
+  <h2 id='about-blog'>About Blog</h2>
+  <Timeline
+    events={[
+      { date: '2023-03-13', content: 'Started writing Markdown notes in Youdao Note' },
+      { date: '2023-10-23', content: 'Started writing notes on Luogu' },
+      { date: '2024-01-10', content: 'Built my first Hexo blog' },
+      { date: '2025-10-06', content: 'Moved into the current Astro-based FXJ Wiki' }
+    ]}
+  />
+</PageLayout>

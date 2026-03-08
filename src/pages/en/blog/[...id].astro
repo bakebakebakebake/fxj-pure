@@ -1,0 +1,51 @@
+---
+import { render } from 'astro:content'
+
+import LocalizedBlogPost from '@/layouts/LocalizedBlogPost.astro'
+import { getLocalizedBlogEntry, getLocalizedBlogPreviews, sortLocalizedBlogByDate } from '@/utils/blog'
+
+export const prerender = true
+
+export async function getStaticPaths() {
+  const posts = sortLocalizedBlogByDate(await getLocalizedBlogPreviews('zh'))
+  return posts.map((post) => ({
+    params: { id: post.id }
+  }))
+}
+
+const id = Astro.params.id!
+const entryResult = await getLocalizedBlogEntry('en', id)
+if (!entryResult) {
+  return Astro.redirect('/en/blog')
+}
+
+const allPosts = sortLocalizedBlogByDate(await getLocalizedBlogPreviews('en'))
+const rendered = entryResult.kind === 'entry' ? await render(entryResult.entry as never) : null
+const headings = rendered?.headings ?? []
+const Content = rendered?.Content
+---
+
+<LocalizedBlogPost
+  preview={entryResult.preview}
+  locale='en'
+  headings={headings}
+  relatedPosts={allPosts}
+  placeholder={entryResult.kind === 'placeholder'}
+>
+  {
+    entryResult.kind === 'entry' && Content ? (
+      <Content />
+    ) : (
+      <div class='space-y-4'>
+        <p>
+          English version is coming soon. This page already exists so the route, metadata, language
+          switcher, archives and tags can all work before the full translation is ready.
+        </p>
+        <p>
+          If you want the complete content right now, switch back to the Chinese version from the
+          button below or the language switcher in the header.
+        </p>
+      </div>
+    )
+  }
+</LocalizedBlogPost>

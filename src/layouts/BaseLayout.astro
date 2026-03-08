@@ -1,9 +1,11 @@
 ---
-import { Footer, Header, ThemeProvider } from 'astro-pure/components/basic'
+import { Header, ThemeProvider } from 'astro-pure/components/basic'
 import type { SiteMeta } from 'astro-pure/types'
 import BaseHead from '@/components/BaseHead.astro'
+import Footer from '@/components/basic/Footer.astro'
 import MarkdownEnhancers from '@/components/MarkdownEnhancers.astro'
 import config from '@/site-config'
+import { getLocaleFromPathname, getLocaleMeta } from '@/utils/i18n'
 import Analytics from '@vercel/analytics/astro'
 
 // Import the global.css file here so that it is included on
@@ -20,11 +22,25 @@ const {
   highlightColor,
   ...props
 } = Astro.props
+const locale = getLocaleFromPathname(Astro.url.pathname)
+const localeMeta = getLocaleMeta(locale)
+
+function withEnglishPath(pathname: string) {
+  if (pathname === '/' || pathname === '') return '/en'
+  if (pathname === '/en' || pathname.startsWith('/en/')) return pathname
+  return `/en${pathname}`
+}
+
+function withChinesePath(pathname: string) {
+  if (pathname === '/en') return '/'
+  if (pathname.startsWith('/en/')) return pathname.slice(3)
+  return pathname
+}
 ---
 
-<html lang={config.locale.lang}>
+<html lang={localeMeta.htmlLang}>
   <head>
-    <BaseHead {articleDate} {description} {ogImage} {title} />
+    <BaseHead {articleDate} {description} {ogImage} {title} locale={locale} />
     <ThemeProvider />
     <Analytics />
   </head>
@@ -41,6 +57,28 @@ const {
     }
     <div class='w-full max-w-[70rem] px-4 sm:px-7 lg:px-10 min-h-[100dvh] flex flex-col justify-between'>
       <Header />
+      <div class='mt-2 flex justify-end'>
+        <div class='inline-flex items-center rounded-full border bg-muted/60 p-1 text-xs text-muted-foreground backdrop-blur'>
+          <a
+            href={withChinesePath(Astro.url.pathname)}
+            class:list={[
+              'rounded-full px-3 py-1 transition-colors',
+              locale === 'zh' ? 'bg-background text-foreground shadow-sm' : 'hover:text-foreground'
+            ]}
+          >
+            中文
+          </a>
+          <a
+            href={withEnglishPath(Astro.url.pathname)}
+            class:list={[
+              'rounded-full px-3 py-1 transition-colors',
+              locale === 'en' ? 'bg-background text-foreground shadow-sm' : 'hover:text-foreground'
+            ]}
+          >
+            English
+          </a>
+        </div>
+      </div>
       <div class='flex-1 w-full'>
         <slot />
       </div>
@@ -60,6 +98,24 @@ const {
       }
     </style>
     <MarkdownEnhancers />
+    <script is:inline>
+      (function () {
+        const pathname = window.location.pathname;
+        const currentLocale = pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'zh';
+        localStorage.setItem('preferred-locale', currentLocale);
+
+        if (pathname !== '/') return;
+        if (sessionStorage.getItem('fxj-root-redirected')) return;
+
+        const saved = localStorage.getItem('preferred-locale');
+        const browserLocale = (navigator.language || '').toLowerCase().startsWith('en') ? 'en' : 'zh';
+        const target = saved || browserLocale;
+        if (target === 'en') {
+          sessionStorage.setItem('fxj-root-redirected', '1');
+          window.location.replace('/en');
+        }
+      })();
+    </script>
 
   </body>
 </html>

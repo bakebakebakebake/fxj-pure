@@ -18,7 +18,7 @@ const linkEditPage = 'https://github.com/bakebakebakebake/fxj-pure/blob/main/pub
 ---
 
 <PageLayout title='Links' {headings} comment>
-  <p>没有固定排序，基本就是随机展示。It's random.</p>
+  <p>No fixed order here. It is random.</p>
   <h2 id='common-links'>Common Links</h2>
   <FriendList list={friends[0]} />
   <Collapse title='Links with Bad Status'>
@@ -30,9 +30,8 @@ const linkEditPage = 'https://github.com/bakebakebakebake/fxj-pure/blob/main/pub
   <h2 id='special-links'>Special Links</h2>
   <FriendList list={friends[2]} />
 
-  <!-- apply-links -->
   <h2 id='apply-links'>Apply Links</h2>
-  <p>本站信息（点击复制）The site information (click to copy)：</p>
+  <p>Site information (click to copy):</p>
   <blockquote class='not-prose grid grid-cols-[auto_1fr] gap-x-2 break-words border-s-4 ps-4'>
     {
       linksConf.applyTip.map(({ name, val }) => {
@@ -50,14 +49,11 @@ const linkEditPage = 'https://github.com/bakebakebakebake/fxj-pure/blob/main/pub
   </blockquote>
 
   <p>
-    可通过下方留言或 <a href={linkEditPage} target='_blank'>提交 PR</a> 申请友链。此外申请说明：<br
-    />
-    Apply your link by leaving comment or <a href={linkEditPage} target='_blank'>Submitting a PR</a
-    >. Additional info:
+    Apply your link by leaving a comment or <a href={linkEditPage} target='_blank'>submitting a PR</a>.
   </p>
   <ul>
-    <li>在你的友链上添加了本站. You've recommended this site on your website.</li>
-    <li>请确保你的站点活着. Make sure your site is alive.</li>
-    <li>博客内容不违反国家法律. Content does not violate common laws.</li>
+    <li>You have already recommended this site on your own site.</li>
+    <li>Your site should be alive and reachable.</li>
+    <li>Content should not violate common laws or basic platform rules.</li>
   </ul>
 </PageLayout>

@@ -1,0 +1,109 @@
+---
+import type { GetStaticPaths, Page } from 'astro'
+
+import { Paginator } from 'astro-pure/components/pages'
+import { Button, Icon } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import LocalizedPostPreview from '@/components/pages/LocalizedPostPreview.astro'
+import config from '@/site-config'
+import {
+  getLocalizedBlogPreviews,
+  getLocalizedTagsWithCount,
+  sortLocalizedBlogByDate,
+  type LocalizedBlogPreview
+} from '@/utils/blog'
+
+export const prerender = true
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = sortLocalizedBlogByDate(await getLocalizedBlogPreviews('en'))
+  const uniqueTags = getLocalizedTagsWithCount(posts)
+  const collectionsCount = posts.length
+  return paginate(posts, {
+    pageSize: config.content.blogPageSize,
+    props: { uniqueTags, collectionsCount }
+  })
+}) satisfies GetStaticPaths
+
+interface Props {
+  page: Page<LocalizedBlogPreview>
+  uniqueTags: [string, number][]
+  collectionsCount: number
+}
+
+const { page, uniqueTags, collectionsCount } = Astro.props
+
+const meta = {
+  description: 'English blog index and translated placeholders',
+  title: 'Blog'
+}
+
+const paginationProps = {
+  ...(page.url.prev && {
+    prevUrl: {
+      text: `← Previous Posts`,
+      url: page.url.prev
+    }
+  }),
+  ...(page.url.next && {
+    nextUrl: {
+      text: `Next Posts →`,
+      url: page.url.next
+    }
+  })
+}
+---
+
+<PageLayout {meta}>
+  <Button title='Back' href='/en' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>Blog</h1>
+    </div>
+    {
+      page.data.length === 0 ? (
+        <p>No posts yet.</p>
+      ) : (
+        <div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
+          <section aria-label='Blog posts list' class='animate' id='content'>
+            <div class='mb-3 flex flex-col justify-between text-sm sm:mb-5 sm:flex-row'>
+              <span class='text-muted-foreground'>
+                Page {page.currentPage} · Showing {page.data.length} of {collectionsCount} posts
+              </span>
+              <a aria-label='View yearly blog archives' href='/en/archives' data-astro-prefetch>
+                View yearly archives →
+              </a>
+            </div>
+            <ul class='flex flex-col gap-y-4 text-start'>
+              {page.data.map((post) => (
+                <LocalizedPostPreview post={post} href={`/en/blog/${post.id}`} detailed />
+              ))}
+            </ul>
+            <Paginator {...paginationProps} />
+          </section>
+
+          {!!uniqueTags.length && (
+            <aside class='animate' id='sidebar'>
+              <h2 class='mb-4 flex items-center text-lg font-semibold'>
+                <Icon name='tag-2' class='me-2' />
+                Tags
+              </h2>
+              <ul class='flex flex-wrap gap-2'>
+                {uniqueTags.map(([tag]) => (
+                  <li>
+                    <Button title={tag} href={`/en/tags/${tag}`} variant='pill' />
+                  </li>
+                ))}
+              </ul>
+              <span class='mt-4 block sm:text-end'>
+                <a aria-label='View all blog categories' href='/en/tags' data-astro-prefetch>
+                  View all →
+                </a>
+              </span>
+            </aside>
+          )}
+        </div>
+      )
+    }
+  </main>
+</PageLayout>

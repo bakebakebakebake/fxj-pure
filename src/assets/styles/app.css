@@ -190,11 +190,17 @@ mark {
   border-radius: 0 1rem 1rem 0;
   background: hsl(var(--content-quote-bg));
   color: hsl(var(--content-quote-fg));
+  font-style: normal;
   padding: 1rem 1.1rem;
 }
 
 #content :where(blockquote):not(.obsidian-callout):not(.aside) :where(p, li) {
   color: inherit;
+  font-style: normal;
+}
+
+#content :where(blockquote):not(.obsidian-callout):not(.aside) :where(.katex, code, pre, strong, em) {
+  font-style: normal;
 }
 
 #content :where(blockquote):not(.obsidian-callout):not(.aside) :where(pre, .astro-code) {

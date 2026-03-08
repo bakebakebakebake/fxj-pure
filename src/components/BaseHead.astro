@@ -2,14 +2,17 @@
 import { prod } from 'astro-pure/server'
 import type { SiteMeta } from 'astro-pure/types'
 import config from '@/site-config'
+import type { Locale } from '@/utils/i18n'
+import { getLocaleMeta } from '@/utils/i18n'
 
-type Props = SiteMeta
+type Props = SiteMeta & { locale?: Locale }
 
-const { articleDate, description, ogImage, title } = Astro.props
+const { articleDate, description, ogImage, title, locale = 'zh' } = Astro.props as Props
 
 const siteTitle = `${title} ${config.titleDelimiter} ${config.title}`
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(ogImage ? ogImage : '/images/social-card.png', Astro.url).href
+const localeMeta = getLocaleMeta(locale)
 ---
 
 <meta charset='utf-8' />
@@ -50,7 +53,7 @@ const socialImageURL = new URL(ogImage ? ogImage : '/images/social-card.png', As
 <meta content={description} property='og:description' />
 <meta content={canonicalURL} property='og:url' />
 <meta content={config.title} property='og:site_name' />
-<meta content={config.locale.attrs} property='og:locale' />
+<meta content={localeMeta.ogLocale} property='og:locale' />
 <meta content={socialImageURL} property='og:image' />
 <meta content='1200' property='og:image:width' />
 <meta content='630' property='og:image:height' />
@@ -78,7 +81,7 @@ const socialImageURL = new URL(ogImage ? ogImage : '/images/social-card.png', As
   rel='alternate'
   type='application/rss+xml'
   title={config.title}
-  href={`${Astro.site}rss.xml`}
+  href={new URL(locale === 'en' ? '/en/rss.xml' : '/rss.xml', Astro.site).toString()}
 />
 
 <meta content={Astro.generator} name='generator' />
@@ -90,7 +93,7 @@ const socialImageURL = new URL(ogImage ? ogImage : '/images/social-card.png', As
   /* User script*/
   prod && (
     <script>
-      console.log( '%c Astro Theme Pure %c https://github.com/cworld1/astro-theme-pure/',
+      console.log( '%c FXJ Wiki %c https://github.com/bakebakebakebake/fxj-pure',
       'color:#fff;background:linear-gradient(90deg,#448bff,#44e9ff);padding:5px 0;',
       'color:#000;background:linear-gradient(90deg,#44e9ff,#ffffff);padding:5px 10px 5px 0px;' )
     </script>

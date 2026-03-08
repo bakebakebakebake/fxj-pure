@@ -1,5 +1,5 @@
 ---
-import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
+import { Collapse, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
@@ -25,7 +25,7 @@ const headings = [
   <p>
     My motto: Anyway, Pace yourself. <Spoiler>不管怎样，调整好自己的节奏！</Spoiler>
   </p>
-  <Button title='Sponsor Me' class='w-fit' href='/projects#sponsorship' variant='ahead' />
+  <!-- <Button title='Sponsor Me' class='w-fit' href='/projects#sponsorship' variant='ahead' /> -->
 
   {/* general-talk */}
   <h2 id='hobbies'>Hobbies</h2>
@@ -174,37 +174,9 @@ const headings = [
       }
     ]}
   />
-  <!-- <ToolSection
-    class='mb-5'
-    title='Other Used Tools'
-    tools={[
-      {
-        name: 'Doubao CLI',
-        description: 'Easy for daily use',
-        href: 'https://www.doubao.com/',
-        icon: import('@/assets/tools/doubao.svg?raw')
-      },
-      // {
-      //   name: 'ima.copilot',
-      //   description: 'AI-powered knowledge base',
-      //   href: 'https://github.com/features/preview/copilot-x',
-      //   icon: import('@/assets/tools/ima.svg?raw')
-      // },
-      // {
-      //   name: 'Cherry Studio',
-      //   description: 'All-in-one AI service aggregator',
-      //   href: 'https://www.cherry-ai.com',
-      //   icon: import('@/assets/tools/ima.svg?raw')
-      // }
-    ]}
-  /> -->
 
   {/* social-networks */}
   <h2 id='social-networks'>Social Networks</h2>
-  <!-- <p>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne.
-  </p> -->
   <Substats
     stats={[
       {
@@ -214,30 +186,29 @@ const headings = [
         text: 'followers',
         api: 'github/bakebakebakebake'
       },
-      // {
-      //   platform: 'Telegram',
-      //   icon: 'telegram',
-      //   color: '#2ca5e0',
-      //   link: 'https://t.me/cworld0_cn',
-      //   text: 'subscribers',
-      //   api: 'telegram/cworld0_cn'
-      // },
-      // {
-      //   platform: 'Weibo',
-      //   icon: 'weibo',
-      //   color: '#e71f19',
-      //   link: 'https://weibo.com/cworld0',
-      //   text: 'followers',
-      //   api: 'weibo/5501674056'
-      // },
-      // {
-      //   platform: 'Steam',
-      //   icon: 'steam',
-      //   color: '#50769d',
-      //   link: 'https://steamcommunity.com/id/cworld',
-      //   text: 'games',
-      //   api: 'steamgames/76561199021278120'
-      // }
+      {
+        platform: 'Zhihu',
+        icon: 'zhihu',
+        color: '#1677ff',
+        link: 'https://www.zhihu.com/people/4-95-22-83',
+        text: 'profile',
+        badge: 'Profile'
+      },
+      {
+        platform: 'Bilibili',
+        icon: 'bilibili',
+        color: '#00a1d6',
+        link: 'https://space.bilibili.com/2071277173',
+        text: 'profile',
+        badge: 'Profile'
+      },
+      {
+        platform: 'X',
+        icon: 'x',
+        link: 'https://x.com/fxj_go/likes',
+        text: 'profile',
+        badge: 'Profile'
+      }
     ]}
   />
 

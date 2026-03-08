@@ -1,0 +1,91 @@
+---
+import { Icon } from 'astro-pure/user'
+
+import config from '@/site-config'
+import { getLocaleFromPathname, t, withLocalePath } from '@/utils/i18n'
+
+const locale = getLocaleFromPathname(Astro.url.pathname)
+const text = t(locale)
+const footerConf = config.footer
+const footerLink1 = footerConf.links?.filter(({ pos }) => pos === 1 || pos === undefined) || []
+const socialLinks = [
+  ...(footerConf.social?.github ? [{ platform: 'github', url: footerConf.social.github }] : []),
+  { platform: 'rss', url: withLocalePath(locale, '/rss.xml') }
+]
+---
+
+<footer class='mx-auto mb-5 mt-16 w-full'>
+  <div class='border-t pt-5'>
+    <div class='flex items-center gap-y-3 max-sm:flex-col sm:justify-between sm:gap-y-0'>
+      <div
+        class='flex items-center gap-x-4 gap-y-2 text-muted-foreground max-sm:flex-col [&_a]:text-foreground'
+      >
+        {
+          footerLink1.length > 0 && (
+            <div>
+              {footerLink1.map(({ title, link, style }, index) => (
+                <span>
+                  <a href={link} target='_blank' class={style}>
+                    {title}
+                  </a>
+                  {index < footerLink1.length - 1 && ' • '}
+                </span>
+              ))}
+            </div>
+          )
+        }
+        <div>
+          {config.footer.year}
+          {config.author}
+          {
+            footerConf.links && footerConf.links.length > 0 && (
+              <>
+                &
+                <span>
+                  {footerConf.links
+                    .filter(({ pos }) => pos === 2)
+                    .map(({ title, link, style }) => (
+                      <span>
+                        <a href={link} target='_blank' class={style}>
+                          {title}
+                        </a>
+                      </span>
+                    ))}
+                </span>
+              </>
+            )
+          }
+        </div>
+        {
+          footerConf.credits && (
+            <span>
+              <a href='https://github.com/withastro/astro' target='_blank'>
+                Astro
+              </a>
+              {' • '}
+              <a href='https://github.com/cworld1/astro-theme-pure' target='_blank'>
+                astro-theme-pure
+              </a>
+              {' • '}
+              {text.footer.credits}
+            </span>
+          )
+        }
+      </div>
+
+      <div class='flex items-center gap-x-4'>
+        {
+          socialLinks.map(({ platform, url }) => (
+            <a
+              class='inline-block text-muted-foreground transition-all hover:text-muted-foreground/75'
+              href={url}
+              aria-label={platform}
+            >
+              <Icon name={platform as 'github' | 'rss'} />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>

@@ -10,6 +10,7 @@ interface SubstatsItem {
   text: string
   api?: string
   count?: number
+  badge?: string
 }
 
 type Props = {
@@ -47,7 +48,7 @@ await Promise.all(stats.map(fetchCount))
 
 <div class='grid grid-cols-1 gap-3 rounded-xl border p-2 sm:grid-cols-2 sm:p-3'>
   {
-    stats.map(({ link, platform, icon, color, count, text }) => (
+    stats.map(({ link, platform, icon, color, count, text, badge }) => (
       <a
         class='group text-muted-foreground no-underline'
         href={link}
@@ -64,6 +65,8 @@ await Promise.all(stats.map(fetchCount))
               <samp>{count}</samp>
               <span class='text-sm font-normal'>{text}</span>
             </div>
+          ) : badge ? (
+            <span class='text-sm font-normal'>{badge}</span>
           ) : (
             <span class='text-sm text-muted-foreground'>-</span>
           )}

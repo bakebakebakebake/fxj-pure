@@ -42,3 +42,4 @@ bunfig.toml
 /src/content/.trash/
 /test/
 CLAUDE.md
+.vercel

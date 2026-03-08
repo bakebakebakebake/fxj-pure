@@ -1,0 +1,17 @@
+---
+import { Button } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+---
+
+<PageLayout meta={{ title: 'Terms and Conditions', description: 'English placeholder for terms and conditions' }}>
+  <Button title='Back' href='/en/terms/list' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 text-3xl font-medium'>Terms and Conditions</h1>
+    </div>
+    <div id='content' class='animate'>
+      <p>The English terms page is being prepared.</p>
+      <p>You can read the current Chinese version here: <a href='/terms/terms-and-conditions'>/terms/terms-and-conditions</a>.</p>
+    </div>
+  </main>
+</PageLayout>

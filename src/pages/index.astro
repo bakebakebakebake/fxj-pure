@@ -7,17 +7,13 @@ import { Button, Card, Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import ProjectCard from '@/components/home/ProjectCard.astro'
 import Section from '@/components/home/Section.astro'
-import SkillLayout from '@/components/home/SkillLayout.astro'
 import avatar from '@/assets/avatar.png'
 import config from '@/site-config'
-
-const languages = ['C', 'Cpp', 'Java', 'SQL']
-const backend = ['JUC', 'JVM', 'Redis', 'MySQL', 'SpringBoot', 'MQ']
-const CS_Basic = ['操作系统', '计算机网络', '数据结构与算法', '数据库系统']
 
 const MAX_POSTS = 10
 const allPosts = await getBlogCollection()
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
+const rssUrl = 'https://fxj.wiki/rss.xml'
 ---
 
 <PageLayout meta={{ title: 'Home' }} highlightColor='#659EB9'>
@@ -39,10 +35,13 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
           <Label
             title='Source code'
             as='a'
-            href='https://github.com/cworld1/astro-theme-pure'
+            href='https://github.com/bakebakebakebake/fxj-pure'
             target='_blank'
           >
             <Icon name='github' class='size-5' slot='icon' />
+          </Label>
+          <Label title='RSS' as='a' href={rssUrl} target='_blank'>
+            <Icon name='rss' class='size-5' slot='icon' />
           </Label>
         </div>
       </div>
@@ -175,22 +174,11 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS)
         </div>
       </Section>
 
-      <!-- 可以写一些自己的奖项,但是我的经不起推敲... -->
-      <!-- <Section title='Certifications'>
-        <Card
-          as='a'
-          heading='Lorem ipsum'
-          subheading='Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio possit voluptatum. Dicat ceteros cu vim. Impetus fuisset ullamcorper pri cu, his posse iisque ad, aliquam honestatis usu id.'
-          date='July 2024'
-          href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-        />
-      </Section> -->
-
-      <Section title='Skills Label'>
+      <!-- <Section title='Skills Label'>
         <SkillLayout title='Languages' skills={languages} />
         <SkillLayout title='Backend' skills={backend} />
         <SkillLayout title='Computer Science' skills={CS_Basic} />
-      </Section>
+      </Section> -->
     </div>
     <!-- <Quote class='mt-12' /> -->
   </main>

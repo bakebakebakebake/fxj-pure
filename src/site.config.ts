@@ -75,7 +75,7 @@ export const theme: ThemeUserConfig = {
     /** Enable displaying a “Astro & Pure theme powered” link in your site’s footer. */
     credits: true,
     /** Optional details about the social media accounts for this site. */
-    social: { github: 'https://github.com/bakebakebakebake/fxj-pure' }  // 【待修改】填入您的 GitHub 用户名
+    social: { github: 'https://github.com/bakebakebakebake' }
   },
 
   content: {
@@ -128,7 +128,7 @@ export const integ: IntegrationUserConfig = {
   typography: {
     class: 'prose text-base text-muted-foreground',
     // The style of blockquote font, normal or italic (default to italic in typography)
-    blockquoteStyle: 'italic',
+    blockquoteStyle: 'normal',
     // The style of inline code block, code or modern (default to code in typography)
     inlineCodeBlockStyle: 'modern'
   },

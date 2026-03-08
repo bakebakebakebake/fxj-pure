@@ -1,0 +1,132 @@
+---
+import { Image } from 'astro:assets'
+
+import { Button, Card, Icon, Label } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import LocalizedPostPreview from '@/components/pages/LocalizedPostPreview.astro'
+import ProjectCard from '@/components/home/ProjectCard.astro'
+import Section from '@/components/home/Section.astro'
+import avatar from '@/assets/avatar.png'
+import config from '@/site-config'
+import { getLocalizedBlogPreviews, sortLocalizedBlogByDate } from '@/utils/blog'
+
+const MAX_POSTS = 10
+const allPostsByDate = sortLocalizedBlogByDate(await getLocalizedBlogPreviews('en')).slice(0, MAX_POSTS)
+const rssUrl = 'https://fxj.wiki/en/rss.xml'
+---
+
+<PageLayout meta={{ title: 'Home', description: 'FXJ Wiki in English' }} highlightColor='#659EB9'>
+  <main class='flex w-full flex-col items-center'>
+    <section class='animate mb-10 flex flex-col items-center gap-y-7' id='content-header'>
+      <Image
+        src={avatar}
+        alt='profile'
+        class='h-28 w-auto rounded-full border p-1'
+        loading='eager'
+      />
+
+      <div class='flex flex-col items-center gap-y-4 text-center'>
+        <h1 class='text-3xl font-bold'>{config.author}</h1>
+        <div class='flex flex-wrap justify-center gap-x-5 gap-y-3'>
+          <Label title='China'>
+            <Icon name='location' class='size-5' slot='icon' />
+          </Label>
+          <Label
+            title='Source code'
+            as='a'
+            href='https://github.com/bakebakebakebake/fxj-pure'
+            target='_blank'
+          >
+            <Icon name='github' class='size-5' slot='icon' />
+          </Label>
+          <Label title='RSS' as='a' href={rssUrl} target='_blank'>
+            <Icon name='rss' class='size-5' slot='icon' />
+          </Label>
+        </div>
+      </div>
+    </section>
+
+    <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
+      <Section title='About'>
+        <p class='text-muted-foreground'>Developer / ACMer</p>
+        <p class='text-muted-foreground'>
+          I am a backend-oriented CS student who also spends a lot of time on contest problems,
+          systems fundamentals and long-form note taking.<br />
+          FXJ Wiki is my long-term writing space for problem editorials, backend notes, and
+          knowledge-base style articles.<br />
+        </p>
+        <Button title='More about me' class='w-fit self-end' href='/en/about' variant='ahead' />
+      </Section>
+
+      {
+        allPostsByDate.length > 0 && (
+          <Section title='Posts'>
+            <ul class='flex flex-col gap-y-1.5 sm:gap-y-2'>
+              {allPostsByDate.map((post) => (
+                <LocalizedPostPreview post={post} href={`/en/blog/${post.id}`} />
+              ))}
+            </ul>
+            <Button title='More posts' class='w-fit self-end' href='/en/blog' variant='ahead' />
+          </Section>
+        )
+      }
+
+      <Section title='Education'>
+        <Card
+          as='a'
+          heading='Southwest Petroleum University'
+          subheading='School of Computer Science and Software Engineering | B.Eng.'
+          date='August 2022 - July 2026'
+          href='https://www.swpu.edu.cn/'
+        />
+      </Section>
+
+      <Section title='Website List'>
+        <div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
+          <ProjectCard
+            href='https://docs.fxj.wiki'
+            heading='Docs'
+            subheading='Reusable docs and theme-related notes.'
+            imagePath='/src/assets/projects/alex-tyson-2BAXJ7ha74s-unsplash.jpg'
+          />
+          <ProjectCard
+            href='https://notes.fxj.wiki'
+            heading='Notes'
+            subheading='Knowledge-base style long-term notes.'
+            imagePath='/src/assets/projects/angelica-teran-Bk9hpaXHK4o-unsplash.jpg'
+          />
+          <ProjectCard
+            href='https://pages.fxj.wiki'
+            heading='Pages'
+            subheading='Earlier GitHub Pages blog and archived content.'
+            imagePath='/src/assets/projects/kseniia-zapiatkina-yATU3rg8tNI-unsplash.jpg'
+          />
+          <ProjectCard
+            href='https://waline.fxj.wiki/ui/login'
+            heading='Waline'
+            subheading='Comment system backend and pageview service.'
+            imagePath='/src/assets/projects/wen-qiao-g_w8I64FiO0-unsplash.jpg'
+          />
+          <ProjectCard
+            as='div'
+            heading='Status'
+            subheading='Planned status page for uptime and incidents.'
+            imagePath='/src/assets/projects/alex-tyson-2BAXJ7ha74s-unsplash.jpg'
+          />
+          <ProjectCard
+            as='div'
+            heading='Share / Analytics'
+            subheading='Planned OneDrive share portal and analytics dashboard.'
+            imagePath='/src/assets/projects/angelica-teran-Bk9hpaXHK4o-unsplash.jpg'
+          />
+        </div>
+      </Section>
+
+      <!-- <Section title='Skills'>
+        <SkillLayout title='Languages' skills={languageSkills} />
+        <SkillLayout title='Backend' skills={backendSkills} />
+        <SkillLayout title='Computer Science' skills={csBasics} />
+      </Section> -->
+    </div>
+  </main>
+</PageLayout>

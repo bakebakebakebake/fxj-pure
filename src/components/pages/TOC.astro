@@ -48,23 +48,30 @@ const toc = generateToc(headings)
       this.headings = Array.from(
         document.querySelectorAll('article h2, article h3, article h4, article h5, article h6')
       )
-      this.tocLinks = Array.from(this.querySelectorAll('.toc-item')).map((link) => {
-        const node = link.closest('.toc-node') as HTMLLIElement
+      this.tocLinks = Array.from(this.querySelectorAll('.toc-item')).flatMap((link) => {
+        const node = link.closest('.toc-node') as HTMLLIElement | null
+        if (!node) return []
+        const progressBar = node.querySelector('.toc-progress') as HTMLElement | null
+        const shell = node.querySelector('.toc-item-shell') as HTMLElement | null
+        if (!progressBar || !shell) return []
         return {
           element: link as HTMLAnchorElement,
-          progressBar: node.querySelector('.toc-progress') as HTMLElement,
+          progressBar,
           slug: (link.getAttribute('href') || '').substring(1),
           node,
-          shell: node.querySelector(':scope > .toc-row > .toc-item-shell') as HTMLElement
+          shell
         }
       })
     }
 
+    getDirectChild<T extends Element>(node: Element, selector: string) {
+      return Array.from(node.children).find((child) => child.matches(selector)) as T | undefined
+    }
+
     setExpanded(node: HTMLLIElement, expanded: boolean) {
-      const toggle = node.querySelector(
-        ':scope > .toc-row > .toc-item-shell > .toc-toggle'
-      ) as HTMLButtonElement | null
-      const sublist = node.querySelector(':scope > .toc-sublist') as HTMLUListElement | null
+      const row = this.getDirectChild<HTMLDivElement>(node, '.toc-row')
+      const toggle = row?.querySelector('.toc-toggle') as HTMLButtonElement | null
+      const sublist = this.getDirectChild<HTMLUListElement>(node, '.toc-sublist') ?? null
       if (!toggle || !sublist) return
 
       toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false')
@@ -173,7 +180,8 @@ const toc = generateToc(headings)
         const progress = this.headingProgress[slug]
         if (!progress) return
 
-        const prevInView = index > 0 ? this.headingProgress[this.tocLinks[index - 1]?.slug]?.inView : false
+        const prevInView =
+          index > 0 ? this.headingProgress[this.tocLinks[index - 1]?.slug]?.inView : false
         const nextInView =
           index < this.tocLinks.length - 1 ? this.headingProgress[this.tocLinks[index + 1]?.slug]?.inView : false
 
@@ -212,17 +220,19 @@ const toc = generateToc(headings)
     connectedCallback() {
       this.applyExpandedState()
 
-      this.querySelectorAll('.toc-toggle').forEach((toggle) => {
-        toggle.addEventListener('click', (event) => {
-          event.preventDefault()
-          event.stopPropagation()
-          const button = event.currentTarget as HTMLButtonElement
-          const node = button.closest('.toc-node') as HTMLLIElement | null
-          if (!node) return
-          const expanded = button.getAttribute('aria-expanded') === 'true'
-          node.dataset.userExpanded = expanded ? 'false' : 'true'
-          this.setExpanded(node, !expanded)
-        })
+      this.addEventListener('click', (event) => {
+        const button = (event.target as HTMLElement | null)?.closest('.toc-toggle') as
+          | HTMLButtonElement
+          | null
+        if (!button) return
+
+        event.preventDefault()
+        event.stopPropagation()
+        const node = button.closest('.toc-node') as HTMLLIElement | null
+        if (!node) return
+        const expanded = button.getAttribute('aria-expanded') === 'true'
+        node.dataset.userExpanded = expanded ? 'false' : 'true'
+        this.setExpanded(node, !expanded)
       })
 
       this.tocLinks.forEach((link) => {

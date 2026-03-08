@@ -1,0 +1,17 @@
+---
+import { Button } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+---
+
+<PageLayout meta={{ title: 'Privacy Policy', description: 'English placeholder for privacy policy' }}>
+  <Button title='Back' href='/en/terms/list' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 text-3xl font-medium'>Privacy Policy</h1>
+    </div>
+    <div id='content' class='animate'>
+      <p>The English privacy policy page is being prepared.</p>
+      <p>You can read the current Chinese version here: <a href='/terms/privacy-policy'>/terms/privacy-policy</a>.</p>
+    </div>
+  </main>
+</PageLayout>

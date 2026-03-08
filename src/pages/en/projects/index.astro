@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets'
+
+import { Button, Collapse, Icon } from 'astro-pure/user'
+import PageLayout from '@/layouts/CommonPage.astro'
+import ProjectSection from '@/components/projects/ProjectSection.astro'
+import Sponsorship from '@/components/projects/Sponsorship.astro'
+import alipay from '@/assets/alipay-qrcode.png'
+import wechat from '@/assets/wechat-qrcode.png'
+
+const headings = [
+  { depth: 2, slug: 'theme', text: 'Theme' },
+  { depth: 2, slug: 'programs', text: 'Programs' },
+  { depth: 2, slug: 'learnings', text: 'Learnings' },
+  { depth: 2, slug: 'sponsorship', text: 'Sponsorship' }
+]
+---
+
+<PageLayout title='Projects' {headings} view>
+  <p>Github Activities:</p>
+  <p>
+    <Image
+      src='https://ghchart.rshah.org/659eb9/bakebakebakebake'
+      alt='github activities'
+      inferSize
+      loading='lazy'
+    />
+  </p>
+  <p>If you want to collaborate on writing, tooling or backend experiments, feel free to reach out.</p>
+  <Button title='Checkout sponsorship' class='w-fit' href='#sponsorship'>
+    <Icon class='size-5' name='receive-money' slot='before' />
+  </Button>
+
+  <h2 id='theme'>Theme</h2>
+  <ProjectSection
+    projects={[
+      {
+        name: 'FXJ Pure',
+        description: 'The current source repository of this site, customized on top of Astro and astro-theme-pure.',
+        links: [
+          { type: 'github', href: 'https://github.com/bakebakebakebake/fxj-pure' },
+          { type: 'site', href: 'https://fxj.wiki' },
+          { type: 'doc', href: 'https://astro-pure.js.org/docs' }
+        ]
+      }
+    ]}
+  />
+
+  <h2 id='programs'>Programs</h2>
+  <ProjectSection
+    projects={[
+      {
+        name: 'FXJ Wiki',
+        description: 'Main personal site for posts, archives and long-form notes.',
+        links: [
+          { type: 'github', href: 'https://github.com/bakebakebakebake/fxj-pure' },
+          { type: 'site', href: 'https://fxj.wiki' }
+        ]
+      },
+      {
+        name: 'Notes (Private)',
+        description: 'Long-term note collection and knowledge-base style content.',
+        links: [{ type: 'site', href: 'https://notes.fxj.wiki' }]
+      },
+      {
+        name: 'Docs',
+        description: 'Separate doc site for reusable configurations and theme notes.',
+        links: [{ type: 'site', href: 'https://docs.fxj.wiki' }]
+      }
+    ]}
+  />
+
+  <Collapse title='Some old projects'>
+    <ProjectSection
+      projects={[
+        {
+          name: 'bakebakebakebake.github.io',
+          description: 'Earlier Hexo / GitHub Pages blog before the current stack.',
+          links: [
+            { type: 'github', href: 'https://github.com/bakebakebakebake/bakebakebakebake.github.io' },
+            { type: 'site', href: 'https://bakebakebakebake.github.io' },
+            { type: 'site', href: 'https://pages.fxj.wiki' }
+          ]
+        }
+      ]}
+    />
+  </Collapse>
+
+  <h2 id='learnings'>Learnings</h2>
+  <ProjectSection
+    class='my-2'
+    projects={[
+      {
+        name: 'ObsidianData (Private)',
+        description: 'Personal notes, snippets and learning materials.',
+        links: [{ type: 'github', href: 'https://github.com/bakebakebakebake/ObsidianData' }]
+      }
+    ]}
+  />
+
+  <h2 id='sponsorship'>Sponsorship</h2>
+  <p>If you sponsor the project, a short message is appreciated so I can notice it quickly.</p>
+  <Sponsorship
+    methods={[
+      { name: 'WeChat', icon: 'wechat-pay', image: wechat },
+      { name: 'Alipay', icon: 'alipay', image: alipay }
+    ]}
+  />
+</PageLayout>

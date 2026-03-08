@@ -1,0 +1,73 @@
+---
+import type { HTMLTag, Polymorphic } from 'astro/types'
+
+import type { LocalizedBlogPreview } from '@/utils/blog'
+import { cn } from 'astro-pure/utils'
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+  post: LocalizedBlogPreview
+  href: string
+  detailed?: boolean
+  class?: string
+}
+
+const { post, href, detailed = false, as: Tag = 'div', class: className } = Astro.props
+const postDate = post.data.updatedDate ?? post.data.publishDate ?? new Date(0)
+const formattedDate = new Intl.DateTimeFormat(post.locale === 'en' ? 'en-US' : 'zh-CN', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+}).format(postDate)
+---
+
+<li
+  class={cn(
+    'group/card relative flex flex-col rounded-2xl border bg-background px-5 py-2.5 transition-colors ease-in-out hover:bg-muted',
+    detailed && 'max-sm:px-4 sm:py-5',
+    className
+  )}
+>
+  <a
+    class={cn('group/link flex w-full flex-col transition-all hover:text-primary', !detailed && 'sm:flex-row')}
+    href={href}
+    data-astro-prefetch
+  >
+    <span class='min-w-[95px] py-1 text-xs font-mono text-muted-foreground'>
+      {formattedDate}
+    </span>
+
+    <Tag class='z-10 flex-grow'>
+      <div class='flex justify-between gap-x-3'>
+        <div class={detailed && 'font-medium'}>
+          {post.data.title}
+          {post.isPlaceholder && (
+            <span class='ms-2 rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground'>
+              Placeholder
+            </span>
+          )}
+        </div>
+        <span class='my-1 shrink-0 text-muted-foreground transition-colors group-hover/link:text-primary'>
+          →
+        </span>
+      </div>
+
+      <p class='line-clamp-2 pt-1 text-sm text-muted-foreground sm:line-clamp-3'>
+        {post.data.description}
+      </p>
+
+      {detailed && (
+        <div class='flex flex-wrap items-center gap-2 py-2 text-sm italic leading-4 text-muted-foreground'>
+          <span class='flex items-center gap-1'>
+            <span class='text-xs uppercase tracking-[0.2em]'>Lang</span>
+            {post.data.language || (post.locale === 'en' ? 'English' : '中文')}
+          </span>
+          {!!post.data.tags.length && (
+            <span class='line-clamp-1'>
+              {post.data.tags.slice(0, 4).join(' · ')}
+            </span>
+          )}
+        </div>
+      )}
+    </Tag>
+  </a>
+</li>
