@@ -1,7 +1,7 @@
 ---
-title: 'Codeforces 题解整理 3：数论、博弈、组合与 EDU'
-description: '以原题解记录为主，收录数论、博弈、组合与 EDU 向的 Codeforces 题目。'
-publishDate: '2026-03-06'
+title: Codeforces 题解整理 3：数论、博弈、组合与 EDU
+description: 2024.1~9 2024以原题解记录为主，收录数论、博弈、组合与 EDU 向的 Codeforces 题目。
+publishDate: 2026-03-06
 tags:
   - 算法竞赛
   - 题解整理
@@ -9,7 +9,7 @@ tags:
   - 数论
   - 博弈论
   - 组合数学
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

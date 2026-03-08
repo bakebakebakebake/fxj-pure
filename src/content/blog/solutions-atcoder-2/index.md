@@ -1,7 +1,7 @@
 ---
-title: 'AtCoder 题解整理 2：DP、概率、图与数据结构'
-description: '以原题解记录为主，收录 ABC 348 E/F、350 D/E、351 D/E/F、357 D/E/F、358 C/E/G、360 E。'
-publishDate: '2026-03-06'
+title: AtCoder 题解整理 2：DP、概率、图与数据结构
+description: 2024.4~7 以原题解记录为主，收录 ABC 348 E/F、350 D/E、351 D/E/F、357 D/E/F、358 C/E/G、360 E。
+publishDate: 2026-03-06
 tags:
   - 算法竞赛
   - 题解整理
@@ -9,7 +9,7 @@ tags:
   - DP
   - 图论
   - 数据结构
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

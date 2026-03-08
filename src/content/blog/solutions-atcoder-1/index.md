@@ -1,7 +1,7 @@
 ---
-title: 'AtCoder 题解整理 1：数论、二分与表示'
-description: '以原题解记录为主，收录 ABC 340 F、341 D、346 D/E/F、356 D/E/F。'
-publishDate: '2026-03-06'
+title: AtCoder 题解整理 1：数论、二分与表示
+description: 2024.3~6 以原题解记录为主，收录 ABC 340 F、341 D、346 D/E/F、356 D/E/F。
+publishDate: 2026-03-06
 tags:
   - 算法竞赛
   - 题解整理
@@ -9,7 +9,7 @@ tags:
   - 数论
   - 二分
   - 状态表示
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

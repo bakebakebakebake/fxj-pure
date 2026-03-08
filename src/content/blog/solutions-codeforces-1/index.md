@@ -1,7 +1,7 @@
 ---
-title: 'Codeforces 题解整理 1：构造、位运算与贪心'
-description: '以原题解记录为主，收录构造、位运算与贪心向的 Codeforces 题目。'
-publishDate: '2026-03-06'
+title: Codeforces 题解整理 1：构造、位运算与贪心
+description: 2024.1~7 以原题解记录为主，收录构造、位运算与贪心向的 Codeforces 题目。
+publishDate: 2026-03-06
 tags:
   - 算法竞赛
   - 题解整理
@@ -9,7 +9,7 @@ tags:
   - 构造
   - 位运算
   - 贪心
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

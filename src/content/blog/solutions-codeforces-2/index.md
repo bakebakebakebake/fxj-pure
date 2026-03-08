@@ -1,7 +1,7 @@
 ---
-title: 'Codeforces 题解整理 2：前缀和、字符串与思维转化'
-description: '以原题解记录为主，收录前缀量、字符串与思维转化向的 Codeforces 题目。'
-publishDate: '2026-03-06'
+title: Codeforces 题解整理 2：前缀和、字符串与思维转化
+description: 2023.12~2024.7 以原题解记录为主，收录前缀量、字符串与思维转化向的 Codeforces 题目。
+publishDate: 2026-03-06
 tags:
   - 算法竞赛
   - 题解整理
@@ -9,7 +9,7 @@ tags:
   - 前缀和
   - 字符串
   - 思维转化
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明
