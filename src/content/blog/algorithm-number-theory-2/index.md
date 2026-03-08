@@ -10,7 +10,7 @@ tags:
   - 欧拉函数
   - 莫比乌斯函数
 language: 中文
-heroImageSrc: /Users/xjf/Downloads/gayatri-malhotra-4wF66_KWJxA-unsplash.jpg
+heroImageSrc: ../../pic/gayatri-malhotra-4wF66_KWJxA-unsplash.jpg
 heroImageColor: " #d4b337 "
 ---
 

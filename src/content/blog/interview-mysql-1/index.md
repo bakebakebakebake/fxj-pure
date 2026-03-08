@@ -9,7 +9,7 @@ tags:
   - B树
   - 索引
 language: 中文
-heroImageSrc: '/Users/xjf/Downloads/tobias-fischer-PkbZahEG2Ng-unsplash.jpg'
+heroImageSrc: '../../pic/tobias-fischer-PkbZahEG2Ng-unsplash.jpg'
 heroImageColor: ' #c0cb9b '
 ---
 

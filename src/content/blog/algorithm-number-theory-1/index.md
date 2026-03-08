@@ -9,7 +9,7 @@ tags:
   - 欧几里得算法
   - 同余
 language: 中文
-heroImageSrc: /Users/xjf/Downloads/bekky-bekks-VcQkZl4Wf1Y-unsplash.jpg
+heroImageSrc: ../../pic/bekky-bekks-VcQkZl4Wf1Y-unsplash.jpg
 heroImageColor: " #4a7273 "
 ---
 

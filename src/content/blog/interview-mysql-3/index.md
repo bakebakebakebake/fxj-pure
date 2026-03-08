@@ -10,7 +10,7 @@ tags:
 language: 中文
 draft: false
 comment: true
-heroImageSrc: /Users/xjf/Downloads/maksym-kaharlytskyi-Q9y3LRuuxmg-unsplash.jpg
+heroImageSrc: ../../pic/maksym-kaharlytskyi-Q9y3LRuuxmg-unsplash.jpg
 heroImageColor: " #dbd6ce "
 ---
 

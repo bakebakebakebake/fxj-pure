@@ -10,7 +10,7 @@ tags:
   - 博弈论
   - 组合数学
 language: 中文
-heroImageSrc: /Users/xjf/Downloads/zarah-v-windh-VPY28zdmB3I-unsplash.jpg
+heroImageSrc: ../../pic/zarah-v-windh-VPY28zdmB3I-unsplash.jpg
 heroImageColor: " #60667e "
 ---
 

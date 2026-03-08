@@ -10,7 +10,7 @@ tags:
   - DNS
   - HTTPS
 language: 中文
-heroImageSrc: /Users/xjf/Downloads/miguel-angel-padrinan-alba-xvASUPTwJsI-unsplash.jpg
+heroImageSrc: ../../pic/miguel-angel-padrinan-alba-xvASUPTwJsI-unsplash.jpg
 heroImageColor: " #7a7e7f "
 ---
 

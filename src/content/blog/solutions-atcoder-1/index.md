@@ -10,7 +10,7 @@ tags:
   - 二分
   - 状态表示
 language: 中文
-heroImageSrc: /Users/xjf/Downloads/nir-himi-uBst6NH7l9c-unsplash.jpg
+heroImageSrc: ../../pic/nir-himi-uBst6NH7l9c-unsplash.jpg
 heroImageColor: " #654c32 "
 ---
 

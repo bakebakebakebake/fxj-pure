@@ -8,7 +8,7 @@ tags:
   - 题目设计
   - 思考
 language: 中文
-heroImageSrc: '/Users/xjf/Downloads/puscas-adryan-VTV9mpLLGks-unsplash.jpg'
+heroImageSrc: '../../pic/puscas-adryan-VTV9mpLLGks-unsplash.jpg'
 heroImageColor: ' #d88e5f '
 ---
 

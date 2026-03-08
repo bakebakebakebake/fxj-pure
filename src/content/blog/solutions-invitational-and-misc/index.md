@@ -10,7 +10,7 @@ tags:
   - 洛谷
   - 思维题
 language: 中文
-heroImageSrc: /Users/xjf/Downloads/brianna-parks-OkiElXd_EDQ-unsplash.jpg
+heroImageSrc: ../../pic/brianna-parks-OkiElXd_EDQ-unsplash.jpg
 heroImageColor: "#6e8059"
 ---
 

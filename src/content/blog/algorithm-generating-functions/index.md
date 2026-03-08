@@ -8,7 +8,7 @@ tags:
   - 组合数学
   - DP
 language: 中文
-heroImageSrc: /Users/xjf/Downloads/jackson-simmer-ZxRHtPacwUY-unsplash.jpg
+heroImageSrc: ../../pic/jackson-simmer-ZxRHtPacwUY-unsplash.jpg
 heroImageColor: " #d6ed9a "
 ---
 

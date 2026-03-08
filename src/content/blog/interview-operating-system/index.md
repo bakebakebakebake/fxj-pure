@@ -10,7 +10,7 @@ tags:
   - 内存管理
   - IO
 language: 中文
-heroImageSrc: /Users/xjf/Downloads/guillaume-coupy-11c7yNn30VA-unsplash.jpg
+heroImageSrc: ../../pic/guillaume-coupy-11c7yNn30VA-unsplash.jpg
 heroImageColor: "#dfb48f"
 ---
 

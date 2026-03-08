@@ -10,7 +10,7 @@ tags:
   - redo log
   - 锁
 language: 中文
-heroImageSrc: /Users/xjf/Downloads/jan-antonin-kolar-lRoX0shwjUQ-unsplash.jpg
+heroImageSrc: ../../pic/jan-antonin-kolar-lRoX0shwjUQ-unsplash.jpg
 heroImageColor: " #783a13 "
 ---
 
