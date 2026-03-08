@@ -1,14 +1,14 @@
 ---
-title: '为什么竞赛里要学多项式'
-description: '从卷积、点值表示、FFT/NTT 到形式幂级数，整理多项式这套工具到底在解决什么。'
-publishDate: '2026-03-06'
+title: 为什么竞赛里要学多项式
+description: 从卷积、点值表示、FFT/NTT 到形式幂级数，整理多项式这套工具到底在解决什么。
+publishDate: 2024-09-15
 tags:
   - 算法
   - 多项式
   - FFT
   - NTT
   - 形式幂级数
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

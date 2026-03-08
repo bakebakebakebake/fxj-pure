@@ -1,7 +1,7 @@
 ---
 title: 竞赛博弈论的判断框架
 description: 以原始博弈论笔记为主，补回判断框架、Bash/Nim、反常博弈、斐波那契博弈、威佐夫博弈与 SG 函数。
-publishDate: 2026-02-06
+publishDate: 2024-08-29
 tags:
   - 算法
   - 博弈论

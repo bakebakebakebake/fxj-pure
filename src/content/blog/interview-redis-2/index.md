@@ -1,7 +1,7 @@
 ---
-title: 'Redis 不只是缓存：锁、消息队列与 HyperLogLog'
-description: '以原始 Redis 笔记为主，保留分布式锁、消息队列、HyperLogLog 与高可用相关整理。'
-publishDate: '2026-03-06'
+title: Redis 不只是缓存：锁、消息队列与 HyperLogLog
+description: 以原始 Redis 笔记为主，保留分布式锁、消息队列、HyperLogLog 与高可用相关整理。
+publishDate: 2025-06-08
 tags:
   - 八股
   - Redis
@@ -9,7 +9,7 @@ tags:
   - HyperLogLog
   - 消息队列
   - 高可用
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

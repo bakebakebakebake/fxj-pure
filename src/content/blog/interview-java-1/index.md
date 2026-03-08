@@ -1,7 +1,7 @@
 ---
-title: 'Java 的抽象边界：集合、IO、反射、代理与 SPI'
-description: '以原始 Java 笔记为主，保留集合、IO、反射、代理与 SPI 的原有整理。'
-publishDate: '2026-03-06'
+title: Java 的抽象边界：集合、IO、反射、代理与 SPI
+description: 以原始 Java 笔记为主，保留集合、IO、反射、代理与 SPI 的原有整理。
+publishDate: 2025-05-07
 tags:
   - 八股
   - Java
@@ -9,7 +9,7 @@ tags:
   - IO
   - 反射
   - SPI
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

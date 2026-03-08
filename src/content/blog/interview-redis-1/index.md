@@ -1,14 +1,14 @@
 ---
-title: 'Redis 为什么适合做缓存：数据结构、线程模型与持久化'
-description: '以原始 Redis 笔记和 Apple Notes 为主，补回缓存定位、数据结构、线程模型与持久化主线。'
-publishDate: '2026-03-06'
+title: Redis 为什么适合做缓存：数据结构、线程模型与持久化
+description: 以原始 Redis 笔记和 Apple Notes 为主，补回缓存定位、数据结构、线程模型与持久化主线。
+publishDate: 2025-05-08
 tags:
   - 八股
   - Redis
   - 缓存
   - 数据结构
   - 持久化
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

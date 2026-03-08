@@ -1,13 +1,13 @@
 ---
-title: '搜索不是暴力：看懂 DFS、BFS 与 DP 的边界'
-description: '以原始搜索题单与题解笔记为主，整理 DFS、BFS、剪枝、最短路与状态搜索。'
-publishDate: '2026-03-06'
+title: 搜索不是暴力：看懂 DFS、BFS 与 DP 的边界
+description: 以原始搜索题单与题解笔记为主，整理 DFS、BFS、剪枝、最短路与状态搜索。
+publishDate: 2024-06-13
 tags:
   - 算法
   - 搜索
   - DFS
   - BFS
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

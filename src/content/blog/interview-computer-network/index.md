@@ -1,9 +1,15 @@
 ---
-title: '从浏览器到服务端：一条请求经过了哪些网络层次'
-description: '别把计网学成协议名清单。顺着一次真实请求往下走，看 DNS、TCP、TLS、HTTP 和拥塞控制怎样接力。'
-publishDate: '2026-03-06'
-tags: ['八股', '计算机网络', 'HTTP', 'TCP', 'DNS', 'HTTPS']
-language: '中文'
+title: 从浏览器到服务端：一条请求经过了哪些网络层次
+description: 别把计网学成协议名清单。顺着一次真实请求往下走，看 DNS、TCP、TLS、HTTP 和拥塞控制怎样接力。
+publishDate: 2025-03-21
+tags:
+  - 八股
+  - 计算机网络
+  - HTTP
+  - TCP
+  - DNS
+  - HTTPS
+language: 中文
 ---
 
 `请求视角` `TCP / HTTP` `HTTPS`

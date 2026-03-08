@@ -1,7 +1,7 @@
 ---
-title: '并发不是开线程：从 JMM 到线程池与 CompletableFuture'
-description: '以原始 Java 并发笔记为主，保留 JMM、锁、原子类、ThreadLocal、线程池等内容。'
-publishDate: '2026-03-06'
+title: 并发不是开线程：从 JMM 到线程池与 CompletableFuture
+description: 以原始 Java 并发笔记为主，保留 JMM、锁、原子类、ThreadLocal、线程池等内容。
+publishDate: 2025-05-16
 tags:
   - 八股
   - Java
@@ -9,7 +9,7 @@ tags:
   - JMM
   - 线程池
   - CompletableFuture
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

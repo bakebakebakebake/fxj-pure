@@ -1,14 +1,14 @@
 ---
-title: '从整除到同余：数论入门该抓什么'
-description: '以原始数论笔记为主，保留 gcd、lcm、裴蜀定理、扩展欧几里得、快速幂、逆元与中国剩余定理。'
-publishDate: '2026-03-06'
+title: 从整除到同余：数论入门该抓什么
+description: 以原始数论笔记为主，保留 gcd、lcm、裴蜀定理、扩展欧几里得、快速幂、逆元与中国剩余定理。
+publishDate: 2024-01-13
 tags:
   - 算法
   - 数论
   - 入门
   - 欧几里得算法
   - 同余
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明

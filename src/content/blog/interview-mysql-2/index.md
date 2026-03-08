@@ -1,7 +1,7 @@
 ---
-title: 'MySQL 如何守住一致性：事务、锁、MVCC 与日志'
-description: '以原始 MySQL 笔记为主，保留事务、锁、MVCC、日志与优化相关整理。'
-publishDate: '2026-03-06'
+title: MySQL 如何守住一致性：事务、锁、MVCC 与日志
+description: 以原始 MySQL 笔记为主，保留事务、锁、MVCC、日志与优化相关整理。
+publishDate: 2025-06-05
 tags:
   - 八股
   - MySQL
@@ -9,7 +9,7 @@ tags:
   - MVCC
   - redo log
   - 锁
-language: '中文'
+language: 中文
 ---
 
 > [!note] 说明
