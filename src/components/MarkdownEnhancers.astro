@@ -147,12 +147,12 @@
         if (foldMarker === '+' || foldMarker === '-') {
           replacement = createElement(
             'details',
-            `obsidian-collapse not-prose my-4 rounded-xl border px-3 py-2 sm:px-4 aside-${type}`
+            `obsidian-collapse my-4 overflow-hidden rounded-xl border px-3 py-2 sm:px-4 aside-${type}`
           );
           if (foldMarker === '+') replacement.open = true;
           const summary = createElement(
             'summary',
-            'obsidian-collapse-summary cursor-pointer font-medium',
+            'obsidian-collapse-summary not-prose cursor-pointer font-medium',
             title
           );
           const body = createElement('div', 'obsidian-collapse-body mt-3');

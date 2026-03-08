@@ -172,10 +172,10 @@ function createCollapse(
   open: boolean
 ) {
   return h(
-    `details.obsidian-collapse.not-prose.my-4.rounded-xl.border.px-3.py-2.sm:px-4.aside-${type}`,
+    `details.obsidian-collapse.my-4.overflow-hidden.rounded-xl.border.px-3.py-2.sm:px-4.aside-${type}`,
     open ? { open: true } : {},
     [
-      h('summary.obsidian-collapse-summary.cursor-pointer.font-medium', title),
+      h('summary.obsidian-collapse-summary.not-prose.cursor-pointer.font-medium', title),
       h('div.obsidian-collapse-body.mt-3', bodyChildren)
     ]
   ) as RootContent

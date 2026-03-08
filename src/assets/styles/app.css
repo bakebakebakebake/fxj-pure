@@ -304,6 +304,43 @@ mark {
   transform: rotate(90deg);
 }
 
+.obsidian-collapse-body > :first-child {
+  margin-top: 0;
+}
+
+.obsidian-collapse-body > :last-child {
+  margin-bottom: 0;
+}
+
+.obsidian-collapse-body :where(p, li) {
+  color: inherit;
+}
+
+.obsidian-collapse-body :where(p) {
+  white-space: pre-line;
+}
+
+.obsidian-collapse-body :where(ul, ol) {
+  margin-block: 0.9rem;
+  padding-inline-start: 1.6rem;
+}
+
+.obsidian-collapse-body :where(ul) {
+  list-style: disc;
+}
+
+.obsidian-collapse-body :where(ol) {
+  list-style: decimal;
+}
+
+.obsidian-collapse-body :where(li) {
+  margin-block: 0.35rem;
+}
+
+.obsidian-collapse-body :where(li > ul, li > ol) {
+  margin-block: 0.45rem 0;
+}
+
 .obsidian-tabs {
   display: block;
   margin-block: 1.5rem;
