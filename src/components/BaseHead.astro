@@ -3,7 +3,7 @@ import { prod } from 'astro-pure/server'
 import type { SiteMeta } from 'astro-pure/types'
 import config from '@/site-config'
 import type { Locale } from '@/utils/i18n'
-import { getLocaleMeta } from '@/utils/i18n'
+import { getLocaleMeta, getLocalizedAuthor } from '@/utils/i18n'
 
 type Props = SiteMeta & { locale?: Locale }
 
@@ -13,6 +13,7 @@ const siteTitle = `${title} ${config.titleDelimiter} ${config.title}`
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const socialImageURL = new URL(ogImage ? ogImage : '/images/social-card.png', Astro.url).href
 const localeMeta = getLocaleMeta(locale)
+const authorName = getLocalizedAuthor(locale)
 ---
 
 <meta charset='utf-8' />
@@ -42,7 +43,7 @@ const localeMeta = getLocaleMeta(locale)
 {/* Primary Meta Tags */}
 <meta content={siteTitle} name='title' />
 <meta content={description} name='description' />
-<meta content={config.author} name='author' />
+<meta content={authorName} name='author' />
 
 {/* Theme Color */}
 <meta content='' name='theme-color' />
@@ -60,7 +61,7 @@ const localeMeta = getLocaleMeta(locale)
 {
   articleDate && (
     <>
-      <meta content={config.author} property='article:author' />
+      <meta content={authorName} property='article:author' />
       <meta content={articleDate} property='article:published_time' />
     </>
   )

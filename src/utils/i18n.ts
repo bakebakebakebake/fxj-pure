@@ -24,6 +24,11 @@ export const localeMeta: Record<
   }
 }
 
+export const localizedAuthor: Record<Locale, string> = {
+  zh: '玛卡巴卡',
+  en: 'MakkaPakka'
+}
+
 export const ui = {
   zh: {
     nav: {
@@ -239,6 +244,10 @@ export function getLocaleMeta(locale: Locale) {
 
 export function t(locale: Locale) {
   return ui[locale]
+}
+
+export function getLocalizedAuthor(locale: Locale) {
+  return localizedAuthor[locale]
 }
 
 export function isEnglishContent(language?: string) {

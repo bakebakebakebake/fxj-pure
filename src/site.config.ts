@@ -5,7 +5,7 @@ export const theme: ThemeUserConfig = {
   /** Title for your website. Will be used in metadata and as browser tab title. */
   title: 'FXJ Wiki',
   /** Will be used in index page & copyright declaration */
-  author: '五香牛肉面',
+  author: '玛卡巴卡',
   /** Description metadata for your website. Can be used in page metadata. */
   description: 'anyway, pace yourself.',
   /** The default favicon for your site which should be a path to an image in the `public/` directory. */
@@ -24,7 +24,7 @@ export const theme: ThemeUserConfig = {
   },
   /** Set a logo image to show in the homepage. */
   logo: {
-    src: 'src/assets/avatar.png',
+    src: 'src/assets/IMG_1052.jpeg',
     alt: 'Avatar'
   },
 

@@ -2,11 +2,11 @@
 import { Icon } from 'astro-pure/user'
 
 import config from '@/site-config'
-import { getLocaleFromPathname, t, withLocalePath } from '@/utils/i18n'
+import { getLocaleFromPathname, getLocalizedAuthor, withLocalePath } from '@/utils/i18n'
 
 const locale = getLocaleFromPathname(Astro.url.pathname)
-const text = t(locale)
 const footerConf = config.footer
+const authorName = getLocalizedAuthor(locale)
 const footerLink1 = footerConf.links?.filter(({ pos }) => pos === 1 || pos === undefined) || []
 const socialLinks = [
   ...(footerConf.social?.github ? [{ platform: 'github', url: footerConf.social.github }] : []),
@@ -36,7 +36,7 @@ const socialLinks = [
         }
         <div>
           {config.footer.year}
-          {config.author}
+          {authorName}
           {
             footerConf.links && footerConf.links.length > 0 && (
               <>
@@ -62,12 +62,11 @@ const socialLinks = [
               <a href='https://github.com/withastro/astro' target='_blank'>
                 Astro
               </a>
-              {' • '}
+              {' & '}
               <a href='https://github.com/cworld1/astro-theme-pure' target='_blank'>
-                astro-theme-pure
+                Pure theme
               </a>
-              {' • '}
-              {text.footer.credits}
+              {' powered'}
             </span>
           )
         }
