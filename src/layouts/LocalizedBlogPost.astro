@@ -8,6 +8,7 @@ import TOC from '@/components/pages/TOC.astro'
 import PageLayout from '@/layouts/ContentLayout.astro'
 import { integ } from '@/site-config'
 import type { LocalizedBlogPreview } from '@/utils/blog'
+import { resolveHeroImage, resolveHeroImageColor, resolveHeroImageSrc } from '@/utils/hero-image'
 import type { Locale } from '@/utils/i18n'
 import { withLocalePath } from '@/utils/i18n'
 
@@ -21,12 +22,9 @@ interface Props {
 
 const { preview, locale, headings = [], relatedPosts = [], placeholder = false } = Astro.props
 const { data } = preview
+const heroImage = resolveHeroImage(data)
 const articleDate = (data.updatedDate ?? data.publishDate).toISOString()
-const socialImage = data.heroImage
-  ? typeof data.heroImage.src === 'string'
-    ? data.heroImage.src
-    : data.heroImage.src.src
-  : '/images/social-card.png'
+const socialImage = resolveHeroImageSrc(data) ?? '/images/social-card.png'
 const currentIndex = relatedPosts.findIndex((post) => post.id === preview.id)
 const prevPost = currentIndex > 0 ? relatedPosts[currentIndex - 1] : undefined
 const nextPost = currentIndex >= 0 ? relatedPosts[currentIndex + 1] : undefined
@@ -35,25 +33,25 @@ const backHref = withLocalePath(locale, '/blog')
 
 <PageLayout
   meta={{ articleDate, description: data.description, ogImage: socialImage, title: data.title }}
-  highlightColor={data.heroImageColor ?? data.heroImage?.color ?? 'hsl(var(--primary) / 1)'}
+  highlightColor={resolveHeroImageColor(data) ?? 'hsl(var(--primary) / 1)'}
   back={backHref}
 >
   {!!headings.length && <TOC {headings} slot='sidebar' />}
 
   <Fragment slot='header'>
-    {data.heroImage && (
+    {heroImage && (
       <div class='localized-hero-image relative mb-6'>
-        {typeof data.heroImage.src === 'string' ? (
+        {typeof heroImage.src === 'string' ? (
           <img
-            src={data.heroImage.src}
-            alt={data.heroImage.alt || data.title}
+            src={heroImage.src}
+            alt={heroImage.alt || data.title}
             class='relative z-10 mt-0 h-auto w-full max-w-[65ch] rounded-2xl object-contain'
             loading='eager'
           />
         ) : (
           <Image
-            {...data.heroImage}
-            alt={data.heroImage.alt || data.title}
+            {...heroImage}
+            alt={heroImage.alt || data.title}
             class='relative z-10 mt-0 h-auto w-full max-w-[65ch] rounded-2xl object-contain'
             loading='eager'
           />
