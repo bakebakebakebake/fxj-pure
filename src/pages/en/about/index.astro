@@ -1,5 +1,5 @@
 ---
-import { Button, Collapse, Icon, Timeline } from 'astro-pure/user'
+import { Button, Collapse, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
@@ -67,29 +67,38 @@ const headings = [
   <h2 id='social-networks'>Social Networks</h2>
   <Substats
     stats={[
-      { platform: 'GitHub', icon: 'github', link: 'https://github.com/bakebakebakebake', text: 'followers', api: 'github/bakebakebakebake' }
+      {
+        platform: 'GitHub',
+        icon: 'github',
+        link: 'https://github.com/bakebakebakebake',
+        text: 'profile',
+        badge: 'Profile'
+      },
+      {
+        platform: 'Zhihu',
+        icon: 'zhihu',
+        color: '#1677ff',
+        link: 'https://www.zhihu.com/people/4-95-22-83',
+        text: 'profile',
+        badge: 'Profile'
+      },
+      {
+        platform: 'Bilibili',
+        icon: 'bilibili',
+        color: '#00a1d6',
+        link: 'https://space.bilibili.com/2071277173',
+        text: 'profile',
+        badge: 'Profile'
+      },
+      {
+        platform: 'X',
+        icon: 'x',
+        link: 'https://x.com/fxj_go/likes',
+        text: 'profile',
+        badge: 'Profile'
+      }
     ]}
   />
-  <div class='not-prose mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3'>
-    <a class='rounded-xl border px-4 py-3 no-underline transition-colors hover:bg-muted' href='https://www.zhihu.com/people/4-95-22-83' target='_blank' rel='noreferrer'>
-      <div class='flex items-center gap-3'>
-        <Icon name='zhihu' class='size-5 text-[#1677ff]' />
-        <div><div class='font-medium text-foreground'>Zhihu</div><p class='m-0 text-sm text-muted-foreground'>Q&A, ideas and saved content.</p></div>
-      </div>
-    </a>
-    <a class='rounded-xl border px-4 py-3 no-underline transition-colors hover:bg-muted' href='https://space.bilibili.com/2071277173' target='_blank' rel='noreferrer'>
-      <div class='flex items-center gap-3'>
-        <Icon name='bilibili' class='size-5 text-[#00a1d6]' />
-        <div><div class='font-medium text-foreground'>Bilibili</div><p class='m-0 text-sm text-muted-foreground'>Learning videos and saved references.</p></div>
-      </div>
-    </a>
-    <a class='rounded-xl border px-4 py-3 no-underline transition-colors hover:bg-muted' href='https://x.com/fxj_go/likes' target='_blank' rel='noreferrer'>
-      <div class='flex items-center gap-3'>
-        <Icon name='x' class='size-5' />
-        <div><div class='font-medium text-foreground'>X</div><p class='m-0 text-sm text-muted-foreground'>English-speaking tech stream.</p></div>
-      </div>
-    </a>
-  </div>
 
   <h2 id='website-services'>Current Site Services</h2>
   <ul>
