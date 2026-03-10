@@ -1,8 +1,6 @@
 ---
 title: AtCoder Solutions 1
-description: >-
-  Short English draft for the Chinese post "AtCoder 题解整理 1：数论、二分与表示". Includes a short English preview for bilingual
-  page switching.
+description: "A collection of original AtCoder writeups from March to June 2024, covering ABC 340 F, 341 D, 346 D/E/F, and 356 D/E/F."
 publishDate: "2026-03-06"
 tags:
   - 算法竞赛

@@ -1,8 +1,6 @@
 ---
 title: Linear Sieve Notes
-description: >-
-  Short English draft for the Chinese post "筛法不只是筛素数：线性筛的统一视角". Includes a minimal summary so bilingual routing can be
-  tested.
+description: "Based on the original number theory notes, this post keeps the material on prime sieves, Euler's totient function, and Wilson's theorem."
 publishDate: "2023-10-27"
 tags:
   - 算法

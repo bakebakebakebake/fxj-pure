@@ -1,8 +1,6 @@
 ---
 title: Number Theory Basics
-description: >-
-  Short English draft for the Chinese post "从整除到同余：数论入门该抓什么". Includes a minimal summary so bilingual routing can be
-  tested.
+description: "Based on the original number theory notes, this post keeps gcd, lcm, Bezout's identity, extended Euclid, fast exponentiation, inverses, and CRT."
 publishDate: "2023-10-23"
 tags:
   - 算法

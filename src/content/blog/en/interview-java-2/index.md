@@ -1,8 +1,6 @@
 ---
 title: JMM, Thread Pools, and CompletableFuture
-description: >-
-  Short English draft for the Chinese post "并发不是开线程：从 JMM 到线程池与 CompletableFuture". Includes a small English summary for
-  routing and layout checks.
+description: "Based on the original Java concurrency notes, this post keeps the material on the JMM, locks, atomic classes, ThreadLocal, thread pools, and related topics."
 publishDate: "2025-05-16"
 tags:
   - 八股

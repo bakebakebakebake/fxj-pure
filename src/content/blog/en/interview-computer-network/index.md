@@ -1,8 +1,6 @@
 ---
 title: Request Path and Network Layers
-description: >-
-  Short English draft for the Chinese post "从浏览器到服务端：一条请求经过了哪些网络层次". Includes a small English summary for routing and
-  layout checks.
+description: "Don't reduce computer networks to protocol names. Follow a real request and see how DNS, TCP, TLS, HTTP, and congestion control work together."
 publishDate: "2025-03-21"
 tags:
   - 八股

@@ -1,8 +1,6 @@
 ---
 title: Invitational and Misc Solutions
-description: >-
-  Short English draft for the Chinese post "邀请赛与补遗：郑州、昆明、HDU 与洛谷". Includes a short English preview for bilingual page
-  switching.
+description: "A collection of original writeups covering the Zhengzhou Invitational, Kunming Invitational, HDU 2973, and Luogu B3645."
 publishDate: "2026-03-06"
 tags:
   - 算法竞赛

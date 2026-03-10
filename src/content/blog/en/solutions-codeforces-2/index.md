@@ -1,8 +1,6 @@
 ---
 title: Codeforces Solutions 2
-description: >-
-  Short English draft for the Chinese post "Codeforces 题解整理 2：前缀和、字符串与思维转化". Includes a short English preview for
-  bilingual page switching.
+description: "A collection of original Codeforces writeups from December 2023 to July 2024, focused on prefix sums, strings, and problem-solving transformations."
 publishDate: "2026-03-06"
 tags:
   - 算法竞赛

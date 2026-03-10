@@ -1,6 +1,6 @@
 ---
 title: Test Article
-description: Short English draft for the Chinese post "test111". Used to verify bilingual routing behavior.
+description: "test & test"
 publishDate: "2026-03-08"
 tags:
   - Test

@@ -1,8 +1,6 @@
 ---
 title: Notes on Problem Design
-description: >-
-  Short English draft for the Chinese post "出题症发作时，我会先抓住那个奇怪的核". Includes a minimal summary so bilingual routing can be
-  tested.
+description: "Built around the original 'Problem-Setting Syndrome' notes, this post keeps the Magic Bag problem, its derivation, code, and follow-up directions."
 publishDate: "2025-06-01"
 tags:
   - 算法

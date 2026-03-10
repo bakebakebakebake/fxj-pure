@@ -1,9 +1,14 @@
 ---
+import { Image } from 'astro:assets'
 import type { HTMLTag, Polymorphic } from 'astro/types'
 
 import type { LocalizedBlogPreview } from '@/utils/blog'
+import { resolveHeroImage, resolveHeroImageColor } from '@/utils/hero-image'
+import type { Locale } from '@/utils/i18n'
+import { withLocalePath } from '@/utils/i18n'
 import { getLocalizedTagLabel } from '@/utils/tag-label'
 import { cn } from 'astro-pure/utils'
+import { Button, Icon } from 'astro-pure/user'
 
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
   post: LocalizedBlogPreview
@@ -21,61 +26,187 @@ const {
   as: Tag = 'div',
   class: className
 } = Astro.props
-const postDate = post.data.updatedDate ?? post.data.publishDate ?? new Date(0)
+
+const heroImage = resolveHeroImage(post.data)
+const heroImageColor = resolveHeroImageColor(post.data)
+const tagLinks = post.data.tags.map((tag: string) => ({
+  href: withLocalePath(post.locale as Locale, `/tags/${tag}`),
+  label: getLocalizedTagLabel(tag, post.locale),
+  value: tag
+}))
+const postDate = post.data.updatedDate ?? post.data.publishDate
 const formattedDate = new Intl.DateTimeFormat(post.locale === 'en' ? 'en-US' : 'zh-CN', {
   year: 'numeric',
-  month: 'short',
+  month: post.locale === 'en' ? 'short' : 'numeric',
   day: 'numeric'
 }).format(postDate)
-const localizedTags = post.data.tags.map((tag: string) => getLocalizedTagLabel(tag, post.locale))
 ---
 
 <li
   class={cn(
-    'group/card relative flex flex-col rounded-2xl border bg-background px-5 py-2.5 transition-colors ease-in-out hover:bg-muted',
+    'post-preview group/card relative flex flex-col rounded-2xl border bg-background px-5 py-2.5 transition-colors ease-in-out hover:bg-muted',
     detailed && 'max-sm:px-4 sm:py-5',
     className
   )}
+  style={detailed &&
+    heroImageColor &&
+    `--preview-highlight:color-mix(in srgb,${heroImageColor} 40%,hsl(var(--foreground)/var(--un-text-opacity,1)));
+    --preview-highlight-bg:hsl(from ${heroImageColor} h s l/20%)`}
 >
   <a
-    class={cn('group/link flex w-full flex-col transition-all hover:text-primary', !detailed && 'sm:flex-row')}
+    class={cn(
+      'group/link flex w-full flex-col transition-all hover:text-primary',
+      !detailed && 'sm:flex-row',
+      detailed && heroImage && 'max-md:pt-24'
+    )}
     href={href}
     data-astro-prefetch
   >
+    {
+      detailed && heroImage && (
+        typeof heroImage.src === 'string' ? (
+          <img
+            src={heroImage.src}
+            alt={heroImage.alt || post.data.title}
+            class='cover-image absolute end-0 top-0 z-0 h-2/3 w-full rounded-2xl object-cover opacity-50 transition-opacity duration-300 group-hover/card:opacity-70 md:h-full md:w-3/5'
+            loading='eager'
+          />
+        ) : (
+          <Image
+            {...heroImage}
+            alt={heroImage.alt || post.data.title}
+            class='cover-image absolute end-0 top-0 z-0 h-2/3 w-full rounded-2xl object-cover opacity-50 transition-opacity duration-300 group-hover/card:opacity-70 md:h-full md:w-3/5'
+            loading='eager'
+          />
+        )
+      )
+    }
+
     <span class='min-w-[95px] py-1 text-xs font-mono text-muted-foreground'>
-      {formattedDate}
+      <time datetime={postDate.toISOString()}>{formattedDate}</time>
     </span>
 
     <Tag class='z-10 flex-grow'>
-      <div class='flex justify-between gap-x-3'>
+      <div class='flex justify-between'>
         <div class={detailed && 'font-medium'}>
+          {post.data.draft && <span class='text-red-500'>(Draft) </span>}
           {post.data.title}
-          {post.isPlaceholder && (
-            <span class='ms-2 rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground'>
-              Placeholder
-            </span>
-          )}
         </div>
-        <span class='my-1 shrink-0 text-muted-foreground transition-colors group-hover/link:text-primary'>
-          →
-        </span>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='16'
+          height='16'
+          viewBox='0 0 24 24'
+          fill='none'
+          stroke-width='2.5'
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          class='preview-redirect my-1 stroke-muted-foreground group-hover/link:stroke-primary'
+        >
+          <line
+            x1='5'
+            y1='12'
+            x2='19'
+            y2='12'
+            class='translate-x-4 scale-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1 group-hover/link:scale-x-100'
+          ></line>
+          <polyline
+            points='12 5 19 12 12 19'
+            class='translate-x-0 transition-all duration-300 ease-in-out group-hover/link:translate-x-1'
+          ></polyline>
+        </svg>
       </div>
-
-      {showDescription && (
-        <p class='line-clamp-2 pt-1 text-sm text-muted-foreground sm:line-clamp-3'>
-          {post.data.description}
-        </p>
-      )}
-
-      {detailed && (
-        <div class='flex flex-wrap items-center gap-2 py-2 text-sm italic leading-4 text-muted-foreground'>
-          <span class='flex items-center gap-1'>
-            <span class='text-xs uppercase tracking-[0.2em]'>Lang</span>
-            {post.data.language || (post.locale === 'en' ? 'English' : '中文')}
-          </span>
-          {!!post.data.tags.length && <span class='line-clamp-1'>{localizedTags.slice(0, 4).join(' · ')}</span>}
-        </div>
-      )}
+      {
+        detailed && (
+          <>
+            {showDescription && (
+              <p
+                class={cn(
+                  'line-clamp-2 pt-1 text-sm text-muted-foreground sm:line-clamp-3',
+                  heroImage && 'sm:me-24'
+                )}
+              >
+                {post.data.description}
+              </p>
+            )}
+            <div class='flex items-center gap-2 py-1.5 text-sm italic leading-4 text-muted-foreground sm:py-3'>
+              {post.data.minutesRead && (
+                <span class='flex items-center gap-1'>
+                  <Icon name='time' class='size-4' />
+                  {post.data.minutesRead}
+                </span>
+              )}
+              {post.data.language && (
+                <span class='flex items-center gap-1'>
+                  <Icon name='earth' class='size-4' />
+                  {post.data.language}
+                </span>
+              )}
+            </div>
+          </>
+        )
+      }
     </Tag>
   </a>
+  {
+    detailed && tagLinks.length > 0 && (
+      <ul class='tag-list mt-1 flex flex-wrap gap-2'>
+        {tagLinks.map((tag: { href: string; label: string; value: string }) => (
+          <li>
+            <Button title={tag.label} href={tag.href} variant='pill' />
+          </li>
+        ))}
+      </ul>
+    )
+  }
 </li>
+
+<style>
+  .post-preview {
+    --preview-highlight-final: var(
+      --preview-highlight,
+      hsl(var(--primary) / var(--un-text-opacity, 1))
+    );
+  }
+
+  .post-preview:hover {
+    &,
+    & .tag-list a {
+      background-color: var(
+        --preview-highlight-bg,
+        hsl(var(--muted) / var(--un-bg-opacity, 1))
+      ) !important;
+    }
+
+    & > a,
+    & .tag-list a:hover {
+      color: var(--preview-highlight-final) !important;
+    }
+
+    & > a .preview-redirect {
+      stroke: var(--preview-highlight-final) !important;
+    }
+  }
+
+  .cover-image {
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+    -ms-mask-image: -ms-linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+    -webkit-mask-image: -webkit-linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
+
+  @media (max-width: 768px) {
+    .cover-image {
+      mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+      -ms-mask-image: -ms-linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+      -webkit-mask-image: -webkit-linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 100%
+      );
+    }
+  }
+</style>

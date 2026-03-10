@@ -1,8 +1,6 @@
 ---
 title: Codeforces Solutions 1
-description: >-
-  Short English draft for the Chinese post "Codeforces 题解整理 1：构造、位运算与贪心". Includes a short English preview for bilingual
-  page switching.
+description: "A collection of original Codeforces writeups from January to July 2024, focused on constructive problems, bit operations, and greedy techniques."
 publishDate: "2026-03-06"
 tags:
   - 算法竞赛

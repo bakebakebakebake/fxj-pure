@@ -1,8 +1,6 @@
 ---
 title: Search, DFS, BFS, and DP
-description: >-
-  Short English draft for the Chinese post "搜索不是暴力：看懂 DFS、BFS 与 DP 的边界". Includes a minimal summary so bilingual routing
-  can be tested.
+description: "Built from the original search problem sets and solution notes, this post organizes DFS, BFS, pruning, shortest paths, and state-space search."
 publishDate: "2024-04-04"
 tags:
   - 算法

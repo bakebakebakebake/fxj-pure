@@ -1,6 +1,6 @@
 ---
 title: Redis Quick Notes
-description: Short English draft for the Chinese post "Redis相关知识点". Includes a small English summary for routing and layout checks.
+description: "Earlier Redis notes originally written in Apple Notes."
 publishDate: "2025-06-08"
 tags:
   - 八股

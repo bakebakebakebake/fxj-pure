@@ -1,8 +1,6 @@
 ---
 title: Syntax Test
-description: >-
-  Short English draft for the Chinese post "Astro Pure 主题语法测试". Used to verify bilingual markdown rendering and locale
-  switching.
+description: "A basic syntax test for Markdown, Obsidian, and AnyBlock."
 publishDate: "2025-10-06"
 tags:
   - 测试

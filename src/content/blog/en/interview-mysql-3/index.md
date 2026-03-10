@@ -1,8 +1,6 @@
 ---
 title: MySQL Logs and Locks
-description: >-
-  Short English draft for the Chinese post "MySQL的日志与锁机制". Includes a small English summary for routing and layout
-  checks.
+description: "Earlier MySQL notes originally written in Apple Notes."
 publishDate: "2025-06-05"
 tags:
   - 八股

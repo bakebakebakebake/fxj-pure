@@ -1,6 +1,6 @@
 ---
 title: Competitive Game Theory Notes
-description: Short English draft for the Chinese post "竞赛博弈论的判断框架". Includes a minimal summary so bilingual routing can be tested.
+description: "Based on the original game theory notes, this post restores the decision framework, Bash/Nim, misere play, Fibonacci game, Wythoff game, and the SG function."
 publishDate: "2024-08-29"
 tags:
   - 算法

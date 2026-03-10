@@ -95,8 +95,10 @@ const localizedTags = data.tags.map((tag) => ({
     </div>
 
     <h1 class='mt-4 text-2xl font-medium sm:mb-2 sm:mt-6 sm:text-3xl'>{data.title}</h1>
-    <div class='mt-3 text-sm text-muted-foreground'>
-      <p class='m-0'>{data.description}</p>
+    <div class='mt-3 italic'>
+      <blockquote class='text-sm text-muted-foreground'>
+        <q>{data.description}</q>
+      </blockquote>
       {placeholder && (
         <p class='mt-3 rounded-xl border bg-muted/60 px-4 py-3 text-sm not-italic text-foreground'>
           English version is coming soon. You can read the current Chinese version here:

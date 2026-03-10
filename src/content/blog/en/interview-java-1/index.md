@@ -1,8 +1,6 @@
 ---
 title: Java Abstractions and Core APIs
-description: >-
-  Short English draft for the Chinese post "Java 的抽象边界：集合、IO、反射、代理与 SPI". Includes a small English summary for routing
-  and layout checks.
+description: "Based on the original Java notes, this post keeps the material on collections, IO, reflection, proxies, and SPI."
 publishDate: "2025-05-07"
 tags:
   - 八股

@@ -1,8 +1,6 @@
 ---
 title: Codeforces Solutions 3
-description: >-
-  Short English draft for the Chinese post "Codeforces 题解整理 3：数论、博弈、组合与 EDU". Includes a short English preview for
-  bilingual page switching.
+description: "A collection of original Codeforces writeups from January to September 2024, focused on number theory, games, combinatorics, and EDU problems."
 publishDate: "2026-03-06"
 tags:
   - 算法竞赛

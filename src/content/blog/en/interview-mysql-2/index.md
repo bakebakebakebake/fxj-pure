@@ -1,8 +1,6 @@
 ---
 title: Transactions, Locks, and MVCC in MySQL
-description: >-
-  Short English draft for the Chinese post "MySQL 如何守住一致性：事务、锁、MVCC 与日志". Includes a small English summary for routing
-  and layout checks.
+description: "Based on the original MySQL notes, this post keeps the material on transactions, locks, MVCC, logs, and optimization."
 publishDate: "2025-06-05"
 tags:
   - 八股

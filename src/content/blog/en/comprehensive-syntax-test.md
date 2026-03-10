@@ -1,8 +1,6 @@
 ---
 title: Comprehensive Syntax Test
-description: >-
-  Short English draft for the Chinese post "Astro Pure 主题完整语法测试". Used to verify bilingual markdown rendering and locale
-  switching.
+description: "A comprehensive compatibility test for Markdown, Obsidian, AnyBlock, and code highlighting."
 publishDate: "2025-10-06"
 tags:
   - 测试

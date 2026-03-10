@@ -1,8 +1,6 @@
 ---
 title: Redis Beyond Caching
-description: >-
-  Short English draft for the Chinese post "Redis 不只是缓存：锁、消息队列与 HyperLogLog". Includes a small English summary for
-  routing and layout checks.
+description: "Based on the original Redis notes, this post keeps the material on distributed locks, message queues, HyperLogLog, and high availability."
 publishDate: "2025-06-08"
 tags:
   - 八股

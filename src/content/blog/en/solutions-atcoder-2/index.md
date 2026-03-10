@@ -1,8 +1,6 @@
 ---
 title: AtCoder Solutions 2
-description: >-
-  Short English draft for the Chinese post "AtCoder 题解整理 2：DP、概率、图与数据结构". Includes a short English preview for bilingual
-  page switching.
+description: "A collection of original AtCoder writeups from April to July 2024, covering ABC 348 E/F, 350 D/E, 351 D/E/F, 357 D/E/F, 358 C/E/G, and 360 E."
 publishDate: "2026-03-06"
 tags:
   - 算法竞赛

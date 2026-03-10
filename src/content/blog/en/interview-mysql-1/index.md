@@ -1,8 +1,6 @@
 ---
 title: Why MySQL Is Fast
-description: >-
-  Short English draft for the Chinese post "MySQL 为什么快：从页结构、索引到 B+ 树". Includes a small English summary for routing and
-  layout checks.
+description: "Based on the original MySQL notes, this post keeps the material on fundamentals, indexes, B+ trees, and execution plans."
 publishDate: "2025-05-10"
 tags:
   - 八股

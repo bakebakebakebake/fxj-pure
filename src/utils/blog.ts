@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from 'astro:content'
+import { getCollection, render, type CollectionEntry } from 'astro:content'
 import type { Locale } from './i18n'
 import { isEnglishContent } from './i18n'
 
@@ -16,6 +16,7 @@ export type LocalizedBlogPreview = {
     description: string
     publishDate: Date
     updatedDate?: Date
+    minutesRead?: string
     heroImage?: BlogEntry['data']['heroImage']
     heroImageSrc?: BlogEntry['data']['heroImageSrc']
     heroImageAlt?: BlogEntry['data']['heroImageAlt']
@@ -48,17 +49,17 @@ export async function getRawEnglishBlogCollection() {
 export async function getLocalizedBlogPreviews(locale: Locale): Promise<LocalizedBlogPreview[]> {
   const zhPosts = await getZhBlogCollection()
   if (locale === 'zh') {
-    return zhPosts.map((post) => toLocalizedPreview(post, 'zh', false))
+    return await Promise.all(zhPosts.map((post) => toLocalizedPreview(post, 'zh', false)))
   }
 
   const englishPosts = await getRawEnglishBlogCollection()
   const englishMap = new Map(englishPosts.map((post) => [post.id, post]))
 
-  return zhPosts.map((zhPost) => {
+  return await Promise.all(zhPosts.map(async (zhPost) => {
     const englishPost = englishMap.get(zhPost.id)
-    if (englishPost) return toLocalizedPreview(englishPost, 'en', false, zhPost)
-    return toLocalizedPreview(zhPost, 'en', true)
-  })
+    if (englishPost) return await toLocalizedPreview(englishPost, 'en', false, zhPost)
+    return await toLocalizedPreview(zhPost, 'en', true)
+  }))
 }
 
 export async function getLocalizedBlogEntry(locale: Locale, id: string) {
@@ -70,7 +71,7 @@ export async function getLocalizedBlogEntry(locale: Locale, id: string) {
     return {
       kind: 'entry' as const,
       entry: zhPost,
-      preview: toLocalizedPreview(zhPost, 'zh', false)
+      preview: await toLocalizedPreview(zhPost, 'zh', false)
     }
   }
 
@@ -80,14 +81,14 @@ export async function getLocalizedBlogEntry(locale: Locale, id: string) {
     return {
       kind: 'entry' as const,
       entry: englishPost,
-      preview: toLocalizedPreview(englishPost, 'en', false, zhPost)
+      preview: await toLocalizedPreview(englishPost, 'en', false, zhPost)
     }
   }
 
   return {
     kind: 'placeholder' as const,
     source: zhPost,
-    preview: toLocalizedPreview(zhPost, 'en', true)
+    preview: await toLocalizedPreview(zhPost, 'en', true)
   }
 }
 
@@ -129,17 +130,18 @@ function dedupeEnglishEntries(entries: (BlogEntry | BlogEnEntry & { collection?:
   return [...map.values()]
 }
 
-function toLocalizedPreview(
+async function toLocalizedPreview(
   post: BlogEntry | BlogEnEntry,
   locale: Locale,
   isPlaceholder: boolean,
   source?: BlogEntry
-): LocalizedBlogPreview {
+): Promise<LocalizedBlogPreview> {
   const sourceData = source?.data
   const heroImage = post.data.heroImage ?? sourceData?.heroImage
   const heroImageSrc = post.data.heroImageSrc ?? sourceData?.heroImageSrc
   const heroImageAlt = post.data.heroImageAlt ?? sourceData?.heroImageAlt
   const heroImageColor = post.data.heroImageColor ?? sourceData?.heroImageColor
+  const minutesRead = await getMinutesRead(source ?? post)
 
   return {
     id: post.id,
@@ -149,6 +151,7 @@ function toLocalizedPreview(
     collection: post.collection as 'blog' | 'blogEn',
     data: {
       ...post.data,
+      minutesRead,
       heroImage,
       heroImageSrc,
       heroImageAlt,
@@ -160,4 +163,9 @@ function toLocalizedPreview(
       language: locale === 'en' ? 'English' : post.data.language
     }
   }
+}
+
+async function getMinutesRead(post: BlogEntry | BlogEnEntry) {
+  const { remarkPluginFrontmatter } = await render(post)
+  return remarkPluginFrontmatter.minutesRead as string | undefined
 }

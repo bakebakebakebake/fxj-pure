@@ -1,8 +1,6 @@
 ---
 title: How Operating Systems Support Programs
-description: >-
-  Short English draft for the Chinese post "操作系统如何托住程序：进程、内存、文件与 I/O". Includes a small English summary for routing and
-  layout checks.
+description: "This post puts operating systems back into context: why programs need processes, threads, virtual memory, page cache, system calls, and file systems."
 publishDate: "2025-03-22"
 tags:
   - 八股

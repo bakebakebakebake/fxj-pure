@@ -1,8 +1,6 @@
 ---
 title: Nowcoder Solutions
-description: >-
-  Short English draft for the Chinese post "牛客题解整理：寒假赛、周赛与多校". Includes a short English preview for bilingual page
-  switching.
+description: "A collection of original writeups from December 2023 to August 2024, covering bookmarked winter contests, weekly contests, and multi-school problems."
 publishDate: "2026-03-06"
 tags:
   - 算法竞赛

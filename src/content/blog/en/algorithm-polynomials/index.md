@@ -1,6 +1,6 @@
 ---
 title: Why Learn Polynomials
-description: Short English draft for the Chinese post "为什么竞赛里要学多项式". Includes a minimal summary so bilingual routing can be tested.
+description: "From convolution and point-value representation to FFT/NTT and formal power series, this post explains what the polynomial toolkit is really solving."
 publishDate: "2024-09-15"
 tags:
   - 算法

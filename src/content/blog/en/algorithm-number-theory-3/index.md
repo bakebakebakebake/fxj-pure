@@ -1,8 +1,6 @@
 ---
 title: Mobius Inversion Notes
-description: >-
-  Short English draft for the Chinese post "从卷积到反演：莫比乌斯反演在做什么". Includes a minimal summary so bilingual routing can be
-  tested.
+description: "Based on the original number theory notes, this post restores Dirichlet convolution, the Mobius function, inversion techniques, and common identities."
 publishDate: "2024-09-13"
 tags:
   - 算法

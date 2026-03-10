@@ -1,8 +1,6 @@
 ---
 title: Generating Functions Primer
-description: >-
-  Short English draft for the Chinese post "我对生成函数的入门理解：先把系数当答案". Includes a minimal summary so bilingual routing can be
-  tested.
+description: "Built from the original notes, this post restores ordinary and exponential generating functions, modeling intuition, and several representative problems."
 publishDate: "2024-09-13"
 tags:
   - 算法

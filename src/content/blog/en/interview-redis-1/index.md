@@ -1,8 +1,6 @@
 ---
 title: Why Redis Works Well as a Cache
-description: >-
-  Short English draft for the Chinese post "Redis 为什么适合做缓存：数据结构、线程模型与持久化". Includes a small English summary for routing
-  and layout checks.
+description: "Built from the original Redis notes and Apple Notes, this post restores cache positioning, data structures, the threading model, and persistence."
 publishDate: "2025-05-08"
 tags:
   - 八股
