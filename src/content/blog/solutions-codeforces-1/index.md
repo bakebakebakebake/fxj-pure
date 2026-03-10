@@ -131,7 +131,10 @@ void solve() {
 
 即 $\displaystyle \sum\limits_{i=1}^n\left|{n-2\times i+1}\right|=\sum\limits_{i=1}^{\lfloor{\frac{n+1}{2}}\rfloor}(n-2\times i+1)+\sum\limits_{i=\lfloor{\frac{n+1}{2}}\rfloor+1}^n(2\times i-n-1)$
 
-拆开化简后最大值即为 $$2\times\lfloor\{\frac\{n+1\}\{2\}\}\rfloor(n-\lfloor\{\frac\{n+1\}\{2\}\}\rfloor)$$
+拆开化简后最大值即为 
+$$
+2\times\lfloor{\frac{n+1}{2}}\rfloor(n-\lfloor{\frac{n+1}{2}}\rfloor)
+$$
 再讨论符合条件的情况如何构造：
 
 当 $1$ 和 $n$ 交换时，可以构造 $2(n-1)$ 的值，$2$ 和 $n-1$ 交换可以构造 $2(n-3)$ 这样的值，...，一共可以构造：
@@ -187,6 +190,7 @@ void solve() {
 确定是否有可能从数组 $a$ 中删除正好一个数，从而使序列 $b$ 不递减（即 $b_i \le b_{i+1}$ 始终为真）。
 
 > [!example]
+> 
 > 例如，假设 Khristina 有一个数组 $a$ = [ $20, 6, 12, 3, 48, 36$ ]。如果她从中取出 $a_4 = 3$ 并计算 $b$ 的 GCD 序列，她会得到：
 > 
 > - $b_1 = GCD(20, 6) = 2$

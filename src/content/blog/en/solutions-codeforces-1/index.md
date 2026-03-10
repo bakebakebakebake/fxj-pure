@@ -130,7 +130,9 @@ The maximum value comes from the difference between the permutations $1,2,3\dots
 
 That is $\displaystyle \sum\limits_{i=1}^n\left|{n-2\times i+1}\right|=\sum\limits_{i=1}^{\lfloor{\frac{n+1}{2}}\rfloor}(n-2\times i+1)+\sum\limits_{i=\lfloor{\frac{n+1}{2}}\rfloor+1}^n(2\times i-n-1)$
 
-After expansion and simplification, the maximum value is $$2\times\lfloor\{\frac\{n+1\}\{2\}\}\rfloor(n-\lfloor\{\frac\{n+1\}\{2\}\}\rfloor)$$
+After expansion and simplification, the maximum value is 
+
+$$2\times\lfloor{\frac{n+1}{2}}\rfloor(n-\lfloor{\frac{n+1}{2}}\rfloor)$$
 
 Now discuss how to construct when conditions are met:
 
