@@ -62,7 +62,7 @@ const rssUrl = Astro.site ? new URL('/en/rss.xml', Astro.site).toString() : '/en
           <Section title='Posts'>
             <ul class='flex flex-col gap-y-1.5 sm:gap-y-2'>
               {allPostsByDate.map((post) => (
-                <LocalizedPostPreview post={post} href={`/en/blog/${post.id}`} />
+                <LocalizedPostPreview post={post} href={`/en/blog/${post.id}`} showDescription={false} />
               ))}
             </ul>
             <Button title='More posts' class='w-fit self-end' href='/en/blog' variant='ahead' />

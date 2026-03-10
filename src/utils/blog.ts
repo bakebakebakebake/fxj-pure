@@ -56,7 +56,7 @@ export async function getLocalizedBlogPreviews(locale: Locale): Promise<Localize
 
   return zhPosts.map((zhPost) => {
     const englishPost = englishMap.get(zhPost.id)
-    if (englishPost) return toLocalizedPreview(englishPost, 'en', false)
+    if (englishPost) return toLocalizedPreview(englishPost, 'en', false, zhPost)
     return toLocalizedPreview(zhPost, 'en', true)
   })
 }
@@ -80,7 +80,7 @@ export async function getLocalizedBlogEntry(locale: Locale, id: string) {
     return {
       kind: 'entry' as const,
       entry: englishPost,
-      preview: toLocalizedPreview(englishPost, 'en', false)
+      preview: toLocalizedPreview(englishPost, 'en', false, zhPost)
     }
   }
 
@@ -132,8 +132,15 @@ function dedupeEnglishEntries(entries: (BlogEntry | BlogEnEntry & { collection?:
 function toLocalizedPreview(
   post: BlogEntry | BlogEnEntry,
   locale: Locale,
-  isPlaceholder: boolean
+  isPlaceholder: boolean,
+  source?: BlogEntry
 ): LocalizedBlogPreview {
+  const sourceData = source?.data
+  const heroImage = post.data.heroImage ?? sourceData?.heroImage
+  const heroImageSrc = post.data.heroImageSrc ?? sourceData?.heroImageSrc
+  const heroImageAlt = post.data.heroImageAlt ?? sourceData?.heroImageAlt
+  const heroImageColor = post.data.heroImageColor ?? sourceData?.heroImageColor
+
   return {
     id: post.id,
     sourceId: post.id,
@@ -142,6 +149,10 @@ function toLocalizedPreview(
     collection: post.collection as 'blog' | 'blogEn',
     data: {
       ...post.data,
+      heroImage,
+      heroImageSrc,
+      heroImageAlt,
+      heroImageColor,
       title: isPlaceholder ? post.data.title : post.data.title,
       description: isPlaceholder
         ? 'This post is currently available in Chinese only. The English version will be added later.'

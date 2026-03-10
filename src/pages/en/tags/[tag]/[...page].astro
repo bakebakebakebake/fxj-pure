@@ -7,6 +7,7 @@ import PageLayout from '@/layouts/BaseLayout.astro'
 import LocalizedPostPreview from '@/components/pages/LocalizedPostPreview.astro'
 import config from '@/site-config'
 import { getLocalizedBlogPreviews, sortLocalizedBlogByDate, type LocalizedBlogPreview } from '@/utils/blog'
+import { getLocalizedTagLabel } from '@/utils/tag-label'
 
 export const prerender = true
 
@@ -29,10 +30,12 @@ interface Props {
 
 const { page } = Astro.props
 const { tag } = Astro.params
+const tagValue = String(tag ?? '')
+const tagLabel = getLocalizedTagLabel(tagValue, 'en')
 
 const meta = {
-  description: `View all posts with the tag - ${tag}`,
-  title: `Tag: ${tag}`
+  description: `View all posts with the tag - ${tagLabel}`,
+  title: `Tag: ${tagLabel}`
 }
 
 const paginationProps = {
@@ -57,7 +60,7 @@ const paginationProps = {
     <div id='content-header' class='animate'>
       <h1 class='mb-6 flex items-end gap-x-2 text-3xl font-medium'>
         Tags:
-        <span class='text-2xl'>#{tag}</span>
+        <span class='text-2xl'>#{tagLabel}</span>
       </h1>
     </div>
 

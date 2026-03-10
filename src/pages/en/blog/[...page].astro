@@ -12,6 +12,7 @@ import {
   sortLocalizedBlogByDate,
   type LocalizedBlogPreview
 } from '@/utils/blog'
+import { getLocalizedTagLabel } from '@/utils/tag-label'
 
 export const prerender = true
 
@@ -91,7 +92,7 @@ const paginationProps = {
               <ul class='flex flex-wrap gap-2'>
                 {uniqueTags.map(([tag]) => (
                   <li>
-                    <Button title={tag} href={`/en/tags/${tag}`} variant='pill' />
+                    <Button title={getLocalizedTagLabel(tag, 'en')} href={`/en/tags/${tag}`} variant='pill' />
                   </li>
                 ))}
               </ul>

@@ -11,6 +11,7 @@ import type { LocalizedBlogPreview } from '@/utils/blog'
 import { resolveHeroImage, resolveHeroImageColor, resolveHeroImageSrc } from '@/utils/hero-image'
 import type { Locale } from '@/utils/i18n'
 import { withLocalePath } from '@/utils/i18n'
+import { getLocalizedTagLabel } from '@/utils/tag-label'
 
 interface Props {
   preview: LocalizedBlogPreview
@@ -29,6 +30,10 @@ const currentIndex = relatedPosts.findIndex((post) => post.id === preview.id)
 const prevPost = currentIndex > 0 ? relatedPosts[currentIndex - 1] : undefined
 const nextPost = currentIndex >= 0 ? relatedPosts[currentIndex + 1] : undefined
 const backHref = withLocalePath(locale, '/blog')
+const localizedTags = data.tags.map((tag) => ({
+  value: tag,
+  label: getLocalizedTagLabel(tag, locale)
+}))
 ---
 
 <PageLayout
@@ -73,16 +78,16 @@ const backHref = withLocalePath(locale, '/blog')
       {!!data.tags.length && (
         <span class='flex items-center gap-1'>
           <Icon name='hashtag' class='size-5' />
-          {data.tags.map((tag, index) => (
+          {localizedTags.map((tag, index) => (
             <>
               <a
-                href={withLocalePath(locale, `/tags/${tag}`)}
+                href={withLocalePath(locale, `/tags/${tag.value}`)}
                 class='hover:underline hover:underline-offset-4'
                 data-pagefind-filter='tag'
               >
-                {tag}
+                {tag.label}
               </a>
-              {index < data.tags.length - 1 && '/'}
+              {index < localizedTags.length - 1 && '/'}
             </>
           ))}
         </span>

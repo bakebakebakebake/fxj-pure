@@ -3,6 +3,7 @@ import { Button } from 'astro-pure/user'
 import { cn } from 'astro-pure/utils'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import { getLocalizedBlogPreviews, getLocalizedTagsWithCount } from '@/utils/blog'
+import { getLocalizedTagLabel } from '@/utils/tag-label'
 
 const allTags = getLocalizedTagsWithCount(await getLocalizedBlogPreviews('en'))
 
@@ -33,7 +34,7 @@ const meta = {
                     val > 2 ? 'rounded-xl px-3 py-1 text-xl' : val > 1 && 'text-lg'
                   )}
                 >
-                  {tag}
+                  {getLocalizedTagLabel(tag, 'en')}
                   <span class={val > 2 ? 'text-base' : 'text-xs'}>{val}</span>
                 </Button>
               </li>
