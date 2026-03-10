@@ -119,6 +119,8 @@ function withChinesePath(pathname: string) {
 
         if (pathname.startsWith('/docs')) return;
 
+        const currentLocale = pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'zh';
+
         const isExplicitPreference = localStorage.getItem(LOCALE_EXPLICIT_KEY) === '1';
         const saved = localStorage.getItem(LOCALE_KEY);
         const savedLocale =
@@ -131,6 +133,10 @@ function withChinesePath(pathname: string) {
         const browserLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || '';
         const browserLocale = browserLanguage.toLowerCase().startsWith('zh') ? 'zh' : 'en';
         const preferredLocale = savedLocale || browserLocale;
+
+        if (savedLocale === currentLocale) {
+          localStorage.setItem(LOCALE_KEY, currentLocale);
+        }
 
         const toEnglishPath = (path) => {
           if (path === '/' || path === '') return '/en';

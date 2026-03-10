@@ -23,14 +23,17 @@ const allPosts = sortLocalizedBlogByDate(await getLocalizedBlogPreviews('en'))
 const rendered = entryResult.kind === 'entry' ? await render(entryResult.entry as never) : null
 const headings = rendered?.headings ?? []
 const Content = rendered?.Content
+const remarkPluginFrontmatter = rendered?.remarkPluginFrontmatter ?? {}
+const currentPreview = allPosts.find((post) => post.id === id) ?? entryResult.preview
 ---
 
 <LocalizedBlogPost
-  preview={entryResult.preview}
+  preview={currentPreview}
   locale='en'
   headings={headings}
   relatedPosts={allPosts}
   placeholder={entryResult.kind === 'placeholder'}
+  remarkPluginFrontmatter={remarkPluginFrontmatter}
 >
   {
     entryResult.kind === 'entry' && Content ? (
