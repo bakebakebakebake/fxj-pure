@@ -1,5 +1,5 @@
 ---
-title: Internal Placeholder
+title: "Internal Placeholder"
 description: Internal placeholder entry for the English blog collection.
 publishDate: 2026-03-08
 draft: true

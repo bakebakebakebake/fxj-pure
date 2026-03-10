@@ -401,3 +401,134 @@ $$
 - [OI-Wiki：多项式](https://oi-wiki.org/math/poly/)
 - [OI-Wiki：多项式入门](https://oi-wiki.org/math/poly/intro/)
 - [蒋炎岩：多项式](https://www.bilibili.com/video/BV1PK4y1x7V4/)
+
+## 实战题解
+
+### 题目1: 大数乘法 (FFT基础应用)
+
+**题目描述**:
+给定两个非负整数A和B,求A×B的结果。
+- 数据范围: A和B的位数不超过10^5
+
+**思路分析**:
+
+**暴力做法**: 模拟竖式乘法,时间复杂度O(n²)
+
+**优化思路**:
+- 将数字的每一位看作多项式的系数
+- 例如: 123 = 1×10² + 2×10¹ + 3×10⁰ 对应多项式 1x² + 2x + 3
+- 两个数相乘 = 两个多项式相乘 = 卷积
+- 使用FFT加速卷积,时间复杂度O(n log n)
+
+**完整代码**:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+const double PI = acos(-1.0);
+
+struct Complex {
+    double r, i;
+    Complex(double r = 0, double i = 0) : r(r), i(i) {}
+    Complex operator+(const Complex& b) const {
+        return Complex(r + b.r, i + b.i);
+    }
+    Complex operator-(const Complex& b) const {
+        return Complex(r - b.r, i - b.i);
+    }
+    Complex operator*(const Complex& b) const {
+        return Complex(r * b.r - i * b.i, r * b.i + i * b.r);
+    }
+};
+
+void FFT(vector<Complex>& a, int n, int inv) {
+    if (n == 1) return;
+
+    for (int i = 0, j = 0; i < n; i++) {
+        if (i > j) swap(a[i], a[j]);
+        for (int k = n >> 1; (j ^= k) < k; k >>= 1);
+    }
+
+    for (int len = 2; len <= n; len <<= 1) {
+        Complex wn(cos(2 * PI / len), inv * sin(2 * PI / len));
+        for (int i = 0; i < n; i += len) {
+            Complex w(1, 0);
+            for (int j = 0; j < len / 2; j++) {
+                Complex u = a[i + j];
+                Complex v = w * a[i + j + len / 2];
+                a[i + j] = u + v;
+                a[i + j + len / 2] = u - v;
+                w = w * wn;
+            }
+        }
+    }
+
+    if (inv == -1) {
+        for (int i = 0; i < n; i++) a[i].r /= n;
+    }
+}
+
+string multiply(string num1, string num2) {
+    int n1 = num1.size(), n2 = num2.size();
+    int n = 1;
+    while (n < n1 + n2) n <<= 1;
+
+    vector<Complex> a(n), b(n);
+    for (int i = 0; i < n1; i++) a[i].r = num1[n1 - 1 - i] - '0';
+    for (int i = 0; i < n2; i++) b[i].r = num2[n2 - 1 - i] - '0';
+
+    FFT(a, n, 1);
+    FFT(b, n, 1);
+
+    for (int i = 0; i < n; i++) a[i] = a[i] * b[i];
+
+    FFT(a, n, -1);
+
+    vector<int> result(n);
+    for (int i = 0; i < n; i++) result[i] = (int)(a[i].r + 0.5);
+
+    for (int i = 0; i < n - 1; i++) {
+        result[i + 1] += result[i] / 10;
+        result[i] %= 10;
+    }
+
+    int pos = n - 1;
+    while (pos > 0 && result[pos] == 0) pos--;
+
+    string ans;
+    for (int i = pos; i >= 0; i--) ans += char(result[i] + '0');
+    return ans;
+}
+```
+
+**性能对比**:
+- 暴力: O(10^10) - 超时
+- FFT: O(10^5 log 10^5) ≈ 0.5秒
+
+**踩坑记录**:
+1. 忘记位逆序置换
+2. 逆变换忘记除以n
+3. 进位处理时数组越界
+
+### 题目2: 多项式求逆 (洛谷P4238)
+
+**题目描述**:
+给定多项式f(x),求g(x)使得f(x)g(x) ≡ 1 (mod x^n)
+
+**思路**: 牛顿迭代 + 倍增
+- 递推公式: g(x) = 2g₀(x) - f(x)g₀²(x)
+- 复杂度: T(n) = T(n/2) + O(n log n) = O(n log n)
+
+**踩坑**: 模数998244353的原根是3
+
+### 题目3: 生成函数计数
+
+**问题**: n种物品,第i种有a[i]个,重量为i。求装满容量m的方案数。
+
+**建模**: 
+- 第i种物品生成函数: 1 + x^i + x^(2i) + ... + x^(a[i]×i)
+- 答案 = 所有生成函数乘积中x^m的系数
+
+**优化**: NTT加速多项式乘法
+- 朴素DP: O(nm²) - 超时
+- 生成函数+NTT: O(nm log m) - 通过
