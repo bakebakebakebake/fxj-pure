@@ -12,31 +12,30 @@ language: English
 heroImageSrc: ../../../pic/bekky-bekks-VcQkZl4Wf1Y-unsplash.jpg
 heroImageColor: " #4a7273 "
 ---
-
 > [!note] Note
-> This article is based on the original number theory notes, assembling scattered notes in blog order while preserving the original content as much as possible.
+> This article reverts to using your original number theory notes as the main body, only concatenating the scattered notes in blog order, preserving the original content as much as possible.
 
 ## Contents
 
 - `gcd`
 - `lcm`
-- `Bézout's theorem`
-- `Extended Euclidean algorithm`
-- `Fast exponentiation`
-- `Modular inverse`
+- `Bézout's Identity`
+- `Extended Euclidean Algorithm`
+- `Fast Exponentiation`
+- `Modular Inverse`
 - `Chinese Remainder Theorem`
 
 ## gcd
 
-<mark style="background: #ADCCFFA6;">Recursive approach</mark>:
+<mark style="background: #ADCCFFA6;">Recursive Method</mark>:
 ```cpp
-//most commonly used
-int gcd(int a, int b)//fast gcd computation
+// Most commonly used
+int gcd(int a, int b) // Quickly compute the greatest common divisor
 {
     return !b ? a : gcd(b, a % b);
 }
 ```
-Iterative approach:
+Iterative Method:
 ```cpp
 int gcd(int a, int b) {
   while (b != 0) {
@@ -46,15 +45,14 @@ int gcd(int a, int b) {
   }
   return a;
 }
-
 ```
 
-C++14 can use `__gcd (a, b)`
+C++14 provides `__gcd(a, b)`.
 
-gcd for large numbers:
+GCD for large numbers:
 ```cpp
 Big gcd(Big a, Big b) {
-  // count occurrences of factor 2 in a and b
+  // Record the number of times the common factor 2 appears in a and b
   int atimes = 0, btimes = 0;
   while (a % 2 == 0) {
     a >>= 1;
@@ -65,7 +63,7 @@ Big gcd(Big a, Big b) {
     btimes++;
   }
   for (;;) {
-    // common factor 2 in a and b has been calculated, no more even cases
+    // The common factor 2 in a and b has already been accounted for; a and b cannot both be even hereafter.
     while (a % 2 == 0) {
       a >>= 1;
     }
@@ -73,87 +71,86 @@ Big gcd(Big a, Big b) {
       b >>= 1;
     }
     if (a == b) break;
-    // ensure a>=b
+    // Ensure a >= b
     if (a < b) swap(a, b);
     a -= b;
   }
   return a << min(atimes, btimes);
 }
-
 ```
 
 ## lcm
 
 For two numbers:
-$gcd(a,b)\\times lcm(a,b)=a\\times b$
+$gcd(a,b) \times lcm(a,b) = a \times b$
 
-To find the least common multiple of two numbers, first find the greatest common divisor.
+To find the least common multiple of two numbers, first find their greatest common divisor.
 
 For multiple numbers:
-When we compute the $gcd$ of two numbers, finding the lcm is $O(1)$ complexity. So for multiple numbers, we don't need to find a common gcd first. The most direct method is: when we calculate the gcd of two numbers, or while finding the gcd of multiple numbers, we put it into the sequence to continue solving. We can transform this and directly put the lcm into the sequence.
+Once we find the $gcd$ of two numbers, finding the lcm is $O(1)$. For multiple numbers, we don't necessarily need to find a common gcd first. The most direct method is: after calculating the gcd of two numbers, perhaps when finding the gcd of multiple numbers, we can put it into the sequence and continue solving for the remaining numbers. So, we can simply put the least common multiple into the sequence directly.
 
-## Bézout's Theorem
+## Bézout's Identity
 
 ### 1 Statement:
-### 2 For integers $a,b$ not both zero, there exist integers $x,y$ such that $ax+by=gcd(a,b)$.
+### 2 Let $a, b$ be integers not both zero. Then there exist integers $x, y$ such that $ax + by = \gcd(a, b)$.
 #### 2.1 Proof:
-Let $s$ be the minimum positive integer value of $ax+by$ when $x=x_0$, $y=y_0$. That is, $ax_0+by_0 = s$
+Suppose the smallest positive integer value of $ax + by$ for some integers $x_0, y_0$ is $s$. That is, $ax_0 + by_0 = s$.
 
-Since $gcd(a,b)|ax_0$ and $gcd(a,b)|ay_0$
+Since $\gcd(a, b) | ax_0$ and $\gcd(a, b) | ay_0$,
 
-Therefore $gcd(a,b)|s$ $.........(1)$
+it follows that $\gcd(a, b) | s$. $.........(1)$
 
-Let $a=qs+r(0\\le r\\le s)$
+Let $a = qs + r$ where $0 \le r < s$.
 
-$r=a-qs=a-q(ax_0+by_0)=a(1-qx_0)+b(-qy_0)=ax+by$
+Then $r = a - qs = a - q(ax_0 + by_0) = a(1 - qx_0) + b(-qy_0) = ax + by$.
 
-Since $s$ is the minimum positive integer, $\\Rightarrow r=0$
+Because $s$ is the smallest positive integer value, we must have $r = 0$.
 
-Therefore $s|a$, similarly $s|b$
+Therefore $s | a$. Similarly, $s | b$.
 
-$\\Rightarrow s|gcd(a,b)$ $..........(2)$
+Hence $s | \gcd(a, b)$. $..........(2)$
 
-From $(1)(2)$ we get $s=gcd(a,b)$.
+From $(1)$ and $(2)$, we get $s = \gcd(a, b)$.
 
-Q.E.D.
+QED.
 
 ### 3 Converse:
 
-For integers $a, b$ not both zero, if $d > 0$ is a common divisor of $a, b$, and there exist integers $x, y$ such that $ax+by=d$, then $d = gcd(a, b)$.
+Let $a, b$ be integers not both zero. If $d > 0$ is a common divisor of $a$ and $b$, and there exist integers $x, y$ such that $ax + by = d$, then $d = \gcd(a, b)$.
 
-In particular, for integers $a, b$ not both zero, if there exist integers $x, y$ such that $ax+by=1$, then $a, b$ are coprime.
+A special case: Let $a, b$ be integers not both zero. If there exist integers $x, y$ such that $ax + by = 1$, then $a$ and $b$ are coprime.
 
-### 4 Further result:
-For natural numbers $a$, $b$ and integer $n$, where $a$ and $b$ are coprime, consider the Diophantine equation:
-			$ax+by=n$
-where $x$ and $y$ are natural numbers. If the equation has a solution, $n$ is said to be representable by $a$, $b$.
+### 4 Further Conclusions:
+For natural numbers $a$, $b$ and an integer $n$, with $a$ and $b$ coprime, consider the indefinite equation:
+$ax + by = n$
+where $x$ and $y$ are natural numbers. If the equation has a solution, we say $n$ can be represented by $a$ and $b$.
 
-Let $C=ab-a-b$. Since $a$ and $b$ are coprime, $C$ must be odd. Then we have:
+Let $C = ab - a - b$. Since $a$ and $b$ are coprime, $C$ must be odd. Then we have the conclusion:
 
 For any integer $n$, exactly one of $n$ and $C-n$ can be represented.
 
-That is: representable and non-representable numbers are symmetric in the interval $[0,C]$ (symmetric about $C/2$). $0$ can be represented, $C$ cannot be represented; negative numbers cannot be represented, numbers greater than $C$ can be represented.
+That is, the representable numbers and the non-representable numbers are symmetric in the interval $[0, C]$ (about half of $C$). $0$ is representable, $C$ is not representable; negative numbers are not representable, numbers greater than $C$ are representable.
 
-For example, in Luogu P3951, the goal is just to find the value of $ab-a-b$
+For example, in [luogu P3951](https://www.luogu.com.cn/problem/P3951), the problem essentially asks for the value of $ab - a - b$.
 
 ## Extended Euclidean Algorithm
 
-**Euclidean algorithm**: $gcd(a,b)=gcd(b,a$ $mod$ $b)$
+**Euclidean Algorithm**: $\gcd(a, b) = \gcd(b, a \bmod b)$
 
-[Proof](https://oi-wiki.org/math/number-theory/gcd/)
+[Proof](https://oi-wiki.org/math/number-theory/gcd/) (in Chinese)
 
-**Extended Euclidean algorithm** $:(Extended Euclidean algorithm, EXGCD)$
+**Extended Euclidean Algorithm** $(EXGCD)$
 
-<mark style="background: #BBFABBA6;">Commonly used</mark> to find  $$ ax+by=gcd (a, b) $$ <mark style="background: #D2B3FFA6;">a feasible solution</mark>.
+<mark style="background: #BBFABBA6;">Commonly used</mark> to find <mark style="background: #D2B3FFA6;">a set of feasible solutions</mark> to $$ ax + by = \gcd (a, b) $$.
 
- $ax_1+by_1=ay_2+bx_2-\\lfloor\\frac{a}{b}\\rfloor\\times by_2=ay_2+b(x_2-\\lfloor\\frac{a}{b}\\rfloor y_2)$
+Derivation:
+$ax_1 + by_1 = ay_2 + bx_2 - \lfloor\frac{a}{b}\rfloor \times by_2 = ay_2 + b(x_2 - \lfloor\frac{a}{b}\rfloor y_2)$
 
- $a=a,b=b$ ,$\\Rightarrow$  $x_1=y_2,y_1=x_2-\\lfloor\\frac{a}{b}\\rfloor y_2$
+Since $a = a$, $b = b$, we get $x_1 = y_2$, $y_1 = x_2 - \lfloor\frac{a}{b}\rfloor y_2$.
 
-Continuously substitute $x_2,y_2$ and recursively solve until $gcd$ $($ greatest common divisor, same below $)$ is $0$, then recursively return
-$x=1,y=0$ to solve.
+Recursively substitute $x_2, y_2$ until the gcd is $0$, then backtrack with $x=1, y=0$ to solve.
 
-[Proof](https://oi-wiki.org/math/number-theory/gcd/)
+[Proof](https://oi-wiki.org/math/number-theory/gcd/) (in Chinese)
 ```cpp
 int Exgcd(int a, int b, int &x, int &y) {
   if (!b) {
@@ -193,7 +190,6 @@ int gcd(int a, int b, int& x, int& y) {
   }
   return a1;
 }
-
 ```
 Matrix method:
 ```cpp
@@ -207,11 +203,10 @@ int exgcd(int a, int b, int &x, int &y) {
   x = x1, y = x2;
   return a;
 }
-
 ```
 
 ## Fast Exponentiation
-<mark style="background: #FFB8EBA6;">Note: use long long</mark>
+<mark style="background: #FFB8EBA6;">Remember to use long long</mark>
 ```cpp
 int qpow(int x, int y)
 {
@@ -230,9 +225,9 @@ int qpow(int x, int y)
 ## Modular Inverse
 
 ### 1 Definition
-If a linear congruence equation $ax \\equiv 1 \\pmod b$ holds, then $x$ is called the modular inverse of $a \\bmod b$, denoted as $a^{-1}$.
+If a linear congruence equation $ax \equiv 1 \pmod b$ holds, then $x$ is called the modular inverse of $a \bmod b$, denoted as $a^{-1}$.
 ### 2 Fermat's Little Theorem:
-$x \\equiv a^{b-2} \\pmod b$. Only holds when $p$ is prime
+$x \equiv a^{b-2} \pmod b$. This is only valid when $p$ is prime.
 
 ### 3 Extended Euclidean Algorithm:
 ```cpp
@@ -244,59 +239,57 @@ int main() {
     ll x, y;
     Exgcd (a, p, x, y);
     x = (x % p + p) % p;
-    printf ("%d\\n", x); //x is the modular inverse of a mod p
+    printf ("%d\n", x); // x is the inverse of a modulo p
 }
 ```
 
-### 4 Linear recursion method:
+### 4 Linear Recurrence Method:
 
 ```cpp
 int inv[1000000];
-void find_inv(int last,int p)
-//find modular inverses of 1~last under mod p
+void find_inv(int last, int p)
+// Find the inverses of all numbers from 1 to last modulo p
 {
-    inv[1]=1;//inverse of 1 is 1 itself
-    for(int i=2;i<=last;i++)
-        inv[i]=(long long)(p-p/i)*(inv[p%i])%p;
-    //note long long, otherwise may overflow
+    inv[1] = 1; // The inverse of 1 is 1 itself
+    for(int i = 2; i <= last; i++)
+        inv[i] = (long long)(p - p / i) * (inv[p % i]) % p;
+    // Be careful with long long to prevent potential overflow
 }
 ```
 
-### 5 Linear computation of inverses for arbitrary n numbers
+### 5 Linear Inverses for Any n Numbers
 
-The above method can only find inverses from $1$ to $n$. If we need to find inverses of any given $n$ numbers ($1 \\le a_i < p$), we need the following method:
+The method above can only find inverses for $1$ to $n$. If you need the inverses of any given $n$ numbers ($1 \le a_i < p$), you need the following method:
 
-First calculate the prefix product of $n$ numbers, denoted as $s_i$, then use fast exponentiation or extended Euclidean algorithm to calculate the inverse of $s_n$, denoted as $sv_n$.
+First, compute the prefix products of the $n$ numbers, denote them as $s_i$. Then, calculate the inverse of $s_n$ using fast exponentiation or the extended Euclidean algorithm, denote it as $sv_n$.
 
-Since $sv_n$ is the inverse of the product of $n$ numbers, when we multiply it by $a_n$, it will cancel with the inverse of $a_n$, thus we get the inverse of the product from $a_1$ to $a_{n-1}$, denoted as $sv_{n-1}$.
+Since $sv_n$ is the inverse of the product of all $n$ numbers, multiplying it by $a_n$ will cancel out the inverse of $a_n$, yielding the inverse of the product of $a_1$ through $a_{n-1}$, denoted as $sv_{n-1}$.
 
-Similarly we can compute all $sv_i$ in sequence, so
-$a_i^{-1}$ can be obtained by $s_{i-1} \\times sv_i$.
+Similarly, we can compute all $sv_i$ sequentially. Then, $a_i^{-1}$ can be obtained by $s_{i-1} \times sv_i$.
 
-Thus we compute the inverses of $n$ numbers in $O (n + \\log p)$ time.
+Thus, we can compute the inverses of $n$ numbers in $O(n + \log p)$ time.
 
 ```cpp
 s[0] = 1;
 for (int i = 1; i <= n; ++i) s[i] = s[i - 1] * a[i] % p;
 sv[n] = qpow(s[n], p - 2);
-// of course exgcd can also be used here, depending on preference
+// Of course, you can also use exgcd here to find the inverse, depending on personal preference.
 for (int i = n; i >= 1; --i) sv[i - 1] = sv[i] * a[i] % p;
 for (int i = 1; i <= n; ++i) inv[i] = sv[i] * s[i - 1] % p;
 ```
 
-### 6 Practice problems
-- [Modular Inverse - OI Wiki](https://oi.wiki/math/number-theory/inverse/#%E9%80%86%E5%85%83%E7%BB%83%E4%B9%A0%E9%A2%98) has several problems
-- B3645 Sequence Prefix Sum 2 - Luogu  [Link](https://www.luogu.com.cn/problem/B3645)
-- [B3646 Sequence Prefix Sum 3 - Luogu](https://www.luogu.com.cn/problem/B3646)
+### 6 Some Practice Problems
+- [Modular Inverse Practice Problems - OI Wiki](https://oi.wiki/math/number-theory/inverse/#%E9%80%86%E5%85%83%E7%BB%83%E4%B9%A0%E9%A2%98) (in Chinese) There are several problems here.
+- B3645 Sequence Prefix Sum 2 - Luogu [Link](https://www.luogu.com.cn/problem/B3645) (in Chinese)
+- [B3646 Sequence Prefix Sum 3 - Luogu](https://www.luogu.com.cn/problem/B3646) (in Chinese)
 
 ## Chinese Remainder Theorem
 
-Used to solve systems of linear congruences
+Used to solve systems of linear congruences.
 
-- Calculate the product of all moduli: $\\displaystyle M=\\Pi m_{i}$
-- For the $i$-th equation, calculate $c_{i}=\\frac{M}{m_{i}}$
-- Calculate the modular inverse of $c_{i}$ modulo $m_{i}$: $c_{i}^{-1}$
-- $\\displaystyle x=\\sum_{i=1}^nr_{i}c_{i}c_{i}^{-1}$
+- Calculate the product of all moduli: $\displaystyle M = \prod m_{i}$
+- For the $i$-th equation, compute $c_{i} = \frac{M}{m_{i}}$
+- Compute the modular multiplicative inverse of $c_{i}$ modulo $m_{i}$, denoted $c_{i}^{-1}$
+- $\displaystyle x = \sum_{i=1}^n r_{i} c_{i} c_{i}^{-1} \pmod M$
 
-
-  [P1495 【Template】Chinese Remainder Theorem (CRT) / Cao Chong Raises Pigs - Luogu](https://www.luogu.com.cn/problem/P1495)
+  [P1495 【Template】Chinese Remainder Theorem (CRT) / Cao Chong Raises Pigs - Luogu](https://www.luogu.com.cn/problem/P1495) (in Chinese)
