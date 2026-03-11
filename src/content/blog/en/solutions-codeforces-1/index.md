@@ -189,6 +189,7 @@ For array $b$: $b_i = GCD(a_i, a_{i + 1})$, $1 \le i \le n - 1$.
 Determine if it is possible to remove exactly one number from array $a$ so that the sequence $b$ becomes non-decreasing (i.e., $b_i \le b_{i+1}$ always holds true).
 
 > [!example]
+> 
 > For example, suppose Khristina has an array $a$ = [ $20, 6, 12, 3, 48, 36$ ]. If she removes $a_4 = 3$ from it and calculates the GCD sequence $b$, she gets:
 > 
 > - $b_1 = GCD(20, 6) = 2$

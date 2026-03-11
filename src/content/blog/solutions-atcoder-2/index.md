@@ -557,6 +557,7 @@ $$\displaystyle \sum_\{i=1\}^N \sum_\{j=i+1\}^N \max(A_j - A_i, 0)$$
 >树状数组求 $k_{th}$ 小的元素：[牛客](https://ac.nowcoder.com/acm/contest/view-submission?submissionId=66730392)
 
 > [!NOTE]- 官方题解
+> 
 > 在这里，对于一个固定的 $i$，对双重求和的贡献可以表示为
 > 
 > $$

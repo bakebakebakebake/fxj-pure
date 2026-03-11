@@ -50,6 +50,7 @@ Yaroslav is interested in how many ways there are to choose the values of $l$ an
 DP
 
 > [!NOTE] New trick:
+> 
 > To directly compute the prefix sum of an array: `partial_sum(a.begin() + 1, a.end(), a.begin() + 1);`
 > (For indices 1~n)
 
@@ -378,7 +379,7 @@ Used to check if, given a length $k$, there exists a way to cover all segments.
 The role of the `check` function is crucial, but proving its correctness remains a question for me.
 
 Binary search: $\text{I still haven't figured it out}$
-![](../../solutions-codeforces-2/Pasted image 20231213195628.png)
+![](../../solutions-codeforces-2/Pasted%20image%2020231213195628.png)
 Changing the 2D `vector<vector<int>>` to `vector<array<int, 2>>` saves a lot of space.
 ```cpp
 #include<bits/stdc++.h>

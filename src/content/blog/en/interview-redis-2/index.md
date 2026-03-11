@@ -131,6 +131,7 @@ Questions:
 		- For the final statistical formula: ![](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/3/2/1693c649359ce382~tplv-t2oaga2asx-jj-mark:3024:0:0:0:q75.awebp)
 
 > [!NOTE]- About the derivation of $n=2^{k_{max}}$ for HyperLogLog: [deepseek](https://chat.deepseek.com/a/chat/s/c17fec01-533f-4fa4-9b85-c62e6f6f5c2c)
+> 
 > ### **I. Definition of Bernoulli Trial and Meaning of Probability $P(k)$**
 >
 > **Bernoulli trial** is defined as "continuously flipping a coin until heads appears, recording the number of flips required". This "Bernoulli trial" actually belongs to the category of **geometric distribution**. Specifically:

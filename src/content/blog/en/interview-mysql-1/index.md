@@ -46,7 +46,7 @@ heroImageColor: ' #c0cb9b '
 			- If exists, returns to executor, then executor checks if conditions are met, sends to client if met, then starts loop (**queries one by one**, user just sees all results displayed together)
 			- After engine finishes reading, returns completion info to executor, executor receives info, exits loop, stops query
 
-![](../../interview-mysql-1/Pasted image 20250528015254.png)
+![](../../interview-mysql-1/Pasted%20image%2020250528015254.png)
 
 Index Pushdown: When searching for a condition after where, includes subsequent conditions in the judgment, reducing the number of table lookbacks (filters more at the engine level, improving efficiency)
 
@@ -61,7 +61,7 @@ In this path:
 - `db.opt`: Stores database default character set and collation rules
 - .frm: Stores table structure
 - .ibd: Stores table data (independent tablespace file)
-	- Structure of tablespace file: ![](../../interview-mysql-1/Pasted image 20250528124745.png)
+	- Structure of tablespace file: ![](../../interview-mysql-1/Pasted%20image%2020250528124745.png)
 	- Row: Table records are *stored* by row
 	- Page: Table records are **stored** by page, **database reads by page as unit**, entire page read into memory (also the minimum unit for InnoDB engine disk management)
 		- For each data read:
@@ -73,7 +73,7 @@ In this path:
 		- This is because adjacent pages in the linked list may not be physically adjacent, causing lots of random I/O during disk queries (**very slow**), so making adjacent pages physically adjacent enables sequential I/O, making range queries fast
 	- Segment consists of multiple extents. Segments are generally divided into data segments, index segments, and rollback segments.
 - InnoDB row formats: (*Redundant*, Compact, Dynamic, and Compressed)
-	- ![](../../interview-mysql-1/Pasted image 20250528140000.png)
+	- ![](../../interview-mysql-1/Pasted%20image%2020250528140000.png)
 	- Record extra information
 		- Variable-length field length list, **stored in reverse order** (Q: **How exactly is this reverse order? Why store in reverse?**)
 			- Because record header info has a pointer to the next record, **pointing to the position between the next record's header info and actual data**, reading left gets header info, reading right gets actual data
@@ -140,10 +140,10 @@ Concepts I think need to be understood:
 
 For visual description, use canvas to view MySQL mind map
 
-![](../../interview-mysql-1/Pasted image 20250531232615.png)
+![](../../interview-mysql-1/Pasted%20image%2020250531232615.png)
 Kind of confused:
 -  [Non-leaf nodes of B+ tree are also connected by doubly linked list](https://www.zhihu.com/question/478187330/answer/2050494617)
-![](../../interview-mysql-1/Pasted image 20260308180826.png)
+![](../../interview-mysql-1/Pasted%20image%2020260308180826.png)
 ##### Physical Storage
 >Primary key index (clustered index), Secondary index (auxiliary index)
 

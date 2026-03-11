@@ -368,7 +368,7 @@ Thought for a long time but couldn't figure it out $\dots$
 Not quite understood $\dots$
 
 This code has been HACKED; submitting it now would TLE.
-![](../../solutions-codeforces-3/Pasted image 20240128171314.png)
+![](../../solutions-codeforces-3/Pasted%20image%2020240128171314.png)
 ```cpp
 void solve()
 {
@@ -407,7 +407,7 @@ $(2)$
 
 Find the maximum $d$ satisfying this condition. This can be done in $\mathcal{O}(\sqrt{x})$ time via simple factorization.
 
-![](../../solutions-codeforces-3/Pasted image 20240128180042.png)
+![](../../solutions-codeforces-3/Pasted%20image%2020240128180042.png)
 
 ```cpp
 void solve()
@@ -745,7 +745,7 @@ The condition must satisfy: `dp[s][0]<=n`.
 
 Continuing from here, it's essentially a knapsack-like DP: `dp[s]` maintains the minimum length needed to form area `s`, the transfer source, and the height of the last layer. As long as the final `dp[s][0] <= n`, it means a construction within the length limit is possible. Then, backtrack according to the recorded predecessor to reconstruct the solution.
 
-![](../../solutions-codeforces-3/Pasted image 20240215152354.png)
+![](../../solutions-codeforces-3/Pasted%20image%2020240215152354.png)
 
 ```cpp
 void solve() {

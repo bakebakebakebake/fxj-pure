@@ -436,14 +436,8 @@ int main() {
 [B3645 Sequence Prefix Sum 2 - Luogu](https://www.luogu.com.cn/problem/B3645)
 [B 3645 Sequence Prefix Sum 2 Solution - lrqlrq250's Blog - Luogu Blog](https://www.luogu.com.cn/blog/lrqlrq250/b-3645-shuo-lie-qian-zhui-hu-2-ti-xie)
 
-Common $\LaTeX$ formulas
 
-> [!NOTE]-
-> 
->  ![](../../solutions-invitational-and-misc/Pasted image 20231127160008.png)
-> 
-
-![](../../solutions-invitational-and-misc/Pasted image 20231127154615.png)
+![](../../solutions-invitational-and-misc/Pasted%20image%2020231127154615.png)
 
  $\prod \limits_{i=l}^r a_i \pmod p$ is found to be equivalent to $\Huge{\frac{\prod\limits_{i=1}^{r}a_i}{\prod\limits_{i=1}^{l-1} a_i}}$ 
  

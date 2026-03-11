@@ -287,7 +287,7 @@ Multiple threads are simultaneously blocked, with one or all of them waiting for
 
 For example: Thread A holds resource 2, Thread B holds resource 1, and they both want to acquire each other's resource, so these two threads will wait for each other and enter a deadlock state.
 
-![](../../interview-java-2/Pasted image 20241219171502.png)
+![](../../interview-java-2/Pasted%20image%2020241219171502.png)
 
 Code for this situation:
 ```java
@@ -399,7 +399,7 @@ Process finished with exit code 0
 
 In Java, the `volatile` keyword ensures variable visibility. If we declare a variable as `volatile`, this instructs the JVM that this variable is shared and unstable, and should be read from main memory each time it's used.
 
-![373](../../interview-java-2/Pasted image 20241219175154.png) ![366](../../interview-java-2/Pasted image 20241219175214.png)
+![373](../../interview-java-2/Pasted%20image%2020241219175154.png) ![366](../../interview-java-2/Pasted%20image%2020241219175214.png)
 
 >In C language: The original meaning is to disable CPU caching. It instructs the compiler that this variable is shared and unstable, and should be read from main memory each time it's used.
 
@@ -806,7 +806,7 @@ Detailed explanation of `monitor`: [Java Locks and Threads](https://tech.youzan.
 public class ReentrantLock implements Lock, java.io.Serializable {}
 ```
 
-![](../../interview-java-2/Pasted image 20241221150553.png)
+![](../../interview-java-2/Pasted%20image%2020241221150553.png)
 
 `ReentrantLock` has an inner class `Sync`, which extends **AQS** (`AbstractQueuedSynchronizer`). Most lock acquisition and release operations are actually implemented in `Sync`. `Sync` has two subclasses: fair lock `FairSync` and non-fair lock `NonfairSync`.
 
@@ -1642,7 +1642,7 @@ Possible questions that might be asked:
 
 #### ThreadLocal Principles
 Principles are similar to:
-![](../../interview-java-2/Pasted image 20250113203923.png)
+![](../../interview-java-2/Pasted%20image%2020250113203923.png)
 
 
 ### ThreadLocal Automatic Cleanup Mechanism and Expansion Principle In-Depth Analysis
@@ -2000,7 +2000,7 @@ For commonly used blocking queues:
 
 #### Thread Pool Task Processing Flow
 
-![](../../interview-java-2/Pasted image 20250117213541.png)
+![](../../interview-java-2/Pasted%20image%2020250117213541.png)
 
 Can thread pools create threads in advance before submitting tasks?
 - `prestartCoreThread()`: Starts one thread, waits for tasks. If core thread count is already reached, this method returns false, otherwise returns true;

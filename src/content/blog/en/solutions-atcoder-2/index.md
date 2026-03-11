@@ -556,6 +556,7 @@ $$\displaystyle \sum_{i=1}^N \sum_{j=i+1}^N \max(A_j - A_i, 0)$$
 > Using Fenwick Tree to find the $k_{th}$ smallest element: [Nowcoder](https://ac.nowcoder.com/acm/contest/view-submission?submissionId=66730392)
 
 > [!NOTE]- Official Solution
+> 
 > Here, for a fixed $i$, the contribution to the double sum can be expressed as
 >
 > $$
@@ -693,7 +694,7 @@ This problem can be divided into three cases:
 Summing up the contributions from each part gives the answer.
 
 Example diagram:
-![](../../solutions-atcoder-2/Pasted image 20240609211726.png)
+![](../../solutions-atcoder-2/Pasted%20image%2020240609211726.png)
 
 Code: First perform topological sorting to calculate the contributions from the chains. For the cycles, calculate the "number of nodes in the cycle" and the "number of nodes that can reach the cycle".
 

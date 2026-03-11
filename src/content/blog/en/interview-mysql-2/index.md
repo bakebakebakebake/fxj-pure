@@ -64,10 +64,10 @@ Commands to start a transaction in MySQL:
 
 **How does Read View work in MVCC?**
 **Read View:**
-![](../../interview-mysql-2/Pasted image 20250528231309.png)
+![](../../interview-mysql-2/Pasted%20image%2020250528231309.png)
 
 After creating a Read View, the record's `trx_id` falls into one of these three categories:
-![](../../interview-mysql-2/Pasted image 20250528232159.png)
+![](../../interview-mysql-2/Pasted%20image%2020250528232159.png)
 
 **This method of controlling concurrent transaction access to the same record through a "version chain" is called MVCC (Multi-Version Concurrency Control).**
 

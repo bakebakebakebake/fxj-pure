@@ -36,7 +36,7 @@ It seems my understanding of the source code analysis part of Java collections i
 ### Overview of Java Collections
 Derived from two main interfaces: one is the `Collection` interface, mainly for storing single elements; the other is the `Map` interface, mainly for storing key-value pairs. Under the `Collection` interface, there are three main sub-interfaces: `List`, `Set`, and `Queue`.
 
-![](../../interview-java-1/Pasted image 20260307205732.png)
+![](../../interview-java-1/Pasted%20image%2020260307205732.png)
 
 >Only the main inheritance relationships are listed here, not all relationships.
 
@@ -104,7 +104,7 @@ The underlying implementation of HashMap.
 
 #### What is the specific process of the put operation in HashMap? (*)
 Flowchart:
-![](../../interview-java-1/Pasted image 20241210161902.png)
+![](../../interview-java-1/Pasted%20image%2020241210161902.png)
 
 **(Important)**
 
@@ -119,7 +119,7 @@ Flowchart:
 
 #### What is the expansion mechanism of HashMap?
 Flowchart:
-![](../../interview-java-1/Pasted image 20241210183948.png)
+![](../../interview-java-1/Pasted%20image%2020241210183948.png)
 
 - The `resize` method needs to be called when adding elements or during initialization. The first time data is added, the array length is initialized to 16. Subsequent expansions occur when the expansion threshold (array length * 0.75) is reached.
 - Each expansion doubles the previous capacity (this ensures it's always a power of 2).
@@ -129,7 +129,7 @@ Flowchart:
     - For linked lists, the linked list needs to be traversed and potentially split. Check if `(e.hash & oldCap)` is 0. The element either stays at the original index or moves to the **original index + increased array size**.
 
 #### What is the addressing algorithm of HashMap?
-![](../../interview-java-1/Pasted image 20241210193345.png)
+![](../../interview-java-1/Pasted%20image%2020241210193345.png)
 
 #### The infinite loop problem of HashMap JDK 1.7 under multi-threading
 Reference videos:
@@ -287,9 +287,9 @@ Actually, the `RandomAccess` interface defines nothing. So `RandomAccess` is mer
 >In the `binarySearch()` method, it checks whether the incoming `list` is an instance of `RandomAccess`. If so, it calls the `indexedBinarySearch()` method; otherwise, it calls the `iteratorBinarySearch()` method.
 
 ### Doubly Linked List vs. Doubly Circular Linked List
-![](../../interview-java-1/Pasted image 20260307205745.png)
+![](../../interview-java-1/Pasted%20image%2020260307205745.png)
 
-![](../../interview-java-1/Pasted image 20260307205750.png)
+![](../../interview-java-1/Pasted%20image%2020260307205750.png)
 
 ### What is the time complexity of inserting and deleting elements in ArrayList?
 >Very easy to understand, the complexity is as expected and similar to the nature of an array.
@@ -372,7 +372,7 @@ static final int tableSizeFor(int cap) {
 
 ### Differences between HashMap and TreeMap
 `TreeMap` and `HashMap` both inherit from `AbstractMap`. Additionally, `TreeMap` implements the `NavigableMap` and `SortedMap` interfaces.
-![](../../interview-java-1/Pasted image 20260307205639.png)
+![](../../interview-java-1/Pasted%20image%2020260307205639.png)
 
 Implementing the `NavigableMap` interface gives `TreeMap` the ability to search for elements within the collection.
 
@@ -448,7 +448,7 @@ That is, in JDK 1.8, regardless of whether an element already exists in the `Has
 Before JDK 1.8, `HashMap` was implemented using an array and linked lists combined, i.e., a hash chain. `HashMap` calculates the hash value of the key after processing it through a perturbation function, then uses `(n - 1) & hash` to determine the storage location of the element (n is the array length). If the position already contains an element, it checks if the hash value and key of the existing element are the same as the one to be inserted. If they are the same, it directly overwrites the value. If not, it resolves the conflict using the separate chaining method. ^45b49e
 
 >**Separate Chaining**: Combines linked lists and arrays. Essentially, it creates an array of linked lists, where each cell in the array is a linked list. When a hash collision occurs, the colliding value is added to the corresponding linked list. As shown in the figure:
-![](../../interview-java-1/Pasted image 20260307205759.png)
+![](../../interview-java-1/Pasted%20image%2020260307205759.png)
 
 ^8b5a78
 
@@ -476,7 +476,7 @@ The perturbation function (the `hash` method) in `HashMap` is used to optimize t
 
 After JDK 1.8, there was a significant change in resolving hash collisions (prior to 1.7, it was separate chaining). When the **linked list length exceeds the threshold (default 8) and the total number of elements exceeds 64**, the linked list is converted to a red-black tree to reduce search time.
 
-![](../../interview-java-1/Pasted image 20260307205816.png)
+![](../../interview-java-1/Pasted%20image%2020260307205816.png)
 
 #### HashMap Source Code: Linked List to Red-Black Tree Conversion
 >Enter the `HashMap` source code and search for `treeifyBin`.
@@ -673,7 +673,7 @@ They differ in how thread safety is achieved.
 Each element in the `Segment` array contains a `HashEntry` array, and each `HashEntry` array is essentially a linked list structure.
 
 > i.e., **`Segment` array + `HashEntry` array + linked list**
-![](../../interview-java-1/Pasted image 20260307205823.png)
+![](../../interview-java-1/Pasted%20image%2020260307205823.png)
 
 Data is divided into segments (these "segments" are `Segment`). Each data segment is assigned a lock. **When a thread acquires a lock to access data in one segment, data in other segments can still be accessed by other threads**.
 
@@ -696,7 +696,7 @@ A `Segment` contains a `HashEntry` array. Each `HashEntry` is a linked list elem
 JDK 1.8 and later: **`Node` array + linked list / red-black tree** (similar to `HashMap` implementation after JDK 1.8).
 > `Node` is only used for linked list scenarios. For red-black trees, `TreeNode` is used. When a conflicting linked list reaches a certain length, it converts to a red-black tree.
 
-![](../../interview-java-1/Pasted image 20260307205835.png)
+![](../../interview-java-1/Pasted%20image%2020260307205835.png)
 
 > [!NOTE]
 > `TreeNode` stores the red-black tree node and is wrapped by `TreeBin`. `TreeBin` maintains the root node of the red-black tree via the `root` attribute. During rotations in a red-black tree, the root node might be replaced by one of its former children. If another thread tries to write to the same red-black tree at this moment, thread-safety issues could arise. Therefore, in `ConcurrentHashMap`, `TreeBin` uses the `waiter` attribute to track the thread currently using the red-black tree, preventing other threads from entering.
@@ -1175,7 +1175,7 @@ Many frameworks use Java's SPI mechanism, such as: the Spring framework, databas
 
 ### Difference between SPI and API
 
-![](../../interview-java-1/Pasted image 20241216185425.png)
+![](../../interview-java-1/Pasted%20image%2020241216185425.png)
 
 - Calling an implementer's interface to gain capabilities provided by the implementer is API.
     - In this case, both the interface and its implementation reside in the implementer's package. The caller uses the interface to **invoke the implementer's functionality**, without needing to care about specific implementation details.
@@ -1184,7 +1184,7 @@ Many frameworks use Java's SPI mechanism, such as: the Spring framework, databas
 
 ### SLF4J Example
 
-![](../../interview-java-1/Pasted image 20241205190953.png)
+![](../../interview-java-1/Pasted%20image%2020241205190953.png)
 
 #### Service Provider Interface
 First, create the `Service Provider Interface` project:

@@ -14,6 +14,7 @@ heroImageSrc: ../../../pic/nir-himi-uBst6NH7l9c-unsplash.jpg
 heroImageColor: " #654c32 "
 ---
 > [!note] Note
+> 
 > This article is based on the original AtCoder problem solutions in Obsidian, with only the addition of section divisions, scope of coverage, and minimal cleanup required for site compatibility; the problem statements, solution approaches, code, and original remarks are preserved as much as possible.
 
 ## Scope of Coverage
@@ -244,6 +245,7 @@ $(n\leq 10^{12}, 1\leq \mid s\mid, \mid t\mid \leq 10^5 )$
 Binary Search + Greedy
 
 > [!NOTE]- Official Solution
+> 
 > Fix $k$ and consider how to determine whether $g(T,k)$ is a subsequence of $f(S,N)$.
 > 
 > Let $s$ be the length of $S$, $t$ be the length of $T$, and $X[: i]$ denote the first $i$ characters of string $X$. Each character in $T$ must also appear in $S$ (otherwise the answer is clearly 0).

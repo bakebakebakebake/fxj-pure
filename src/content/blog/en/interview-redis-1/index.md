@@ -88,6 +88,7 @@ Differences:
 ## Redis Data Types and Use Cases
 
 > [!note]- Let's look at the most common data types and scenarios together
+> 
 > | Type | Common Scenarios |
 > | --- | --- |
 > | `String` | Cache objects, counters, distributed locks, shared sessions |
@@ -167,6 +168,7 @@ It doesn't mean the entire process has only one thread.
 - After Redis 6: Can also enable I/O threads to share network send/receive pressure, but **command execution is still single-threaded**.
 
 > [!tip] The most solid way to answer this question
+> 
 > Don't directly say "Redis is single-threaded." A more accurate statement is: The command execution model is primarily single-threaded, avoiding lock contention; but background tasks and network I/O after Redis 6 are not completely single-threaded.
 
 ### Why It's Fast
