@@ -3,6 +3,20 @@ import { Collapse, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
+import safariIcon from '@/assets/tools/app-icons/safari.png'
+import pixpinIcon from '@/assets/tools/app-icons/pixpin.png'
+import codexIcon from '@/assets/tools/app-icons/codex.png'
+import claudeCodeIcon from '@/assets/tools/app-icons/claude-code.png'
+import typelessIcon from '@/assets/tools/app-icons/typeless.png'
+import antigravityIcon from '@/assets/tools/app-icons/antigravity.png'
+import wechatInputIcon from '@/assets/tools/app-icons/wechat-input.png'
+import doubaoIcon from '@/assets/tools/app-icons/doubao.png'
+import notebookLmIcon from '@/assets/tools/app-icons/notebooklm-candidate.png'
+import cherryStudioIcon from '@/assets/tools/app-icons/cherry-studio.png'
+import raycastIcon from '@/assets/tools/app-icons/raycast.png'
+import fineTuneIcon from '@/assets/tools/app-icons/fine-tune.png'
+import activityWatchIcon from '@/assets/tools/app-icons/activitywatch.png'
+import appleNotesIcon from '@/assets/tools/app-icons/apple-notes.png'
 
 const headings = [
   { depth: 2, slug: 'hobbies', text: 'Hobbies' },
@@ -16,11 +30,9 @@ const headings = [
 <PageLayout title='About' {headings} comment>
   <p>Developer / ACMer</p>
   <p>
-    一位小菜鸡，正在学习中...<br>
-    西南石油大学就读于计算机科学与技术专业。<br>
-    就业方向在后端开发方向。<br>
-    我的兴趣主要是在算法竞赛/数学/优化/理解本质上。<br>
-    <Spoiler>谁说后端方向就不能体会理解其本质的乐趣了呢！</Spoiler>
+    一位计算机小菜鸡，正在学习中...<br /><br />
+    喜欢在抽象模型、工程实现和真实问题之间来回推敲，把东西尽量想明白、写清楚。<br /><br />
+    长期目标希望将算法、系统、写作和自动化工具逐步连成一套真正稳定的个人工作流。
   </p>
   <p>
     My motto: Anyway, Pace yourself. <Spoiler>不管怎样，调整好自己的节奏！</Spoiler>
@@ -30,81 +42,72 @@ const headings = [
   {/* general-talk */}
   <h2 id='hobbies'>Hobbies</h2>
   <ul>
-    <li>Lorem ipsum dolor sit amet, vidit suscipit at mei.</li>
-    <li>
-      Quem denique mea id. Usu ei regione indoctum dissentiunt, cu meliore fuisset mei, vel quod
-      voluptua ne.
-    </li>
-    <li>Ex dicat impedit mel, at eum oratio possit voluptatum.</li>
-    <li>Impetus fuisset ullamcorper pri cu, his posse iisque ad, aliquam honestatis usu id.</li>
+    <li>热爱数学、算法与逻辑推理，享受探索抽象结构与底层原理。</li>
+    <li>喜欢 coding、搭建个人博客，钻研各类工具。</li>
+    <li>关注大模型发展方向、知识管理与自动化，追求极致的系统体验。</li>
+    <li>对哲学与认知科学保持好奇，喜欢深度思考。</li>
   </ul>
 
   {/* tools */}
   <h2 id='tools'>Tools</h2>
-  <p>Current support tools as follow:</p>
-  <!-- <ToolSection
-    class='mb-5'
-    title='Design'
-    tools={[
-      {
-        name: 'Photoshop',
-        description: 'Picture Editing',
-        href: 'https://www.adobe.com/products/photoshop',
-        icon: import('@/assets/tools/photoshop.svg?raw')
-      },
-      {
-        name: 'Illustrator',
-        description: 'Vector Drawing',
-        href: 'https://www.adobe.com/products/illustrator',
-        icon: import('@/assets/tools/illustrator.svg?raw')
-      },
-      {
-        name: 'After Effects',
-        description: 'Motion Graphics',
-        href: 'https://www.adobe.com/products/aftereffects',
-        icon: import('@/assets/tools/aftereffects.svg?raw')
-      },
-      {
-        name: 'Premiere Pro',
-        description: 'Video Editing',
-        href: 'https://www.adobe.com/products/premiere',
-        icon: import('@/assets/tools/premiere.svg?raw')
-      }
-    ]}
-  /> -->
+  <p>日常高频使用的一组工具如下。</p>
   <ToolSection
     class='mb-5'
     title='Productivity'
     tools={[
       {
+        name: 'Safari',
+        description: '主力浏览器',
+        href: 'https://www.apple.com/safari/',
+        icon: safariIcon
+      },
+      {
         name: 'Chrome',
-        description: 'Browser',
+        description: '兼容性与多账号场景',
         href: 'https://www.google.com/chrome/',
         icon: import('@/assets/tools/chrome.svg?raw')
       },
       {
-        name: 'Edge',
-        description: 'Browser',
-        href: 'https://www.microsoft.com/en-us/edge',
-        icon: import('@/assets/tools/edge.svg?raw')
-      },
-      // {
-      //   name: 'Firefox',
-      //   description: 'Browser',
-      //   href: 'https://www.mozilla.org/en-US/firefox',
-      //   icon: import('@/assets/tools/firefox.svg?raw')
-      // },
-      {
         name: 'Obsidian',
-        description: 'All-in-one Daliy Note Taking',
+        description: '知识库与长线笔记',
         href: 'https://www.obsidian.md/',
         icon: import('@/assets/tools/obsidian.svg?raw')
       },
       {
+        name: 'Apple Notes',
+        description: '轻量速记与收集',
+        href: 'https://www.apple.com/macos/notes/',
+        icon: appleNotesIcon
+      },
+      {
         name: 'Typora',
-        description: 'Markdown Reader for single file',
+        description: '单文件 Markdown 编辑',
         href: 'https://typora.io/',
         icon: import('@/assets/tools/typora.svg?raw')
+      },
+      {
+        name: 'Typeless',
+        description: '沉浸式写作与整理',
+        href: 'https://www.typeless.com/',
+        icon: typelessIcon
+      },
+      {
+        name: 'PixPin',
+        description: '截图、贴图与标注',
+        href: 'https://pixpin.cn/',
+        icon: pixpinIcon
+      },
+      {
+        name: 'Raycast',
+        description: '启动器与系统工作流',
+        href: 'https://www.raycast.com/',
+        icon: raycastIcon
+      },
+      {
+        name: '微信输入法',
+        description: '中文输入',
+        href: 'https://z.weixin.qq.com/',
+        icon: wechatInputIcon
       }
     ]}
   />
@@ -113,50 +116,74 @@ const headings = [
     title='Development'
     tools={[
       {
-        name: 'VS Code',
-        description: 'IDE',
-        href: 'https://code.visualstudio.com/',
-        icon: import('@/assets/tools/vscode.svg?raw')
+        name: 'Codex',
+        description: '代码代理',
+        href: 'https://openai.com/codex/',
+        icon: codexIcon
       },
       {
-        name: 'Cursor',
-        description: 'AI IDE(for Tab Mode)',
-        href: 'https://www.cursor.com/',
-        icon: import('@/assets/tools/cursor.svg?raw')
+        name: 'Claude Code',
+        description: '终端代码代理',
+        href: 'https://claude.com/product/claude-code',
+        icon: claudeCodeIcon
       },
       {
-        name: 'IntelliJ IDEA',
-        description: 'IDE',
-        href: 'https://www.jetbrains.com/idea/',
-        icon: import('@/assets/tools/IDEA.svg?raw')
+        name: 'tmux',
+        description: '终端会话管理',
+        href: 'https://github.com/tmux/tmux',
+        icon: import('@/assets/tools/tmux.svg?raw')
+      },
+      {
+        name: 'Antigravity',
+        description: 'Agentic coding workspace',
+        href: 'https://antigravity.google/',
+        icon: antigravityIcon
       }
-      // {
-      //   name: 'Neovim',
-      //   description: 'IDE',
-      //   href: 'https://neovim.io/',
-      //   icon: import('@/assets/tools/neovim.svg?raw')
-      // },
-      // {
-      //   name: 'Sublime Text',
-      //   description: 'IDE',
-      //   href: 'https://www.sublimetext.com/',
-      //   icon: import('@/assets/tools/sublime.svg?raw')
-      // }
+    ]}
+  />
+  <ToolSection
+    class='mb-5'
+    title='AI & Automation'
+    tools={[
+      {
+        name: 'Doubao',
+        description: '中文 AI 助手',
+        href: 'https://www.doubao.com/',
+        icon: doubaoIcon
+      },
+      {
+        name: 'NotebookLM',
+        description: '资料驱动的问答与整理',
+        href: 'https://notebooklm.google.com/',
+        icon: notebookLmIcon
+      },
+      {
+        name: 'Cherry Studio',
+        description: '多模型桌面工作台',
+        href: 'https://cherry-ai.com/',
+        icon: cherryStudioIcon
+      },
+      {
+        name: 'FineTune',
+        description: '按应用控制音量',
+        href: 'https://github.com/ronitsingh10/FineTune',
+        icon: fineTuneIcon
+      },
+      {
+        name: 'ActivityWatch',
+        description: '时间追踪与行为统计',
+        href: 'https://activitywatch.net/',
+        icon: activityWatchIcon
+      }
     ]}
   />
   <ToolSection
     class='mb-5'
     title='Environment'
     tools={[
-      // {
-      //   name: 'Arch Linux',
-      //   description: 'Linux Distribution',
-      //   href: 'https://archlinux.org/',
-      //   icon: import('@/assets/tools/archlinux.svg?raw')
-      // },
       {
         name: 'Ubuntu 22.04 LTS',
-        description: 'Linux Distribution(WSL)',
+        description: 'Linux 发行版（WSL）',
         href: 'https://ubuntu.com/',
         icon: import('@/assets/tools/ubuntu.svg?raw')
       },

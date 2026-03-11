@@ -42,41 +42,49 @@ function isImageMetadata(obj: unknown): obj is ImageMetadata {
             {tool.darkIcon ? (
               <>
                 {isImageMetadata(tool.icon) ? (
-                  <div class='size-10 rounded-lg bg-primary-foreground p-2 dark:hidden'>
-                    <Image src={tool.icon} alt={tool.name} class='h-full w-full object-contain' />
+                  <div class='size-11 rounded-lg bg-primary-foreground p-1 dark:hidden'>
+                    <Image
+                      src={tool.icon}
+                      alt={tool.name}
+                      class='h-full w-full object-contain scale-110'
+                    />
                   </div>
                 ) : (
                   <Svg
                     src={tool.icon}
-                    class='size-10 rounded-lg bg-primary-foreground fill-foreground p-2 dark:hidden'
+                    class='size-11 rounded-lg bg-primary-foreground fill-foreground p-1 dark:hidden'
                   />
                 )}
 
                 {isImageMetadata(tool.darkIcon) ? (
-                  <div class='size-10 rounded-lg bg-primary-foreground p-2 hidden dark:block'>
+                  <div class='size-11 rounded-lg bg-primary-foreground p-1 hidden dark:block'>
                     <Image
                       src={tool.darkIcon}
                       alt={tool.name}
-                      class='h-full w-full object-contain'
+                      class='h-full w-full object-contain scale-110'
                     />
                   </div>
                 ) : (
                   <Svg
                     src={tool.darkIcon}
-                    class='size-10 rounded-lg bg-primary-foreground fill-foreground p-2 hidden dark:block'
+                    class='size-11 rounded-lg bg-primary-foreground fill-foreground p-1 hidden dark:block'
                   />
                 )}
               </>
             ) : (
               <>
                 {isImageMetadata(tool.icon) ? (
-                  <div class='size-10 rounded-lg bg-primary-foreground p-2'>
-                    <Image src={tool.icon} alt={tool.name} class='h-full w-full object-contain' />
+                  <div class='size-11 rounded-lg bg-primary-foreground p-1'>
+                    <Image
+                      src={tool.icon}
+                      alt={tool.name}
+                      class='h-full w-full object-contain scale-110'
+                    />
                   </div>
                 ) : (
                   <Svg
                     src={tool.icon}
-                    class='size-10 rounded-lg bg-primary-foreground fill-foreground p-2'
+                    class='size-11 rounded-lg bg-primary-foreground fill-foreground p-1'
                   />
                 )}
               </>

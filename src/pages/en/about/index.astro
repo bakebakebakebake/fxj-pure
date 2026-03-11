@@ -1,15 +1,27 @@
 ---
-import { Button, Collapse, Timeline } from 'astro-pure/user'
+import { Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
+import safariIcon from '@/assets/tools/app-icons/safari.png'
+import pixpinIcon from '@/assets/tools/app-icons/pixpin.png'
+import codexIcon from '@/assets/tools/app-icons/codex.png'
+import claudeCodeIcon from '@/assets/tools/app-icons/claude-code.png'
+import typelessIcon from '@/assets/tools/app-icons/typeless.png'
+import antigravityIcon from '@/assets/tools/app-icons/antigravity.png'
+import wechatInputIcon from '@/assets/tools/app-icons/wechat-input.png'
+import doubaoIcon from '@/assets/tools/app-icons/doubao.png'
+import notebookLmIcon from '@/assets/tools/app-icons/notebooklm-candidate.png'
+import cherryStudioIcon from '@/assets/tools/app-icons/cherry-studio.png'
+import raycastIcon from '@/assets/tools/app-icons/raycast.png'
+import fineTuneIcon from '@/assets/tools/app-icons/fine-tune.png'
+import activityWatchIcon from '@/assets/tools/app-icons/activitywatch.png'
+import appleNotesIcon from '@/assets/tools/app-icons/apple-notes.png'
 
 const headings = [
-  { depth: 2, slug: 'focus', text: 'Focus' },
+  { depth: 2, slug: 'hobbies', text: 'Hobbies' },
   { depth: 2, slug: 'tools', text: 'Tools' },
   { depth: 2, slug: 'social-networks', text: 'Social Networks' },
-  { depth: 2, slug: 'website-services', text: 'Current Site Services' },
-  { depth: 2, slug: 'future-services', text: 'Planned Services' },
   { depth: 2, slug: 'about-blog', text: 'About Blog' }
 ]
 ---
@@ -17,17 +29,19 @@ const headings = [
 <PageLayout title='About' {headings} comment>
   <p>Developer / ACMer</p>
   <p>
-    This site is where I collect algorithm editorials, backend notes, system fundamentals and
-    long-form learning records. The goal is not fast posting, but durable writing.
+    Just a computer noob, still learning...<br /><br />
+    I like moving back and forth between abstract models, practical implementation, and real
+    problems, trying to understand things clearly enough to write them down.<br /><br />
+    My long-term goal is to gradually connect algorithms, systems, writing, and automation into a
+    truly stable personal workflow.
   </p>
-  <Button title='View projects' class='w-fit' href='/en/projects' variant='ahead' />
 
-  <h2 id='focus'>Focus</h2>
+  <h2 id='hobbies'>Hobbies</h2>
   <ul>
-    <li>Contest problem solving, editorial writing and post-contest review.</li>
-    <li>Java backend fundamentals: JUC, JVM, databases, cache and engineering practices.</li>
-    <li>Classic CS topics including OS, networking and database systems.</li>
-    <li>Obsidian / Markdown / Astro based knowledge workflows.</li>
+    <li>I enjoy mathematics, algorithms, and logical reasoning, especially abstract structures and low-level principles.</li>
+    <li>I like coding, building my personal blog, and tinkering with all kinds of tools.</li>
+    <li>I pay close attention to LLMs, knowledge management, and automation, and I care about polished systems.</li>
+    <li>I stay curious about philosophy and cognitive science, and enjoy thinking deeply.</li>
   </ul>
 
   <h2 id='tools'>Tools</h2>
@@ -35,23 +49,36 @@ const headings = [
     class='mb-5'
     title='Productivity'
     tools={[
-      { name: 'Obsidian', description: 'Knowledge base and notes', href: 'https://obsidian.md/', icon: import('@/assets/tools/obsidian.svg?raw') },
+      { name: 'Safari', description: 'Primary browser', href: 'https://www.apple.com/safari/', icon: safariIcon },
+      { name: 'Chrome', description: 'Compatibility and multi-account flows', href: 'https://www.google.com/chrome/', icon: import('@/assets/tools/chrome.svg?raw') },
+      { name: 'Obsidian', description: 'Knowledge base and long-term notes', href: 'https://obsidian.md/', icon: import('@/assets/tools/obsidian.svg?raw') },
+      { name: 'Apple Notes', description: 'Quick capture and lightweight notes', href: 'https://www.apple.com/macos/notes/', icon: appleNotesIcon },
       { name: 'Typora', description: 'Single-file Markdown editor', href: 'https://typora.io/', icon: import('@/assets/tools/typora.svg?raw') },
-      { name: 'Notion', description: 'Planning and workspace management', href: 'https://www.notion.so/', icon: import('@/assets/tools/notion.svg?raw') },
-      { name: 'Chrome', description: 'Daily browser', href: 'https://www.google.com/chrome/', icon: import('@/assets/tools/chrome.svg?raw') },
-      { name: 'Edge', description: 'Secondary browser', href: 'https://www.microsoft.com/edge', icon: import('@/assets/tools/edge.svg?raw') },
-      { name: 'Firefox', description: 'Compatibility checks', href: 'https://www.mozilla.org/firefox/', icon: import('@/assets/tools/firefox.svg?raw') }
+      { name: 'Typeless', description: 'Focused writing and organization', href: 'https://www.typeless.com/', icon: typelessIcon },
+      { name: 'PixPin', description: 'Screenshots, pinning, and annotation', href: 'https://pixpin.cn/', icon: pixpinIcon },
+      { name: 'Raycast', description: 'Launcher and system workflows', href: 'https://www.raycast.com/', icon: raycastIcon },
+      { name: 'WeChat Input', description: 'Chinese input method', href: 'https://z.weixin.qq.com/', icon: wechatInputIcon }
     ]}
   />
   <ToolSection
     class='mb-5'
     title='Development'
     tools={[
-      { name: 'VS Code', description: 'General coding', href: 'https://code.visualstudio.com/', icon: import('@/assets/tools/vscode.svg?raw') },
-      { name: 'Cursor', description: 'AI-assisted IDE', href: 'https://www.cursor.com/', icon: import('@/assets/tools/cursor.svg?raw') },
-      { name: 'IntelliJ IDEA', description: 'Java IDE', href: 'https://www.jetbrains.com/idea/', icon: import('@/assets/tools/IDEA.svg?raw') },
-      { name: 'ChatGPT', description: 'Reasoning and drafting support', href: 'https://chat.openai.com/', icon: import('@/assets/tools/chatgpt.svg?raw') },
-      { name: 'Doubao', description: 'Chinese AI assistant', href: 'https://www.doubao.com/', icon: import('@/assets/tools/doubao.svg?raw') }
+      { name: 'Codex', description: 'Coding agent', href: 'https://openai.com/codex/', icon: codexIcon },
+      { name: 'Claude Code', description: 'Terminal coding agent', href: 'https://claude.com/product/claude-code', icon: claudeCodeIcon },
+      { name: 'tmux', description: 'Terminal session management', href: 'https://github.com/tmux/tmux', icon: import('@/assets/tools/tmux.svg?raw') },
+      { name: 'Antigravity', description: 'Agentic coding workspace', href: 'https://antigravity.google/', icon: antigravityIcon }
+    ]}
+  />
+  <ToolSection
+    class='mb-5'
+    title='AI & Automation'
+    tools={[
+      { name: 'Doubao', description: 'Chinese AI assistant', href: 'https://www.doubao.com/', icon: doubaoIcon },
+      { name: 'NotebookLM', description: 'Source-grounded research companion', href: 'https://notebooklm.google.com/', icon: notebookLmIcon },
+      { name: 'Cherry Studio', description: 'Desktop multi-model workspace', href: 'https://cherry-ai.com/', icon: cherryStudioIcon },
+      { name: 'FineTune', description: 'Per-app volume control', href: 'https://github.com/ronitsingh10/FineTune', icon: fineTuneIcon },
+      { name: 'ActivityWatch', description: 'Time tracking and personal analytics', href: 'https://activitywatch.net/', icon: activityWatchIcon }
     ]}
   />
   <ToolSection
@@ -99,28 +126,6 @@ const headings = [
       }
     ]}
   />
-
-  <h2 id='website-services'>Current Site Services</h2>
-  <ul>
-    <li><strong>FXJ Wiki</strong>: main site for blog, archives, tags and search.</li>
-    <li><strong>Docs</strong>: reusable docs and theme-related notes.</li>
-    <li><strong>Notes</strong>: a more knowledge-base-like writing space.</li>
-    <li><strong>Pages</strong>: archived earlier GitHub Pages content.</li>
-    <li><strong>Waline</strong>: comment system and pageview service.</li>
-  </ul>
-
-  <h2 id='future-services'>Planned Services</h2>
-  <Collapse title='Status'>
-    Planned uptime dashboard with incidents and historical availability. The preferred direction is
-    <strong>Upptime</strong>.
-  </Collapse>
-  <Collapse title='Share'>
-    Planned share portal for cloud files. The preferred direction is
-    <strong>onedrive-cf-index-ng</strong>.
-  </Collapse>
-  <Collapse title='Analytics'>
-    Planned Umami panel so analytics and comment admin can be kept separate.
-  </Collapse>
 
   <h2 id='about-blog'>About Blog</h2>
   <Timeline

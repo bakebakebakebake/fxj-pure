@@ -3,7 +3,7 @@ import { Image } from 'astro:assets'
 
 import { PostPreview } from 'astro-pure/components/pages'
 import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
-import { Button, Card, Icon, Label } from 'astro-pure/user'
+import { Button, Card, Collapse, Icon, Label } from 'astro-pure/user'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import ProjectCard from '@/components/home/ProjectCard.astro'
 import Section from '@/components/home/Section.astro'
@@ -63,13 +63,9 @@ const rssUrl = Astro.site ? new URL('/rss.xml', Astro.site).toString() : '/rss.x
 
     <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
       <Section title='About'>
-        <p class='text-muted-foreground'>Developer / ACMer
-        </p>
+        <p class='text-muted-foreground'>Developer / ACMer</p>
         <p class='text-muted-foreground'>
-          一位小菜鸡，正在学习中...<br>
-          西南石油大学就读于计算机科学与技术专业。<br>
-          就业方向在后端开发方向。<br>
-          我的兴趣主要是在算法竞赛/数学/优化/理解本质上。<br>
+          一位计算机小菜鸡，正在学习中...<br /><br />
         </p>
         <Button title='More about me' class='w-fit self-end' href='/about' variant='ahead' />
       </Section>
@@ -141,24 +137,6 @@ const rssUrl = Astro.site ? new URL('/rss.xml', Astro.site).toString() : '/rss.x
       <Section title='Website List'>
         <div class='grid grid-cols-1 gap-3 sm:grid-cols-2'>
           <ProjectCard
-            href='https://docs.fxj.wiki'
-            heading='Docs'
-            subheading='文档站点 - 技术文档与笔记整理'
-            imagePath='/src/assets/projects/alex-tyson-2BAXJ7ha74s-unsplash.jpg'
-          />
-          <ProjectCard
-            href='https://notes.fxj.wiki'
-            heading='Notes'
-            subheading='笔记站点 - 学习笔记与知识积累'
-            imagePath='/src/assets/projects/angelica-teran-Bk9hpaXHK4o-unsplash.jpg'
-          />
-          <ProjectCard
-            href='https://pages.fxj.wiki'
-            heading='Pages'
-            subheading='早期博客 - Github Pages'
-            imagePath='/src/assets/projects/kseniia-zapiatkina-yATU3rg8tNI-unsplash.jpg'
-          />
-          <ProjectCard
             href='https://waline.fxj.wiki/ui/login'
             heading='Waline comment system'
             subheading='Web Analytics'
@@ -176,13 +154,29 @@ const rssUrl = Astro.site ? new URL('/rss.xml', Astro.site).toString() : '/rss.x
             subheading='文件分享站 - OneDrive 文件浏览与下载'
             imagePath='/src/assets/projects/angelica-teran-Bk9hpaXHK4o-unsplash.jpg'
           />
-          <!-- <ProjectCard
-            href='/projects'
-            heading='更多项目'
-            subheading='查看更多项目和作品'
-            imagePath='/src/assets/projects/wen-qiao-g_w8I64FiO0-unsplash.jpg'
-          /> -->
         </div>
+        <Collapse title='Archived Sites'>
+          <div class='mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2'>
+            <ProjectCard
+              href='https://docs.fxj.wiki'
+              heading='Docs'
+              subheading='文档站点 - 技术文档与笔记整理'
+              imagePath='/src/assets/projects/alex-tyson-2BAXJ7ha74s-unsplash.jpg'
+            />
+            <ProjectCard
+              href='https://notes.fxj.wiki'
+              heading='Notes'
+              subheading='笔记站点 - 学习笔记与知识积累'
+              imagePath='/src/assets/projects/angelica-teran-Bk9hpaXHK4o-unsplash.jpg'
+            />
+            <ProjectCard
+              href='https://pages.fxj.wiki'
+              heading='Pages'
+              subheading='早期博客 - Github Pages'
+              imagePath='/src/assets/projects/kseniia-zapiatkina-yATU3rg8tNI-unsplash.jpg'
+            />
+          </div>
+        </Collapse>
       </Section>
 
       <!-- <Section title='Skills Label'>
