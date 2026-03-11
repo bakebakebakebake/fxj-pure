@@ -1,103 +1,106 @@
-# Astro Theme Pure
+# FXJ Wiki
 
 [English](./README.md) | 简体中文
 
-一个由 Astro 构建的，轻便简洁、快速强大的博客 & 文档主题。
+[fxj.wiki](https://fxj.wiki/) 的个人博客源码，基于 Astro 构建，并在 `astro-theme-pure` 基础上进行了较多定制。
 
-[![GitHub deployments](https://img.shields.io/github/deployments/cworld1/astro-theme-pure/production?style=flat&logo=vercel&label=vercel)](https://astro-pure.js.org/)
-[![NPM Version](https://img.shields.io/npm/v/astro-pure?logo=npm&style=flat)](https://www.npmjs.com/package/astro-pure)
-[![GitHub Release](https://img.shields.io/github/v/release/cworld1/astro-theme-pure?include_prereleases&style=flat&label=template)](https://github.com/cworld1/astro-theme-pure/releases)
-[![GitHub License](https://img.shields.io/github/license/cworld1/astro-theme-pure?style=flat)](https://github.com/cworld1/astro-theme-pure/blob/main/LICENSE)
+## 项目简介
 
-![image](./.github/assets/header.webp)
-![image](./.github/assets/body.webp)
+FXJ Wiki 是一个中英双语的个人站点，当前主要承载：
 
-> [!NOTE]
-> 已知问题：1. Head 标签和自定义选项仍在开发中（已经暴露模板直接改）；2. 主题模板 v4.0.5^ CSS 预设被换到 PresetMini。如有任何问题，请及时反馈。
+- 博客文章
+- 面试与系统笔记
+- 算法题解与思考记录
+- 个人工具链与工作流实验
 
-## 简介
+这个仓库已经不是单纯的主题模板，而是当前线上站点的实际源码，包含内容、页面定制、双语博客路由，以及个人服务入口。
 
-查看 [预览 →](https://astro-pure.js.org/)
+## 站点地址
 
-### :fire: 特性
+- 主站：[fxj.wiki](https://fxj.wiki/)
+- 英文站：[fxj.wiki/en](https://fxj.wiki/en)
+- 状态页：[status.fxj.wiki](https://status.fxj.wiki/)
+- OneDrive 分享站：[onedrive.fxj.wiki](https://onedrive.fxj.wiki/)
 
-- [x] :rocket: 快速高性能
-- [x] :star: 简单干净的设计
-- [x] :iphone: 响应式设计
-- [x] :mag: 使用 [pagefind](https://pagefind.app/) 构建的全站搜索
-- [x] :world_map: 站点地图和 RSS 订阅
-- [x] :spider_web: 友好的 SEO
-- [x] :book: 目录（table of contents）
-- [x] :framed_picture: 动态为文章生成可供三方媒体预览的分享图像
-- [x] :framed_picture: Mediumzoom 图像灯箱
+## 当前特性
 
-### :package: 组件
+- 中英双语博客结构
+- 自定义首页与 About 页面
+- KaTeX 数学公式渲染
+- Obsidian 风格 Markdown 与 Callout 支持
+- 基于 Pagefind 的全文搜索
+- RSS、Sitemap、SEO 元数据与分享图
+- Waline 评论与阅读量统计
+- 基于 Vercel 的 Astro 服务端部署
 
-主题包含了许多组件，不仅可以在主题中使用，还可以在其他 Astro 项目中使用。
+## 技术栈
 
-> 其他 Astro 项目使用需要 UnoCSS。更多详情请查阅 [Package README](https://github.com/cworld1/astro-theme-pure/blob/main/packages/pure/README.md#use-with-common-astro-project)。
+- Astro 5
+- TypeScript
+- `astro-pure`
+- UnoCSS
+- Waline
+- Vercel
 
-- 基础组件：`Aside`、`Tabs`、`Timeline`、`Steps`、`Spoiler`...
-- 高级组件：`GithubCard`、`LinkPreview`、`Quote`、`QRCode`...
+## 内容结构
 
-## :white_check_mark: Lighthouse 分数
+主要内容目录如下：
 
-[![lighthouse-score](./.github/assets/lighthouse-score.png)](https://pagespeed.web.dev/analysis/https-cworld-top/o229zrt5o4?form_factor=mobile&hl=en)
+- `src/content/blog`：中文博客
+- `src/content/blog/en`：英文博客
+- `src/content/pic`：共享封面图与文章图片
+- `src/pages`：首页、About、标签页、归档页等自定义页面
 
-## 文档
+博客文章目前主要采用这种组织方式：
 
-[文档](https://astro-pure.js.org/docs) | [展示台](https://github.com/cworld1/astro-theme-pure/issues/10)
+```text
+src/content/blog/<slug>/index.md
+src/content/blog/en/<slug>/index.md
+```
 
-## NPM 包
-
-在 NPM 上查看：[astro-theme-pure](https://www.npmjs.com/package/astro-pure)
+这样可以让 URL 更简洁，也便于把文章资源和正文放在统一结构下管理。
 
 ## 本地开发
 
 环境要求：
 
-- [Nodejs](https://nodejs.org/): 18.0.0+
+- Node.js `22.x`
+- npm 或 bun
 
-克隆存储库：
+安装依赖：
 
-```shell
-git clone https://github.com/cworld1/astro-theme-pure.git
-cd astro-theme-pure
+```bash
+npm install
 ```
 
-有用的命令：
+启动开发环境：
 
-```shell
-# install dependencies
-bun install
-
-# start the dev server
-bun dev
-
-# build the project
-bun run build
-
-# preview (after the build)
-bun preview
-
-# create a new post
-bun new-post
+```bash
+npm run dev
 ```
 
-## 贡献
+常用命令：
 
-为了花更多时间编写代码，减少在空白上纠结的时间，本项目使用代码约定和样式来鼓励一致性。风格一致的代码更容易（且更不容易出错）进行审查、维护和理解。
+```bash
+npm run build
+npm run preview
+npm run check
+npm run clean
+```
+
+## 部署
+
+生产环境部署在 Vercel。
+
+项目使用 Astro 的 Vercel adapter，以 server 模式构建；静态资源、Pagefind 搜索索引和内容集合都会在正常构建流程里一起生成。
 
 ## 鸣谢
 
-- [Astro Cactus](https://github.com/chrismwilliams/astro-theme-cactus)
-- [Astro Resume](https://github.com/srleom/astro-theme-resume)
-- [Starlight](https://github.com/withastro/starlight)
-
-其他第三方参考资料在 [Docs#Contributions](https://astro-pure.js.org/docs/advanced/thanks) 上。感谢所有开源库。
+- [Astro](https://astro.build/)
+- [astro-theme-pure / astro-pure](https://github.com/cworld1/astro-theme-pure)
+- [Waline](https://waline.js.org/)
+- [Pagefind](https://pagefind.app/)
 
 ## 许可证
 
-本项目基于 Apache 2.0 许可证。
-
-[![Star History Chart](https://api.star-history.com/svg?repos=cworld1/astro-theme-pure&type=Date)](https://star-history.com/#cworld1/astro-theme-pure&Date)
+本仓库遵循 [Apache 2.0 License](./LICENSE)。
