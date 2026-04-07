@@ -3,12 +3,12 @@ title: "Codeforces Solutions 2: Prefix Sums, Strings, and Thought Transformation
 description: "Solutions from Dec 2023 to Jul 2024, covering prefix sums, strings, and transformation-oriented Codeforces problems."
 publishDate: 2026-03-06
 tags:
-- algorithm竞赛
-- 题解整理
+- competitive programming
+- solution collection
 - Codeforces
 - prefix and
 - string
-- 思Dtransformation
+- thought transformation
 language: English
 heroImageSrc: ../../../pic/salvatore-andrea-santacroce-AmKua5hKI38-unsplash.jpg
 heroImageColor: " #9fd0cb "

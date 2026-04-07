@@ -178,6 +178,32 @@ mark {
   color: inherit !important;
 }
 
+#content :where(.mermaid-source-hidden) {
+  display: none !important;
+}
+
+#content :where(.mermaid-diagram) {
+  margin-block: 1.5rem;
+  overflow-x: auto;
+  border: 1px solid hsl(var(--border) / 0.85);
+  border-radius: 1rem;
+  background: hsl(var(--content-code-bg));
+  padding: 1rem;
+}
+
+#content :where(.mermaid-diagram svg) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+#content :where(.mermaid-diagram-error) {
+  margin-top: 0.65rem;
+  color: hsl(var(--destructive) / 0.92);
+  font-size: 0.9rem;
+}
+
 #content :where(:not(pre) > code) {
   background: hsl(var(--content-inline-code-bg));
   color: hsl(var(--content-inline-code-fg));
@@ -199,7 +225,9 @@ mark {
   font-style: normal;
 }
 
-#content :where(blockquote):not(.obsidian-callout):not(.aside) :where(.katex, code, pre, strong, em) {
+#content
+  :where(blockquote):not(.obsidian-callout):not(.aside)
+  :where(.katex, code, pre, strong, em) {
   font-style: normal;
 }
 

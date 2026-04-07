@@ -2,6 +2,7 @@ import type { AstroGlobal, ImageMetadata } from 'astro'
 import { getImage } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import rss from '@astrojs/rss'
+import type { RSSFeedItem } from '@astrojs/rss'
 import type { Root } from 'mdast'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
@@ -67,13 +68,15 @@ const GET = async (context: AstroGlobal) => {
     title: config.title,
     description: config.description,
     site: import.meta.env.SITE,
-    items: await Promise.all(
-      allPostsByDate.map(async (post) => ({
+    items: (await Promise.all(
+      allPostsByDate.map(async (post): Promise<RSSFeedItem> => ({
         link: `/docs/${post.id}`,
         content: await renderContent(post, siteUrl),
-        ...post.data
+        title: post.data.title,
+        description: post.data.description,
+        pubDate: post.data.updatedDate ?? post.data.publishDate ?? new Date(0)
       }))
-    )
+    )) satisfies RSSFeedItem[]
   })
 }
 

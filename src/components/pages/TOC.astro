@@ -1,21 +1,22 @@
 ---
 import type { MarkdownHeading } from 'astro'
 
-import { generateToc } from '@/plugins/toc'
 import TOCHeading from '@/components/pages/TOCHeading.astro'
+import { generateToc } from '@/plugins/toc'
 
 interface Props {
   headings: MarkdownHeading[]
   class?: string
   id?: string
+  title?: string
 }
 
-const { headings, class: className, ...props } = Astro.props
+const { headings, class: className, title = 'TABLE OF CONTENTS', ...props } = Astro.props
 const toc = generateToc(headings)
 ---
 
 <toc-heading class={className} {...props}>
-  <h2 class='font-semibold'>TABLE OF CONTENTS</h2>
+  <h2 class='font-semibold'>{title}</h2>
   <ul class='mt-4 text-card-foreground'>
     {toc.map((heading) => <TOCHeading heading={heading} />)}
   </ul>
@@ -106,9 +107,7 @@ const toc = generateToc(headings)
         const userState = node.dataset.userExpanded
 
         const expanded =
-          activePath.has(slug) ||
-          userState === 'true' ||
-          (userState !== 'false' && depth === 2)
+          activePath.has(slug) || userState === 'true' || (userState !== 'false' && depth === 2)
 
         this.setExpanded(node, expanded)
       })
@@ -183,7 +182,9 @@ const toc = generateToc(headings)
         const prevInView =
           index > 0 ? this.headingProgress[this.tocLinks[index - 1]?.slug]?.inView : false
         const nextInView =
-          index < this.tocLinks.length - 1 ? this.headingProgress[this.tocLinks[index + 1]?.slug]?.inView : false
+          index < this.tocLinks.length - 1
+            ? this.headingProgress[this.tocLinks[index + 1]?.slug]?.inView
+            : false
 
         element.classList.toggle('is-active', slug === currentActiveSlug)
         shell.classList.toggle('is-range-active', progress.inView)
@@ -221,9 +222,9 @@ const toc = generateToc(headings)
       this.applyExpandedState()
 
       this.addEventListener('click', (event) => {
-        const button = (event.target as HTMLElement | null)?.closest('.toc-toggle') as
-          | HTMLButtonElement
-          | null
+        const button = (event.target as HTMLElement | null)?.closest(
+          '.toc-toggle'
+        ) as HTMLButtonElement | null
         if (!button) return
 
         event.preventDefault()
@@ -241,7 +242,11 @@ const toc = generateToc(headings)
           const directHeading = this.headings.find((heading) => heading.id === link.slug)
           if (!directHeading) return
 
-          history.pushState(null, directHeading.textContent || '', link.element.getAttribute('href'))
+          history.pushState(
+            null,
+            directHeading.textContent || '',
+            link.element.getAttribute('href')
+          )
           this.applyExpandedState(link.slug)
           directHeading.scrollIntoView({ behavior: 'smooth' })
         })

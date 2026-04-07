@@ -1,0 +1,60 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+import { getBlogCollection } from 'astro-pure/server'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { Button } from 'astro-pure/user'
+import { buildDocsTree } from '@/utils/docs'
+
+const docsTree = buildDocsTree((await getBlogCollection('docs')) as CollectionEntry<'docs'>[])
+
+const meta = {
+  title: 'Docs',
+  description: 'Chinese-first docs hub for FXJ Wiki.'
+}
+---
+
+<PageLayout {meta}>
+  <Button title='Back' href='/en' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-4 text-3xl font-medium'>Docs</h1>
+      <p class='max-w-3xl text-muted-foreground'>
+        This docs area is online in English so the route and language switcher stay stable, but
+        the full content is still published in Chinese for now.
+      </p>
+    </div>
+
+    <div id='content' class='animate mt-8 space-y-6'>
+      <p>
+        If you want the complete material right now, open the Chinese version directly from the
+        links below.
+      </p>
+
+      <div class='grid grid-cols-1 gap-4 lg:grid-cols-2'>
+        {
+          docsTree.map((source) => (
+            <section class='rounded-[1.75rem] border border-border/80 bg-card/30 p-6'>
+              <h2 class='m-0 text-xl font-medium sm:text-[1.75rem]'>{source.title.en}</h2>
+              <p class='mt-3 max-w-[32rem] text-sm leading-7 text-muted-foreground sm:text-base'>
+                {source.description.en}
+              </p>
+              <div class='mt-6'>
+                <a
+                  class='inline-flex items-center justify-center whitespace-nowrap rounded-full border border-border/80 bg-background/40 px-5 py-2.5 text-sm font-medium text-foreground no-underline transition-colors hover:bg-muted'
+                  href={`/docs/${source.startDocId}`}
+                >
+                  Read Chinese version
+                </a>
+              </div>
+            </section>
+          ))
+        }
+      </div>
+
+      <p>
+        You can also open the <a href='/docs'>Chinese docs home</a> to browse the full directory.
+      </p>
+    </div>
+  </main>
+</PageLayout>

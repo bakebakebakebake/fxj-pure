@@ -1,0 +1,78 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+import PageLayout from '@/layouts/ContentLayout.astro'
+import { getBlogCollection } from 'astro-pure/server'
+
+import DocsContents from '@/components/docs/DocsContents.astro'
+import { docsSourceMeta } from '@/utils/docs'
+
+export const prerender = true
+
+export async function getStaticPaths() {
+  const posts = (await getBlogCollection('docs')) as CollectionEntry<'docs'>[]
+
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post }
+  }))
+}
+
+type Props = {
+  post: CollectionEntry<'docs'>
+}
+
+const { post } = Astro.props
+const chineseHref = `/docs/${post.id}`
+const { description, title } = post.data
+const currentSource = docsSourceMeta.find((source) => source.key === post.data.source)
+const seriesTitle = currentSource?.title.en ?? 'Current Series'
+---
+
+<PageLayout meta={{ description, title }} back='/en/docs'>
+  <Fragment slot='sidebar'>
+    <DocsContents class='docs-toc block mt-3' />
+  </Fragment>
+
+  <Fragment slot='header'>
+    <h1 class='text-2xl font-medium sm:mb-2 sm:text-3xl'>{title}</h1>
+    <div class='mt-4 text-sm text-muted-foreground'>
+      This route is reserved for the future English version. The full content is available in
+      Chinese now.
+    </div>
+  </Fragment>
+
+  <div class='space-y-4'>
+    <p>
+      I keep this English route online so the language switcher and docs structure remain stable
+      before the full translation pass starts.
+    </p>
+    <p>
+      If you want the real content right away, open the Chinese original from the button below.
+    </p>
+    <div class='flex flex-wrap gap-3'>
+      <a
+        class='inline-flex items-center justify-center whitespace-nowrap rounded-full border border-border/80 px-4 py-2 text-sm text-foreground no-underline transition-colors hover:bg-muted'
+        href={chineseHref}
+      >
+        Read Chinese original
+      </a>
+      <a
+        class='inline-flex items-center justify-center whitespace-nowrap rounded-full border border-border/80 px-4 py-2 text-sm text-foreground no-underline transition-colors hover:bg-muted'
+        href='/en/docs'
+      >
+        Back to docs home
+      </a>
+    </div>
+  </div>
+
+  <div slot='bottom'>
+    <div class='mt-3 rounded-xl border px-4 py-4 sm:px-5 sm:py-5 md:mt-6'>
+      <div class='mb-3'>
+        <h2 class='text-sm font-medium text-foreground'>Series Outline</h2>
+        <p class='mt-1 text-xs text-muted-foreground'>{seriesTitle}</p>
+      </div>
+      <DocsContents title={false} sourceKey={post.data.source} showSourceHeading={false} />
+    </div>
+  </div>
+</PageLayout>

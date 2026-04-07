@@ -7,8 +7,8 @@ tags:
   - Solution Collection
   - AtCoder
   - DP
-  - 图论
-  - 数据结构
+  - Graph Theory
+  - Data Structures
 language: English
 heroImageSrc: ../../../pic/nikita-fursenko-5_a-QqK6680-unsplash.jpg
 heroImageColor: " #98adca "

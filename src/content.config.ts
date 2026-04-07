@@ -115,7 +115,22 @@ const blogEn = defineCollection({
 
 // Define docs collection
 const docs = defineCollection({
-  loader: glob({ base: './src/content/docs', pattern: '**/*.{md,mdx}' }),
+  loader: glob({
+    base: './src/content/docs',
+    pattern: [
+      '**/*.{md,mdx}',
+      '!agent-memory-teaching/12-interview-guide.md',
+      '!mit-6.824/00-总览/**/*.md',
+      '!mit-6.824/01-基础/07-基础概念速查：Go、RPC、并发、分布式.md',
+      '!mit-6.824/02-实验/00-调试手册：Lab 1-3 统一排障流程.md',
+      '!mit-6.824/02-实验/01-Lab 1 MapReduce：从零到通过所有测试.md',
+      '!mit-6.824/02-实验/02-Lab 2 Raft：从零到通过所有测试.md',
+      '!mit-6.824/02-实验/03-Lab 3 KVRaft：从零到通过所有测试.md',
+      '!mit-6.824/03-论文/00-论文精华：MapReduce + Raft 核心要点.md',
+      '!mit-6.824/03-论文/03-论文规则到实验代码速查表.md',
+      '!mit-6.824/04-面试/**/*.md'
+    ]
+  }),
   schema: () =>
     z.object({
       title: z.string().max(60),
@@ -124,6 +139,13 @@ const docs = defineCollection({
       updatedDate: z.coerce.date().optional(),
       tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
       draft: z.boolean().default(false),
+      source: z.string().optional(),
+      sourceTitle: z.string().optional(),
+      section: z.string().optional(),
+      sectionTitle: z.string().optional(),
+      subsection: z.string().optional(),
+      subsectionTitle: z.string().optional(),
+      language: z.string().optional(),
       // Special fields
       order: z.number().default(999)
     })

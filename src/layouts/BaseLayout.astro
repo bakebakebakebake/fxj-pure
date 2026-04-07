@@ -117,7 +117,13 @@ function withChinesePath(pathname: string) {
           });
         }
 
-        if (pathname.startsWith('/docs')) return;
+        if (
+          pathname.startsWith('/docs') ||
+          pathname === '/en/docs' ||
+          pathname.startsWith('/en/docs/')
+        ) {
+          return;
+        }
 
         const currentLocale = pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'zh';
 

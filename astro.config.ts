@@ -76,7 +76,12 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkMath, remarkObsidian],
     rehypePlugins: [
-      [rehypeKatex, {}],
+      [
+        rehypeKatex,
+        {
+          strict: (errorCode: string) => (errorCode === 'newLineInDisplayMode' ? 'ignore' : 'warn')
+        }
+      ],
       rehypeHeadingIds,
       rehypeObsidianBlocks,
       [

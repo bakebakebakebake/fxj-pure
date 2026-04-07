@@ -3,98 +3,322 @@ import { type CollectionEntry } from 'astro:content'
 
 import { getBlogCollection } from 'astro-pure/server'
 import { cn } from 'astro-pure/utils'
+import {
+  buildDocsTree,
+  type DocsEntry,
+  type DocsTreeSection,
+  type DocsTreeSource,
+  type DocsTreeSubsection
+} from '@/utils/docs'
+import { getLocaleFromPathname, withLocalePath } from '@/utils/i18n'
 
-const docsCollection = (await getBlogCollection('docs')) as CollectionEntry<'docs'>[]
-// Group docs by id first part (setup, integrations, advanced, etc.)
-const docsByCate = docsCollection.reduce((acc: { [key: string]: typeof docsCollection }, doc) => {
-  const id = doc.id.split('/')[0]
-  if (!acc[id]) acc[id] = [] as typeof docsCollection
-  acc[id].push(doc)
-  return acc
-}, {})
-
-const docCategories = {
-  setup: 'Setup',
-  integrations: 'Integrations',
-  advanced: 'Advanced'
-}
+const allDocsCollection = (await getBlogCollection('docs')) as CollectionEntry<'docs'>[]
+const docsCollection = allDocsCollection
+const locale = getLocaleFromPathname(Astro.url.pathname)
 
 type Props = {
   title?: boolean
   class?: string
+  sourceKey?: string
+  showSourceHeading?: boolean
 }
 
-const { title = true, class: className, ...props } = Astro.props
+const {
+  title = true,
+  class: className,
+  sourceKey,
+  showSourceHeading = true,
+  ...props
+} = Astro.props
+
+const docsTree = buildDocsTree(docsCollection).filter((source: DocsTreeSource) =>
+  sourceKey ? source.key === sourceKey : true
+)
+const headingText = locale === 'en' ? 'Docs' : '文档目录'
+const currentPath = normalizePath(Astro.url.pathname)
+const toggleLabelPrefix = locale === 'en' ? 'Toggle section:' : '切换分组：'
+
+function normalizePath(pathname: string) {
+  const normalized = pathname.replace(/\/+$/u, '')
+  return normalized || '/'
+}
+
+function getDocHref(doc: DocsEntry) {
+  return withLocalePath(locale, `/docs/${doc.id}`)
+}
+
+function isCurrentDoc(doc: DocsEntry) {
+  return normalizePath(getDocHref(doc)) === currentPath
+}
+
+function subsectionHasCurrent(subsection: DocsTreeSubsection) {
+  return subsection.entries.some(isCurrentDoc)
+}
+
+function sectionHasCurrent(section: DocsTreeSection) {
+  return section.entries.some(isCurrentDoc) || section.subsections.some(subsectionHasCurrent)
+}
 ---
 
-<docs-toc class={cn('not-prose', className)} {...props}>
-  {title && <h2 class='text-foreground font-semibold'>DOCS</h2>}
-  <ul class='mt-4 flex flex-col gap-y-5'>
+<div class={cn('not-prose', className)} {...props}>
+  {title && <h2 class='text-foreground font-semibold'>{headingText}</h2>}
+  <ul class:list={['flex flex-col gap-y-5', title && 'mt-4']}>
     {
-      Object.entries(docCategories).map(([id, title]: [string, string]) => (
+      docsTree.map((source: DocsTreeSource) => (
         <li>
-          <h3 class='text-muted-foreground text-xs tracking-widest uppercase'>{title}</h3>
-          <ul class='mt-2 flex flex-col'>
-            {docsByCate[id]
-              .sort((a, b) => a.data.order - b.data.order)
-              .map((doc) => (
-                <li class='docs-item flex relative ms-2 px-3 py-1 text-foreground/75 transition-all rounded-2xl'>
-                  <a class='flex-1 hover:text-foreground' href={`/docs/${doc.id}`}>
-                    {doc.data.title}
-                  </a>
+          {showSourceHeading ? (
+            <details class='docs-group docs-group-source' open>
+              <summary
+                class='docs-summary docs-summary-source text-muted-foreground text-xs tracking-widest uppercase'
+                aria-label={`${toggleLabelPrefix} ${source.title[locale]}`}
+              >
+                <span class='docs-chevron' aria-hidden='true'>
+                  ▸
+                </span>
+                <span>{source.title[locale]}</span>
+              </summary>
+
+              <ul class='mt-2 flex flex-col'>
+                {source.sections.map((section: DocsTreeSection) => (
+                  <li class='mt-2 first:mt-0'>
+                    <details
+                      class='docs-group docs-group-section'
+                      open={sectionHasCurrent(section)}
+                    >
+                      <summary
+                        class='docs-summary docs-summary-section px-2 text-sm font-medium text-foreground/80'
+                        aria-label={`${toggleLabelPrefix} ${section.title[locale]}`}
+                      >
+                        <span class='docs-chevron' aria-hidden='true'>
+                          ▸
+                        </span>
+                        <span>{section.title[locale]}</span>
+                      </summary>
+
+                      {!!section.entries.length && (
+                        <ul class='mt-1 flex flex-col'>
+                          {section.entries.map((doc: DocsEntry) => (
+                            <li
+                              class:list={[
+                                'docs-item relative ms-2 flex rounded-2xl px-3 py-1 text-foreground/75 transition-all',
+                                isCurrentDoc(doc) && 'docs-current'
+                              ]}
+                            >
+                              <a
+                                class='flex-1 hover:text-foreground'
+                                href={getDocHref(doc)}
+                                aria-current={isCurrentDoc(doc) ? 'page' : undefined}
+                              >
+                                {doc.data.title}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {!!section.subsections.length && (
+                        <div class='mt-2 flex flex-col gap-y-2'>
+                          {section.subsections.map((subsection: DocsTreeSubsection) => (
+                            <details
+                              class='docs-group docs-group-subsection'
+                              open={subsectionHasCurrent(subsection)}
+                            >
+                              <summary
+                                class='docs-summary docs-summary-subsection px-2 text-xs tracking-wide text-muted-foreground uppercase'
+                                aria-label={`${toggleLabelPrefix} ${subsection.title[locale]}`}
+                              >
+                                <span class='docs-chevron' aria-hidden='true'>
+                                  ▸
+                                </span>
+                                <span>{subsection.title[locale]}</span>
+                              </summary>
+
+                              <ul class='mt-1 flex flex-col'>
+                                {subsection.entries.map((doc: DocsEntry) => (
+                                  <li
+                                    class:list={[
+                                      'docs-item relative ms-2 flex rounded-2xl px-3 py-1 text-foreground/75 transition-all',
+                                      isCurrentDoc(doc) && 'docs-current'
+                                    ]}
+                                  >
+                                    <a
+                                      class='flex-1 hover:text-foreground'
+                                      href={getDocHref(doc)}
+                                      aria-current={isCurrentDoc(doc) ? 'page' : undefined}
+                                    >
+                                      {doc.data.title}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </details>
+                          ))}
+                        </div>
+                      )}
+                    </details>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ) : (
+            <ul class='flex flex-col'>
+              {source.sections.map((section: DocsTreeSection) => (
+                <li class='mt-2 first:mt-0'>
+                  <details class='docs-group docs-group-section' open={sectionHasCurrent(section)}>
+                    <summary
+                      class='docs-summary docs-summary-section px-2 text-sm font-medium text-foreground/80'
+                      aria-label={`${toggleLabelPrefix} ${section.title[locale]}`}
+                    >
+                      <span class='docs-chevron' aria-hidden='true'>
+                        ▸
+                      </span>
+                      <span>{section.title[locale]}</span>
+                    </summary>
+
+                    {!!section.entries.length && (
+                      <ul class='mt-1 flex flex-col'>
+                        {section.entries.map((doc: DocsEntry) => (
+                          <li
+                            class:list={[
+                              'docs-item relative ms-2 flex rounded-2xl px-3 py-1 text-foreground/75 transition-all',
+                              isCurrentDoc(doc) && 'docs-current'
+                            ]}
+                          >
+                            <a
+                              class='flex-1 hover:text-foreground'
+                              href={getDocHref(doc)}
+                              aria-current={isCurrentDoc(doc) ? 'page' : undefined}
+                            >
+                              {doc.data.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {!!section.subsections.length && (
+                      <div class='mt-2 flex flex-col gap-y-2'>
+                        {section.subsections.map((subsection: DocsTreeSubsection) => (
+                          <details
+                            class='docs-group docs-group-subsection'
+                            open={subsectionHasCurrent(subsection)}
+                          >
+                            <summary
+                              class='docs-summary docs-summary-subsection px-2 text-xs tracking-wide text-muted-foreground uppercase'
+                              aria-label={`${toggleLabelPrefix} ${subsection.title[locale]}`}
+                            >
+                              <span class='docs-chevron' aria-hidden='true'>
+                                ▸
+                              </span>
+                              <span>{subsection.title[locale]}</span>
+                            </summary>
+
+                            <ul class='mt-1 flex flex-col'>
+                              {subsection.entries.map((doc: DocsEntry) => (
+                                <li
+                                  class:list={[
+                                    'docs-item relative ms-2 flex rounded-2xl px-3 py-1 text-foreground/75 transition-all',
+                                    isCurrentDoc(doc) && 'docs-current'
+                                  ]}
+                                >
+                                  <a
+                                    class='flex-1 hover:text-foreground'
+                                    href={getDocHref(doc)}
+                                    aria-current={isCurrentDoc(doc) ? 'page' : undefined}
+                                  >
+                                    {doc.data.title}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </details>
+                        ))}
+                      </div>
+                    )}
+                  </details>
                 </li>
               ))}
-          </ul>
+            </ul>
+          )}
         </li>
       ))
     }
   </ul>
-</docs-toc>
+</div>
 
 <style>
-  docs-toc .docs-item::before {
+  .docs-group {
+    min-width: 0;
+  }
+
+  .docs-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    cursor: pointer;
+    list-style: none;
+    border-radius: 0.85rem;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .docs-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .docs-summary:hover {
+    background: hsl(var(--muted) / 0.75);
+  }
+
+  .docs-chevron {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    color: hsl(var(--muted-foreground) / 1);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] > .docs-summary .docs-chevron {
+    transform: rotate(90deg);
+  }
+
+  .docs-summary-source {
+    padding: 0.2rem 0.3rem;
+  }
+
+  .docs-summary-section,
+  .docs-summary-subsection {
+    padding-block: 0.25rem;
+  }
+
+  .docs-item::before {
     content: '';
     display: block;
     position: absolute;
-    top: 5%;
-    bottom: 5%;
+    top: 12%;
+    bottom: 12%;
     left: -0.5rem;
     width: 2px;
     background-color: hsl(var(--input) / var(--un-bg-opacity));
   }
 
-  docs-toc :global(.docs-item.docs-hl) {
+  .docs-item:hover {
+    background-color: hsl(var(--muted) / 0.72);
+  }
+
+  .docs-current {
     background-color: hsl(var(--muted) / var(--un-bg-opacity));
     font-weight: 500;
-    & a {
-      color: hsl(var(--primary) / var(--un-text-opacity));
-    }
+  }
 
-    &::before {
-      background-color: hsl(var(--primary) / var(--un-bg-opacity));
-    }
+  .docs-current a {
+    color: hsl(var(--primary) / var(--un-text-opacity));
+  }
+
+  .docs-current::before {
+    background-color: hsl(var(--primary) / var(--un-bg-opacity));
   }
 </style>
-
-<script>
-  class DocsTOC extends HTMLElement {
-    link: string = ''
-
-    constructor() {
-      super()
-
-      this.link = window.location.pathname
-    }
-
-    connectedCallback() {
-      const links = this.querySelectorAll('a')
-      links.forEach((link) => {
-        if (link.getAttribute('href') === this.link) {
-          link.parentElement?.classList.add('docs-hl')
-        }
-      })
-    }
-  }
-
-  customElements.define('docs-toc', DocsTOC)
-</script>

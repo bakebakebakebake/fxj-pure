@@ -11,6 +11,7 @@ import typelessIcon from '@/assets/tools/app-icons/typeless.png'
 import antigravityIcon from '@/assets/tools/app-icons/antigravity.png'
 import wechatInputIcon from '@/assets/tools/app-icons/wechat-input.png'
 import doubaoIcon from '@/assets/tools/app-icons/doubao.png'
+import doubaoInputIcon from '@/assets/tools/app-icons/doubao-input.png'
 import notebookLmIcon from '@/assets/tools/app-icons/notebooklm-candidate.png'
 import cherryStudioIcon from '@/assets/tools/app-icons/cherry-studio.png'
 import raycastIcon from '@/assets/tools/app-icons/raycast.png'
@@ -57,7 +58,8 @@ const headings = [
       { name: 'Typeless', description: 'Focused writing and organization', href: 'https://www.typeless.com/', icon: typelessIcon },
       { name: 'PixPin', description: 'Screenshots, pinning, and annotation', href: 'https://pixpin.cn/', icon: pixpinIcon },
       { name: 'Raycast', description: 'Launcher and system workflows', href: 'https://www.raycast.com/', icon: raycastIcon },
-      { name: 'WeChat Input', description: 'Chinese input method', href: 'https://z.weixin.qq.com/', icon: wechatInputIcon }
+      { name: 'WeChat Input', description: 'Chinese input method', href: 'https://z.weixin.qq.com/', icon: wechatInputIcon },
+      { name: 'Doubao Input', description: 'Voice input', href: 'https://www.doubao.com/', icon: doubaoInputIcon }
     ]}
   />
   <ToolSection
@@ -77,7 +79,6 @@ const headings = [
       { name: 'Doubao', description: 'Chinese AI assistant', href: 'https://www.doubao.com/', icon: doubaoIcon },
       { name: 'NotebookLM', description: 'Source-grounded research companion', href: 'https://notebooklm.google.com/', icon: notebookLmIcon },
       { name: 'Cherry Studio', description: 'Desktop multi-model workspace', href: 'https://cherry-ai.com/', icon: cherryStudioIcon },
-      { name: 'FineTune', description: 'Per-app volume control', href: 'https://github.com/ronitsingh10/FineTune', icon: fineTuneIcon },
       { name: 'ActivityWatch', description: 'Time tracking and personal analytics', href: 'https://activitywatch.net/', icon: activityWatchIcon }
     ]}
   />
@@ -85,9 +86,16 @@ const headings = [
     class='mb-5'
     title='Environment'
     tools={[
-      { name: 'macOS', description: 'Primary laptop environment', href: 'https://www.apple.com/macos/', icon: import('@/assets/tools/apple.svg?raw') },
-      { name: 'Ubuntu (WSL)', description: 'CLI-heavy development environment', href: 'https://ubuntu.com/', icon: import('@/assets/tools/ubuntu.svg?raw') },
-      { name: 'Windows 11', description: 'Secondary workstation', href: 'https://www.microsoft.com/windows/windows-11', icon: import('@/assets/tools/windows11.svg?raw') }
+      { name: 'macOS', description: 'MacBook Air', href: 'https://www.apple.com/macos/', icon: import('@/assets/tools/apple.svg?raw') },
+      { name: 'Windows 11', description: 'Lenovo Legion', href: 'https://www.microsoft.com/windows/windows-11', icon: import('@/assets/tools/windows11.svg?raw') },
+      { name: 'Ubuntu (WSL)', description: 'Linux distribution', href: 'https://ubuntu.com/', icon: import('@/assets/tools/ubuntu.svg?raw') }
+    ]}
+  />
+  <ToolSection
+    class='mb-5'
+    title='Other'
+    tools={[
+      { name: 'FineTune', description: 'Per-app volume control', href: 'https://github.com/ronitsingh10/FineTune', icon: fineTuneIcon }
     ]}
   />
 

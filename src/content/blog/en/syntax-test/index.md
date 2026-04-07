@@ -3,10 +3,10 @@ title: "Astro Pure Syntax Test"
 description: "A basic syntax test for Markdown, Obsidian, and AnyBlock."
 publishDate: "2025-10-06"
 tags:
-  - 测试
+  - Test
   - Markdown
   - Obsidian
-  - 语法
+  - Syntax
 language: English
 draft: true
 comment: true

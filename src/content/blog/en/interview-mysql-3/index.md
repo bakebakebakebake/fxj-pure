@@ -3,10 +3,10 @@ title: "MySQL Logs and Locking Mechanisms"
 description: "Earlier MySQL notes originally written in Apple Notes."
 publishDate: "2025-06-05"
 tags:
-  - 八股
+  - Interview Prep
   - MySQL
   - log
-  - 锁
+  - lock
 language: English
 draft: false
 comment: true

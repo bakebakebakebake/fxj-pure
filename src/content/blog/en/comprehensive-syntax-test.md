@@ -3,12 +3,12 @@ title: Comprehensive Syntax Test
 description: "A comprehensive compatibility test for Markdown, Obsidian, AnyBlock, and code highlighting."
 publishDate: "2025-10-06"
 tags:
-  - 测试
+  - Test
   - Markdown
   - Obsidian
   - AnyBlock
-  - 语法
-  - 代码高亮
+  - Syntax
+  - Code Highlighting
 language: English
 draft: true
 comment: true

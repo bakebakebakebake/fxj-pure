@@ -1,25 +1,25 @@
 <script is:inline>
   class ObsidianTabs extends HTMLElement {
     connectedCallback() {
-      const tabs = [...this.querySelectorAll('button[role="tab"]')];
-      const panels = [...this.querySelectorAll(':scope > [role="tabpanel"]')];
-      if (!tabs.length || !panels.length) return;
+      const tabs = [...this.querySelectorAll('button[role="tab"]')]
+      const panels = [...this.querySelectorAll(':scope > [role="tabpanel"]')]
+      if (!tabs.length || !panels.length) return
 
       const activate = (nextIndex) => {
         tabs.forEach((tab, index) => {
-          tab.setAttribute('aria-selected', index === nextIndex ? 'true' : 'false');
-          tab.classList.toggle('is-active', index === nextIndex);
-        });
+          tab.setAttribute('aria-selected', index === nextIndex ? 'true' : 'false')
+          tab.classList.toggle('is-active', index === nextIndex)
+        })
         panels.forEach((panel, index) => {
-          if (index === nextIndex) panel.removeAttribute('hidden');
-          else panel.setAttribute('hidden', 'true');
-        });
-      };
+          if (index === nextIndex) panel.removeAttribute('hidden')
+          else panel.setAttribute('hidden', 'true')
+        })
+      }
 
       tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => activate(index));
+        tab.addEventListener('click', () => activate(index))
         tab.addEventListener('keydown', (event) => {
-          if (!(event instanceof KeyboardEvent)) return;
+          if (!(event instanceof KeyboardEvent)) return
           const nextIndex =
             event.key === 'ArrowLeft'
               ? Math.max(index - 1, 0)
@@ -29,19 +29,19 @@
                   ? 0
                   : event.key === 'End'
                     ? tabs.length - 1
-                    : index;
+                    : index
           if (nextIndex !== index) {
-            event.preventDefault();
-            activate(nextIndex);
-            tabs[nextIndex]?.focus();
+            event.preventDefault()
+            activate(nextIndex)
+            tabs[nextIndex]?.focus()
           }
-        });
-      });
+        })
+      })
     }
   }
 
   if (!customElements.get('obsidian-tabs')) {
-    customElements.define('obsidian-tabs', ObsidianTabs);
+    customElements.define('obsidian-tabs', ObsidianTabs)
   }
 
   const calloutTypeMap = {
@@ -62,7 +62,7 @@
     danger: 'danger',
     error: 'danger',
     fail: 'danger'
-  };
+  }
 
   const selectorMap = {
     tabs: 'tabs',
@@ -74,62 +74,62 @@
     card: 'card',
     list2card: 'card',
     卡片: 'card'
-  };
+  }
 
-  const getContainer = () => document.querySelector('#content') ?? document.body;
+  const getContainer = () => document.querySelector('#content') ?? document.body
 
   const nextMeaningfulSibling = (node) => {
-    let current = node.nextSibling;
+    let current = node.nextSibling
     while (current) {
       if (current.nodeType === Node.TEXT_NODE && !current.textContent?.trim()) {
-        current = current.nextSibling;
-        continue;
+        current = current.nextSibling
+        continue
       }
-      return current;
+      return current
     }
-    return null;
-  };
+    return null
+  }
 
   const createElement = (tag, className, text) => {
-    const element = document.createElement(tag);
-    if (className) element.className = className;
-    if (text) element.textContent = text;
-    return element;
-  };
+    const element = document.createElement(tag)
+    if (className) element.className = className
+    if (text) element.textContent = text
+    return element
+  }
 
   const readSelector = (text) => {
-    const match = text.trim().match(/^\[([^\]]+)\]$/u);
-    if (!match) return null;
-    const [rawName] = match[1].split('|');
-    const token = rawName?.trim();
-    if (!token) return null;
-    return selectorMap[token.toLowerCase()] ?? selectorMap[token] ?? null;
-  };
+    const match = text.trim().match(/^\[([^\]]+)\]$/u)
+    if (!match) return null
+    const [rawName] = match[1].split('|')
+    const token = rawName?.trim()
+    if (!token) return null
+    return selectorMap[token.toLowerCase()] ?? selectorMap[token] ?? null
+  }
 
   const parseCalloutMarker = (paragraph) => {
-    const firstNode = paragraph.firstChild;
-    if (!firstNode || firstNode.nodeType !== Node.TEXT_NODE) return null;
+    const firstNode = paragraph.firstChild
+    if (!firstNode || firstNode.nodeType !== Node.TEXT_NODE) return null
 
-    const normalized = (firstNode.textContent || '').replace(/\r/g, '');
-    const match = normalized.match(/^\[!([a-zA-Z-]+)\]([+-])?\s*/u);
-    if (!match) return null;
+    const normalized = (firstNode.textContent || '').replace(/\r/g, '')
+    const match = normalized.match(/^\[!([a-zA-Z-]+)\]([+-])?\s*/u)
+    if (!match) return null
 
-    const rawType = match[1].toLowerCase();
-    const foldMarker = match[2] ?? '';
-    const remainder = normalized.slice(match[0].length);
-    const [titleLead, ...introLines] = remainder.split('\n');
-    const titleNodes = [];
+    const rawType = match[1].toLowerCase()
+    const foldMarker = match[2] ?? ''
+    const remainder = normalized.slice(match[0].length)
+    const [titleLead, ...introLines] = remainder.split('\n')
+    const titleNodes = []
 
     if (titleLead.trim()) {
-      titleNodes.push(document.createTextNode(titleLead.trim()));
+      titleNodes.push(document.createTextNode(titleLead.trim()))
     }
 
-    [...paragraph.childNodes].slice(1).forEach((child) => {
-      titleNodes.push(child.cloneNode(true));
-    });
+    ;[...paragraph.childNodes].slice(1).forEach((child) => {
+      titleNodes.push(child.cloneNode(true))
+    })
 
     if (!titleNodes.length) {
-      titleNodes.push(document.createTextNode(rawType));
+      titleNodes.push(document.createTextNode(rawType))
     }
 
     return {
@@ -137,215 +137,225 @@
       foldMarker,
       titleNodes,
       introText: introLines.join('\n').trim()
-    };
-  };
+    }
+  }
 
   const splitParagraphText = (paragraph) => {
-    const rawText = paragraph.textContent?.replace(/\r/g, '') ?? '';
-    const [firstLine, ...restLines] = rawText.split('\n');
+    const rawText = paragraph.textContent?.replace(/\r/g, '') ?? ''
+    const [firstLine, ...restLines] = rawText.split('\n')
     return {
       firstLine: firstLine.trim(),
       restText: restLines.join('\n').trim()
-    };
-  };
+    }
+  }
 
   const renderCallouts = () => {
     getContainer()
       .querySelectorAll('blockquote')
       .forEach((blockquote) => {
-        if (blockquote.dataset.obsidianEnhanced === 'true') return;
+        if (blockquote.dataset.obsidianEnhanced === 'true') return
 
-        const firstParagraph = [...blockquote.children].find((child) => child.tagName?.toLowerCase() === 'p');
-        if (!firstParagraph) return;
+        const firstParagraph = [...blockquote.children].find(
+          (child) => child.tagName?.toLowerCase() === 'p'
+        )
+        if (!firstParagraph) return
 
-        const parsedMarker = parseCalloutMarker(firstParagraph);
-        if (!parsedMarker) return;
+        const parsedMarker = parseCalloutMarker(firstParagraph)
+        if (!parsedMarker) return
 
-        const { rawType, foldMarker, titleNodes, introText } = parsedMarker;
-        const type = calloutTypeMap[rawType] ?? 'note';
-        const bodyChildren = [];
+        const { rawType, foldMarker, titleNodes, introText } = parsedMarker
+        const type = calloutTypeMap[rawType] ?? 'note'
+        const bodyChildren = []
 
         if (introText) {
-          bodyChildren.push(createElement('p', '', introText));
+          bodyChildren.push(createElement('p', '', introText))
         }
 
-        [...blockquote.children].forEach((child, index) => {
-          if (index === 0) return;
-          bodyChildren.push(child.cloneNode(true));
-        });
+        ;[...blockquote.children].forEach((child, index) => {
+          if (index === 0) return
+          bodyChildren.push(child.cloneNode(true))
+        })
 
-        let replacement;
+        let replacement
         if (foldMarker === '+' || foldMarker === '-') {
           replacement = createElement(
             'details',
             `obsidian-collapse my-4 overflow-hidden rounded-xl border px-3 py-2 sm:px-4 aside-${type}`
-          );
-          if (foldMarker === '+') replacement.open = true;
+          )
+          if (foldMarker === '+') replacement.open = true
           const summary = createElement(
             'summary',
             'obsidian-collapse-summary not-prose cursor-pointer font-medium'
-          );
-          titleNodes.forEach((node) => summary.appendChild(node));
-          const body = createElement('div', 'obsidian-collapse-body mt-3');
-          bodyChildren.forEach((child) => body.appendChild(child));
-          replacement.append(summary, body);
+          )
+          titleNodes.forEach((node) => summary.appendChild(node))
+          const body = createElement('div', 'obsidian-collapse-body mt-3')
+          bodyChildren.forEach((child) => body.appendChild(child))
+          replacement.append(summary, body)
         } else {
           replacement = createElement(
             'aside',
             'obsidian-callout aside my-3 overflow-hidden rounded-xl border'
-          );
+          )
           const container = createElement(
             'div',
             `aside-container border-l-8 border-primary px-4 py-3 bg-primary aside-${type}`
-          );
+          )
           const heading = createElement(
             'p',
             'callout-title not-prose flex items-center gap-x-2 font-medium text-primary'
-          );
-          titleNodes.forEach((node) => heading.appendChild(node));
-          const body = createElement('div', 'aside-content mt-2');
-          bodyChildren.forEach((child) => body.appendChild(child));
-          container.append(heading, body);
-          replacement.appendChild(container);
+          )
+          titleNodes.forEach((node) => heading.appendChild(node))
+          const body = createElement('div', 'aside-content mt-2')
+          bodyChildren.forEach((child) => body.appendChild(child))
+          container.append(heading, body)
+          replacement.appendChild(container)
         }
 
-        replacement.dataset.obsidianEnhanced = 'true';
-        blockquote.replaceWith(replacement);
-      });
-  };
+        replacement.dataset.obsidianEnhanced = 'true'
+        blockquote.replaceWith(replacement)
+      })
+  }
 
   const extractItemLead = (item) => {
     const children = [...item.children].filter(
       (child) => !(child.nodeType === Node.TEXT_NODE && !child.textContent?.trim())
-    );
-    const firstParagraph = children.find((child) => child.tagName?.toLowerCase() === 'p');
-    const bodyChildren = [];
+    )
+    const firstParagraph = children.find((child) => child.tagName?.toLowerCase() === 'p')
+    const bodyChildren = []
 
     if (firstParagraph) {
-      const { firstLine, restText } = splitParagraphText(firstParagraph);
-      if (restText) bodyChildren.push(createElement('p', '', restText));
+      const { firstLine, restText } = splitParagraphText(firstParagraph)
+      if (restText) bodyChildren.push(createElement('p', '', restText))
       children.forEach((child) => {
-        if (child === firstParagraph) return;
-        bodyChildren.push(child.cloneNode(true));
-      });
+        if (child === firstParagraph) return
+        bodyChildren.push(child.cloneNode(true))
+      })
       return {
         label: firstLine || 'Item',
-        bodyChildren: bodyChildren.length ? bodyChildren : [createElement('p', '', firstLine || 'Item')]
-      };
+        bodyChildren: bodyChildren.length
+          ? bodyChildren
+          : [createElement('p', '', firstLine || 'Item')]
+      }
     }
 
     return {
       label: item.textContent?.trim() || 'Item',
       bodyChildren: [createElement('p', '', item.textContent?.trim() || 'Item')]
-    };
-  };
+    }
+  }
 
   const createTabsBlock = (panels) => {
-    const root = createElement('div', 'obsidian-tabs not-prose');
-    const tabListWrapper = createElement('div', 'tablist-wrapper not-content');
-    const tabList = document.createElement('ul');
-    tabList.className = 'my-0';
-    tabList.setAttribute('role', 'tablist');
+    const root = createElement('div', 'obsidian-tabs not-prose')
+    const tabListWrapper = createElement('div', 'tablist-wrapper not-content')
+    const tabList = document.createElement('ul')
+    tabList.className = 'my-0'
+    tabList.setAttribute('role', 'tablist')
 
     panels.forEach((panel, index) => {
-      const li = createElement('li', 'tab');
-      li.setAttribute('role', 'presentation');
-      const button = createElement('button', index === 0 ? 'is-active' : '', panel.label);
-      button.type = 'button';
-      button.setAttribute('role', 'tab');
-      button.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
-      button.dataset.panel = `ob-tab-panel-${index}`;
-      li.appendChild(button);
-      tabList.appendChild(li);
-    });
+      const li = createElement('li', 'tab')
+      li.setAttribute('role', 'presentation')
+      const button = createElement('button', index === 0 ? 'is-active' : '', panel.label)
+      button.type = 'button'
+      button.setAttribute('role', 'tab')
+      button.setAttribute('aria-selected', index === 0 ? 'true' : 'false')
+      button.dataset.panel = `ob-tab-panel-${index}`
+      li.appendChild(button)
+      tabList.appendChild(li)
+    })
 
-    tabListWrapper.appendChild(tabList);
-    root.appendChild(tabListWrapper);
+    tabListWrapper.appendChild(tabList)
+    root.appendChild(tabListWrapper)
 
     panels.forEach((panel, index) => {
-      const tabPanel = createElement('div', '', '');
-      tabPanel.id = `ob-tab-panel-${index}`;
-      tabPanel.setAttribute('role', 'tabpanel');
-      if (index !== 0) tabPanel.setAttribute('hidden', 'true');
-      panel.bodyChildren.forEach((child) => tabPanel.appendChild(child));
-      root.appendChild(tabPanel);
-    });
+      const tabPanel = createElement('div', '', '')
+      tabPanel.id = `ob-tab-panel-${index}`
+      tabPanel.setAttribute('role', 'tabpanel')
+      if (index !== 0) tabPanel.setAttribute('hidden', 'true')
+      panel.bodyChildren.forEach((child) => tabPanel.appendChild(child))
+      root.appendChild(tabPanel)
+    })
 
-    return root;
-  };
+    return root
+  }
 
   const createTimelineBlock = (list) => {
-    const root = createElement('div', 'obsidian-timeline not-prose');
-    const ul = createElement('ul', 'ps-0 sm:ps-2');
-    const items = [...list.children].filter((child) => child.tagName?.toLowerCase() === 'li');
+    const root = createElement('div', 'obsidian-timeline not-prose')
+    const ul = createElement('ul', 'ps-0 sm:ps-2')
+    const items = [...list.children].filter((child) => child.tagName?.toLowerCase() === 'li')
 
     items.forEach((item, index) => {
-      const { label, bodyChildren } = extractItemLead(item);
+      const { label, bodyChildren } = extractItemLead(item)
       const li = createElement(
         'li',
         'group relative flex list-none gap-x-3 rounded-full ps-0 sm:gap-x-2'
-      );
+      )
       li.appendChild(
         createElement(
           'span',
           'z-10 my-2 ms-2 h-3 w-3 min-w-3 rounded-full border-2 border-muted-foreground'
         )
-      );
+      )
 
       if (index !== items.length - 1) {
-        const line = createElement('span', 'absolute start-[12px] top-[20px] w-1 bg-border');
-        line.style.height = 'calc(100% - 4px)';
-        li.appendChild(line);
+        const line = createElement('span', 'absolute start-[12px] top-[20px] w-1 bg-border')
+        line.style.height = 'calc(100% - 4px)'
+        li.appendChild(line)
       }
 
-      const content = createElement('div', 'flex gap-2 max-sm:flex-col');
+      const content = createElement('div', 'flex gap-2 max-sm:flex-col')
       content.appendChild(
         createElement(
           'samp',
           'w-fit grow-0 rounded-md py-1 text-sm max-sm:bg-primary-foreground max-sm:px-2 sm:min-w-[82px] sm:text-right',
           label
         )
-      );
-      const body = document.createElement('div');
-      bodyChildren.forEach((child) => body.appendChild(child));
-      content.appendChild(body);
-      li.appendChild(content);
-      ul.appendChild(li);
-    });
+      )
+      const body = document.createElement('div')
+      bodyChildren.forEach((child) => body.appendChild(child))
+      content.appendChild(body)
+      li.appendChild(content)
+      ul.appendChild(li)
+    })
 
-    root.appendChild(ul);
-    return root;
-  };
+    root.appendChild(ul)
+    return root
+  }
 
   const createCardGrid = (list) => {
-    const root = createElement('div', 'obsidian-card-grid not-prose');
-    [...list.children]
+    const root = createElement('div', 'obsidian-card-grid not-prose')
+    ;[...list.children]
       .filter((child) => child.tagName?.toLowerCase() === 'li')
       .forEach((item) => {
-        const { label, bodyChildren } = extractItemLead(item);
-        const article = createElement('article', 'obsidian-card rounded-2xl border bg-muted px-5 py-3');
-        article.appendChild(createElement('h3', 'text-lg font-medium', label));
-        const body = createElement('div', 'mt-2');
-        bodyChildren.forEach((child) => body.appendChild(child));
-        article.appendChild(body);
-        root.appendChild(article);
-      });
-    return root;
-  };
+        const { label, bodyChildren } = extractItemLead(item)
+        const article = createElement(
+          'article',
+          'obsidian-card rounded-2xl border bg-muted px-5 py-3'
+        )
+        article.appendChild(createElement('h3', 'text-lg font-medium', label))
+        const body = createElement('div', 'mt-2')
+        bodyChildren.forEach((child) => body.appendChild(child))
+        article.appendChild(body)
+        root.appendChild(article)
+      })
+    return root
+  }
 
   const renderAnyBlockSelectors = () => {
     getContainer()
       .querySelectorAll('p')
       .forEach((paragraph) => {
-        if (paragraph.dataset.obsidianEnhanced === 'true') return;
-        const selector = readSelector(paragraph.textContent ?? '');
-        if (!selector) return;
+        if (paragraph.dataset.obsidianEnhanced === 'true') return
+        const selector = readSelector(paragraph.textContent ?? '')
+        if (!selector) return
 
-        const target = nextMeaningfulSibling(paragraph);
-        if (!(target instanceof HTMLElement)) return;
+        const target = nextMeaningfulSibling(paragraph)
+        if (!(target instanceof HTMLElement)) return
 
-        let replacement = null;
-        if ((selector === 'timeline' || selector === 'card' || selector === 'tabs') && target.tagName === 'UL') {
+        let replacement = null
+        if (
+          (selector === 'timeline' || selector === 'card' || selector === 'tabs') &&
+          target.tagName === 'UL'
+        ) {
           replacement =
             selector === 'timeline'
               ? createTimelineBlock(target)
@@ -355,112 +365,277 @@
                     [...target.children]
                       .filter((child) => child.tagName?.toLowerCase() === 'li')
                       .map((item) => extractItemLead(item))
-                  );
+                  )
         }
 
-        if (!replacement) return;
-        replacement.dataset.obsidianEnhanced = 'true';
-        target.remove();
-        paragraph.replaceWith(replacement);
-      });
-  };
+        if (!replacement) return
+        replacement.dataset.obsidianEnhanced = 'true'
+        target.remove()
+        paragraph.replaceWith(replacement)
+      })
+  }
 
   const renderEmbedParagraphs = () => {
     getContainer()
       .querySelectorAll('p')
       .forEach((paragraph) => {
-        if (paragraph.dataset.obsidianEnhanced === 'true') return;
-        if (paragraph.childNodes.length !== 1) return;
-        const onlyChild = paragraph.firstElementChild;
-        if (!(onlyChild instanceof HTMLAnchorElement)) return;
-        if (!onlyChild.classList.contains('obsidian-note-embed')) return;
+        if (paragraph.dataset.obsidianEnhanced === 'true') return
+        if (paragraph.childNodes.length !== 1) return
+        const onlyChild = paragraph.firstElementChild
+        if (!(onlyChild instanceof HTMLAnchorElement)) return
+        if (!onlyChild.classList.contains('obsidian-note-embed')) return
 
-        const wrapper = createElement('div', 'obsidian-note-embed-card not-prose');
-        wrapper.appendChild(createElement('p', 'obsidian-note-embed-label', 'Embedded note'));
-        wrapper.appendChild(onlyChild.cloneNode(true));
-        wrapper.dataset.obsidianEnhanced = 'true';
-        paragraph.replaceWith(wrapper);
-      });
-  };
+        const wrapper = createElement('div', 'obsidian-note-embed-card not-prose')
+        wrapper.appendChild(createElement('p', 'obsidian-note-embed-label', 'Embedded note'))
+        wrapper.appendChild(onlyChild.cloneNode(true))
+        wrapper.dataset.obsidianEnhanced = 'true'
+        paragraph.replaceWith(wrapper)
+      })
+  }
 
   const stripInlineCommentText = (root) => {
-    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-    const textNodes = [];
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
+    const textNodes = []
 
-    let currentNode = walker.nextNode();
+    let currentNode = walker.nextNode()
     while (currentNode) {
-      textNodes.push(currentNode);
-      currentNode = walker.nextNode();
+      textNodes.push(currentNode)
+      currentNode = walker.nextNode()
     }
 
     textNodes.forEach((node) => {
-      const value = node.textContent ?? '';
-      const nextValue = value.replace(/%%[\s\S]*?%%/gu, '');
-      if (nextValue !== value) node.textContent = nextValue;
-    });
-  };
+      const value = node.textContent ?? ''
+      const nextValue = value.replace(/%%[\s\S]*?%%/gu, '')
+      if (nextValue !== value) node.textContent = nextValue
+    })
+  }
 
   const removeEmptyParagraphs = (root) => {
     root.querySelectorAll('p').forEach((paragraph) => {
-      if (!paragraph.textContent?.trim() && !paragraph.querySelector('img, video, audio, iframe, a')) {
-        paragraph.remove();
+      if (
+        !paragraph.textContent?.trim() &&
+        !paragraph.querySelector('img, video, audio, iframe, a')
+      ) {
+        paragraph.remove()
       }
-    });
-  };
+    })
+  }
 
   const stripCommentBlocks = (parent) => {
-    let inCommentBlock = false;
+    let inCommentBlock = false
 
-    [...parent.children].forEach((child) => {
-      const text = child.textContent?.trim() ?? '';
+    ;[...parent.children].forEach((child) => {
+      const text = child.textContent?.trim() ?? ''
 
       if (!inCommentBlock && text.startsWith('%%')) {
-        child.remove();
-        if (!text.endsWith('%%')) inCommentBlock = true;
-        return;
+        child.remove()
+        if (!text.endsWith('%%')) inCommentBlock = true
+        return
       }
 
       if (inCommentBlock) {
-        child.remove();
-        if (text.endsWith('%%')) inCommentBlock = false;
-        return;
+        child.remove()
+        if (text.endsWith('%%')) inCommentBlock = false
+        return
       }
 
-      stripInlineCommentText(child);
-      stripCommentBlocks(child);
-    });
-  };
+      stripInlineCommentText(child)
+      stripCommentBlocks(child)
+    })
+  }
 
   const removeCommentArtifacts = () => {
-    const container = getContainer();
-    stripInlineCommentText(container);
-    stripCommentBlocks(container);
-    removeEmptyParagraphs(container);
-  };
+    const container = getContainer()
+    stripInlineCommentText(container)
+    stripCommentBlocks(container)
+    removeEmptyParagraphs(container)
+  }
 
   const upgradeTabs = () => {
     document.querySelectorAll('.obsidian-tabs').forEach((node) => {
-      if (node.tagName.toLowerCase() === 'obsidian-tabs') return;
-      const replacement = document.createElement('obsidian-tabs');
-      for (const attr of [...node.attributes]) replacement.setAttribute(attr.name, attr.value);
-      replacement.innerHTML = node.innerHTML;
-      node.replaceWith(replacement);
-    });
-  };
-
-  const enhanceMarkdown = () => {
-    removeCommentArtifacts();
-    renderCallouts();
-    renderAnyBlockSelectors();
-    renderEmbedParagraphs();
-    upgradeTabs();
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', enhanceMarkdown, { once: true });
-  } else {
-    enhanceMarkdown();
+      if (node.tagName.toLowerCase() === 'obsidian-tabs') return
+      const replacement = document.createElement('obsidian-tabs')
+      for (const attr of [...node.attributes]) replacement.setAttribute(attr.name, attr.value)
+      replacement.innerHTML = node.innerHTML
+      node.replaceWith(replacement)
+    })
   }
 
-  document.addEventListener('astro:page-load', enhanceMarkdown);
+  const enhanceMarkdown = () => {
+    removeCommentArtifacts()
+    renderCallouts()
+    renderAnyBlockSelectors()
+    renderEmbedParagraphs()
+    upgradeTabs()
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enhanceMarkdown, { once: true })
+  } else {
+    enhanceMarkdown()
+  }
+
+  document.addEventListener('astro:page-load', enhanceMarkdown)
+</script>
+
+<script>
+  import mermaid from 'mermaid'
+
+  let mermaidRenderCounter = 0
+  let mermaidThemeObserver: MutationObserver | null = null
+  let mermaidRenderTimer = 0
+  const isDev = import.meta.env.DEV
+  const mermaidDevReloadKey = 'mermaid-dev-import-reload'
+
+  const getMermaidTheme = () =>
+    document.documentElement.classList.contains('dark') ? 'dark' : 'default'
+
+  const ensureMermaidTargets = (block: HTMLElement) => {
+    const parent = block.parentElement
+    if (!parent) return null
+
+    const blockId = block.dataset.mermaidBlockId ?? `mermaid-block-${++mermaidRenderCounter}`
+    block.dataset.mermaidBlockId = blockId
+
+    let diagram = parent.querySelector(
+      `.mermaid-diagram[data-mermaid-owner="${blockId}"]`
+    ) as HTMLDivElement | null
+    if (!diagram) {
+      diagram = document.createElement('div')
+      diagram.className = 'mermaid-diagram not-prose'
+      diagram.dataset.mermaidOwner = blockId
+      block.insertAdjacentElement('afterend', diagram)
+    }
+
+    let error = parent.querySelector(
+      `.mermaid-diagram-error[data-mermaid-owner="${blockId}"]`
+    ) as HTMLParagraphElement | null
+    if (!error) {
+      error = document.createElement('p')
+      error.className = 'mermaid-diagram-error not-prose'
+      error.dataset.mermaidOwner = blockId
+      diagram.insertAdjacentElement('afterend', error)
+    }
+
+    return { blockId, diagram, error }
+  }
+
+  const renderMermaidBlock = async (block: HTMLElement, force = false) => {
+    const code = block.querySelector('pre code')
+    if (!(code instanceof HTMLElement)) return
+
+    const source = (code.textContent ?? '').trim()
+    if (!source) return
+
+    const targets = ensureMermaidTargets(block)
+    if (!targets) return
+
+    const { blockId, diagram, error } = targets
+    const theme = getMermaidTheme()
+    if (!force && block.dataset.mermaidReady === 'true' && block.dataset.mermaidTheme === theme) {
+      return
+    }
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      suppressErrorRendering: true,
+      theme
+    })
+
+    try {
+      const renderId = `${blockId}-${theme}-${++mermaidRenderCounter}`
+      const { svg, bindFunctions } = await mermaid.render(renderId, source)
+      diagram.innerHTML = svg
+      bindFunctions?.(diagram)
+      diagram.hidden = false
+      error.hidden = true
+      error.textContent = ''
+      block.classList.add('mermaid-source-hidden')
+      block.dataset.mermaidReady = 'true'
+      block.dataset.mermaidTheme = theme
+      if (isDev) {
+        sessionStorage.removeItem(mermaidDevReloadKey)
+      }
+    } catch (renderError) {
+      const errorMessage =
+        renderError instanceof Error
+          ? renderError.message
+          : typeof renderError === 'string'
+            ? renderError
+            : ''
+      const shouldReloadForDevImportError =
+        isDev &&
+        /Failed to fetch dynamically imported module|Outdated Optimize Dep/u.test(errorMessage) &&
+        sessionStorage.getItem(mermaidDevReloadKey) !== 'done'
+
+      if (shouldReloadForDevImportError) {
+        sessionStorage.setItem(mermaidDevReloadKey, 'done')
+        window.location.reload()
+        return
+      }
+
+      block.classList.remove('mermaid-source-hidden')
+      block.dataset.mermaidReady = 'false'
+      diagram.hidden = true
+      diagram.innerHTML = ''
+      error.hidden = false
+      error.textContent =
+        renderError instanceof Error
+          ? `Mermaid 渲染失败：${renderError.message}`
+          : 'Mermaid 渲染失败，请先检查语法。'
+    }
+  }
+
+  const renderMermaidDiagrams = async (force = false) => {
+    const blocks = [...document.querySelectorAll('#content .astro-code[data-language="mermaid"]')]
+    if (!blocks.length) return
+
+    for (const block of blocks) {
+      if (!(block instanceof HTMLElement)) continue
+      await renderMermaidBlock(block, force)
+    }
+  }
+
+  const scheduleMermaidRender = (force = false) => {
+    window.clearTimeout(mermaidRenderTimer)
+    mermaidRenderTimer = window.setTimeout(() => {
+      void renderMermaidDiagrams(force)
+    }, 16)
+  }
+
+  const setupMermaidThemeObserver = () => {
+    if (mermaidThemeObserver) return
+
+    mermaidThemeObserver = new MutationObserver((records) => {
+      const classChanged = records.some((record) => record.attributeName === 'class')
+      if (classChanged) {
+        scheduleMermaidRender(true)
+      }
+    })
+
+    mermaidThemeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      () => {
+        scheduleMermaidRender()
+        setupMermaidThemeObserver()
+      },
+      { once: true }
+    )
+  } else {
+    scheduleMermaidRender()
+    setupMermaidThemeObserver()
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    scheduleMermaidRender()
+    setupMermaidThemeObserver()
+  })
 </script>

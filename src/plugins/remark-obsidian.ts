@@ -40,15 +40,7 @@ const noteByDir = buildUniqueLookup(
 const assetEntries = collectAssets()
 const assetsByBasename = buildUniqueLookup(assetEntries, (assetPath) => path.basename(assetPath))
 
-const imageExtensions = new Set([
-  '.png',
-  '.jpg',
-  '.jpeg',
-  '.gif',
-  '.webp',
-  '.svg',
-  '.avif'
-])
+const imageExtensions = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.avif'])
 
 const selectorMap = new Map<string, 'tabs' | 'timeline' | 'card'>([
   ['tabs', 'tabs'],
@@ -108,6 +100,20 @@ export default function remarkObsidian() {
 
       parent.children.splice(index, 1, ...replacements)
       return index + replacements.length
+    })
+
+    visit(tree, 'link', (node: Link) => {
+      const resolvedLink = resolveMarkdownLink(node.url, file.path)
+      if (!resolvedLink) return
+
+      node.url = resolvedLink.url
+      if (!resolvedLink.broken) return
+
+      node.data ??= {}
+      node.data.hProperties = {
+        ...(node.data.hProperties ?? {}),
+        className: [...toClassNames(node.data.hProperties?.className), 'broken-link']
+      }
     })
   }
 }
@@ -233,7 +239,10 @@ function normalizeSlug(slug: string) {
 }
 
 function normalizeKey(value: string) {
-  return value.trim().replace(/\.(md|mdx)$/u, '').toLowerCase()
+  return value
+    .trim()
+    .replace(/\.(md|mdx)$/u, '')
+    .toLowerCase()
 }
 
 function shouldSkipInlineTransform(parent: Parent) {
@@ -370,7 +379,11 @@ function resolveNoteTarget(target: string, currentFile?: string): ResolvedNote |
   return { url: resolved.url, broken: false, label: path.basename(resolved.slug) }
 }
 
-function resolveRelativeNote(target: string, currentFile?: string, currentCollection?: ContentCollection) {
+function resolveRelativeNote(
+  target: string,
+  currentFile?: string,
+  currentCollection?: ContentCollection
+) {
   if (!currentFile || !currentCollection) return null
   if (!target.includes('/') && !target.startsWith('.')) return null
 
@@ -415,10 +428,35 @@ function resolveAssetTarget(target: string, currentFile?: string): ResolvedAsset
   return { url: target, broken: true }
 }
 
+function resolveMarkdownLink(target: string, currentFile?: string): ResolvedAsset | null {
+  if (!isMarkdownNoteLink(target)) return null
+
+  const { target: noteTarget, anchor } = splitAnchor(target)
+  const resolvedNote = resolveNoteTarget(noteTarget, currentFile)
+  if (!resolvedNote) return { url: '#', broken: true }
+
+  return {
+    url: resolvedNote.broken
+      ? '#'
+      : anchor
+        ? `${resolvedNote.url}#${slugifyHeading(anchor)}`
+        : resolvedNote.url,
+    broken: resolvedNote.broken
+  }
+}
+
 function toRelativeAssetPath(fromDir: string, absoluteTarget: string) {
   let relativePath = path.relative(fromDir, absoluteTarget).split(path.sep).join('/')
   if (!relativePath.startsWith('.')) relativePath = `./${relativePath}`
   return relativePath
+}
+
+function isMarkdownNoteLink(target: string) {
+  if (!target || target.startsWith('#') || target.startsWith('/')) return false
+  if (/^[a-z]+:/iu.test(target)) return false
+
+  const { target: pathTarget } = splitAnchor(target)
+  return /\.(md|mdx)$/iu.test(pathTarget.trim())
 }
 
 function isImageTarget(target: string) {

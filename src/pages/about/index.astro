@@ -11,6 +11,7 @@ import typelessIcon from '@/assets/tools/app-icons/typeless.png'
 import antigravityIcon from '@/assets/tools/app-icons/antigravity.png'
 import wechatInputIcon from '@/assets/tools/app-icons/wechat-input.png'
 import doubaoIcon from '@/assets/tools/app-icons/doubao.png'
+import doubaoInputIcon from '@/assets/tools/app-icons/doubao-input.png'
 import notebookLmIcon from '@/assets/tools/app-icons/notebooklm-candidate.png'
 import cherryStudioIcon from '@/assets/tools/app-icons/cherry-studio.png'
 import raycastIcon from '@/assets/tools/app-icons/raycast.png'
@@ -108,6 +109,12 @@ const headings = [
         description: '中文输入',
         href: 'https://z.weixin.qq.com/',
         icon: wechatInputIcon
+      },
+      {
+        name: '豆包输入法',
+        description: '语音输入',
+        href: 'https://www.doubao.com/',
+        icon: doubaoInputIcon
       }
     ]}
   />
@@ -164,12 +171,6 @@ const headings = [
         icon: cherryStudioIcon
       },
       {
-        name: 'FineTune',
-        description: '按应用控制音量',
-        href: 'https://github.com/ronitsingh10/FineTune',
-        icon: fineTuneIcon
-      },
-      {
         name: 'ActivityWatch',
         description: '时间追踪与行为统计',
         href: 'https://activitywatch.net/',
@@ -182,12 +183,6 @@ const headings = [
     title='Environment'
     tools={[
       {
-        name: 'Ubuntu 22.04 LTS',
-        description: 'Linux 发行版（WSL）',
-        href: 'https://ubuntu.com/',
-        icon: import('@/assets/tools/ubuntu.svg?raw')
-      },
-      {
         name: 'MacOS Tahoe',
         description: 'MacBook Air',
         href: 'https://www.apple.com/macos/',
@@ -198,6 +193,24 @@ const headings = [
         description: 'Lenovo Legion',
         href: 'https://news.microsoft.com/windows11-general-availability/',
         icon: import('@/assets/tools/windows11.svg?raw')
+      },
+      {
+        name: 'Ubuntu 22.04 LTS',
+        description: 'Linux 发行版（WSL）',
+        href: 'https://ubuntu.com/',
+        icon: import('@/assets/tools/ubuntu.svg?raw')
+      }
+    ]}
+  />
+  <ToolSection
+    class='mb-5'
+    title='Other'
+    tools={[
+      {
+        name: 'FineTune',
+        description: '按应用控制音量',
+        href: 'https://github.com/ronitsingh10/FineTune',
+        icon: fineTuneIcon
       }
     ]}
   />

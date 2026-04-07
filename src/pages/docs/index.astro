@@ -1,14 +1,20 @@
 ---
+import type { CollectionEntry } from 'astro:content'
+
+import { getBlogCollection } from 'astro-pure/server'
 import { Button, Icon } from 'astro-pure/user'
 import { cn } from 'astro-pure/utils'
 import PageLayout from '@/layouts/BaseLayout.astro'
 import { integ } from '@/site-config'
 
 import DocsContents from '@/components/docs/DocsContents.astro'
+import { buildDocsTree } from '@/utils/docs'
+
+const docsTree = buildDocsTree((await getBlogCollection('docs')) as CollectionEntry<'docs'>[])
 
 const meta = {
   title: 'Docs',
-  description: 'Docs content documentation'
+  description: '中文文档中心，收录 Agent Memory 文档与 MIT 6.824 学习笔记。'
 }
 ---
 
@@ -16,24 +22,70 @@ const meta = {
   <Button title='Back' href='/' variant='back' />
   <main class='mt-6 lg:mt-10'>
     <div id='content-header' class='animate'>
-      <h1 class='mb-6 text-3xl font-medium'>Docs of Astro Theme Pure</h1>
+      <h1 class='mb-4 text-3xl font-medium'>Docs</h1>
+      <p class='max-w-3xl text-muted-foreground'>
+        这里收录当前站点的中文文档内容。现在先开放两个入口：一套是 Agent Memory
+        项目文档，另一套是 MIT 6.824 学习笔记。英文页面暂时只保留承接和跳转，不做整站翻译。
+      </p>
     </div>
 
     <div id='content' class={cn('animate mt-8 max-w-none md:min-w-[45ch]', integ.typography.class)}>
-      <h2 class='text-xl font-medium'>Theme documentation</h2>
-      <DocsContents title={false} />
+      <div class='grid grid-cols-1 gap-4 not-prose lg:grid-cols-2'>
+        {
+          docsTree.map((source) => (
+            <section class='rounded-[1.75rem] border border-border/80 bg-card/30 p-6'>
+              <div class='flex items-start justify-between gap-4'>
+                <div class='min-w-0 flex-1'>
+                  <h2 class='m-0 text-xl font-medium text-foreground sm:text-[1.75rem]'>
+                    {source.title.zh}
+                  </h2>
+                  <p class='mt-3 max-w-[32rem] text-sm leading-7 text-muted-foreground sm:text-base'>
+                    {source.description.zh}
+                  </p>
+                </div>
+                <span class='shrink-0 whitespace-nowrap rounded-full border border-border/80 bg-background/60 px-4 py-1.5 text-sm leading-none text-muted-foreground'>
+                  {source.entries.length} 篇
+                </span>
+              </div>
+              <div class='mt-6'>
+                <a
+                  class='inline-flex items-center justify-center whitespace-nowrap rounded-full border border-border/80 bg-background/40 px-5 py-2.5 text-sm font-medium text-foreground no-underline transition-colors hover:bg-muted'
+                  href={`/docs/${source.startDocId}`}
+                >
+                  从这里开始
+                </a>
+              </div>
+            </section>
+          ))
+        }
+      </div>
 
-      <h2 class='text-xl font-medium'>Feedback</h2>
-      <p>
-        If you have any problems, you can check <a
-          href='https://github.com/bakebakebakebake/fxj-pure/issues'
-          target='_blank'>Github Issues</a
-        > for project support.
-      </p>
-      <h2 class='text-xl font-medium'>News Describe (Alpha)</h2>
-      <p>
-        <a href='/docs/rss.xml' target='_blank'><Icon name='rss' /> </a>
-      </p>
+      {
+        docsTree.map((source) => (
+          <section class='mt-10'>
+            <div class='mb-4 flex items-center justify-between gap-4'>
+              <div>
+                <h2 class='mb-2 text-xl font-medium'>{source.title.zh}</h2>
+                <p class='my-0 text-sm text-muted-foreground'>{source.description.zh}</p>
+              </div>
+              <span class='text-sm text-muted-foreground'>{source.entries.length} 篇</span>
+            </div>
+            <div class='rounded-2xl border px-4 py-4 sm:px-5 sm:py-5'>
+              <DocsContents title={false} sourceKey={source.key} showSourceHeading={false} />
+            </div>
+          </section>
+        ))
+      }
+
+      <section class='mt-10'>
+        <h2 class='text-xl font-medium'>订阅</h2>
+        <p class='flex items-center gap-2'>
+          <a href='/docs/rss.xml' target='_blank' rel='noreferrer'>
+            <Icon name='rss' />
+          </a>
+          <span>可通过 RSS 跟踪 docs 更新。</span>
+        </p>
+      </section>
     </div>
   </main>
 </PageLayout>

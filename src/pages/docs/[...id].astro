@@ -2,38 +2,43 @@
 import { render, type CollectionEntry } from 'astro:content'
 
 import { MediumZoom } from 'astro-pure/advanced'
-import { TOC } from 'astro-pure/components/pages'
-import { getBlogCollection, sortMDByDate } from 'astro-pure/server'
-import { Button } from 'astro-pure/user'
+import { getBlogCollection } from 'astro-pure/server'
+import { Icon } from 'astro-pure/user'
 import PageLayout from '@/layouts/ContentLayout.astro'
-
 import DocsContents from '@/components/docs/DocsContents.astro'
+import TOC from '@/components/pages/TOC.astro'
+import { docsSourceMeta, getDocsSiblings } from '@/utils/docs'
 
 export const prerender = true
 
 export async function getStaticPaths() {
-  const posts = sortMDByDate(await getBlogCollection('docs'))
+  const posts = (await getBlogCollection('docs')) as CollectionEntry<'docs'>[]
+
   return posts.map((post) => ({
     params: { id: post.id },
     props: { post }
   }))
 }
 
-type Props = {
-  post: CollectionEntry<'docs'>
-}
-
 const { post } = Astro.props
+const docsCollection = (await getBlogCollection('docs')) as CollectionEntry<'docs'>[]
 const { Content, headings } = await render(post)
 const { description, title } = post.data
-
-const editPath = `https://github.com/bakebakebakebake/fxj-pure/edit/main/${post.filePath}`
+const { prev, next } = getDocsSiblings(docsCollection, post)
+const hasArticleToc = headings.some(({ depth }) => depth > 1)
+const currentSource = docsSourceMeta.find((source) => source.key === post.data.source)
+const seriesTitle = currentSource?.title.zh ?? '当前系列'
 ---
 
 <PageLayout meta={{ description, title }} back='/docs'>
   <Fragment slot='sidebar'>
-    {!!headings.length && <TOC {headings} />}
-    <DocsContents class='docs-toc block mt-3' />
+    {
+      hasArticleToc ? (
+        <TOC headings={headings} title='文章目录' class='block mt-3' />
+      ) : (
+        <DocsContents class='block mt-3' />
+      )
+    }
   </Fragment>
 
   <Fragment slot='header'>
@@ -62,36 +67,49 @@ const editPath = `https://github.com/bakebakebakebake/fxj-pure/edit/main/${post.
   <Content />
 
   <div slot='bottom'>
-    <Button title='Edit on GitHub' href={editPath} class='px-3 py-2' style='font-size:1rem'>
-      {/* mingcute:edit-2-line */}
-      <!-- prettier-ignore -->
-      <svg slot='before' xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'><!-- Icon from MingCute Icon by MingCute Design - https://github.com/Richard9394/MingCute/blob/main/LICENSE --><g fill='none' fill-rule='evenodd'><path d='m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z'/><path fill='currentColor' d='M13.896 3.03a2 2 0 0 1 2.701-.117l.127.117l4.243 4.243a2 2 0 0 1 .117 2.7l-.117.128l-10.314 10.314a2 2 0 0 1-1.238.578L9.239 21H4.006a1.01 1.01 0 0 1-1.004-.9l-.006-.11v-5.233a2 2 0 0 1 .467-1.284l.12-.13L13.895 3.03ZM12.17 7.584l-7.174 7.174V19H9.24l7.174-7.174l-4.243-4.243Zm3.14-3.14L13.584 6.17l4.243 4.243l1.726-1.726z'/></g></svg>
-      Edit on GitHub
-    </Button>
-    {/* Show docs contents */}
-    <div class='rounded-xl border px-4 py-3 mt-3 sm:py-4 md:mt-6'>
-      <DocsContents />
+    <h2 class='mb-3 text-sm font-medium text-foreground'>继续阅读</h2>
+    <div class='mt-3 grid gap-2 sm:mt-6 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-center'>
+      <div class='min-w-0'>
+        {
+          prev && (
+            <a
+              href={`/docs/${prev.id}`}
+              class='inline-flex max-w-full items-center gap-2 rounded-xl px-4 py-2 no-underline transition-colors hover:bg-muted'
+            >
+              <span class='truncate'>← {prev.data.title}</span>
+            </a>
+          )
+        }
+      </div>
+      <a
+        href='/docs'
+        class='inline-flex w-fit shrink-0 items-center justify-center gap-2 self-start whitespace-nowrap rounded-full border border-border bg-muted/60 px-4 py-2 text-sm text-foreground no-underline transition-colors hover:bg-muted sm:self-auto'
+      >
+        <Icon name='list' class='size-4 shrink-0' />
+        <span class='sm:hidden'>返回 Docs</span>
+        <span class='hidden sm:inline'>返回文档首页</span>
+      </a>
+      <div class='min-w-0 text-end'>
+        {
+          next && (
+            <a
+              href={`/docs/${next.id}`}
+              class='inline-flex max-w-full items-center gap-2 rounded-xl px-4 py-2 no-underline transition-colors hover:bg-muted'
+            >
+              <span class='truncate'>{next.data.title} →</span>
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <div class='mt-6 rounded-2xl border border-border bg-muted/30 px-4 py-4 sm:px-5 sm:py-5'>
+      <div class='mb-3'>
+        <h3 class='text-sm font-medium text-foreground'>本系列目录</h3>
+        <p class='mt-1 text-xs text-muted-foreground'>{seriesTitle}</p>
+      </div>
+      <DocsContents title={false} sourceKey={post.data.source} showSourceHeading={false} />
     </div>
   </div>
 </PageLayout>
 <MediumZoom />
-
-<style>
-  @media (min-width: 1300px) {
-    :global(
-      main, .bottom { transform: translateX(7.9rem); }
-      #sidebar { overflow: inherit; }
-      toc-heading { height: 100%; display: flex; flex-direction: column; }
-      toc-heading > ul { overflow-y: scroll; }
-    )
-    .docs-toc {
-      position: fixed;
-      top: 0;
-      left: -64rem;
-      margin-top: 0;
-      max-height: calc(100vh - 7rem);
-      overflow-y: scroll;
-      padding-right: 1rem !important;
-    }
-  }
-</style>
