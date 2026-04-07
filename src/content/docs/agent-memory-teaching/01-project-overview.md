@@ -283,7 +283,7 @@ agent-memory/
 1. 先用 Python embedded 模式本地写一条记忆、查一条记忆；
 2. 再启动 Go 服务，试一次远程模式；
 3. 再看 `docs/teaching/03` 和 `docs/teaching/04`，把算法和服务端骨架对起来；
-4. 最后再看 benchmark、部署和面试文档。
+4. 最后再看 benchmark 和部署文档。
 
 这一顺序对应的是“先建立感性认识，再回头理解架构”的阅读方式，比一上来就啃全部源码更有效。
 
@@ -296,10 +296,9 @@ agent-memory/
 5. [05 Python SDK 指南](05-python-sdk-guide.md)
 6. [07 数据库与 Schema 指南](07-database-schema-guide.md)
 
-如果你是为了面试准备，建议再补：
+如果你想补充性能与工程落地这一段，建议再补：
 
 7. [11 性能与基准测试](11-performance-benchmarking.md)
-8. [12 面试准备指南](12-interview-guide.md)
 
 ## 小结
 
@@ -314,4 +313,3 @@ agent-memory/
 - [02 架构深度剖析](02-architecture-deep-dive.md)
 - [03 算法指南](03-algorithm-guide.md)
 - [09 API 参考](09-api-reference.md)
-- [12 面试准备指南](12-interview-guide.md)
