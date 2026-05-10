@@ -12,8 +12,6 @@ heroImageSrc: ../../../pic/susan-q-yin-Ctaj_HCqW84-unsplash.jpg
 heroImageColor: " #88736b "
 ---
 
-> [!note] Note
-> This article is based directly on your original search notes, without compressing them into an overview-style short article; only the heading hierarchy, links, and images have been adapted for the site.
 
 ## Included Content
 

@@ -20,7 +20,7 @@ heroImageColor: " #dbd6ce "
 
 # MySQL的日志  
   
-其实有很多种日志，但是对于面试中较为重要的有：  
+其实有很多种日志，但是较为重要的有：  
 - Bin log（属于MySQL）  
 - Undo log  
 - Redo log  

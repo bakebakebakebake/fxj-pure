@@ -13,12 +13,7 @@ heroImageSrc: '../../../pic/tobias-fischer-PkbZahEG2Ng-unsplash.jpg'
 heroImageColor: ' #c0cb9b '
 ---
 
-> [!note] Note
-> This article is based on your original MySQL notes, primarily covering fundamentals, indexes, B+ trees, and execution plans.
 
-## Contents
-
-- `MySQL Fundamentals and Indexes`
 
 ## MySQL Fundamentals, Indexes, and B+ Trees
 

@@ -14,8 +14,7 @@ heroImageSrc: ../../pic/zarah-v-windh-VPY28zdmB3I-unsplash.jpg
 heroImageColor: " #60667e "
 ---
 
-> [!note] 说明
-> 这里保留你原来更偏“证明链”的题解内容，尤其是数论、SG、组合和 EDU 这些不适合再被我压成摘要的部分。
+
 
 ## 收录范围
 

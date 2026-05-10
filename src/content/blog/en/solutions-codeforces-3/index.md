@@ -13,8 +13,6 @@ language: English
 heroImageSrc: ../../../pic/zarah-v-windh-VPY28zdmB3I-unsplash.jpg
 heroImageColor: " #60667e "
 ---
-> [!note] Note
-> This section retains your original "proof chain" solution content, especially those parts from number theory, SG, combinatorics, and EDU that are no longer suitable for me to compress into summaries.
 
 ## Coverage
 

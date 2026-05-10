@@ -13,34 +13,6 @@ language: English
 heroImageSrc: ../../../pic/eugene-golovesov-dxp8NcWrqGM-unsplash.jpg
 heroImageColor: " #9cbfe7 "
 ---
-> [!note] Description  
-> This document is only for integration, without changing the main content of each original problem; the main purpose is to consolidate the problem solutions scattered across different contest notes into one, and handle image and link compatibility along the way.  
-
-## Scope of Inclusion  
-
-- `Winter Break 2 - I/J`  
-- `Winter Break 2 - D`  
-- `Winter Break 3 - L/M`  
-- `Winter Break 3 - G/H`  
-- `Winter Break 5 - G/H`  
-- `Nowcoder Multi-University Training 4 - H`  
-- `Nowcoder Multi-University Training 4 - C`  
-- `Nowcoder Weekly Contest 60 - D`  
-- `Nowcoder Weekly Contest 60 - E`  
-- `Nowcoder Weekly Contest 60 - F`  
-- `Nowcoder Weekly Contest 51 - D`  
-- `Nowcoder Weekly Contest 51 - E`  
-- `Nowcoder Weekly Contest 51 - F`  
-- `Nowcoder Weekly Contest 31 - E`  
-- `Nowcoder Weekly Contest 52 - C`  
-- `Nowcoder Weekly Contest 52 - E`  
-- `Nowcoder Weekly Contest 52 - F`  
-- `Nowcoder Weekly Contest 47 - D`  
-- `Nowcoder Weekly Contest 47 - E`  
-- `Nowcoder Weekly Contest 47 - F`  
-- `Nowcoder Weekly Contest 35 - F/G`  
-- `Nowcoder Weekly Contest 55 - E`  
-
 ## 2024 Nowcoder Winter Break Algorithm Basic Training Camp 2 - I/J Tokitsukaze and Short Path (plus)(minus)  
 The only difference between plus and minus is the way the edge weight is calculated.  
 

@@ -16,12 +16,7 @@ heroImageSrc: ../../../pic/sean-pollock-PhYq704ffdA-unsplash.jpg
 heroImageColor: " #3e4f64 "
 ---
 
-> [!note] Note
-> This article returns to your original Redis Q&A notes, focusing on locks, message queues, HyperLogLog, and high availability.
 
-## Covered Content
-
-- `Redis Q`
 
 ## Redis High-Frequency Questions & Scenario Notes
 

@@ -13,14 +13,7 @@ language: English
 heroImageSrc: ../../../pic/gayatri-malhotra-4wF66_KWJxA-unsplash.jpg
 heroImageColor: " #d4b337 "
 ---
-> [!note] Note
-> This article reverts to the original sieve method / Euler function notes, and incorporates Wilson's theorem, trying not to alter the original derivations and templates.
 
-## Contents
-
-- `Prime Sieve Methods`
-- `Euler's Totient Function`
-- `Wilson's Theorem`
 
 ## Prime Sieve Methods
 

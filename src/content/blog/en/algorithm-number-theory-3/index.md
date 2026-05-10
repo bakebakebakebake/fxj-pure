@@ -12,15 +12,7 @@ language: English
 heroImageSrc: ../../../pic/franco-debartolo-v3E6teZ_KUM-unsplash.jpg
 heroImageColor: "#8d6540"
 ---
-> [!note] Note
-> This article continues with the approach of "prioritizing the original notes, supplementing the structure without forcibly altering the content." Your original part already includes the definition of convolution, the Möbius function, and the inversion formula. This time, the main goal is to smoothly connect the relationships between them: why convolution appears, why μ is introduced, and how to approach the inversion when you see it.
 
-## Contents
-
-- `Dirichlet Convolution`
-- `Möbius Function`
-- `Möbius Inversion`
-- `Common Convolution Relations and Problem-Solving Entry Points`
 
 ## First, the Conclusion: What This Article Aims to Solve
 

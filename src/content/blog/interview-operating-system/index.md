@@ -1,6 +1,6 @@
 ---
 title: 操作系统如何托住程序：进程、内存、文件与 I/O
-description: 把操作系统放回运行现场：程序为什么需要进程线程、虚拟内存、页缓存、系统调用和文件系统这一整套托底机制。
+description: 回到程序运行现场，看进程线程、虚拟内存、系统调用、页缓存和 I/O 模型怎样协作。
 publishDate: 2025-03-22
 tags:
   - 八股
@@ -13,7 +13,6 @@ language: 中文
 heroImageSrc: ../../pic/guillaume-coupy-11c7yNn30VA-unsplash.jpg
 heroImageColor: "#dfb48f"
 ---
-
 `运行现场` `虚拟内存` `I/O 模型`
 
 操作系统这章最适合从一个很朴素的问题开始学：**程序为什么能跑起来**。

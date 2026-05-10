@@ -1,6 +1,6 @@
 ---
-title: 搜索不是暴力：看懂 DFS、BFS 与 DP 的边界
-description: 以原始搜索题单与题解笔记为主，整理 DFS、BFS、剪枝、最短路与状态搜索。
+title: 搜索刷题整理
+description: 刷题记录，非正常博客...
 publishDate: 2024-04-04
 tags:
   - 算法
@@ -11,18 +11,11 @@ language: 中文
 heroImageSrc: ../../pic/susan-q-yin-Ctaj_HCqW84-unsplash.jpg
 heroImageColor: " #88736b "
 ---
+> 这边只有题目和代码，仅代表个人部分刷题过程
 
-> [!note] 说明
-> 这篇直接以你原来的搜索笔记为主体，不再压缩成概览式短文；只是把站点里的标题层级、链接和图片做了兼容处理。
-
-## 收录内容
-
-- `搜索刷题概要`
-
-## 原始搜索题单与题解整理
-
-- [【算法1-7】搜索 - 题单 - 洛谷 | 计算机科学教育新生态](https://www.luogu.com.cn/training/112#problems)
-- [CMの搜索 - 题单 - 洛谷 | 计算机科学教育新生态](https://www.luogu.com.cn/training/10560#information)
+题单：
+1. [【算法1-7】搜索 - 题单 - 洛谷 | 计算机科学教育新生态](https://www.luogu.com.cn/training/112#problems)
+2. [CMの搜索 - 题单 - 洛谷 | 计算机科学教育新生态](https://www.luogu.com.cn/training/10560#information)
 
 ### 题单 1 ：
 
@@ -1294,11 +1287,4 @@ void solve() {
 }
 ```
 
-#### [P1790 矩形分割 ](https://www.luogu.com.cn/problem/P1790)
-同类型的题目：
-
-- [P1817 棋盘染色](https://www.luogu.com.cn/problem/P1817)
-- [P4537  矩形 ](https://www.luogu.com.cn/problem/P4537)
-这类矩形分割题的主线通常就是：枚举第一刀怎么切，把当前状态拆成两个更小的子问题，再用记忆化搜索去重。难点不在搜索本身，而在于如何把“当前矩形的边界、颜色 / 障碍状态、是否合法继续切”压成一个不会爆炸的状态。
-
-后面几个题做起来就没什么意义了。
+就先列这些，后面的有时间再做吧...

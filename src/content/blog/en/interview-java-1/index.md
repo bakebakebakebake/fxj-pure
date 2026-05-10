@@ -14,20 +14,6 @@ heroImageSrc: '../../../pic/jonas-jacobsson-RFHFV7lVQBY-unsplash.jpg'
 heroImageColor: '#b56c36'
 ---
 
-> [!note] Note
-> This article reverts to your original Java Collections/Fundamentals notes as the main body, striving to retain the original question formats, summaries, and source code analysis structure as much as possible.
-
-## Contents
-
-- `Overview of Java Collections`
-- `Java Collections Summary`
-- `Common Knowledge about List`
-- `Common Knowledge about Map (Important)`
-- `Java Basics Summary`
-- `Java Reflection`
-- `Java Proxy Pattern`
-- `Java SPI Mechanism`
-- `Java IO`
 
 ## Overview of Java Collections
 

@@ -12,8 +12,6 @@ heroImageSrc: ../../../pic/jackson-simmer-ZxRHtPacwUY-unsplash.jpg
 heroImageColor: " #d6ed9a "
 ---
 
-> [!note] Note
-> This article continues the "original notes + supplementary organization" approach. The original notes already had ordinary generating functions, exponential generating functions, and three problems; this time mainly completing the modeling main line, common formulas, and why we do it this way, to facilitate connecting to the polynomial article later.
 
 ## Coverage
 

@@ -12,8 +12,6 @@ heroImageSrc: ../../../pic/amanda-jones-P787-xixGio-unsplash.jpg
 heroImageColor: " #730102 "
 ---
 
-> [!note] Note
-> This article continues following the original notes, without rewriting it into an "encyclopedia-style overview". The original content already covers Bash, Nim, Misere games, Fibonacci game, Wythoff's game, and SG function. This time, the main focus is to supplement "how to judge when encountering problems" into a more practical main thread.
 
 ## Content Covered
 

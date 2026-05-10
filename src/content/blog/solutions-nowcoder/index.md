@@ -14,8 +14,7 @@ heroImageSrc: ../../pic/eugene-golovesov-dxp8NcWrqGM-unsplash.jpg
 heroImageColor: " #9cbfe7 "
 ---
 
-> [!note] 说明
-> 这篇只做整合，不改你原来每道题的主体内容；主要是把分散在不同比赛笔记里的题解汇到同一篇，并顺手处理图片和链接兼容。
+
 
 ## 收录范围
 

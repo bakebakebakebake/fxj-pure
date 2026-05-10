@@ -14,8 +14,7 @@ heroImageSrc: ../../pic/nir-himi-uBst6NH7l9c-unsplash.jpg
 heroImageColor: " #654c32 "
 ---
 
-> [!note] 说明
-> 这篇以 Obsidian 里原来的 AtCoder 题解为主体，只补了分节、收录范围和站点兼容所需的少量清理；题意、思路、代码和原来的备注尽量原样保留。
+
 
 ## 收录范围
 

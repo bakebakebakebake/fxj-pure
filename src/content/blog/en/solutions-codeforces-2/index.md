@@ -13,14 +13,6 @@ language: English
 heroImageSrc: ../../../pic/salvatore-andrea-santacroce-AmKua5hKI38-unsplash.jpg
 heroImageColor: " #9fd0cb "
 ---
-> [!note] Explanation
-> This set retains the original contest problem solution snippets, only reordered according to the current blog grouping, without rewriting your content in a uniform tone.
-
-## Scope of Inclusion
-
-- `CF 1994 Div.1+2 C`
-- `CF 1994 Div.1+2 D`
-- `CF 1994 Div.1+2 E`
 - `CF 1994 Div.1+2 F`
 - `CF 1996 Div.3 D`
 - `CF 1996 Div.3 E`

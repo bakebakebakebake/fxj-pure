@@ -9,16 +9,12 @@ tags:
   - Data Structures
   - Persistence
 language: English
-draft: false
+draft: true
 comment: true
 heroImageSrc: ../../../pic/nenad-kaevik-eDNfp_tpdFo-unsplash.jpg
 heroImageColor: "#979996"
 ---
 
-> [!note] Note
-> This article is based on the original `Redis Summary` and `Redis Common Interview Questions` from Apple Notes, covering the main topics: why Redis is used for caching, data structures, thread model, and persistence.
-
-## Covered Content
 
 - High-frequency questions from `Redis Summary`
 - Notes on cache positioning, data structures, thread model, and persistence from `Redis Common Interview Questions`

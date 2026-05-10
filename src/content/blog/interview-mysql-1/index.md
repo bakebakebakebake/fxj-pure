@@ -13,12 +13,8 @@ heroImageSrc: '../../pic/tobias-fischer-PkbZahEG2Ng-unsplash.jpg'
 heroImageColor: ' #c0cb9b '
 ---
 
-> [!note] 说明
-> 这篇改回以你原来的 MySQL 笔记为主体，主要保留基础、索引、B+ 树和执行计划这一段。
 
-## 收录内容
 
-- `MySQL 基础与索引`
 
 ## MySQL 基础、索引与 B+ 树
 

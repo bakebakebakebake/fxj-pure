@@ -14,8 +14,7 @@ heroImageSrc: ../../pic/nikita-fursenko-5_a-QqK6680-unsplash.jpg
 heroImageColor: " #98adca "
 ---
 
-> [!note] 说明
-> 这篇继续直接回填原来的题解笔记，尽量不改原有描述，只处理了站点里的图片、链接和分节兼容问题。
+
 
 ## 收录范围
 

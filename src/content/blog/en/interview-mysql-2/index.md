@@ -13,13 +13,6 @@ comment: true
 heroImageSrc: ../../../pic/maksym-kaharlytskyi-Q9y3LRuuxmg-unsplash.jpg
 heroImageColor: " #dbd6ce "
 ---
-> [!note] Description
-> This article reverts to using your original MySQL notes as the main body, primarily retaining the sections on transactions, locks, MVCC, logs, and optimization.
-
-## Content Included
-
-- `MySQL Transactions and Logs`
-
 ## MySQL Transactions, Locks, MVCC, and Logs
 
 ### Transactions

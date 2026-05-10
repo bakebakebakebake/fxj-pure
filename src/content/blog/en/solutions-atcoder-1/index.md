@@ -13,9 +13,6 @@ language: English
 heroImageSrc: ../../../pic/nir-himi-uBst6NH7l9c-unsplash.jpg
 heroImageColor: " #654c32 "
 ---
-> [!note] Note
-> 
-> This article is based on the original AtCoder problem solutions in Obsidian, with only the addition of section divisions, scope of coverage, and minimal cleanup required for site compatibility; the problem statements, solution approaches, code, and original remarks are preserved as much as possible.
 
 ## Scope of Coverage
 

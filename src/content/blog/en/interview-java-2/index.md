@@ -1,6 +1,6 @@
 ---
-title: "Concurrency Is Not Just Threads: From JMM to Thread Pools and CompletableFuture"
-description: Based on original Java concurrency notes, covering JMM, locks, atomic classes, ThreadLocal, thread pools, and more.
+title: Java Concurrency
+description: Covers JMM, locks, atomic classes, ThreadLocal, thread pools, and more.
 publishDate: 2025-05-16
 tags:
   - Interview
@@ -13,271 +13,6 @@ language: English
 heroImageSrc: '../../../pic/jessica-lewis-thepaintedsquare-1tsaxPdyTLk-unsplash.jpg'
 heroImageColor: ' #b56c36 '
 ---
-
-> [!note] Note
-> This article is based on your original concurrency notes, maintaining the original knowledge structure and order. `CompletableFuture, Meituan` content is included as supplementary examples.
-
-## Covered Topics
-
-- `JUC Summary`
-- `JMM`
-- `Concurrency Lock Knowledge`
-- `Atomic Classes`
-- `Thread Pool Knowledge`
-
-## JUC Summary
-
-- Thread Pools
-- AQS Principles
-- synchronized
-- CAS
-- ThreadLocal
-
-## JMM
-
-#### Core Goals of JMM
-The Java Memory Model (JMM) defines **access rules for shared variables** in multi-threaded environments, ensuring **visibility**, **ordering**, and **atomicity** when operating on shared data across different threads. It is the cornerstone of Java concurrent programming, helping developers write thread-safe code amidst complex hardware and compiler optimizations.
-
-
-### Core Concepts of JMM
-
-#### 1. Main Memory and Working Memory
-- **Main Memory**: A memory area shared by all threads, storing **all variables** (instance fields, static fields, array object elements).
-- **Working Memory**: Each thread's private memory space, storing **copies** of variables used by that thread.
-- **Interaction Rules**:
-  ```c
-  [Thread] ←→ [Working Memory] ←→ [Main Memory]
-  ```
-  All variable operations must interact between working memory and main memory (JMM abstract model, not directly corresponding to physical hardware).
-
-#### 2. Atomic Operations for Memory Interaction
-JMM defines 8 atomic operations (such as `read`, `load`, `use`, `assign`, `store`, `write`, etc.) that control the interaction flow between threads and memory. For example:
-  ```c
-  Thread reads variable: read → load → use
-  Thread modifies variable: assign → store → write
-  ```
-
-
-### Three Core Problems & Solutions
-
-#### 1. Visibility
-- **Problem**: When one thread modifies a shared variable, other threads cannot immediately see the modification.
-- **JMM Solutions**:
-  - **`volatile` keyword**: Forces modifications to be flushed to main memory and invalidates other threads' copies.
-  - **`synchronized` locks**: Synchronizes variables to main memory before releasing the lock, and reloads from main memory when acquiring the lock.
-  - **`final` fields**: Properly initialized final fields are visible to other threads.
-
-#### 2. Ordering
-- **Problem**: Compiler/processor optimizations cause instruction reordering, breaking the program's expected order.
-- **JMM Solutions**:
-  - **`happens-before` rules**: Define visibility ordering constraints between operations.
-  - **Memory barriers** (`volatile`, `synchronized` implicitly insert barriers) prohibit specific reorderings.
-
-#### 3. Atomicity
-- **Problem**: Multi-threaded operations cause non-atomic steps to be interrupted.
-- **JMM Solutions**:
-  - **`synchronized`**: Ensures code block atomicity through locking mechanism.
-  - **Atomic classes (`AtomicInteger`, etc.)**: Implement lock-free atomic operations based on CAS.
-
-
-### Detailed Explanation of Happens-Before Principles
-JMM defines the **visibility ordering** of operations through happens-before rules. If operation A happens-before operation B, then A's results are visible to B.
-
-#### Six Core Rules
-| **Rule**               | **Description**                                                                 | **Example**                                                                 |
-|------------------------|-------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| **Program Order Rule**         | Operations within the same thread are ordered by code sequence (but doesn't prohibit instruction reordering)                     | `int x = 1; int y = x;` (y's assignment can see x=1)                            |
-| **Lock Rule**              | Unlock operation happens-before subsequent lock operation                                     | ```synchronized(lock) { x=1; }``` → ```synchronized(lock) { print(x); }``` |
-| **`volatile` Rule**     | Write operation on volatile variable happens-before subsequent read operation                        | ```volatile boolean flag = true;``` → `if(flag) {...}`                   |
-| **Thread Start Rule**         | Parent thread modifications before starting child thread are visible to child thread                                         | ```thread.start()``` modifications before are visible in `run()`                             |
-| **Thread Termination Rule**         | All operations in a thread happen-before other threads detecting that thread's termination                       | Code after `thread.join()` can see modifications within the thread                               |
-| **Transitivity Rule**           | If A happens-before B, and B happens-before C, then A happens-before C       | Combining multiple rules to form an ordering chain                                                   |
-
-
-### JMM Implementation Mechanisms
-
-#### 1. Memory Barriers
-| **Barrier Type**       | **Function**                                 | **Corresponding Code Example**                          |
-|--------------------|----------------------------------------|-----------------------------------------|
-| **LoadLoad**       | Prohibits reordering of read operations before and after the barrier              | Inserted after `volatile read`                        |
-| **StoreStore**     | Prohibits reordering of write operations before and after the barrier              | Inserted before `volatile write`                        |
-| **LoadStore**      | Prohibits reordering of read operations with subsequent write operations              | Rarely used explicitly                               |
-| **StoreLoad**      | Prohibits reordering of write operations with subsequent read operations (full barrier)    | Inserted after `volatile write` (highest cost)             |
-
-#### 2. Memory Semantics of `volatile`
-- **Write Operation**:
-  1. Flushes the value in working memory to main memory (`store` + `write`).
-  2. Inserts `StoreStore` + `StoreLoad` barriers.
-- **Read Operation**:
-  1. Reloads the latest value from main memory (`read` + `load`).
-  2. Inserts `LoadLoad` + `LoadStore` barriers.
-
-#### 3. Memory Semantics of Locks (using `synchronized` as example)
-- **Acquiring Lock (monitorenter)**:
-  - Invalidates shared variables in working memory, forcing reload from main memory.
-- **Releasing Lock (monitorexit)**:
-  - Flushes modifications in working memory to main memory.
-
-
-### JMM Practical Cases
-
-#### Case 1: Double-Checked Locking (DCL) with `volatile`
-```java
-class Singleton {
-    private static volatile Singleton instance; // Must be volatile
-
-    public static Singleton getInstance() {
-        if (instance == null) {
-            synchronized (Singleton.class) {
-                if (instance == null) {
-                    instance = new Singleton(); // Without volatile, may see uninitialized object
-                }
-            }
-        }
-        return instance;
-    }
-}
-```
-- **Root Cause**: The non-atomic operation of `new Singleton()` (allocate memory → initialize → assign reference) may be reordered.
-- **`volatile` Function**: Prohibits instruction reordering, ensuring other threads see a fully initialized object.
-
-#### Case 2: Immutable Objects with `final`
-```java
-class ImmutableObject {
-    private final int x;
-
-    public ImmutableObject(int x) {
-        this.x = x; // final field initialization guarantees visibility
-    }
-}
-```
-- **JMM Guarantee**: Properly constructed immutable objects (all fields are `final`) can be safely published without synchronization.
-
-#### Case 3: Using jstack to Diagnose Deadlocks
-
-**Deadlock Code Example**:
-```java
-public class DeadlockExample {
-    private static Object lock1 = new Object();
-    private static Object lock2 = new Object();
-
-    public static void main(String[] args) {
-        Thread t1 = new Thread(() -> {
-            synchronized (lock1) {
-                System.out.println("Thread 1: holding lock1");
-                try { Thread.sleep(100); } catch (InterruptedException e) {}
-                synchronized (lock2) {
-                    System.out.println("Thread 1: holding lock1 & lock2");
-                }
-            }
-        });
-
-        Thread t2 = new Thread(() -> {
-            synchronized (lock2) {
-                System.out.println("Thread 2: holding lock2");
-                try { Thread.sleep(100); } catch (InterruptedException e) {}
-                synchronized (lock1) {
-                    System.out.println("Thread 2: holding lock2 & lock1");
-                }
-            }
-        });
-
-        t1.start();
-        t2.start();
-    }
-}
-```
-
-**Using jstack to Diagnose**:
-```bash
-# 1. Get process ID
-jps
-
-# Output example:
-# 12345 DeadlockExample
-# 12346 Jps
-
-# 2. View thread stack
-jstack 12345
-
-# Output example:
-Found one Java-level deadlock:
-=============================
-"Thread-1":
-  waiting to lock monitor 0x00007f8b1c004e00 (object 0x00000007d5f3e3a0, a java.lang.Object),
-  which is held by "Thread-0"
-"Thread-0":
-  waiting to lock monitor 0x00007f8b1c007350 (object 0x00000007d5f3e3b0, a java.lang.Object),
-  which is held by "Thread-1"
-
-Java stack information for the threads listed above:
-===================================================
-"Thread-1":
-        at DeadlockExample.lambda$main$1(DeadlockExample.java:23)
-        - waiting to lock <0x00000007d5f3e3a0> (a java.lang.Object)
-        - locked <0x00000007d5f3e3b0> (a java.lang.Object)
-        ...
-
-"Thread-0":
-        at DeadlockExample.lambda$main$0(DeadlockExample.java:13)
-        - waiting to lock <0x00000007d5f3e3b0> (a java.lang.Object)
-        - locked <0x00000007d5f3e3a0> (a java.lang.Object)
-        ...
-
-Found 1 deadlock.
-```
-
-**Solutions**:
-1. Unify lock acquisition order (all threads acquire locks in lock1→lock2 order)
-2. Use `tryLock` with timeout
-3. Use `ReentrantLock`'s `lockInterruptibly` to support interruption
-
-
-#### **Common Misconceptions & Pitfalls**
-| **Misconception**                          | **Correct Understanding**                                                                 |
-|-----------------------------------|-----------------------------------------------------------------------------|
-| `volatile` guarantees atomicity           | Only guarantees atomicity of single read/write operations; compound operations still need locks or atomic classes                                |
-| `synchronized` completely prohibits instruction reordering | Only guarantees ordering within synchronized blocks (code outside critical sections can still be reordered)                           |
-| No need to consider memory visibility without contention        | Even in single-threaded scenarios, JIT optimizations may cause visibility issues (e.g., reading non-volatile variables in loops)    |
-| 64-bit variables (long/double) atomicity     | On 32-bit JVMs, non-volatile long/double variables may be split into two 32-bit operations            |
-
-
-### Relationship Between JMM and Hardware Memory Architecture
-```c
-           [Java Thread]          [Java Thread]
-               ↓   ↑                   ↓   ↑
-           [Working Memory]               [Working Memory]
-               ↓   ↑                   ↓   ↑
-           [CPU Cache]               [CPU Cache]
-               ↖   ↗               ↖   ↗
-                 [Main Memory/RAM]
-```
-- **JMM is an abstract model**: Doesn't directly correspond to physical hardware structure, but ultimately maps to CPU cache coherence protocols (such as MESI).
-- **Cache Line**: Root cause of false sharing problems (optimization scenarios like `@Contended` annotation).
-
-
-### JMM Development Best Practices
-1. **Prioritize high-level tools**:
-   - Concurrent collections (`ConcurrentHashMap`)
-   - Atomic classes (`AtomicInteger`)
-   - Thread pools (`ExecutorService`)
-
-2. **Strictly follow happens-before rules**:
-   - Establish clear visibility ordering through `volatile`, locks, `final`, etc.
-
-3. **Avoid premature optimization**:
-   - Before performance issues arise, prioritize simple `synchronized`.
-
-4. **Use analysis tools for verification**:
-   - **JMM verification tools**: JCStress, Java Pathfinder.
-   - **Performance analysis**: JProfiler, Async Profiler.
-
-
-### Summary
-The Java Memory Model provides developers with tools to control visibility, ordering, and atomicity in multi-threaded environments by defining **interaction rules between threads and memory**. Understanding its core mechanisms (such as happens-before, memory barriers, volatile semantics) is key to writing high-performance concurrent code. Remember three golden rules:
-1. **Visibility**: Ensure modifications are visible through synchronization mechanisms (locks/volatile).
-2. **Ordering**: Rely on happens-before rules to constrain instruction order.
-3. **Atomicity**: Use locks or atomic classes to protect compound operations.
 
 ## Concurrency Lock Knowledge
 
@@ -917,707 +652,98 @@ Underlying principles:
 
 >Just understand AQS principles.
 
+## JMM
+
+JMM defines the access rules for shared variables in multi-threaded environments, centered around three issues: visibility, ordering, and atomicity.
+
+JMM divides memory into two parts: main memory (shared by all threads, storing instance fields, static fields, array elements) and working memory (private to each thread, storing copies of main memory variables). All thread operations on variables go through the interaction between working memory and main memory. JMM defines 8 atomic operations (read, load, use, assign, store, write, lock, unlock) to govern this interaction.
+
+- **Visibility**: One thread modifies a shared variable, other threads may not see it immediately. `volatile` forces the modification to be flushed to main memory and invalidates other threads' copies; `synchronized` flushes to main memory before releasing the lock and reloads upon acquiring the lock; properly constructed `final` fields are visible to other threads.
+- **Ordering**: Compilers and processors may reorder instructions. JMM constrains visibility ordering through happens-before rules and prohibits specific reorderings via memory barriers.
+- **Atomicity**: Compound operations like `i++` can be interrupted. `synchronized` guarantees atomicity through locking; atomic classes achieve lock-free atomic operations via CAS.
+
+### Happens-Before Rules
+
+If operation A happens-before operation B, then A's results are visible to B, and A is ordered before B.
+
+| Rule | Description |
+|------|-------------|
+| Program Order Rule | Within the same thread, each action happens-before every subsequent action in program order |
+| Lock Rule | An unlock happens-before every subsequent lock on the same monitor |
+| volatile Rule | A write to a volatile field happens-before every subsequent read of that field |
+| Thread Start Rule | A call to `Thread.start()` happens-before every action in the started thread |
+| Thread Termination Rule | Any action in a thread happens-before another thread detects that thread's termination via `Thread.join()` or `Thread.isAlive()` |
+| Transitivity | If A happens-before B and B happens-before C, then A happens-before C |
+
+### Memory Barriers
+
+JMM implements happens-before constraints through four types of memory barriers:
+
+| Barrier Type | Effect |
+|-------------|--------|
+| LoadLoad | Prevents reordering of subsequent reads before the barrier |
+| StoreStore | Prevents reordering of subsequent writes before the barrier |
+| LoadStore | Prevents reordering of a read with a subsequent write |
+| StoreLoad | Prevents reordering of a write with a subsequent read (most expensive, inserted after volatile writes) |
+
+**volatile semantics**: A volatile write flushes the value to main memory, preceded by a StoreStore barrier and followed by a StoreLoad barrier. A volatile read reloads from main memory, followed by LoadLoad and LoadStore barriers.
+
+**synchronized semantics**: Acquiring a lock (monitorenter) invalidates the working memory, forcing a reload from main memory; releasing a lock (monitorexit) flushes working memory modifications back to main memory.
+
+### Common Cases
+
+**Double-Checked Locking (DCL)**:
+```java
+class Singleton {
+    private static volatile Singleton instance;
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+```
+Without `volatile`, the `new Singleton()` instruction (allocate → initialize → assign reference) could be reordered, causing another thread to see a partially constructed object.
+
+**Immutable Object with `final`**:
+```java
+class ImmutableObject {
+    private final int x;
+    public ImmutableObject(int x) { this.x = x; }
+}
+```
+Properly constructed `final` fields are safely visible to all threads without synchronization.
+
+### Common Misconceptions
+
+| Misconception | Correct Understanding |
+|--------------|----------------------|
+| `volatile` guarantees atomicity | Only guarantees atomicity for single read/write; compound operations still need locks or atomic classes |
+| `synchronized` completely prohibits reordering | Only guarantees ordering within the critical section; code outside can still be reordered |
+| No visibility issues without contention | Even single-threaded, JIT optimizations may cause visibility issues (e.g., non-volatile variable in long loops) |
+
 ## Atomic Classes
 
-### Java Atomic Classes
+Atomic classes in `java.util.concurrent.atomic` wrap the CAS mechanism discussed earlier into directly usable thread-safe tools. They use the `Unsafe` class to invoke hardware-level atomic instructions and `volatile` for visibility, achieving lock-free atomic operations.
 
-Java's atomic classes in the concurrency package (`java.util.concurrent.atomic`) implement thread-safe lock-free operations through hardware-level atomic instructions (CAS), solving performance bottleneck problems of traditional lock mechanisms in high-concurrency competition scenarios.
+The family covers basic types (`AtomicInteger`, `AtomicLong`, `AtomicBoolean`), reference types (`AtomicReference`, `AtomicStampedReference` with version number to prevent ABA), array types (`AtomicIntegerArray`, etc.), field updaters (`AtomicIntegerFieldUpdater` for atomic field updates without replacing the entire object), and Java 8's high-performance counters (`LongAdder`, `DoubleAdder`).
 
-### Atomic Family Members
-
-```
-Atomic Class System
-├── Basic Types
-│   ├── AtomicInteger
-│   ├── AtomicLong
-│   └── AtomicBoolean
-│
-├── Reference Types
-│   ├── AtomicReference
-│   ├── AtomicStampedReference (with version number)
-│   └── AtomicMarkableReference (with mark bit)
-│
-├── Array Types
-│   ├── AtomicIntegerArray
-│   ├── AtomicLongArray
-│   └── AtomicReferenceArray
-│
-├── Field Updaters
-│   ├── AtomicIntegerFieldUpdater
-│   ├── AtomicLongFieldUpdater
-│   └── AtomicReferenceFieldUpdater
-│
-└── High-Performance Counters
-    ├── LongAdder (Java8+)
-    └── DoubleAdder (Java8+)
-```
-
-### Core Principle: CAS (Compare And Swap)
-
-**CAS Operation Flow**:
-```
-           +-----------------+
-           | Read memory value V     |
-           +-----------------+
-                     |
-                     v
-+----------------------------------+
-| Compare V with expected value A                 |
-| if (V == A) → Write new value B          | → Success returns true
-| else        → Abandon operation            | → Failure returns false
-+----------------------------------+
-```
-
-**CPU Hardware Support**:
-- x86: `LOCK CMPXCHG` instruction
-- ARM: `LDREX/STREX` instructions
-- Atomicity guarantee: Cache lock or bus lock
-
-### Core Class Details and Code Examples
-
-#### 1. AtomicInteger
+Core usage of `AtomicInteger`:
 ```java
 AtomicInteger counter = new AtomicInteger(0);
-
-// Atomic increment
-counter.incrementAndGet();  // 1
-
-// Custom update
-int result = counter.updateAndGet(x -> x * 2);  // 2
-
-// Compound operation
-boolean success = counter.compareAndSet(2, 5); // true
+counter.incrementAndGet();                       // atomic increment
+counter.updateAndGet(x -> x * 2);                // atomic functional update
+boolean ok = counter.compareAndSet(2, 5);        // CAS
 ```
 
-#### 2. AtomicReference
-```java
-AtomicReference<User> userRef = new AtomicReference<>();
-User oldUser = new User("Alice");
-User newUser = new User("Bob");
+`LongAdder` suits high-contention write-many-read-few scenarios. Unlike `AtomicLong` where all threads contend for the same CAS variable, it distributes hot spots across multiple `Cell` objects—writes likely operate on the thread's own Cell, reads aggregate the results. It trades eventual consistency for throughput. For low contention, `AtomicInteger`/`AtomicLong` is simpler; for high contention, `LongAdder` wins.
 
-// Atomic replacement
-userRef.set(oldUser);
-userRef.compareAndSet(oldUser, newUser); // Success
-```
-
-#### 3. LongAdder (Segmented Lock Optimization)
-```java
-LongAdder totalBytes = new LongAdder();
-
-// Concurrent addition
-parallelStream().forEach(i -> totalBytes.add(i));
-
-// Get final result (not real-time)
-long sum = totalBytes.sum();
-```
-
-#### 4. AtomicStampedReference (Solves ABA Problem)
-```java
-AtomicStampedReference<Integer> money = new AtomicStampedReference<>(100, 0);
-
-int[] stampHolder = new int[1];
-int current = money.get(stampHolder); // value=100, version=0
-
-// CAS operation with version number
-money.compareAndSet(100, 200, stampHolder[0], stampHolder[0]+1);
-```
-
-
-### Performance Comparison: synchronized vs Atomic vs LongAdder
-| **Scenario**             | 10 threads/1 million operations (ms) |
-|----------------------|-------------------------|
-| synchronized         | 2450                    |
-| AtomicInteger        | 680                     |
-| LongAdder            | 120                     |
-
-**Conclusion**:
-- **Low contention**: Atomic classes are 3-5 times faster than locks
-- **High contention**: LongAdder performance advantage can reach 20 times
-
-
-### Atomic Class Best Practices
-
-#### 1. Applicable Scenarios
-```c
-✅ Counters (access statistics)
-✅ Status flags (initialization flags)
-✅ Atomic object property updates
-✅ Lock-free data structures (queues, stacks)
-✅ Statistics with low real-time requirements
-```
-
-#### 2. Pitfall Guide
-```java
-// Wrong example: Compound operations still need protection
-AtomicInteger count = new AtomicInteger(0);
-if (count.get() < 10) {  // Race condition exists here!
-    count.incrementAndGet();
-}
-
-// Correct approach: Use CAS loop
-while (true) {
-    int current = count.get();
-    if (current >= 10) break;
-    if (count.compareAndSet(current, current+1)) break;
-}
-```
-
-#### 3. Memory Visibility Guarantee
-All atomic classes internally use **volatile** variables, guaranteeing:
-- **Visibility**: Modifications are immediately visible to other threads
-- **Ordering**: Prevents instruction reordering
-
-
-### Atomic Class Design Patterns
-
-#### 1. Lock-Free Stack Implementation
-```java
-public class LockFreeStack<T> {
-    private AtomicReference<Node<T>> top = new AtomicReference<>();
-
-    public void push(T item) {
-        Node<T> newHead = new Node<>(item);
-        Node<T> oldHead;
-        do {
-            oldHead = top.get();
-            newHead.next = oldHead;
-        } while (!top.compareAndSet(oldHead, newHead));
-    }
-
-    public T pop() {
-        Node<T> oldHead;
-        Node<T> newHead;
-        do {
-            oldHead = top.get();
-            if (oldHead == null) return null;
-            newHead = oldHead.next;
-        } while (!top.compareAndSet(oldHead, newHead));
-        return oldHead.item;
-    }
-
-    private static class Node<T> {
-        final T item;
-        Node<T> next;
-        // Constructor...
-    }
-}
-```
-
-#### 2. Efficient Counter Group
-```java
-class MetricCounter {
-    private final AtomicLongArray counters;
-
-    public MetricCounter(int size) {
-        counters = new AtomicLongArray(size);
-    }
-
-    public void increment(int index) {
-        counters.getAndIncrement(index);
-    }
-
-    public long getTotal() {
-        long sum = 0;
-        for (int i = 0; i < counters.length(); i++) {
-            sum += counters.get(i);
-        }
-        return sum;
-    }
-}
-```
-
-
-#### ⚖️ **Atomic Class Limitations**
-| **Limitation**      | **Solution**                       |
-| ----------- | ------------------------------ |
-| ABA problem      | Use AtomicStampedReference with version numbers |
-| Long loop time, high overhead    | Combine with backoff algorithm (Exponential Backoff)    |
-| Can only guarantee single variable atomicity | Use locks or merge variables                       |
-| False sharing problem       | @Contended annotation for cache line padding             |
-
-
-### Java 8+ Enhanced Features
-#### 1. Enhanced API
-```java
-AtomicInteger atomic = new AtomicInteger(5);
-
-// Functional update
-atomic.accumulateAndGet(3, Math::max); // Result is 5
-
-// Lazy initialization
-AtomicReference<ExpensiveObject> ref = new AtomicReference<>();
-ExpensiveObject obj = ref.updateAndGet(
-    o -> o != null ? o : createExpensiveObject()
-);
-```
-
-#### 2. Adder Series Optimization
-```c
-LongAdder → Suitable for statistics scenarios (write-heavy, read-light)
-LongAccumulator → Supports custom accumulation rules
-```
-
-
-### Architect Considerations
-1. **Cost Trade-offs**:
-   - Development cost: Atomic classes are more complex than locks
-   - Maintenance cost: Requires deep understanding of memory model
-
-2. **Technology Selection**:
-   ```c
-   Single variable atomic operations → Atomic series
-   Distributed counters → Redis/ZooKeeper
-   Ultra-high concurrency statistics → LongAdder + periodic persistence
-   ```
-
-3. **Future Trends**:
-   - Vectorized API (Valhalla project)
-   - Hardware-accelerated atomic instructions
-
-
-**Ultimate Summary**:
-Atomic classes are foundational tools for Java concurrent programming. They:
-🔹 Replace locks with **CAS** for lock-free concurrency
-🔹 Guarantee visibility through **volatile**
-🔹 Optimize high-concurrency scenarios with **segmentation strategy**
-Mastering their principles and applicable scenarios is essential for building high-performance Java applications.
-
-### Atomic Class API Examples
-Here are detailed API examples and difference analysis for each member of the Java Atomic class family:
-
-
-### I. Basic Type Atomic Classes
-#### 1. AtomicInteger
-```java
-AtomicInteger atomicInt = new AtomicInteger(0);
-
-// Basic operations
-atomicInt.set(10);                          // Set value
-int val = atomicInt.get();                  // Get value → 10
-
-// Atomic operations
-int newVal = atomicInt.incrementAndGet();    // Increment → 11
-int oldVal = atomicInt.getAndAdd(5);         // Return old value → 11, new value → 16
-
-// CAS operation
-boolean success = atomicInt.compareAndSet(16, 20); // true
-
-// Functional update
-atomicInt.updateAndGet(x -> x * 2);          // 20 → 40
-```
-
-#### 2. AtomicLong
-```java
-AtomicLong atomicLong = new AtomicLong(100L);
-
-// Similar to AtomicInteger, supports large-range counting
-atomicLong.addAndGet(50);                    // 150L
-long current = atomicLong.getAndDecrement(); // 150 → 149
-```
-
-#### 3. AtomicBoolean
-```java
-AtomicBoolean atomicBool = new AtomicBoolean(false);
-
-// Atomic state toggle
-boolean old = atomicBool.getAndSet(true);    // false → true
-
-// Conditional update
-boolean updated = atomicBool.compareAndSet(true, false); // true
-```
-
-
-### II. Reference Type Atomic Classes
-#### 1. AtomicReference
-```java
-AtomicReference<String> ref = new AtomicReference<>("A");
-
-// Update reference
-ref.set("B");
-String oldVal = ref.getAndSet("C");          // "B" → "C"
-
-// CAS has ABA problem
-ref.compareAndSet("C", "D");                 // true
-```
-
-#### 2. AtomicStampedReference (With Version Number)
-```java
-AtomicStampedReference<String> stampedRef = 
-    new AtomicStampedReference<>("A", 0);
-
-// Solve ABA problem
-int[] stampHolder = new int[1];
-String currentRef = stampedRef.get(stampHolder); // currentRef="A", stamp=0
-
-// Check version number when updating
-boolean success = stampedRef.compareAndSet(
-    "A", "B", stampHolder[0], stampHolder[0] + 1); // Success, version becomes 1
-```
-
-#### 3. AtomicMarkableReference (With Mark Bit)
-```java
-AtomicMarkableReference<String> markableRef = 
-    new AtomicMarkableReference<>("A", false);
-
-// Use boolean mark
-boolean[] markHolder = new boolean[1];
-String ref = markableRef.get(markHolder);    // ref="A", mark=false
-
-// Update mark bit
-markableRef.attemptMark("A", true);          // Mark as true
-```
-
-
-### III. Array Type Atomic Classes
-#### 1. AtomicIntegerArray
-```java
-int[] arr = {1, 2, 3};
-AtomicIntegerArray atomicArray = new AtomicIntegerArray(arr);
-
-// Atomic element update
-atomicArray.set(0, 10);                      // Index 0 → 10
-int val = atomicArray.getAndAdd(1, 5);       // Index 1: 2 → 7, return old value 2
-
-// CAS operation
-boolean updated = atomicArray.compareAndSet(2, 3, 30); // Index 2: 3 → 30
-```
-
-#### 2. AtomicReferenceArray
-```java
-AtomicReferenceArray<String> refArray = 
-    new AtomicReferenceArray<>(new String[5]);
-
-refArray.set(0, "Java");
-String old = refArray.getAndUpdate(0, s -> s + "8"); // "Java" → "Java8"
-```
-
-
-### IV. Field Updaters
-#### 1. AtomicIntegerFieldUpdater
-```java
-class Counter {
-    volatile int count; // Must be volatile
-}
-
-Counter obj = new Counter();
-AtomicIntegerFieldUpdater<Counter> updater = 
-    AtomicIntegerFieldUpdater.newUpdater(Counter.class, "count");
-
-updater.addAndGet(obj, 5); // obj.count = 5
-```
-
-#### 2. AtomicReferenceFieldUpdater
-```java
-class Node {
-    volatile Node next; // Must be volatile
-}
-
-Node head = new Node();
-AtomicReferenceFieldUpdater<Node, Node> updater = 
-    AtomicReferenceFieldUpdater.newUpdater(Node.class, Node.class, "next");
-
-updater.compareAndSet(head, null, new Node()); // Update head.next
-```
-
-
-### V. High-Performance Counters
-#### 1. LongAdder
-```java
-LongAdder adder = new LongAdder();
-
-// Concurrent accumulation (suitable for write-heavy, read-light)
-adder.add(10);
-adder.increment();
-
-// Get sum (not precise real-time value)
-long sum = adder.sum();                      // 11
-
-// Reset (doesn't affect ongoing accumulation)
-adder.reset();                               // sum → 0
-```
-
-#### 2. LongAccumulator (More General)
-```java
-LongAccumulator accumulator = 
-    new LongAccumulator((x, y) -> x * y, 1); // Initial value 1, multiplier
-
-accumulator.accumulate(3);                   // 1*3=3
-accumulator.accumulate(5);                   // 3*5=15
-long result = accumulator.get();             // 15
-```
-
-
-### VI. Core Differences Summary
-| **Category**          | **Typical Class**               | **Core Features**                          | **Use Cases**                     |
-|-------------------|-------------------------|--------------------------------------|----------------------------------|
-| Basic Types          | AtomicInteger           | Single variable atomic operations                        | Simple counters, status flags             |
-| Reference Types          | AtomicStampedReference  | Version numbers solve ABA problem                 | Lock-free stacks/queues, complex state management        |
-| Array Types          | AtomicIntegerArray      | Atomic operations on array elements                      | Concurrent statistics arrays                     |
-| Field Updaters        | AtomicIntegerFieldUpdater | Reflective object field updates                    | Need atomic updates to existing class fields           |
-| High-Performance Counters      | LongAdder               | Scatter hotspots, eventual consistency                   | High-concurrency statistics (e.g., QPS counting)        |
-
-
-### VII. Selection Decision Guide
-1. **Single Variable Counting**
-   - Low contention → `AtomicInteger`
-   - High contention → `LongAdder`
-
-2. **Object Reference Updates**
-   - No ABA problem → `AtomicReference`
-   - Need ABA prevention → `AtomicStampedReference`
-
-3. **Array Element Atomic Operations**
-   - Basic types → `AtomicIntegerArray`
-   - Objects → `AtomicReferenceArray`
-
-4. **Modify Existing Class Fields**
-   - Non-invasive modification → `AtomicXxxFieldUpdater`
-
-
-Through the above code examples and comparisons, developers can clearly distinguish the applicable scenarios and core API usage of different Atomic classes.
-
-### AtomicInteger vs LongAdder
-**AtomicInteger vs LongAdder In-Depth Analysis**
-This article will deeply analyze two core classes in the Java atomic variable family, detailing API usage through code examples and comparing performance in different scenarios.
-
-
-### Core Class Comparison
-| **Feature**          | AtomicInteger                 | LongAdder (Java8+)          |
-|-------------------|-------------------------------|-----------------------------| 
-| **Implementation Principle**      | CAS lock-free algorithm                   | Segmented locks (Cell scatter hotspots)       |
-| **Applicable Scenarios**      | Low-concurrency atomic operations                 | High-concurrency write-heavy, read-light scenarios           |
-| **Memory Consumption**      | Low                            | Higher (each thread has independent Cell)     |
-| **Precision Guarantee**      | Strong consistency                      | Eventual consistency                   |
-| **Typical Applications**      | Simple counters                    | Statistical data collection/monitoring metrics         |
-
-
-### AtomicInteger API Details
-#### 1. Basic Operations
-```java
-AtomicInteger ai = new AtomicInteger(0);
-
-// Set value (non-atomic)
-ai.set(10);
-
-// Get current value
-int current = ai.get(); // 10
-
-// Atomic set and return old value
-int old = ai.getAndSet(20); // old=10, ai=20
-
-// Compare and swap (CAS)
-boolean success = ai.compareAndSet(20, 30); // true
-```
-
-#### 2. Atomic Operations
-```java
-// Increment and get new value
-int newVal = ai.incrementAndGet(); // 31
-
-// Get and increment
-int before = ai.getAndIncrement(); // 31 → ai=32
-
-// Atomic addition
-int result = ai.addAndGet(5); // 32+5=37
-
-// Custom operation
-int custom = ai.updateAndGet(x -> x * 2); // 37*2=74
-```
-
-#### 3. Complex Operations
-```java
-// Accumulate calculation (thread-safe version)
-int accumulated = ai.accumulateAndGet(10, (prev, x) -> prev + x); // 74+10=84
-
-// Lazy initialization (commonly used for singletons)
-AtomicInteger lazy = new AtomicInteger();
-int initialized = lazy.updateAndGet(x -> x == 0 ? 100 : x);
-```
-
-
-### LongAdder API Details
-#### 1. Basic Operations
-```java
-LongAdder adder = new LongAdder();
-
-// Increment (no return value)
-adder.increment();       // +1
-adder.add(5);            // +5
-
-// Decrement
-adder.decrement();       // -1
-
-// Reset counter
-adder.reset();           // Zero out
-
-// Get current value (non-atomic snapshot)
-long sum = adder.sum();  // 5
-```
-
-#### 2. Compound Operations
-```java
-// Add then get (similar to getAndAdd)
-long beforeAdd = adder.sumThenReset(); // Return current value and reset
-
-// Merge with other Adder
-LongAdder another = new LongAdder();
-another.add(3);
-adder.add(another.sum()); // adder=8
-```
-
-#### 3. Statistics Scenarios
-```java
-// High-concurrency statistics example
-LongAdder totalRequests = new LongAdder();
-LongAdder failedRequests = new LongAdder();
-
-// Request processing thread
-void handleRequest() {
-    totalRequests.increment();
-    try {
-        processRequest();
-    } catch (Exception e) {
-        failedRequests.increment();
-    }
-}
-
-// Output statistics
-System.out.printf("Success rate: %.2f%%%n", 
-    100 * (totalRequests.sum() - failedRequests.sum()) / (double)totalRequests.sum());
-```
-
-
-### Performance Comparison Test
-#### Test Code
-```java
-@BenchmarkMode(Mode.Throughput)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
-public class CounterBenchmark {
-    private AtomicInteger atomic = new AtomicInteger();
-    private LongAdder adder = new LongAdder();
-
-    // Thread count simulates different concurrency levels
-    @Param({"1", "4", "8"})
-    private int threads;
-
-    @Benchmark
-    public void atomicIncrement(Blackhole bh) {
-        atomic.incrementAndGet();
-    }
-
-    @Benchmark
-    public void adderIncrement(Blackhole bh) {
-        adder.increment();
-    }
-}
-```
-
-#### Test Results (ops/ms)
-| Threads | AtomicInteger | LongAdder |
-|-------|---------------|-----------|
-| 1     | 12,345,678    | 9,876,543 |
-| 4     | 3,456,789     | 8,765,432 |
-| 8     | 1,234,567     | 8,456,789 |
-
-**Conclusion**:
-- **Low concurrency**: AtomicInteger performs better
-- **High concurrency**: LongAdder throughput increases 6-8 times
-
-
-### Selection Decision Tree
-```
-Need atomic variable?
-├─ Yes → Are write operations frequent?
-│   ├─ Yes → LongAdder
-│   └─ No → AtomicInteger
-└─ No → Consider other synchronization mechanisms
-```
-
-
-### Best Practices
-#### AtomicInteger Use Cases
-```java
-// 1. Simple counter
-AtomicInteger counter = new AtomicInteger();
-requestHandlers.forEach(h -> 
-    h.setOnSuccess(() -> counter.incrementAndGet())
-);
-
-// 2. Status flag
-AtomicInteger status = new AtomicInteger(0);
-if (status.compareAndSet(0, 1)) {
-    // Execute initialization operation
-}
-```
-
-#### LongAdder Use Cases
-```java
-// 1. Real-time data statistics
-LongAdder bytesSent = new LongAdder();
-networkService.addListener(bytes -> 
-    bytesSent.add(bytes)
-);
-
-// 2. High-frequency counter
-LongAdder clickCounter = new LongAdder();
-button.addClickListener(e -> 
-    clickCounter.increment()
-);
-```
-
-
-####  **Precautions**
-4. **LongAdder Precision Issues**
-   ```java
-   // sum() is only an approximate value, for exact value:
-   long exactSum = adder.longValue(); // Equivalent to sum()
-   // True precision requires stopping all write operations
-   ```
-
-5. **Memory Consumption Control**
-   ```java
-   // Estimate Cell array size (default maximum CPU cores)
-   -Djava.util.concurrent.ForkJoinPool.common.parallelism=16
-   ```
-
-6. **AtomicInteger ABA Problem**
-   ```java
-   // Use AtomicStampedReference when version control is needed
-   AtomicStampedReference<Integer> ref = 
-       new AtomicStampedReference<>(0, 0);
-   ```
-
-
-### Advanced Techniques
-#### Custom Segmentation Strategy
-```java
-// Inherit Striped64 to implement custom scatter algorithm
-class CustomAdder extends Striped64 {
-    public void increment() {
-        Cell[] cs; long b, v; int m;
-        if ((cs = cells) != null || 
-            !casBase(b = base, b + 1)) {
-            // Custom conflict handling logic
-        }
-    }
-}
-```
-
-#### Combining with Concurrent Containers
-```java
-ConcurrentHashMap<String, LongAdder> counterMap = new ConcurrentHashMap<>();
-
-// Count word frequency
-words.forEach(word -> 
-    counterMap.computeIfAbsent(word, k -> new LongAdder()).increment()
-);
-```
-
-
-**Summary**:
-- **AtomicInteger**: Swiss Army knife for simple scenarios, guarantees strong consistency
-- **LongAdder**: Nuclear weapon for high-concurrency write scenarios, trades space for time
-Choose reasonably based on actual scenarios, and can combine with JMH for performance testing verification.
+Atomic classes cannot solve compound operation races: `if (counter.get() < 10) counter.incrementAndGet()` can still be interleaved. Use a CAS retry loop or fall back to `synchronized`.
 
 ## Thread Pools and ThreadLocal
 
@@ -1645,223 +771,60 @@ Principles are similar to:
 ![](../../interview-java-2/Pasted%20image%2020250113203923.png)
 
 
-### ThreadLocal Automatic Cleanup Mechanism and Expansion Principle In-Depth Analysis
+### ThreadLocal Cleanup and Expansion
 
+ThreadLocalMap uses two core methods, `replaceStaleEntry` and `expungeStaleEntry`, to automatically clean up expired Entries (those with `Entry.key == null`), mitigating memory leaks.
 
-#### I. Automatic Cleanup Trigger Point Principle Analysis
+**replaceStaleEntry** is triggered in `set()` when the current slot's Entry has expired. It scans backward to find the earliest expired Entry in the contiguous run, scans forward to find a matching key or additional expired Entries, replaces the value and swaps slots, then calls `expungeStaleEntry` to clean the full segment:
 
-ThreadLocalMap implements automatic cleanup of expired Entries through two core methods `replaceStaleEntry` and `expungeStaleEntry`, avoiding memory leaks.
-
-
-##### 1. `replaceStaleEntry` Method
-**Trigger Scenario**: During the `set()` method, when the current slot's Entry is found to be expired (`Entry.key == null`), the old value needs to be replaced and adjacent expired Entries cleaned up.
-
-**Execution Flow**:
-```c
-1. Locate expired slot (staleSlot)
-2. Scan forward: Find the starting position of the frontmost consecutive expired Entry (slotToExpunge)
-3. Scan backward: Find the first non-empty Entry or end of array
-   - If matching key found, directly replace value
-   - If new expired Entry found, update slotToExpunge
-4. Clean expired Entries from starting position to current slot
-5. Call expungeStaleEntry for deep cleaning
-```
-
-**Code Logic** (simplified version):
 ```java
 private void replaceStaleEntry(ThreadLocal<?> key, Object value, int staleSlot) {
     Entry[] tab = table;
     int len = tab.length;
-    Entry e;
-
-    // Scan forward to find first expired Entry position
+    // Scan backward to find the first stale entry
     int slotToExpunge = staleSlot;
-    for (int i = prevIndex(staleSlot, len); (e = tab[i]) != null; i = prevIndex(i, len)) {
-        if (e.get() == null) slotToExpunge = i;
-    }
-
-    // Scan backward to find replaceable Entry
-    for (int i = nextIndex(staleSlot, len); (e = tab[i]) != null; i = nextIndex(i, len)) {
-        ThreadLocal<?> k = e.get();
-
-        // Found matching key, replace value and swap slots
-        if (k == key) {
-            e.value = value;
-            tab[i] = tab[staleSlot];
-            tab[staleSlot] = e;
-
-            // If no other expired Entry found in forward scan, update cleanup starting point
-            if (slotToExpunge == staleSlot) slotToExpunge = i;
-            cleanSomeSlots(expungeStaleEntry(slotToExpunge), len);
-            return;
-        }
-
-        // Found new expired Entry, update cleanup starting point
-        if (k == null && slotToExpunge == staleSlot) {
+    for (int i = staleSlot - 1; i >= 0 && tab[i] != null; i--)
+        if (tab[i].refersTo(null))
             slotToExpunge = i;
-        }
-    }
-
-    // No matching key found, directly replace current slot
+    // Scan forward for matching key or more stale entries
+    for (int i = staleSlot + 1; i < len && tab[i] != null; i++)
+        if (tab[i].refersTo(key)) { ... }
+    // If no matching key, create new entry at staleSlot
     tab[staleSlot].value = null;
     tab[staleSlot] = new Entry(key, value);
-
-    // Trigger deep cleaning
-    if (slotToExpunge != staleSlot) {
-        cleanSomeSlots(expungeStaleEntry(slotToExpunge), len);
-    }
+    // Clean up
+    if (slotToExpunge != staleSlot)
+        expungeStaleEntry(slotToExpunge);
 }
 ```
 
+**expungeStaleEntry** is triggered in `get()` or `remove()` when an expired Entry is encountered. It clears the specified slot and continues scanning forward, cleaning any expired Entries it finds and rehashing valid ones:
 
-##### 2. `expungeStaleEntry` Method
-**Trigger Scenario**: When expired Entry is found in `get()` or `remove()`, cleanup and rehashing of valid Entries is needed.
-
-**Execution Flow**:
-```c
-1. Clean expired Entry at specified slot
-2. Scan backward until empty slot encountered:
-   - Clean all encountered expired Entries
-   - Rehash valid Entries
-3. Return position of next empty slot
-```
-
-**Code Logic** (simplified version):
 ```java
 private int expungeStaleEntry(int staleSlot) {
-    Entry[] tab = table;
-    int len = tab.length;
-
-    // Clean current slot
-    tab[staleSlot].value = null;
-    tab[staleSlot] = null;
+    Entry[] tab = table; int len = tab.length;
+    tab[staleSlot].value = null; tab[staleSlot] = null;  // clear stale entry
     size--;
-
-    Entry e;
-    int i;
-    // Scan backward to clean and rehash
-    for (i = nextIndex(staleSlot, len); (e = tab[i]) != null; i = nextIndex(i, len)) {
-        ThreadLocal<?> k = e.get();
-        if (k == null) { // Expired Entry
-            e.value = null;
-            tab[i] = null;
-            size--;
-        } else { // Valid Entry
-            int h = k.threadLocalHashCode & (len - 1);
-            if (h != i) { // Needs rehashing
-                tab[i] = null;
-                while (tab[h] != null) h = nextIndex(h, len);
-                tab[h] = e;
-            }
-        }
+    for (int i = staleSlot + 1; i < len && tab[i] != null; i++) {
+        Entry e = tab[i];
+        if (e.refersTo(null)) { e.value = null; tab[i] = null; size--; }
+        else { /* rehash if needed */ }
     }
-    return i; // Return next empty slot
+    return i;
 }
 ```
 
+**Expansion** follows a clean-before-expand strategy: initial capacity 16, threshold = capacity × 2/3. When `size ≥ threshold`, a full cleanup of expired Entries runs first. Only if `size ≥ threshold × 3/4` after cleanup does a real expansion occur—capacity doubles and all valid Entries are rehashed.
 
-#### II. Expansion Mechanism Principle Analysis
+| Mechanism | Advantage | Cost |
+|-----------|----------|------|
+| Weak reference keys + auto-cleanup | Reduces memory leak risk | Adds overhead to set/get operations |
+| Lazy cleanup | Avoids full table scans | May leave some expired Entries |
+| Clean-before-expand | Only expands for truly needed data | Higher expansion cost |
 
-ThreadLocalMap's expansion strategy is **clean first, then expand**, ensuring only valid Entries are retained during expansion.
-
-
-##### 1. Expansion Trigger Conditions
-```c
-Initial capacity = 16
-Expansion threshold = Initial capacity * 2/3 = 10
-Trigger condition: size >= threshold
-```
-
-##### 2. Expansion Process
-```c
-1. Full cleanup of expired Entries (call expungeStaleEntries)
-2. If size >= threshold * 3/4 after cleanup, execute expansion
-3. Double capacity (newLen = oldLen * 2)
-4. Rehash all valid Entries to new array
-```
-
-**Code Logic** (simplified version):
-```java
-private void resize() {
-    Entry[] oldTab = table;
-    int oldLen = oldTab.length;
-    int newLen = oldLen * 2; // Double capacity
-    Entry[] newTab = new Entry[newLen];
-    int count = 0;
-
-    // Rehash valid Entries
-    for (int j = 0; j < oldLen; j++) {
-        Entry e = oldTab[j];
-        if (e != null) {
-            ThreadLocal<?> k = e.get();
-            if (k == null) { // Skip expired Entry
-                e.value = null;
-            } else {
-                // Calculate new position
-                int h = k.threadLocalHashCode & (newLen - 1);
-                while (newTab[h] != null) h = nextIndex(h, newLen);
-                newTab[h] = e;
-                count++;
-            }
-        }
-    }
-
-    // Update threshold
-    setThreshold(newLen);
-    size = count;
-    table = newTab;
-}
-```
+Auto-cleanup recovers Entries whose weak-reference keys have been collected, but the strong reference to the `value` still requires explicit `remove()`—especially critical in thread pool scenarios.
 
 
-##### 3. Rehashing Conflict Resolution
-- **Linear probing**: When new position conflicts, sequentially find next empty slot.
-- **Probe step**: Fixed at 1 (`nextIndex = (i + 1) % len`).
-
-
-#### III. Design Significance and Performance Trade-offs
-| **Mechanism**             | **Advantages**                               | **Cost**                     |
-|----------------------|---------------------------------------|------------------------------|
-| Weak reference keys + automatic cleanup   | Reduces memory leak risk                       | Increases `set` / `get` time complexity  |
-| Lazy cleanup     | Avoids global scan overhead                     | May leave some expired Entries         |
-| Clean first then expand         | Ensures expansion only targets valid data                 | Higher expansion cost                  |
-| Linear probing           | Simple implementation, cache-friendly                     | Performance degrades with hash conflicts             |
-
-
-#### IV. Complete Cleanup Process Diagram
-```c
-         [set()/get() triggered]
-                 |
-                 v
-        Found expired Entry (key=null)
-                 |
-         +-------+-------+
-         |               |
-         v               v
- replaceStaleEntry   expungeStaleEntry
- (Replace and local cleanup)      (Deep cleanup)
-         |               |
-         +-------+-------+
-                 |
-                 v
-           cleanSomeSlots
-        (Heuristic cleanup of subsequent slots)
-                 |
-                 v
-            [Cleanup complete]
-```
-
-
-#### V. Key Conclusions
-1. **Memory Leak Protection**:
-   - Automatic cleanup mechanism can reclaim Entries with **weak reference keys that have become invalid**, but **strong references to values** still need explicit cleanup via `remove()`.
-
-2. **Performance Optimization**:
-   - **Lazy cleanup** avoids full table scans, but may leave expired Entries in extreme cases.
-   - **2x expansion** balances space utilization and rehashing cost.
-
-3. **Developer Responsibility**:
-   - Must **explicitly call `remove()`** (especially in thread pool scenarios), which automatic cleanup mechanisms cannot replace.
 #### Memory Leak Issues Caused
 Memory leak issues can be resolved by calling the `remove` method. When necessary, use `try... finally` to prevent memory leaks
 

@@ -14,8 +14,7 @@ heroImageSrc: ../../pic/salvatore-andrea-santacroce-AmKua5hKI38-unsplash.jpg
 heroImageColor: " #9fd0cb "
 ---
 
-> [!note] 说明
-> 这一组保留原来的比赛题解片段，只按现在博客分组重新排了一下顺序，没有再把你的内容重写成统一口吻。
+
 
 ## 收录范围
 

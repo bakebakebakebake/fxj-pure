@@ -13,26 +13,6 @@ language: English
 heroImageSrc: ../../../pic/pawel-czerwinski-mv3APn9e7SU-unsplash.jpg
 heroImageColor: " #0077b3 "
 ---
-> [!note] Note
-> This is revised to directly retain the original Codeforces solution content: keep the original draft for single problems, and for contest notes, only extract the problems you specifically marked in your bookmarks.
-
-## Scope of Inclusion
-
-- `B. Binary Colouring`
-- `B. Collatz Conjecture`
-- `C. Manhattan Permutations`
-- `D. GCD-sequence`
-- `CF 1985 Div.4 F`
-- `CF 1985 Div.4 G`
-- `CF 1985 Div.4 H`
-- `CF 1995 Div.2 B1`
-- `CF 1995 Div.2 B2`
-- `CF 1995 Div.2 C`
-- `CF 1988 Div.2 C`
-- `CF 1988 Div.2 D`
-- `CF 1918 Div.2 C`
-- `CF 1946 Div.2 B`
-- `CF 1946 Div.2 C`
 - `CF 1946 Div.2 D`
 
 ## B. Binary Colouring

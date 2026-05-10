@@ -14,8 +14,7 @@ heroImageSrc: ../../pic/pawel-czerwinski-mv3APn9e7SU-unsplash.jpg
 heroImageColor: " #0077b3 "
 ---
 
-> [!note] 说明
-> 这篇改成直接保留原来的 Codeforces 题解内容：单题就保留单题原稿，比赛笔记只抽出你书签里点名要留的那些题。
+
 
 ## 收录范围
 

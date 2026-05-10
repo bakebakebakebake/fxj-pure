@@ -13,8 +13,6 @@ language: English
 heroImageSrc: ../../../pic/nikita-fursenko-5_a-QqK6680-unsplash.jpg
 heroImageColor: " #98adca "
 ---
-> [!note] Note
-> This article continues to directly backfill the original problem solution notes, trying to keep the original descriptions unchanged as much as possible, only handling image, link, and section compatibility issues within the site.
 
 ## Scope of Coverage
 

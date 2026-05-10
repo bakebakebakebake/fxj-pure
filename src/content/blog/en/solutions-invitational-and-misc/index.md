@@ -13,14 +13,6 @@ language: English
 heroImageSrc: ../../../pic/brianna-parks-OkiElXd_EDQ-unsplash.jpg
 heroImageColor: "#6e8059"
 ---
-> [!note] Instruction
-> This article will no longer include summary-style short reviews. Instead, it will directly restore the original solutions for the invitational contest and individual problems, with only supplementary compatibility handling added on the site side.
-
-## Scope of Inclusion
-
-- `2024 Zhengzhou Invitational M`
-- `2024 Zhengzhou Invitational H`
-- `2024 Zhengzhou Invitational A`
 - `2024 Zhengzhou Invitational D`
 - `2024 Kunming Invitational A`
 - `2024 Kunming Invitational E`

@@ -1,6 +1,6 @@
 ---
-title: 并发不是开线程：从 JMM 到线程池与 CompletableFuture
-description: 以原始 Java 并发笔记为主，保留 JMM、锁、原子类、ThreadLocal、线程池等内容。
+title: Java并发
+description: 大概包括JMM、锁、原子类、ThreadLocal、线程池等内容。
 publishDate: 2025-05-16
 tags:
   - 八股
@@ -10,274 +10,10 @@ tags:
   - 线程池
   - CompletableFuture
 language: 中文
-heroImageSrc: '../../pic/jessica-lewis-thepaintedsquare-1tsaxPdyTLk-unsplash.jpg'
-heroImageColor: ' #b56c36 '
+heroImageSrc: ../../pic/jessica-lewis-thepaintedsquare-1tsaxPdyTLk-unsplash.jpg
+heroImageColor: " #b56c36 "
 ---
 
-> [!note] 说明
-> 这篇改回以你原来的并发笔记为主体，尽量不改原有的知识点展开顺序；`CompletableFuture, 美团` 之后只作为补充案例。
-
-## 收录内容
-
-- `JUC总结`
-- `JMM`
-- `并发锁相关知识`
-- `Atomic 原子类`
-- `线程池相关知识`
-
-## JUC 总结
-
-- 线程池
-- AQS 原理
-- synchronized
-- CAS
-- ThreadLocal
-
-## JMM
-
-#### JMM 的核心目标
-Java 内存模型（Java Memory Model, JMM）定义了多线程环境下**共享变量的访问规则**，确保在不同线程间操作共享数据时的**可见性**、**有序性**和**原子性**。它是 Java 并发编程的基石，帮助开发者在复杂的硬件和编译器优化中编写线程安全的代码。
-
-
-### JMM 的核心概念
-
-#### 1. 主内存（Main Memory）与工作内存（Working Memory）
-- **主内存**：所有线程共享的内存区域，存储**所有变量**（实例字段、静态字段、数组对象元素）。
-- **工作内存**：每个线程私有的内存空间，存储该线程使用的变量的**副本**。
-- **交互规则**：
-  ```c
-  [线程] ←→ [工作内存] ←→ [主内存]
-  ```
-  所有变量操作必须通过工作内存与主内存交互（JMM 抽象模型，不直接对应物理硬件）。
-
-#### 2. 内存间交互的原子操作
-JMM 定义了 8 种原子操作（如 `read`、`load`、`use`、`assign`、`store`、`write` 等），控制线程与内存的交互流程。例如：
-  ```c
-  线程读取变量：read → load → use
-  线程修改变量：assign → store → write
-  ```
-
-
-### 三大核心问题&解决方案
-
-#### 1. 可见性（Visibility）
-- **问题**：一个线程修改共享变量，其他线程无法立即看到修改。
-- **JMM 方案**：
-  - **`volatile` 关键字**：强制将修改刷新到主内存，并使其他线程的副本失效。
-  - **`synchronized` 锁**：释放锁前将变量同步到主内存，获取锁时从主内存重新加载。
-  - **`final` 字段**：正确初始化后对其他线程可见。
-
-#### 2. 有序性（Ordering）
-- **问题**：编译器/处理器优化导致指令重排序，破坏程序预期顺序。
-- **JMM 方案**：
-  - **`happens-before` 规则**：定义操作间的可见性顺序约束。
-  - **内存屏障**（`volatile`、`synchronized` 隐式插入屏障）禁止特定重排序。
-
-#### 3. 原子性（Atomicity）
-- **问题**：多线程操作导致非原子步骤被中断。
-- **JMM 方案**：
-  - **`synchronized`**：通过锁机制保证代码块原子性。
-  - **原子类（`AtomicInteger` 等）**：基于 CAS 实现无锁原子操作。
-
-
-### Happens-Before 原则详解
-JMM 通过 happens-before 规则定义操作的**可见性顺序**，若操作 A happens-before 操作 B，则 A 的结果对 B 可见。
-
-#### 六大核心规则
-| **规则**               | **说明**                                                                 | **示例**                                                                 |
-|------------------------|-------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| **程序顺序规则**         | 同一线程内的操作按代码顺序保证有序性（但不禁止指令重排序）                     | `int x = 1; int y = x;`（y 的赋值能看到 x=1）                            |
-| **锁规则**              | 解锁操作 happens-before 后续的加锁操作                                     | ```synchronized(lock) { x=1; }``` → ```synchronized(lock) { print(x); }``` |
-| **`volatile` 规则**     | 对 volatile 变量的写操作 happens-before 后续的读操作                        | ```volatile boolean flag = true;``` → `if(flag) {...}`                   |
-| **线程启动规则**         | 父线程启动子线程前的修改对子线程可见                                         | ```thread.start()``` 前的修改对 `run()` 可见                             |
-| **线程终止规则**         | 线程的所有操作 happens-before 其他线程检测到该线程终止                       | `thread.join()` 后的代码能看到线程内的修改                               |
-| **传递性规则**           | 若 A happens-before B，且 B happens-before C，则 A happens-before C       | 组合多个规则形成顺序链                                                   |
-
-
-### JMM 的实现机制
-
-#### 1. 内存屏障（Memory Barriers）
-| **屏障类型**       | **作用**                                 | **对应代码示例**                          |
-|--------------------|-----------------------------------------|------------------------------------------|
-| **LoadLoad**       | 禁止该屏障前后的读操作重排序              | `volatile读` 后插入                        |
-| **StoreStore**     | 禁止该屏障前后的写操作重排序              | `volatile写` 前插入                        |
-| **LoadStore**      | 禁止读操作与后续写操作重排序              | 较少显式使用                               |
-| **StoreLoad**      | 禁止写操作与后续读操作重排序（全能屏障）    | `volatile写` 后插入（开销最大）             |
-
-#### 2. `volatile` 的内存语义
-- **写操作**：
-  1. 将工作内存的值刷新到主内存（`store` + `write`）。
-  2. 插入 `StoreStore` + `StoreLoad` 屏障。
-- **读操作**：
-  1. 从主内存重新加载最新值（`read` + `load`）。
-  2. 插入 `LoadLoad` + `LoadStore` 屏障。
-
-#### 3. 锁的内存语义（以 `synchronized` 为例）
-- **加锁（monitorenter）**：
-  - 将工作内存中的共享变量置为无效，强制从主内存重新加载。
-- **释放锁（monitorexit）**：
-  - 将工作内存的修改刷新到主内存。
-
-
-### JMM 实战案例
-
-#### 案例 1：双重检查锁定（DCL）与 `volatile`
-```java
-class Singleton {
-    private static volatile Singleton instance; // 必须 volatile
-    
-    public static Singleton getInstance() {
-        if (instance == null) {
-            synchronized (Singleton.class) {
-                if (instance == null) {
-                    instance = new Singleton(); // 无 volatile 可能看到未初始化对象
-                }
-            }
-        }
-        return instance;
-    }
-}
-```
-- **问题根源**：`new Singleton()` 的非原子操作（分配内存→初始化→赋值引用）可能被重排序。
-- **`volatile` 作用**：禁止指令重排序，保证其他线程看到完全初始化的对象。
-
-#### 案例 2：不可变对象与 `final`
-```java
-class ImmutableObject {
-    private final int x;
-
-    public ImmutableObject(int x) {
-        this.x = x; // final 字段的初始化保证可见性
-    }
-}
-```
-- **JMM 保证**：正确构造的不可变对象（所有字段为 `final`），无需同步即可安全发布。
-
-#### 案例 3：使用 jstack 排查死锁
-
-**死锁代码示例**:
-```java
-public class DeadlockExample {
-    private static Object lock1 = new Object();
-    private static Object lock2 = new Object();
-
-    public static void main(String[] args) {
-        Thread t1 = new Thread(() -> {
-            synchronized (lock1) {
-                System.out.println("Thread 1: holding lock1");
-                try { Thread.sleep(100); } catch (InterruptedException e) {}
-                synchronized (lock2) {
-                    System.out.println("Thread 1: holding lock1 & lock2");
-                }
-            }
-        });
-
-        Thread t2 = new Thread(() -> {
-            synchronized (lock2) {
-                System.out.println("Thread 2: holding lock2");
-                try { Thread.sleep(100); } catch (InterruptedException e) {}
-                synchronized (lock1) {
-                    System.out.println("Thread 2: holding lock2 & lock1");
-                }
-            }
-        });
-
-        t1.start();
-        t2.start();
-    }
-}
-```
-
-**使用 jstack 排查**:
-```bash
-# 1. 获取进程ID
-jps
-
-# 输出示例:
-# 12345 DeadlockExample
-# 12346 Jps
-
-# 2. 查看线程栈
-jstack 12345
-
-# 输出示例:
-Found one Java-level deadlock:
-=============================
-"Thread-1":
-  waiting to lock monitor 0x00007f8b1c004e00 (object 0x00000007d5f3e3a0, a java.lang.Object),
-  which is held by "Thread-0"
-"Thread-0":
-  waiting to lock monitor 0x00007f8b1c007350 (object 0x00000007d5f3e3b0, a java.lang.Object),
-  which is held by "Thread-1"
-
-Java stack information for the threads listed above:
-===================================================
-"Thread-1":
-        at DeadlockExample.lambda$main$1(DeadlockExample.java:23)
-        - waiting to lock <0x00000007d5f3e3a0> (a java.lang.Object)
-        - locked <0x00000007d5f3e3b0> (a java.lang.Object)
-        ...
-
-"Thread-0":
-        at DeadlockExample.lambda$main$0(DeadlockExample.java:13)
-        - waiting to lock <0x00000007d5f3e3b0> (a java.lang.Object)
-        - locked <0x00000007d5f3e3a0> (a java.lang.Object)
-        ...
-
-Found 1 deadlock.
-```
-
-**解决方案**:
-1. 统一加锁顺序(所有线程都按lock1→lock2的顺序获取锁)
-2. 使用`tryLock`设置超时
-3. 使用`ReentrantLock`的`lockInterruptibly`支持中断
-
-
-#### **常见误区与陷阱**
-| **误区**                          | **正确理解**                                                                 |
-|-----------------------------------|-----------------------------------------------------------------------------|
-| `volatile` 能保证原子性           | 只能保证单次读/写的原子性，复合操作仍需锁或原子类                                |
-| `synchronized` 完全禁止指令重排序 | 仅保证同步块内的有序性（临界区外的代码仍可能被重排序）                           |
-| 无竞争时无需考虑内存可见性        | 即使单线程，JIT 优化可能导致可见性问题（如循环中读取未标记为 volatile 的变量）    |
-| 64 位变量（long/double）原子性     | 32 位 JVM 上 long/double 的非 volatile 变量可能被分解为两次 32 位操作            |
-
-
-### JMM 与硬件内存架构的关系
-```c
-           [Java Thread]          [Java Thread]
-               ↓   ↑                   ↓   ↑
-           [工作内存]               [工作内存]
-               ↓   ↑                   ↓   ↑
-           [CPU 缓存]               [CPU 缓存]
-               ↖   ↗               ↖   ↗
-                 [主内存/RAM]
-```
-- **JMM 是抽象模型**：不直接对应物理硬件结构，但最终映射到 CPU 缓存一致性协议（如 MESI）。
-- **缓存行（Cache Line）**：伪共享问题的根源（如 `@Contended` 注解的优化场景）。
-
-
-### JMM 开发最佳实践
-1. **优先使用高层工具**：
-   - 并发集合（`ConcurrentHashMap`）
-   - 原子类（`AtomicInteger`）
-   - 线程池（`ExecutorService`）
-
-2. **严格遵循 happens-before 规则**：
-   - 通过 `volatile`、锁、`final` 等建立明确的可见性顺序。
-
-3. **避免过度优化**：
-   - 在未出现性能问题前，优先使用简单的 `synchronized`。
-
-4. **使用分析工具验证**：
-   - **JMM 验证工具**：JCStress、Java Pathfinder。
-   - **性能分析**：JProfiler、Async Profiler。
-
-
-### 总结
-Java 内存模型通过定义**线程与内存的交互规则**，为开发者提供了在多线程环境中控制可见性、有序性和原子性的工具。理解其核心机制（如 happens-before、内存屏障、volatile 语义）是编写高性能并发代码的关键。记住三个黄金法则：
-1. **可见性**：通过同步机制（锁/volatile）保证修改可见。
-2. **有序性**：依赖 happens-before 规则约束指令顺序。
-3. **原子性**：使用锁或原子类保护复合操作。
 
 ## 并发锁相关知识
 
@@ -822,8 +558,6 @@ public ReentrantLock(boolean fair) {
 
 **`ReentrantLock` 的底层就是由 `AQS` 来实现的**。
 
-关于 AQS ：AQS详解
-
 #### 与 synchronized 的区别*
 >都为**可重入锁**：也叫递归锁，指的是**线程可以再次获取自己的内部锁**。比如一个线程获得了某个对象的锁，此时这个对象锁还没有释放，当其再次想要获取这个对象的锁的时候还是可以获取的，如果是不可重入锁的话，就会造成**死锁**。
 
@@ -915,709 +649,112 @@ StampedLock 的性能为什么更好？
 底层原理：
 `StampedLock` 不是直接实现 `Lock` 或 `ReadWriteLock` 接口，而是基于 CLH 锁实现的（AQS 也是基于这玩意），CLH 锁是对自旋锁的一种改良，是一种隐式的链表队列。`StampedLock` 通过 CLH 队列进行线程的管理，通过同步状态值 state 来表示锁的状态和类型。
 
->知道 AQS 原理即可。
+
+
+
+## JMM
+
+JMM 定义了多线程环境下共享变量的访问规则，核心围绕三个问题：**可见性**、**有序性**、**原子性**。
+
+JMM 把内存分为两部分：所有线程共享的**主内存**（存放实例字段、静态字段、数组元素），以及每个线程私有的**工作内存**（存放主内存变量的副本）。线程对变量的所有操作都要经过工作内存与主内存的交互——JMM 定义了 8 种原子操作（`read`、`load`、`use`、`assign`、`store`、`write`、`lock`、`unlock`）来约束这个过程。这是一个抽象模型，不直接对应物理 CPU 缓存，但最终会映射到缓存一致性协议上。
+
+**可见性**：一个线程修改了共享变量，其他线程未必立刻看到。`volatile` 强制修改刷回主内存并使其他副本失效；`synchronized` 在释放锁前刷主内存、获取锁后重新加载；`final` 字段在构造函数正确完成后对其他线程可见。
+
+**有序性**：编译器和处理器可能重排序指令。JMM 通过 happens-before 规则约束操作之间的可见性顺序，通过内存屏障禁止特定重排序。
+
+**原子性**：复合操作（如 `i++`）可能被中断。`synchronized` 用锁保证代码块原子性；原子类通过 CAS 实现无锁原子操作。
+
+### Happens-Before 规则
+
+若操作 A happens-before 操作 B，则 A 的结果对 B 可见，且 A 在 B 之前执行（按此顺序）。
+
+| 规则 | 说明 |
+|---|---|
+| 程序顺序规则 | 同一线程内，前面的操作 happens-before 后面的操作（不禁止重排序，但保证结果一致） |
+| 锁规则 | 解锁 happens-before 后续对同一锁的加锁 |
+| volatile 规则 | 对 volatile 变量的写 happens-before 后续对该变量的读 |
+| 线程启动规则 | `thread.start()` 之前的操作 happens-before 子线程内的任何操作 |
+| 线程终止规则 | 线程内所有操作 happens-before `thread.join()` 返回后的代码 |
+| 传递性 | A happens-before B，B happens-before C → A happens-before C |
+
+### 内存屏障
+
+JMM 通过四种内存屏障来实现 happens-before 约束：
+
+| 屏障类型 | 作用 |
+|---|---|
+| LoadLoad | 禁止前后的读操作重排序 |
+| StoreStore | 禁止前后的写操作重排序 |
+| LoadStore | 禁止读与后续写重排序 |
+| StoreLoad | 禁止写与后续读重排序（开销最大，`volatile` 写后插入） |
+
+`volatile` 写的语义：将工作内存的值刷新到主内存，前插 StoreStore、后插 StoreLoad 屏障。`volatile` 读的语义：从主内存重新加载最新值，后插 LoadLoad、LoadStore 屏障。
+
+`synchronized` 的锁语义也依赖内存屏障：加锁（`monitorenter`）时令工作内存中的共享变量失效，强制从主内存重新加载；释放锁（`monitorexit`）时将工作内存修改刷新到主内存。
+
+### 案例
+
+双重检查锁定必须用 `volatile`：
+
+```java
+class Singleton {
+    private static volatile Singleton instance; // 必须 volatile
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+```
+
+`new Singleton()` 不是原子操作（分配内存 → 初始化 → 赋值引用），可能被重排序为分配内存 → 赋值引用 → 初始化。若无 `volatile`，其他线程可能在初始化完成前拿到非 null 但未初始化的对象。
+
+不可变对象用 `final` 保证安全发布：
+
+```java
+class ImmutableObject {
+    private final int x;
+    public ImmutableObject(int x) { this.x = x; }
+}
+```
+
+JMM 保证：所有字段为 `final` 且正确构造的对象，无需同步即可被多线程安全访问。
+
+### 常见误区
+
+| 误区 | 正确理解 |
+|---|---|
+| `volatile` 能保证原子性 | 只能保证单次读/写的原子性，复合操作仍需锁或原子类 |
+| `synchronized` 完全禁止重排序 | 仅保证同步块内的有序性，临界区外的代码仍可能被重排序 |
+| 无竞争时无需考虑可见性 | 即使单线程，JIT 优化可能导致可见性问题 |
+| 64 位变量原子性有保障 | 32 位 JVM 上 long/double 的非 volatile 变量可能被分解为两次 32 位操作 |
+
 
 ## Atomic 原子类
 
-### Java Atomic 原子类
+原子类（`java.util.concurrent.atomic`）将前面讲的 CAS 封装成了可直接使用的线程安全工具。它们内部通过 `Unsafe` 类调用硬件级原子指令，用 `volatile` 保证变量可见性，在无锁的前提下实现原子操作。
 
-Java并发包中的原子类(`java.util.concurrent.atomic`)通过硬件级原子指令(CAS)实现了线程安全的无锁操作,解决了传统锁机制在高并发竞争场景下的性能瓶颈问题。
+家族成员覆盖了基本类型（`AtomicInteger`、`AtomicLong`、`AtomicBoolean`）、引用类型（`AtomicReference`、`AtomicStampedReference` 带版本号防 ABA）、数组类型（`AtomicIntegerArray` 等）、字段更新器（`AtomicIntegerFieldUpdater`，无需替换整个对象即可原子更新某个字段），以及 Java 8 引入的高性能计数器（`LongAdder`、`DoubleAdder`）。
 
-### Atomic 家族成员
+`AtomicInteger` 的核心用法：
 
-```
-Atomic 原子类体系
-├── 基本类型
-│   ├── AtomicInteger
-│   ├── AtomicLong
-│   └── AtomicBoolean
-│
-├── 引用类型
-│   ├── AtomicReference
-│   ├── AtomicStampedReference(带版本号)
-│   └── AtomicMarkableReference(带标记位)
-│
-├── 数组类型
-│   ├── AtomicIntegerArray
-│   ├── AtomicLongArray
-│   └── AtomicReferenceArray
-│
-├── 字段更新器
-│   ├── AtomicIntegerFieldUpdater
-│   ├── AtomicLongFieldUpdater
-│   └── AtomicReferenceFieldUpdater
-│
-└── 高性能计数器
-    ├── LongAdder(Java8+)
-    └── DoubleAdder(Java8+)
-```
-
-### 核心原理: CAS(Compare And Swap)
-
-**CAS操作流程**:
-```
-           +-----------------+
-           | 读取内存值 V     |
-           +-----------------+
-                     |
-                     v
-+----------------------------------+
-| 比较 V 与预期值 A                 |
-| if (V == A) → 写入新值 B          | → 成功返回 true
-| else        → 放弃操作            | → 失败返回 false
-+----------------------------------+
-```
-
-**CPU硬件支持**:
-- x86: `LOCK CMPXCHG` 指令
-- ARM: `LDREX/STREX` 指令
-- 原子性保障: 缓存锁或总线锁
-
-### 核心类详解与代码示例
-
-#### 1. AtomicInteger
 ```java
 AtomicInteger counter = new AtomicInteger(0);
-
-// 原子递增
-counter.incrementAndGet();  // 1
-
-// 自定义更新
-int result = counter.updateAndGet(x -> x * 2);  // 2
-
-// 复合操作
-boolean success = counter.compareAndSet(2, 5); // true
+counter.incrementAndGet();                       // 原子自增
+counter.updateAndGet(x -> x * 2);                // 原子函数式更新
+boolean ok = counter.compareAndSet(2, 5);        // CAS
 ```
 
-#### 2. AtomicReference
-```java
-AtomicReference<User> userRef = new AtomicReference<>();
-User oldUser = new User("Alice");
-User newUser = new User("Bob");
+`LongAdder` 适合高并发写多读少的统计场景。它不像 `AtomicLong` 那样所有线程竞争同一个 CAS 变量，而是将热点分散到多个 `Cell`，写操作大概率只在自己的 Cell 上 CAS，读操作才汇总——用最终一致性换吞吐量。低竞争时 `AtomicInteger`/`AtomicLong` 更简单直接，高竞争时 `LongAdder` 优势明显。
 
-// 原子替换
-userRef.set(oldUser);
-userRef.compareAndSet(oldUser, newUser); // 成功
-```
+原子类不能解决复合操作的竞态：`if (counter.get() < 10) counter.incrementAndGet()` 这两个调用之间仍可能被穿插。此时要么用 CAS 循环重试，要么退回到 `synchronized`。
 
-#### 3. LongAdder（分段锁优化）
-```java
-LongAdder totalBytes = new LongAdder();
-
-// 并发添加
-parallelStream().forEach(i -> totalBytes.add(i));
-
-// 获取最终结果（非实时）
-long sum = totalBytes.sum();
-```
-
-#### 4. AtomicStampedReference（解决 ABA 问题）
-```java
-AtomicStampedReference<Integer> money = new AtomicStampedReference<>(100, 0);
-
-int[] stampHolder = new int[1];
-int current = money.get(stampHolder); // 值=100, 版本=0
-
-// 带版本号的CAS操作
-money.compareAndSet(100, 200, stampHolder[0], stampHolder[0]+1);
-```
-
-
-### 性能对比：synchronized vs Atomic vs LongAdder
-| **场景**             | 10 线程/100 万次操作（ms） |
-|----------------------|-------------------------|
-| synchronized         | 2450                    |
-| AtomicInteger        | 680                     |
-| LongAdder            | 120                     |
-
-**结论**：  
-- **低竞争**：Atomic 类比锁快 3-5 倍  
-- **高竞争**：LongAdder 性能优势可达 20 倍
-
-
-### Atomic 类最佳实践
-
-#### 1. 适用场景
-```c
-✅ 计数器（访问量统计）
-✅ 状态标志位（初始化标志）
-✅ 对象属性原子更新
-✅ 无锁数据结构（队列、栈）
-✅ 实时性要求不高的统计
-```
-
-#### 2. 避坑指南
-```java
-// 错误示例：复合操作仍需保护
-AtomicInteger count = new AtomicInteger(0);
-if (count.get() < 10) {  // 此处存在竞态条件！
-    count.incrementAndGet();
-}
-
-// 正确做法：使用CAS循环
-while (true) {
-    int current = count.get();
-    if (current >= 10) break;
-    if (count.compareAndSet(current, current+1)) break;
-}
-```
-
-#### 3. 内存可见性保障
-所有原子类内部均使用 **volatile** 变量，保证：
-- **可见性**：修改立即对其他线程可见
-- **有序性**：防止指令重排序
-
-
-### Atomic 类设计模式
-
-#### 1. 无锁栈实现
-```java
-public class LockFreeStack<T> {
-    private AtomicReference<Node<T>> top = new AtomicReference<>();
-
-    public void push(T item) {
-        Node<T> newHead = new Node<>(item);
-        Node<T> oldHead;
-        do {
-            oldHead = top.get();
-            newHead.next = oldHead;
-        } while (!top.compareAndSet(oldHead, newHead));
-    }
-
-    public T pop() {
-        Node<T> oldHead;
-        Node<T> newHead;
-        do {
-            oldHead = top.get();
-            if (oldHead == null) return null;
-            newHead = oldHead.next;
-        } while (!top.compareAndSet(oldHead, newHead));
-        return oldHead.item;
-    }
-
-    private static class Node<T> {
-        final T item;
-        Node<T> next;
-        // 构造方法...
-    }
-}
-```
-
-#### 2. 高效计数器组
-```java
-class MetricCounter {
-    private final AtomicLongArray counters;
-
-    public MetricCounter(int size) {
-        counters = new AtomicLongArray(size);
-    }
-
-    public void increment(int index) {
-        counters.getAndIncrement(index);
-    }
-
-    public long getTotal() {
-        long sum = 0;
-        for (int i = 0; i < counters.length(); i++) {
-            sum += counters.get(i);
-        }
-        return sum;
-    }
-}
-```
-
-
-#### ⚖️ **Atomic 类局限性**
-| **局限**      | **解决方案**                       |
-| ----------- | ------------------------------ |
-| ABA 问题      | 使用带版本号的 AtomicStampedReference |
-| 循环时间长开销大    | 配合退避算法（Exponential Backoff）    |
-| 只能保证单个变量原子性 | 使用锁或合并变量                       |
-| 伪共享问题       | @Contended 注解填充缓存行             |
-
-
-### Java 8+ 增强特性
-#### 1. 增强型 API
-```java
-AtomicInteger atomic = new AtomicInteger(5);
-
-// 函数式更新
-atomic.accumulateAndGet(3, Math::max); // 结果为5
-
-// 延迟初始化
-AtomicReference<ExpensiveObject> ref = new AtomicReference<>();
-ExpensiveObject obj = ref.updateAndGet(
-    o -> o != null ? o : createExpensiveObject()
-);
-```
-
-#### 2. Adder 系列优化
-```c
-LongAdder → 适合统计场景（写多读少）
-LongAccumulator → 支持自定义累加规则
-```
-
-
-### 架构师思考
-1. **成本权衡**：  
-   - 开发成本：Atomic 类比锁更复杂  
-   - 维护成本：需要深入理解内存模型
-
-2. **技术选型**：  
-   ```c
-   单变量原子操作 → Atomic 系列
-   分布式计数器 → Redis/ZooKeeper
-   超高并发统计 → LongAdder + 定期持久化
-   ```
-
-3. **未来趋势**：  
-   - 向量化 API（Valhalla 项目）
-   - 硬件加速的原子指令
-
-
-**终极总结**：  
-Atomic 类是 Java 并发编程的基石工具，它们：  
-🔹 用 **CAS** 取代锁实现无锁并发  
-🔹 通过 **volatile** 保证可见性  
-🔹 借 **分段策略** 优化高并发场景  
-掌握其原理与适用场景，是构建高性能 Java 应用的必备技能。
-
-### 对于原子类相关 API 例子
-以下是针对 Java Atomic 原子类家族各成员的详细 API 示例及区别分析：
-
-
-### 一、基本类型原子类
-#### 1. AtomicInteger
-```java
-AtomicInteger atomicInt = new AtomicInteger(0);
-
-// 基础操作
-atomicInt.set(10);                          // 设置值
-int val = atomicInt.get();                  // 获取值 → 10
-
-// 原子运算
-int newVal = atomicInt.incrementAndGet();    // 递增 → 11
-int oldVal = atomicInt.getAndAdd(5);         // 返回旧值 → 11，新值 → 16
-
-// CAS 操作
-boolean success = atomicInt.compareAndSet(16, 20); // true
-
-// 函数式更新
-atomicInt.updateAndGet(x -> x * 2);          // 20 → 40
-```
-
-#### 2. AtomicLong
-```java
-AtomicLong atomicLong = new AtomicLong(100L);
-
-// 类似 AtomicInteger，支持大范围计数
-atomicLong.addAndGet(50);                    // 150L
-long current = atomicLong.getAndDecrement(); // 150 → 149
-```
-
-#### 3. AtomicBoolean
-```java
-AtomicBoolean atomicBool = new AtomicBoolean(false);
-
-// 原子切换状态
-boolean old = atomicBool.getAndSet(true);    // false → true
-
-// 条件更新
-boolean updated = atomicBool.compareAndSet(true, false); // true
-```
-
-
-### 二、引用类型原子类
-#### 1. AtomicReference
-```java
-AtomicReference<String> ref = new AtomicReference<>("A");
-
-// 更新引用
-ref.set("B");
-String oldVal = ref.getAndSet("C");          // "B" → "C"
-
-// CAS 存在 ABA 问题
-ref.compareAndSet("C", "D");                 // true
-```
-
-#### 2. AtomicStampedReference（带版本号）
-```java
-AtomicStampedReference<String> stampedRef = 
-    new AtomicStampedReference<>("A", 0);
-
-// 解决 ABA 问题
-int[] stampHolder = new int[1];
-String currentRef = stampedRef.get(stampHolder); // currentRef="A", stamp=0
-
-// 更新时检查版本号
-boolean success = stampedRef.compareAndSet(
-    "A", "B", stampHolder[0], stampHolder[0] + 1); // 成功，版本号变为1
-```
-
-#### 3. AtomicMarkableReference（带标记位）
-```java
-AtomicMarkableReference<String> markableRef = 
-    new AtomicMarkableReference<>("A", false);
-
-// 使用布尔标记
-boolean[] markHolder = new boolean[1];
-String ref = markableRef.get(markHolder);    // ref="A", mark=false
-
-// 更新标记位
-markableRef.attemptMark("A", true);          // 标记为 true
-```
-
-
-### 三、数组类型原子类
-#### 1. AtomicIntegerArray
-```java
-int[] arr = {1, 2, 3};
-AtomicIntegerArray atomicArray = new AtomicIntegerArray(arr);
-
-// 原子更新元素
-atomicArray.set(0, 10);                      // 索引0 → 10
-int val = atomicArray.getAndAdd(1, 5);       // 索引1: 2 → 7，返回旧值2
-
-// CAS 操作
-boolean updated = atomicArray.compareAndSet(2, 3, 30); // 索引2: 3 → 30
-```
-
-#### 2. AtomicReferenceArray
-```java
-AtomicReferenceArray<String> refArray = 
-    new AtomicReferenceArray<>(new String[5]);
-
-refArray.set(0, "Java");
-String old = refArray.getAndUpdate(0, s -> s + "8"); // "Java" → "Java8"
-```
-
-
-### 四、字段更新器
-#### 1. AtomicIntegerFieldUpdater
-```java
-class Counter {
-    volatile int count; // 必须是 volatile
-}
-
-Counter obj = new Counter();
-AtomicIntegerFieldUpdater<Counter> updater = 
-    AtomicIntegerFieldUpdater.newUpdater(Counter.class, "count");
-
-updater.addAndGet(obj, 5); // obj.count = 5
-```
-
-#### 2. AtomicReferenceFieldUpdater
-```java
-class Node {
-    volatile Node next; // 必须是 volatile
-}
-
-Node head = new Node();
-AtomicReferenceFieldUpdater<Node, Node> updater = 
-    AtomicReferenceFieldUpdater.newUpdater(Node.class, Node.class, "next");
-
-updater.compareAndSet(head, null, new Node()); // 更新 head.next
-```
-
-
-### 五、高性能计数器
-#### 1. LongAdder
-```java
-LongAdder adder = new LongAdder();
-
-// 并发累加（适合写多读少）
-adder.add(10);
-adder.increment();
-
-// 获取总和（非精确实时值）
-long sum = adder.sum();                      // 11
-
-// 重置（不影响正在进行的累加）
-adder.reset();                               // sum → 0
-```
-
-#### 2. LongAccumulator（更通用）
-```java
-LongAccumulator accumulator = 
-    new LongAccumulator((x, y) -> x * y, 1); // 初始值1，累乘器
-
-accumulator.accumulate(3);                   // 1*3=3
-accumulator.accumulate(5);                   // 3*5=15
-long result = accumulator.get();             // 15
-```
-
-
-### 六、核心区别总结
-| **类目**          | **典型类**               | **核心特点**                          | **适用场景**                     |
-|-------------------|-------------------------|--------------------------------------|----------------------------------|
-| 基本类型          | AtomicInteger           | 单变量原子操作                        | 简单计数器、状态标志             |
-| 引用类型          | AtomicStampedReference  | 带版本号解决 ABA 问题                 | 无锁栈/队列、复杂状态管理        |
-| 数组类型          | AtomicIntegerArray      | 原子操作数组元素                      | 并发统计数组                     |
-| 字段更新器        | AtomicIntegerFieldUpdater | 反射式更新对象字段                    | 需要原子更新已有类字段           |
-| 高性能计数器      | LongAdder               | 分散热点，最终一致性                   | 高并发统计（如 QPS 计数）        |
-
-
-### 七、选型决策指南
-1. **单变量计数**  
-   - 低竞争 → `AtomicInteger`  
-   - 高竞争 → `LongAdder`
-
-2. **对象引用更新**  
-   - 无 ABA 问题 → `AtomicReference`  
-   - 需防 ABA → `AtomicStampedReference`
-
-3. **数组元素原子操作**  
-   - 基本类型 → `AtomicIntegerArray`  
-   - 对象 → `AtomicReferenceArray`
-
-4. **修改现有类字段**  
-   - 无侵入式修改 → `AtomicXxxFieldUpdater`
-
-
-通过以上代码示例和对比，开发者可以清晰区分不同 Atomic 类的适用场景及核心 API 的使用方式。
-
-### AtomicInteger 与 LongAdder 
-**AtomicInteger 与 LongAdder 深度解析**  
-本文将深入分析 Java 原子变量家族的两个核心类，通过代码示例详解 API 使用，并对比不同场景下的性能表现。
-
-
-### 核心类对比
-| **特性**          | AtomicInteger                 | LongAdder (Java8+)          |
-|-------------------|-------------------------------|-----------------------------|
-| **实现原理**      | CAS 无锁算法                   | 分段锁（Cell 分散热点）       |
-| **适用场景**      | 低并发原子操作                 | 高并发写多读少场景           |
-| **内存消耗**      | 低                            | 较高（每个线程独立 Cell）     |
-| **精度保证**      | 强一致性                      | 最终一致性                   |
-| **典型应用**      | 简单计数器                    | 统计数据收集/监控指标         |
-
-
-### AtomicInteger API 详解
-#### 1. 基础操作
-```java
-AtomicInteger ai = new AtomicInteger(0);
-
-// 设置值（非原子）
-ai.set(10); 
-
-// 获取当前值
-int current = ai.get(); // 10
-
-// 原子设置并返回旧值
-int old = ai.getAndSet(20); // old=10, ai=20
-
-// 比较并交换（CAS）
-boolean success = ai.compareAndSet(20, 30); // true
-```
-
-#### 2. 原子运算
-```java
-// 递增并获取新值
-int newVal = ai.incrementAndGet(); // 31
-
-// 获取并递增
-int before = ai.getAndIncrement(); // 31 → ai=32
-
-// 原子加法
-int result = ai.addAndGet(5); // 32+5=37
-
-// 自定义运算
-int custom = ai.updateAndGet(x -> x * 2); // 37*2=74
-```
-
-#### 3. 复杂操作
-```java
-// 累积计算（线程安全版本）
-int accumulated = ai.accumulateAndGet(10, (prev, x) -> prev + x); // 74+10=84
-
-// 延迟初始化（常用于单例）
-AtomicInteger lazy = new AtomicInteger();
-int initialized = lazy.updateAndGet(x -> x == 0 ? 100 : x);
-```
-
-
-### LongAdder API 详解
-#### 1. 基础操作
-```java
-LongAdder adder = new LongAdder();
-
-// 递增（无返回值）
-adder.increment();       // +1
-adder.add(5);            // +5
-
-// 递减
-adder.decrement();       // -1
-
-// 重置计数器
-adder.reset();           // 归零
-
-// 获取当前值（非原子快照）
-long sum = adder.sum();  // 5
-```
-
-#### 2. 组合操作
-```java
-// 先加后获取（类似 getAndAdd）
-long beforeAdd = adder.sumThenReset(); // 返回当前值并重置
-
-// 与其他Adder合并
-LongAdder another = new LongAdder();
-another.add(3);
-adder.add(another.sum()); // adder=8
-```
-
-#### 3. 统计场景
-```java
-// 高并发统计示例
-LongAdder totalRequests = new LongAdder();
-LongAdder failedRequests = new LongAdder();
-
-// 请求处理线程
-void handleRequest() {
-    totalRequests.increment();
-    try {
-        processRequest();
-    } catch (Exception e) {
-        failedRequests.increment();
-    }
-}
-
-// 输出统计
-System.out.printf("成功率: %.2f%%%n", 
-    100 * (totalRequests.sum() - failedRequests.sum()) / (double)totalRequests.sum());
-```
-
-
-### 性能对比测试
-#### 测试代码
-```java
-@BenchmarkMode(Mode.Throughput)
-@OutputTimeUnit(TimeUnit.MILLISECONDS)
-public class CounterBenchmark {
-    private AtomicInteger atomic = new AtomicInteger();
-    private LongAdder adder = new LongAdder();
-
-    // 线程数模拟不同并发级别
-    @Param({"1", "4", "8"})
-    private int threads;
-
-    @Benchmark
-    public void atomicIncrement(Blackhole bh) {
-        atomic.incrementAndGet();
-    }
-
-    @Benchmark
-    public void adderIncrement(Blackhole bh) {
-        adder.increment();
-    }
-}
-```
-
-#### 测试结果（ops/ms）
-| 线程数 | AtomicInteger | LongAdder |
-|-------|---------------|-----------|
-| 1     | 12,345,678    | 9,876,543 |
-| 4     | 3,456,789     | 8,765,432 |
-| 8     | 1,234,567     | 8,456,789 |
-
-**结论**：  
-- **低并发**：AtomicInteger 性能更优  
-- **高并发**：LongAdder 吞吐量提升 6-8 倍
-
-
-### 选型决策树
-```
-需要原子变量吗？
-├─ 是 → 写操作是否高频？
-│   ├─ 是 → LongAdder
-│   └─ 否 → AtomicInteger
-└─ 否 → 考虑其他同步机制
-```
-
-
-### 最佳实践
-#### AtomicInteger 适用场景
-```java
-// 1. 简单计数器
-AtomicInteger counter = new AtomicInteger();
-requestHandlers.forEach(h -> 
-    h.setOnSuccess(() -> counter.incrementAndGet())
-);
-
-// 2. 状态标志位
-AtomicInteger status = new AtomicInteger(0);
-if (status.compareAndSet(0, 1)) {
-    // 执行初始化操作
-}
-```
-
-#### LongAdder 适用场景
-```java
-// 1. 实时数据统计
-LongAdder bytesSent = new LongAdder();
-networkService.addListener(bytes -> 
-    bytesSent.add(bytes)
-);
-
-// 2. 高频计数器
-LongAdder clickCounter = new LongAdder();
-button.addClickListener(e -> 
-    clickCounter.increment()
-);
-```
-
-
-####  **注意事项**
-4. **LongAdder 的精度问题**  
-   ```java
-   // sum() 只是近似值，如需精确值：
-   long exactSum = adder.longValue(); // 等同于 sum()
-   // 真正精确需要停止所有写操作
-   ```
-
-5. **内存消耗控制**  
-   ```java
-   // 预估 Cell 数组大小（默认最大CPU核数）
-   -Djava.util.concurrent.ForkJoinPool.common.parallelism=16
-   ```
-
-6. **AtomicInteger 的 ABA 问题**  
-   ```java
-   // 需要版本号控制时使用 AtomicStampedReference
-   AtomicStampedReference<Integer> ref = 
-       new AtomicStampedReference<>(0, 0);
-   ```
-
-
-### 高级技巧
-#### 自定义分段策略
-```java
-// 继承 Striped64 实现自定义分散算法
-class CustomAdder extends Striped64 {
-    public void increment() {
-        Cell[] cs; long b, v; int m;
-        if ((cs = cells) != null || 
-            !casBase(b = base, b + 1)) {
-            // 自定义冲突处理逻辑
-        }
-    }
-}
-```
-
-#### 与并发容器配合
-```java
-ConcurrentHashMap<String, LongAdder> counterMap = new ConcurrentHashMap<>();
-
-// 统计单词频率
-words.forEach(word -> 
-    counterMap.computeIfAbsent(word, k -> new LongAdder()).increment()
-);
-```
-
-
-**总结**：  
-- **AtomicInteger**：简单场景的瑞士军刀，保证强一致性  
-- **LongAdder**：高并发写场景的核武器，以空间换时间  
-根据实际场景合理选择，可结合 JMH 进行性能测试验证。
 
 ## 线程池与 ThreadLocal
 
@@ -1626,7 +763,7 @@ words.forEach(word ->
 
 `ThreadLocal` 类允许每个线程绑定自己的值，可以将其形象地比喻为一个“存放数据的盒子”。每个线程都有自己独立的盒子，用于存储私有数据，确保不同线程之间的数据互不干扰。
 
-我个人认为这个视频讲清楚了：
+%% 我个人认为这个视频讲清楚了：
 -  [ThreadLocal实现原理与内存泄漏问题\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1BsqHYdEun/?vd_source=cb670d82714ee9baee22c33ef083884d)
 - 有一个人写了相关的笔记，在电脑的：`E:\Download_copy\IDM_Download\JavaNote-main` 文件夹中，可以参考
 - 黑马的笔记：`E:\Download_copy\IDM_Download\并发编程笔记`
@@ -1638,229 +775,63 @@ words.forEach(word ->
 可能会被问到的问题有：
 - **ThreadLocal 的原理**
 - **导致的内存泄露问题**
-- 如何跨线程传递 ThreadLocal 的值？
+- 如何跨线程传递 ThreadLocal 的值？ %%
 
 #### ThreadLocal 的原理
 原理类似于：
 ![](./Pasted%20image%2020250113203923.png)
 
-### ThreadLocal 自动清理机制与扩容原理深度解析
+### ThreadLocal 的清理与扩容
 
+ThreadLocalMap 通过 `replaceStaleEntry` 和 `expungeStaleEntry` 两个方法自动清理过期的 Entry（`Entry.key == null`），避免内存泄漏。
 
-#### 一、自动清理触发点原理分析
+**`replaceStaleEntry`** 在 `set()` 方法中发现当前槽位的 Entry 已过期时触发。它向前扫描找到最前端的连续过期 Entry 起点，向后扫描查找匹配的 key 或新的过期 Entry，替换 value 并交换槽位，最后调用 `expungeStaleEntry` 做深度清理：
 
-ThreadLocalMap 通过两个核心方法 `replaceStaleEntry` 和 `expungeStaleEntry` 实现过期 Entry 的自动清理，避免内存泄漏。
-
-
-##### 1. `replaceStaleEntry` 方法
-**触发场景**：在 `set()` 方法中发现当前槽位的 Entry 已过期（`Entry.key == null`），需要替换旧值并清理相邻的过期 Entry。
-
-**执行流程**：
-```c
-1. 定位过期槽位（staleSlot）
-2. 向前扫描：找到最前端的连续过期 Entry 的起始位置（slotToExpunge）
-3. 向后扫描：找到第一个非空 Entry 或数组末尾
-   - 若找到匹配的 key，直接替换 value
-   - 若找到新的过期 Entry，更新 slotToExpunge
-4. 清理起始位置到当前槽位的过期 Entry
-5. 调用 expungeStaleEntry 进行深度清理
-```
-
-**代码逻辑**（简化版）：
 ```java
 private void replaceStaleEntry(ThreadLocal<?> key, Object value, int staleSlot) {
     Entry[] tab = table;
-    int len = tab.length;
-    Entry e;
-
-    // 向前扫描找到第一个过期 Entry 的位置
-    int slotToExpunge = staleSlot;
-    for (int i = prevIndex(staleSlot, len); (e = tab[i]) != null; i = prevIndex(i, len)) {
+    int len = tab.length, slotToExpunge = staleSlot;
+    for (int i = prevIndex(staleSlot, len); (e = tab[i]) \!= null; i = prevIndex(i, len))
         if (e.get() == null) slotToExpunge = i;
-    }
-
-    // 向后扫描查找可替换的 Entry
-    for (int i = nextIndex(staleSlot, len); (e = tab[i]) != null; i = nextIndex(i, len)) {
+    for (int i = nextIndex(staleSlot, len); (e = tab[i]) \!= null; i = nextIndex(i, len)) {
         ThreadLocal<?> k = e.get();
-
-        // 找到匹配的 key，替换 value 并交换槽位
-        if (k == key) {
-            e.value = value;
-            tab[i] = tab[staleSlot];
-            tab[staleSlot] = e;
-
-            // 若向前扫描未找到其他过期 Entry，更新清理起点
+        if (k == key) { e.value = value; tab[i] = tab[staleSlot]; tab[staleSlot] = e;
             if (slotToExpunge == staleSlot) slotToExpunge = i;
-            cleanSomeSlots(expungeStaleEntry(slotToExpunge), len);
-            return;
-        }
-
-        // 发现新的过期 Entry，更新清理起点
-        if (k == null && slotToExpunge == staleSlot) {
-            slotToExpunge = i;
-        }
+            cleanSomeSlots(expungeStaleEntry(slotToExpunge), len); return; }
+        if (k == null && slotToExpunge == staleSlot) slotToExpunge = i;
     }
-
-    // 未找到匹配 key，直接替换当前槽位
-    tab[staleSlot].value = null;
-    tab[staleSlot] = new Entry(key, value);
-
-    // 触发深度清理
-    if (slotToExpunge != staleSlot) {
-        cleanSomeSlots(expungeStaleEntry(slotToExpunge), len);
-    }
+    tab[staleSlot].value = null; tab[staleSlot] = new Entry(key, value);
+    if (slotToExpunge \!= staleSlot) cleanSomeSlots(expungeStaleEntry(slotToExpunge), len);
 }
 ```
 
+**`expungeStaleEntry`** 在 `get()` 或 `remove()` 中发现过期 Entry 时触发，清理指定槽位后继续向后扫描，遇到过期 Entry 就清理，遇到有效 Entry 就重新哈希定位：
 
-##### 2. `expungeStaleEntry` 方法
-**触发场景**：在 `get()` 或 `remove()` 中发现过期 Entry，需要清理并重新哈希有效 Entry。
-
-**执行流程**：
-```c
-1. 清理指定槽位的过期 Entry
-2. 向后扫描直到遇到空槽位：
-   - 清理所有遇到的过期 Entry
-   - 对有效 Entry 重新哈希定位
-3. 返回下一个空槽位的位置
-```
-
-**代码逻辑**（简化版）：
 ```java
 private int expungeStaleEntry(int staleSlot) {
-    Entry[] tab = table;
-    int len = tab.length;
-
-    // 清理当前槽位
-    tab[staleSlot].value = null;
-    tab[staleSlot] = null;
-    size--;
-
-    Entry e;
-    int i;
-    // 向后扫描清理并重新哈希
-    for (i = nextIndex(staleSlot, len); (e = tab[i]) != null; i = nextIndex(i, len)) {
+    Entry[] tab = table; int len = tab.length;
+    tab[staleSlot].value = null; tab[staleSlot] = null; size--;
+    Entry e; int i;
+    for (i = nextIndex(staleSlot, len); (e = tab[i]) \!= null; i = nextIndex(i, len)) {
         ThreadLocal<?> k = e.get();
-        if (k == null) { // 过期 Entry
-            e.value = null;
-            tab[i] = null;
-            size--;
-        } else { // 有效 Entry
-            int h = k.threadLocalHashCode & (len - 1);
-            if (h != i) { // 需要重新哈希
-                tab[i] = null;
-                while (tab[h] != null) h = nextIndex(h, len);
-                tab[h] = e;
-            }
-        }
+        if (k == null) { e.value = null; tab[i] = null; size--; }
+        else { int h = k.threadLocalHashCode & (len - 1);
+            if (h \!= i) { tab[i] = null; while (tab[h] \!= null) h = nextIndex(h, len); tab[h] = e; } }
     }
-    return i; // 返回下一个空槽位
+    return i;
 }
 ```
 
+**扩容**采用先清理后扩容策略：初始容量 16，阈值 = 容量 × 2/3。当 size ≥ threshold 时，先全量清理过期 Entry，若清理后 size ≥ threshold × 3/4 才真正扩容，容量翻倍并重新哈希所有有效 Entry，用线性探测解决冲突。
 
-#### 二、扩容机制原理分析
+| 机制 | 优点 | 代价 |
+|---|---|---|
+| 弱引用键 + 自动清理 | 减少内存泄漏风险 | 增加 set/get 的时间复杂度 |
+| 惰性清理 | 避免全局扫描开销 | 可能残留部分过期 Entry |
+| 先清理后扩容 | 扩容仅针对有效数据 | 扩容成本较高 |
 
-ThreadLocalMap 的扩容策略是**先清理后扩容**，确保扩容时仅保留有效 Entry。
+自动清理能回收弱引用键已失效的 Entry，但 value 的强引用仍需依赖 `remove()` 显式清除——线程池场景下尤其重要。
 
-
-##### 1. 扩容触发条件
-```c
-初始容量 = 16
-扩容阈值 = 初始容量 * 2/3 = 10
-触发条件：size >= threshold
-```
-
-##### 2. 扩容流程
-```c
-1. 全量清理过期 Entry（调用 expungeStaleEntries）
-2. 若清理后 size >= threshold * 3/4，执行扩容
-3. 容量翻倍（newLen = oldLen * 2）
-4. 重新哈希所有有效 Entry 到新数组
-```
-
-**代码逻辑**（简化版）：
-```java
-private void resize() {
-    Entry[] oldTab = table;
-    int oldLen = oldTab.length;
-    int newLen = oldLen * 2; // 容量翻倍
-    Entry[] newTab = new Entry[newLen];
-    int count = 0;
-
-    // 重新哈希有效 Entry
-    for (int j = 0; j < oldLen; j++) {
-        Entry e = oldTab[j];
-        if (e != null) {
-            ThreadLocal<?> k = e.get();
-            if (k == null) { // 跳过过期 Entry
-                e.value = null; 
-            } else {
-                // 计算新位置
-                int h = k.threadLocalHashCode & (newLen - 1);
-                while (newTab[h] != null) h = nextIndex(h, newLen);
-                newTab[h] = e;
-                count++;
-            }
-        }
-    }
-
-    // 更新阈值
-    setThreshold(newLen);
-    size = count;
-    table = newTab;
-}
-```
-
-
-##### 3. 重新哈希冲突解决
-- **线性探测法**：新位置冲突时，依次查找下一个空槽位。
-- **探测步长**：固定为 1（`nextIndex = (i + 1) % len`）。
-
-
-#### 三、设计意义与性能权衡
-| **机制**             | **优点**                               | **代价**                     |
-|----------------------|---------------------------------------|------------------------------|
-| 弱引用键 + 自动清理   | 减少内存泄漏风险                       | 增加 `set` / `get` 的时间复杂度  |
-| 惰性清理（Lazy）     | 避免全局扫描的开销                     | 可能残留部分过期 Entry         |
-| 先清理后扩容         | 确保扩容仅针对有效数据                 | 扩容成本较高                  |
-| 线性探测法           | 实现简单，缓存友好                     | 哈希冲突时性能下降             |
-
-
-#### 四、完整清理流程图解
-```c
-         [set()/get() 触发]
-                 |
-                 v
-        发现过期 Entry（key=null）
-                 |
-         +-------+-------+
-         |               |
-         v               v
- replaceStaleEntry   expungeStaleEntry
- (替换并局部清理)      (深度清理)
-         |               |
-         +-------+-------+
-                 |
-                 v
-           cleanSomeSlots
-        (启发式清理后续槽位)
-                 |
-                 v
-            [清理完成]
-```
-
-
-#### 五、关键结论
-1. **内存泄漏防护**：  
-   - 自动清理机制可回收**弱引用键已失效**的 Entry，但 **value 的强引用**仍需依赖 `remove()` 显式清除。
-   
-2. **性能优化**：  
-   - **惰性清理**避免了全表扫描，但极端情况下可能残留过期 Entry。
-   - **2 倍扩容**平衡了空间利用率与重新哈希成本。
-
-3. **开发者责任**：  
-   - 必须**显式调用 `remove()`**（尤其是线程池场景），这是自动清理机制无法替代的。
 #### 导致的内存泄露问题
 内存泄漏问题调用 `remove` 方法即可，必要时，使用 `try... finally` 的方式防止内存泄漏
 
@@ -2010,7 +981,7 @@ public ThreadPoolExecutor(int corePoolSize,//线程池的核心线程数量
 - 使用 `submit()`提交任务：对于通过 `submit()`提交的任务，如果在任务执行中发生异常，这个异常不会直接打印出来。相反，异常会被封装在由 `submit()`返回的 `Future` 对象中。当调用 `Future.get()`方法时，可以捕获到一个 `ExecutionException`。在这种情况下，线程不会因为异常而终止，它会**继续存在于线程池中**，准备执行后续的任务。
 
 这种设计允许 `submit()`提供更灵活的错误处理机制，因为它允许调用者决定如何处理异常，而 `execute()`则适用于那些不需要关注执行结果的场景。
-
+%% 
 #### 如何给线程命名
 
 - 利用 `guava` 的 `ThreadFactoryBuilder`
@@ -2385,6 +1356,7 @@ class ResizableCapacityLinkedBlockingQueue<E> extends LinkedBlockingQueue<E> {
 }
 ```
 
+%%
 #### 如何设计一个根据任务的优先级执行的线程池？
 有两种方式：
 - 提交到线程池的任务实现 `Comparable` 接口，并重写 `compareTo` 方法来指定任务之间的优先级比较规则。
@@ -2398,7 +1370,7 @@ class ResizableCapacityLinkedBlockingQueue<E> extends LinkedBlockingQueue<E> {
 解决办法：(对应上面的问题)
 - 继承 PriorityBlockingQueue 并重写一下 offer 方法(入队)的逻辑，当插入的元素数量超过指定值就返回 false 。
 - 通过优化设计来解决（比较麻烦），比如等待时间过长的任务会被移除并重新添加到队列中，但是优先级会被提升。
-- ()对于性能方面的影响，是没办法避免的，毕竟需要对任务进行排序操作。并且，对于大部分业务场景来说，这点性能影响是可以接受的。
+- ()对于性能方面的影响，是没办法避免的，毕竟需要对任务进行排序操作。并且，对于大部分业务场景来说，这点性能影响是可以接受的。 
 
-### Future
->Future,AQS 的内容参考 java并发-概念，其他的主要参考 java相关
+%% ### Future
+>Future,AQS 的内容参考 java并发-概念，其他的主要参考 java相关 %%

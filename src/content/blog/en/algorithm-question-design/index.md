@@ -12,8 +12,6 @@ heroImageSrc: '../../../pic/puscas-adryan-VTV9mpLLGks-unsplash.jpg'
 heroImageColor: ' #d88e5f '
 ---
 
-> [!note] Note
-> This article returns to being based on the original problem-setting notes, preserving your problem description, algorithm approach, code implementation, and subsequent extensions, no longer rewritten in an overview tone.
 
 ## Content Covered
 

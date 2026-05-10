@@ -12,18 +12,7 @@ language: English
 heroImageSrc: ../../../pic/bekky-bekks-VcQkZl4Wf1Y-unsplash.jpg
 heroImageColor: " #4a7273 "
 ---
-> [!note] Note
-> This article reverts to using your original number theory notes as the main body, only concatenating the scattered notes in blog order, preserving the original content as much as possible.
 
-## Contents
-
-- `gcd`
-- `lcm`
-- `Bézout's Identity`
-- `Extended Euclidean Algorithm`
-- `Fast Exponentiation`
-- `Modular Inverse`
-- `Chinese Remainder Theorem`
 
 ## gcd
 

@@ -14,12 +14,6 @@ heroImageSrc: ../../pic/jan-antonin-kolar-lRoX0shwjUQ-unsplash.jpg
 heroImageColor: " #783a13 "
 ---
 
-> [!note] 说明
-> 这篇改回以你原来的 MySQL 笔记为主体，主要保留事务、锁、MVCC、日志和优化这一段。
-
-## 收录内容
-
-- `MySQL 事务与日志`
 
 ## MySQL 事务、锁、MVCC 与日志
 

@@ -14,8 +14,7 @@ heroImageSrc: ../../pic/brianna-parks-OkiElXd_EDQ-unsplash.jpg
 heroImageColor: "#6e8059"
 ---
 
-> [!note] 说明
-> 这篇不再写概述式短评，直接回填原来的邀请赛和单题题解，只在站点侧补兼容处理。
+
 
 ## 收录范围
 

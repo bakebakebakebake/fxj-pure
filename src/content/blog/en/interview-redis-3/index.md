@@ -15,7 +15,7 @@ comment: true
 heroImageSrc: ../../../pic/salah-regouane-TATJUx-08kE-unsplash.jpg
 heroImageColor: " #252934 "
 ---
-# Redis Common Interview Questions  
+
 > Redis is an open-source (BSD licensed), in-memory database (with very fast read/write speed), commonly used in scenarios such as **caching, message queues, and distributed locks**.  
 
 > 

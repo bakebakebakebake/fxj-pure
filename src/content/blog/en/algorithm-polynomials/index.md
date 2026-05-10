@@ -12,17 +12,6 @@ language: English
 heroImageSrc: ../../../pic/claudio-luiz-castro-_R95VMWyn7A-unsplash.jpg
 heroImageColor: " #005fb8 "
 ---
-> [!note] Explanation
-> This is part of the "originally had too little local content, so rewriting by supplementing materials" section. The main storyline references the public materials of Jiang Yanyan and the polynomial directory of OI-Wiki, but the writing style tries to stick to the competition notes approach: first talk about when to think of it, then introduce the tool itself.
-
-## Content Included
-
-- `Why polynomials are worth learning`
-- `Coefficient Representation / Point-value Representation / Interpolation`
-- `Intuition for using FFT / NTT`
-- `The position of Formal Power Series in competitions`
-- `When to think about polynomials`
-
 ## Let's Address the Misconceptions First
 
 Many people, upon first encountering polynomial algorithms, get intimidated by terms like:
