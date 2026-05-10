@@ -1,5 +1,5 @@
 ---
-title: Codeforces 题解整理 1：构造、位运算与贪心
+title: Codeforces 题解整理 1
 description: 2024.1~7 以原题解记录为主，收录构造、位运算与贪心向的 Codeforces 题目。
 publishDate: 2026-03-06
 tags:
@@ -87,7 +87,7 @@ void solve() {
 
 鉴于初始值为 $x$ 、 $y$ 和 $k$ ，马克西姆想知道 $x$ 的最终值是多少。
 
->做时没有思路
+
 
 若 $x<y$ ：则后面一定是 $x+1,x+2,\dots,y-1,(1,2,\dots,y-1)$ 呈现周期性。
 
@@ -117,7 +117,7 @@ void solve() {
 
 #### Solution
 
->每次都能想到正确思路，但是就是写不出来，总感觉差点什么...
+
 
 构造
 
@@ -200,7 +200,7 @@ void solve() {
 > 得到的 GCD 序列 $b$ = \[ $2,6,12,12$ \]是非递减的，因为 $b_1 \le b_2 \le b_3 \le b_4$ .
 > 
 
->无想法 
+
 
 主要思路：
 
@@ -495,9 +495,6 @@ void solve() {
 }
 ```
 
-#### hard version
-
-...
 
 ## CF 1995 Div.2 B1 - Bouquet (Easy Version)
 **这是问题的简单版本。唯一不同的是，在这个版本中，花朵是通过枚举来指定的**。

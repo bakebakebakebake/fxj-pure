@@ -1,5 +1,5 @@
 ---
-title: "Invitational and Addendum: Zhengzhou, Kunming, HDU, and Luogu"
+title: "Invitational and Misc Solutions"
 description: Primarily based on original solution records, including Zhengzhou Invitational, Kunming Invitational, HDU 2973, and Luogu B3645.
 publishDate: 2026-03-06
 tags:

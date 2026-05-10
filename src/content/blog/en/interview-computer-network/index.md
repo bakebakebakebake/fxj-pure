@@ -1,6 +1,6 @@
 ---
 title: "From Browser to Server: Which Network Layers a Request Crosses"
-description: Don't reduce computer networks to a list of protocol names. Follow a real request and see how DNS, TCP, TLS, HTTP, and congestion control work together.
+description: Follow one real request and see how DNS, TCP, TLS, HTTP, and congestion control take turns.
 publishDate: 2025-03-21
 tags:
   - Interview Prep
@@ -10,108 +10,32 @@ tags:
   - DNS
   - HTTPS
 language: English
+draft: true
 heroImageSrc: ../../../pic/miguel-angel-padrinan-alba-xvASUPTwJsI-unsplash.jpg
 heroImageColor: " #7a7e7f "
 ---
 
 `Request Perspective` `TCP / HTTP` `HTTPS`
 
-Computer networks are easiest to learn as a "protocol name warehouse."
+Start from one request and the roles of each layer become much clearer.
 
-HTTP, HTTPS, TCP, UDP, DNS, IP, MAC, ARP, congestion control, flow control—they all sound important, and they can indeed be asked separately in exams. But once you keep them separated for too long, your brain starts forgetting one crucial fact: **these things were originally designed to make real communication happen**.
+The rough chain is DNS, TCP, TLS, HTTP, and rendering.
 
-So I increasingly prefer to start learning computer networks from a single request.
+## Find the Peer
 
-First question: **When I type a URL in the browser, which layers are actually working together**.
+Before the request starts, the browser needs to know which machine the domain name points to.
 
-> [!tip] Always review computer networks with a request in mind
-> You can attach all knowledge points to this chain: "find address -> establish connection -> ensure security -> transmit semantics -> control speed -> close connection". As long as this chain stays intact, many interview questions won't fragment into a pile of terms.
+### DNS: Translate Names to Addresses
 
-## First, Walk Through a Complete Request
+DNS is a layered collaborative system, not a single phone book.
 
-[timeline]
+## Step Two: Establish the TCP Connection
 
-- Parse URL
-  The browser first extracts the protocol, domain, port, and path, preparing the target to access.
+After the IP is known, the request still has not actually started.
 
-- DNS Query
-  Convert the domain name to an IP, with cache, recursive resolver, and authoritative DNS working in sequence.
+### What the Three-Way Handshake Confirms
 
-- Establish Connection
-  If using TCP, a handshake is required first; if it's HTTPS, TLS negotiation must also be completed on top.
-
-- Send HTTP Request
-  Request method, headers, path, and status semantics come into play.
-
-- Transmission and Control
-  Segmentation, acknowledgment, retransmission, flow control, and congestion control work together to ensure data is delivered as stably as possible.
-
-- Response and Rendering
-  The browser receives the response, then continues to fetch CSS, JS, and images before the page is fully displayed.
-
-As long as you keep this timeline in mind, the responsibilities of each layer become much easier to understand.
-
-## Step One: Find the Other Party First
-
-Many people say "the browser sends a request," which sounds like the first step is sending HTTP.
-
-Actually, it's not.
-
-In most scenarios, the browser first needs to know: which machine does this domain name correspond to.
-
-### What DNS Does Is Convert Names to Addresses
-
-Domain names are easy to remember, but machines actually rely on IP addresses for routing.
-
-So the core responsibility of the DNS layer is to translate:
-
-- `www.example.com`
-
-into:
-
-- An IP address that can be routed to.
-
-This step commonly goes through these caches or nodes:
-
-- Browser cache;
-- Operating system cache;
-- Local recursive resolver;
-- Root, top-level domain, and authoritative DNS servers.
-
-You don't necessarily have to memorize the entire recursive process every time, but it's best to know: **DNS is not a single-point phone book; it's itself a layered collaborative system**.
-
-### Why DNS Directly Affects Access Experience
-
-Because it's a necessary step before the request truly begins.
-
-- Slow resolution means slow time to first byte overall;
-- Different resolution strategies may direct users to different data centers;
-- CDN scheduling often relies primarily on domain name resolution results.
-
-So when you say "the website is slow," the problem might not even have reached the business service yet—it's already slow at the resolution path.
-
-> DNS decouples "human-friendly names" from "machine-routable addresses," while also enabling caching and traffic scheduling. This is much better than rote memorization.
-
-## Step Two: Connection Isn't Just "Connected" and Done
-
-After getting the IP, the request still hasn't truly started.
-
-If using TCP-based communication, the client and server must first establish this channel.
-
-### What the Three-Way Handshake Is Actually Confirming
-
-Many people say "the three-way handshake is to confirm both sides can send and receive normally," which is correct but somewhat abstract.
-
-A more complete understanding would be:
-
-- The client first initiates the connection intention;
-- The server confirms it can receive and is willing to send;
-- The client then confirms it received the other party's response;
-- Both sides also complete initial sequence number synchronization, laying the foundation for subsequent reliable transmission.
-
-So the handshake is **establishing a common context for the subsequent reliable byte stream**.
-
-### Complete TCP Three-Way Handshake Process
+The handshake confirms that both sides can send and receive, and that the initial sequence numbers are synchronized.
 
 **First Handshake**:
 - Client sends: SYN=1, seq=x
@@ -742,4 +666,3 @@ It's more like a layered collaborative request journey:
 So after truly learning computer networks, when you look at a request, you won't just see "the browser sent an HTTP."
 
 What you'll see is an entire set of protocols working together for the same thing: **delivering a communication as correctly, efficiently, and securely as possible to the other side.**
-

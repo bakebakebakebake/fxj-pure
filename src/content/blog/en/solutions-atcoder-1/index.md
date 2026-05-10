@@ -1,5 +1,5 @@
 ---
-title: "AtCoder Solutions 1: Number Theory, Binary Search, and Representation"
+title: "AtCoder Solutions 1"
 description: March-June 2024, primarily based on original solution records, including ABC 340 F, 341 D, 346 D/E/F, 356 D/E/F.
 publishDate: 2026-03-06
 tags:

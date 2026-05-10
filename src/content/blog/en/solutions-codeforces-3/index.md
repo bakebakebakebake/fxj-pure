@@ -1,5 +1,5 @@
 ---
-title: "Codeforces Solutions 3: Number Theory, Games, Combinatorics, and EDU"
+title: "Codeforces Solutions 3"
 description: Solutions from Jan-Sep 2024, focusing on number theory, game theory, combinatorics, and EDU problems from Codeforces.
 publishDate: 2026-03-06
 tags:
@@ -1066,7 +1066,7 @@ $C_{n}^m=\frac{n!}{(n-m)!\times m!}$
 
 $cnt$ represents the number of available rows and columns. Then: $ans=\sum\limits_{i=0}^{cnt/2}(C_{cnt}^{2i}\times C_{2i}^{i}\times i!)\equiv\sum\limits_{i=0}^{cnt/2}\left( \frac{cnt!}{(cnt-2i)!\times i!} \right)=\sum\limits_{i=0}^{cnt/2}\left( C_{cnt}^{2i}\times \frac{2i!}{i!} \right)$.
 
-I don't understand how this is derived $\dots$.
+
 ```cpp
 #define int long long
 constexpr int mod = 1e9 + 7;

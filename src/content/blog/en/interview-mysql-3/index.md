@@ -1,6 +1,6 @@
 ---
 title: "MySQL Logs and Locking Mechanisms"
-description: "Earlier MySQL notes originally written in Apple Notes."
+description: "Earlier MySQL notes."
 publishDate: "2025-06-05"
 tags:
   - Interview Prep
@@ -11,9 +11,6 @@ language: English
 draft: false
 comment: true
 ---
-%%> [!note] Description
-> <% tp.file.cursor(1) %>%%
-
 # MySQL Logs
 
 There are actually many types of logs, but the more important ones for interviews are:

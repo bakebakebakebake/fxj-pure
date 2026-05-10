@@ -1,5 +1,5 @@
 ---
-title: "Codeforces Solutions 2: Prefix Sums, Strings, and Thought Transformation"
+title: "Codeforces Solutions 2"
 description: "Solutions from Dec 2023 to Jul 2024, covering prefix sums, strings, and transformation-oriented Codeforces problems."
 publishDate: 2026-03-06
 tags:
@@ -370,8 +370,8 @@ Used to check if, given a length $k$, there exists a way to cover all segments.
 - If all segments are traversed successfully and can be covered, return `true`, indicating there exists a way to cover all segments within length $k$.
 The role of the `check` function is crucial, but proving its correctness remains a question for me.
 
-Binary search: $\text{I still haven't figured it out}$
-![](../../solutions-codeforces-2/Pasted%20image%2020231213195628.png)
+Binary search:
+![](../../solutions-codeforces-2/Pasted%20image%2020260510150134.png)
 Changing the 2D `vector<vector<int>>` to `vector<array<int, 2>>` saves a lot of space.
 ```cpp
 #include<bits/stdc++.h>
@@ -689,7 +689,7 @@ Rudolf asks you to help him and, based on Bernard's information, calculate the n
 ### Solution
 <span style="color:#92d050">DP/Thinking</span>
 
-Although this problem didn't use dp, DP needs focused practice!
+
 
 Jiangly's approach for this problem is great: update the reachable positions in each step into a `d` array, then assign all reachable positions from the `d` array to the `dp` array. This way, the `dp` array holds all reachable final positions.
 ```cpp

@@ -1,5 +1,5 @@
 ---
-title: "Nowcoder Solutions: Winter Contests, Weeklies, and Multi-School"
+title: "Nowcoder Solutions"
 description: December 2023 to August 2024, primarily based on original solution records, covering bookmarked winter contests, weekly contests, and multi-school problems.
 publishDate: 2026-03-06
 tags:
@@ -354,8 +354,7 @@ void solve() {
 }
 ```
 
->I didn't quite understand the code. My main idea was to preprocess the $sum[i]$ array, and then in a double loop, ensure that the indices corresponding to the double loop are not the same (i.e., cannot concatenate with itself), so there would be no need to reverse the array and do it again.  
->
+
 ```cpp 
 void solve() {
     int n;
@@ -434,7 +433,7 @@ Enumerate $a_{1}, a_{2}, a_{3} (1, 2, 3)$. If there exists a case where $z=1 \&\
 
 If a condition that satisfies the requirements is found, it exists.  
 
-The code feels very simple, it's just that I didn't think of it myself.  
+
 ```cpp
 int i, j, k, n, m, t, a[1005];
 vector<tuple<int, int, int> > v;
@@ -942,7 +941,7 @@ Information needed for the segment tree:
 
 The problem actually hints: $\mathrm{abs}(a[x]+a[x+1]+.....+a[y])$ is a contiguous segment, i.e., $pre[y]-pre[x-1]$. The maximum value minus the minimum value of prefix sums within the interval $[l,r]$ is the answer. So we need to maintain the maximum and minimum values within the interval.  
 
->After changing i=1 to i=0, it passed? I don't understand.  
+
 ```cpp
 #define int long long
 int f1[500010][30], f2[500010][30];
@@ -955,7 +954,7 @@ void solve() {
     for (int i = 1;i <= n;i++)f1[i][0] = pre[i], f2[i][0] = f1[i][0];
 
     for (int j = 1;j <= 30;j++) {
-        for (int i = 0;i + (1 << j) - 1 <= n;i++) { // After changing i=1 to i=0, it passed?
+        for (int i = 0;i + (1 << j) - 1 <= n;i++) {
             f1[i][j] = max(f1[i][j - 1], f1[i + (1 << (j - 1))][j - 1]);
             f2[i][j] = min(f2[i][j - 1], f2[i + (1 << (j - 1))][j - 1]);
         }

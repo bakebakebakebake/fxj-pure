@@ -1,5 +1,5 @@
 ---
-title: 邀请赛与补遗：郑州、昆明、HDU 与洛谷
+title: 杂项题解整理
 description: 以原题解记录为主，收录郑州邀请赛、昆明邀请赛、HDU 2973 与洛谷 B3645。
 publishDate: 2026-03-06
 tags:

@@ -1,5 +1,5 @@
 ---
-title: AtCoder 题解整理 2：DP、概率、图与数据结构
+title: AtCoder 题解整理 2
 description: 2024.4~7 以原题解记录为主，收录 ABC 348 E/F、350 D/E、351 D/E/F、357 D/E/F、358 C/E/G、360 E。
 publishDate: 2026-03-06
 tags:
@@ -43,7 +43,7 @@ heroImageColor: " #98adca "
 
 原：[Problem - F - Codeforces](https://codeforces.com/contest/1092/problem/F) 不过这个题目是求的最大值，前面的处理一样，第二个 DFS 有所区别：
 
-$\Huge{CF_{DFS_{2}}}$
+${CF_{DFS_{2}}}$
 ```cpp 
 void go(int v, int p = -1) {
 	ans = max(ans, res);

@@ -1,5 +1,5 @@
 ---
-title: Codeforces 题解整理 3：数论、博弈、组合与 EDU
+title: Codeforces 题解整理 3
 description: 2024.1~9 2024以原题解记录为主，收录数论、博弈、组合与 EDU 向的 Codeforces 题目。
 publishDate: 2026-03-06
 tags:
@@ -368,7 +368,7 @@ void solve() {
 没太搞懂 $\dots$
 
 这段代码已经被 HACK 了，现在提交会 T
-![](./Pasted%20image%2020240128171314.png)
+
 ```cpp
 void solve()
 {
@@ -407,7 +407,6 @@ $(2)$
 
 找到满足该条件的最大 $d$。这可以在 $\mathcal{O}(\sqrt{x})$ 时间内通过简单的因数分解来实现。
 
-![](./Pasted%20image%2020240128180042.png)
 
 ```cpp
 void solve()
@@ -1068,7 +1067,7 @@ $C_{n}^m=\frac{n!}{(n-m)!\times m!}$
 
 $cnt$ 代表可用的行列数，则： $ans=\sum\limits_{i=0}^{cnt/2}(C_{cnt}^{2i}\times C_{2i}^{i}\times i!)\equiv\sum\limits_{i=0}^{cnt/2}\left( \frac{cnt!}{(cnt-2i)!\times i!} \right)=\sum\limits_{i=0}^{cnt/2}\left( C_{cnt}^{2i}\times \frac{2i!}{i!} \right)$
 
-不懂是如何推出的 $\dots$
+
 ```cpp
 #define int long long
 constexpr int mod = 1e9 + 7;

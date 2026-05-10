@@ -1,6 +1,6 @@
 ---
 title: "How Operating Systems Hold Up Programs: Processes, Memory, Files, and I/O"
-description: "A practical review of operating systems: processes, threads, virtual memory, page cache, system calls, file systems, and I/O."
+description: "Processes, threads, virtual memory, page cache, system calls, file systems, and I/O."
 publishDate: 2025-03-22
 tags:
   - Interview Prep
@@ -10,24 +10,16 @@ tags:
   - Memory Management
   - IO
 language: English
+draft: true
 heroImageSrc: ../../../pic/guillaume-coupy-11c7yNn30VA-unsplash.jpg
 heroImageColor: "#dfb48f"
 ---
 
 `Runtime Context` `Virtual Memory` `I/O Models`
 
-The best way to start learning about operating systems is with a simple question: **Why can programs run at all?**
+Start from one question: **Why can programs run at all?**
 
-Because if you genuinely follow this question through, concepts like processes, threads, address spaces, page tables, file systems, system calls, page cache, `mmap`, and `epoll` — which initially seem scattered — suddenly become parts of the same chain.
-
-Conversely, if you just memorize terms chapter by chapter from a textbook, OS is particularly easy to learn as "I've heard of each point, but together it's like I never learned it."
-
-So this article doesn't want to follow the table of contents, but rather return to the runtime context of programs to see: **What foundational work is the operating system actually doing for applications?**
-
-> [!tip] The most important thread to grasp in operating systems
-> Who executes, who occupies resources, how addresses are mapped, how data is persisted, and how slow devices don't drag down fast ones. As long as these five questions aren't lost, processes, memory, file systems, and I/O will be hard to learn in a scattered way.
-
-## First, look at the general process from program startup to execution
+## Program Startup to Execution
 
 [timeline]
 

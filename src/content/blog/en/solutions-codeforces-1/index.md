@@ -1,5 +1,5 @@
 ---
-title: "Codeforces Solutions 1: Construction, Bit Operations, and Greedy"
+title: "Codeforces Solutions 1"
 description: Solutions from Jan-Jul 2024, focusing on construction, bit operations, and greedy problems from Codeforces.
 publishDate: 2026-03-06
 tags:
@@ -97,7 +97,7 @@ Given the Manhattan permutation value, construct this permutation.
 
 #### Solution
 
->I always think of the correct idea every time, but just can't write it out, always feeling like something is missing...
+
 
 Construction
 
@@ -813,7 +813,7 @@ Time complexity: $O(\log 10^{18})$ per test case.
 
 Code
 
-I didn't understand at first why the answer could be output directly as $b-a$ later, but later I found it could be simpler.
+
 ```cpp
 #define int long long
 void solve()

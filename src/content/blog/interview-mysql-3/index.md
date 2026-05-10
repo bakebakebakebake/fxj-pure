@@ -14,10 +14,6 @@ heroImageSrc: ../../pic/maksym-kaharlytskyi-Q9y3LRuuxmg-unsplash.jpg
 heroImageColor: " #dbd6ce "
 ---
 
-%%> [!note] 说明
-> <% tp.file.cursor(1) %>%%
-
-
 # MySQL的日志  
   
 其实有很多种日志，但是较为重要的有：  

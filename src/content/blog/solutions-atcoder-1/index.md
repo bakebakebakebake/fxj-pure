@@ -1,5 +1,5 @@
 ---
-title: AtCoder 题解整理 1：数论、二分与表示
+title: AtCoder 题解整理 1
 description: 2024.3~6 以原题解记录为主，收录 ABC 340 F、341 D、346 D/E/F、356 D/E/F。
 publishDate: 2026-03-06
 tags:

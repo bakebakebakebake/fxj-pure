@@ -1,6 +1,6 @@
 ---
 title: "Why MySQL Is Fast: Pages, Indexes, and B+ Trees"
-description: Based on the original MySQL notes, this post covers fundamentals, indexes, B+ trees, and execution plans.
+description: Covers fundamentals, indexes, B+ trees, and execution plans.
 publishDate: 2025-05-10
 tags:
   - Interview
@@ -9,8 +9,8 @@ tags:
   - B-Tree
   - Index
 language: English
-heroImageSrc: '../../../pic/tobias-fischer-PkbZahEG2Ng-unsplash.jpg'
-heroImageColor: ' #c0cb9b '
+heroImageSrc: ../../../pic/tobias-fischer-PkbZahEG2Ng-unsplash.jpg
+heroImageColor: " #c0cb9b "
 ---
 
 

@@ -1,6 +1,6 @@
 ---
 title: MySQL 为什么快：从页结构、索引到 B+ 树
-description: 以原始 MySQL 笔记为主，保留基础、索引、B+ 树与执行计划相关整理。
+description: 保留基础、索引、B+ 树与执行计划相关整理。
 publishDate: 2025-05-10
 tags:
   - 八股
@@ -9,8 +9,8 @@ tags:
   - B树
   - 索引
 language: 中文
-heroImageSrc: '../../pic/tobias-fischer-PkbZahEG2Ng-unsplash.jpg'
-heroImageColor: ' #c0cb9b '
+heroImageSrc: ../../pic/tobias-fischer-PkbZahEG2Ng-unsplash.jpg
+heroImageColor: " #c0cb9b "
 ---
 
 

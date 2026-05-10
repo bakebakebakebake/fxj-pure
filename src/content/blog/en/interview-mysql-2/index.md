@@ -1,6 +1,6 @@
 ---
 title: "How MySQL Preserves Consistency: Transactions, Locks, MVCC, and Logs"
-description: Previously recorded content about MySQL in Apple Notes
+description: Covers transactions, locks, MVCC, logs, and related optimization notes.
 publishDate: 2025-06-05
 tags:
   - Interview Prep

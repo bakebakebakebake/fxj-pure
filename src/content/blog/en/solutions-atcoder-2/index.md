@@ -1,5 +1,5 @@
 ---
-title: "AtCoder Solutions 2: DP, Probability, Graphs, and Data Structures"
+title: "AtCoder Solutions 2"
 description: April~July 2024, primarily based on original solution records, including ABC 348 E/F, 350 D/E, 351 D/E/F, 357 D/E/F, 358 C/E/G, 360 E.
 publishDate: 2026-03-06
 tags:
@@ -41,7 +41,7 @@ Rerooting DP / Tree DP / <span style="color:#92d050">Rerooting / Tree Centroid</
 
 Original: [Problem - F - Codeforces](https://codeforces.com/contest/1092/problem/F) However, that problem asks for the maximum value. The initial processing is the same, but the second DFS differs:
 
-$\Huge{CF_{DFS_{2}}}$
+${CF_{DFS_{2}}}$
 ```cpp
 void go(int v, int p = -1) {
 	ans = max(ans, res);

@@ -1,5 +1,5 @@
 ---
-title: Codeforces 题解整理 2：前缀和、字符串与思维转化
+title: Codeforces 题解整理 2
 description: 2023.12~2024.7 以原题解记录为主，收录前缀量、字符串与思维转化向的 Codeforces 题目。
 publishDate: 2026-03-06
 tags:
@@ -377,8 +377,8 @@ $$
 - 如果成功遍历了所有线段并且都能够被覆盖，则返回 `true`，表示存在一种方式将所有线段覆盖在长度为 $k$ 的情况下。 
 `check` 函数的作用很重要，但是如何证明其正确性还是我的一个问题。
 
-二分搜索：$\text{我仍然没有想出来}$
-![](./Pasted%20image%2020231213195628.png)
+二分搜索：
+![](Pasted%20image%2020260510150134.png)
 将二维的 `vector<vector<int>>` 变为 `vector<array<int, 2>>` 节省了不少空间
 ```cpp
 #include<bits/stdc++.h>
@@ -697,8 +697,6 @@ void solve() {
 
 ### Solution
 <span style="color:#92d050">DP/思维</span>
-
-虽然这题并没有用到 dp，但是DP 需要专项练习了！
 
 这题 Jiangly 的思路很棒，将每次能走到的地方更新到 `d` 数组中去，每次再将 d 数组中能走到的全部赋值给 dp 数组，这样，dp 数组中就有最后一次能走到的全部位置了。
 ```cpp
@@ -1065,7 +1063,6 @@ void solve() {
 ```
 
 这里需要用到筛法；
-模板整理
 
 ## CF 1937 Div.2 D - Pinball
 有一个长度为 $n$ 的一维网格。网格的 $i$ /th 单元格包含一个字符 $s_i$ ，这个字符要么是"<"，要么是">"。
