@@ -42,6 +42,8 @@ bunfig.toml
 /src/content/.trash/
 /test/
 CLAUDE.md
+.claude/
+/src/content/.claude/
 .vercel
 .alma-snapshots
 /src/content/docs/**
