@@ -32,6 +32,14 @@ const { selector = config.integ.mediumZoom.selector, background = 'hsl(var(--bac
         >
           ×
         </button>
+        <div class="content-image-viewer__controls">
+          <button type="button" class="content-image-viewer__control" aria-label="Zoom out" data-zoom-out>
+            −
+          </button>
+          <button type="button" class="content-image-viewer__control" aria-label="Zoom in" data-zoom-in>
+            +
+          </button>
+        </div>
         <div class="content-image-viewer__viewport">
           <img class="content-image-viewer__image" alt="" />
         </div>
@@ -52,12 +60,19 @@ const { selector = config.integ.mediumZoom.selector, background = 'hsl(var(--bac
     const root = createViewer()
     const viewport = root.querySelector('.content-image-viewer__viewport')
     const viewerImage = root.querySelector('.content-image-viewer__image')
+    const zoomInButton = root.querySelector('[data-zoom-in]')
+    const zoomOutButton = root.querySelector('[data-zoom-out]')
     if (!(viewport instanceof HTMLDivElement) || !(viewerImage instanceof HTMLImageElement)) return
 
     let activeImage = null
     let scale = 1
     let gestureStartScale = 1
     let startWidth = 0
+
+    const applyScale = (nextScale) => {
+      scale = clamp(nextScale, 0.75, 4)
+      syncSize()
+    }
 
     const syncSize = () => {
       if (!viewerImage.complete || !startWidth) return
@@ -105,6 +120,12 @@ const { selector = config.integ.mediumZoom.selector, background = 'hsl(var(--bac
       })
     }
 
+    const stepScale = (direction) => {
+      if (root.hidden || !activeImage) return
+      const delta = direction === 'in' ? 0.15 : -0.15
+      applyScale(scale + delta)
+    }
+
     images.forEach((image) => {
       if (!(image instanceof HTMLImageElement)) return
       if (image.dataset.viewerBound === 'true') return
@@ -137,9 +158,8 @@ const { selector = config.integ.mediumZoom.selector, background = 'hsl(var(--bac
         if (root.hidden || !activeImage) return
         if (!event.ctrlKey && !event.metaKey) return
         event.preventDefault()
-        const delta = event.deltaY < 0 ? 1.12 : 0.89
-        scale = clamp(scale * delta, 0.85, 6)
-        syncSize()
+        const delta = event.deltaY < 0 ? 0.12 : -0.12
+        applyScale(scale + delta)
       },
       { passive: false }
     )
@@ -162,9 +182,11 @@ const { selector = config.integ.mediumZoom.selector, background = 'hsl(var(--bac
     root.addEventListener('gestureend', (event) => {
       if (root.hidden) return
       event.preventDefault()
-      scale = clamp(scale, 0.85, 6)
-      syncSize()
+      applyScale(scale)
     })
+
+    zoomInButton?.addEventListener('click', () => stepScale('in'))
+    zoomOutButton?.addEventListener('click', () => stepScale('out'))
   }
 
   const initViewer = () => {
@@ -202,6 +224,7 @@ const { selector = config.integ.mediumZoom.selector, background = 'hsl(var(--bac
     position: relative;
     z-index: 1;
     display: grid;
+    grid-template-rows: auto 1fr;
     height: 100%;
     width: 100%;
     place-items: center;
@@ -225,7 +248,31 @@ const { selector = config.integ.mediumZoom.selector, background = 'hsl(var(--bac
     line-height: 1;
   }
 
+  .content-image-viewer__controls {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 2;
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+
+  .content-image-viewer__control {
+    display: inline-flex;
+    height: 2.25rem;
+    width: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid hsl(var(--border) / 0.9);
+    border-radius: 9999px;
+    background: hsl(var(--background) / 0.82);
+    color: hsl(var(--foreground) / 1);
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
   .content-image-viewer__viewport {
+    align-self: center;
     max-height: calc(100vh - 5rem);
     max-width: min(96vw, 1400px);
     overflow: auto;
@@ -250,7 +297,7 @@ const { selector = config.integ.mediumZoom.selector, background = 'hsl(var(--bac
   @media (max-width: 640px) {
     .content-image-viewer__shell {
       padding-inline: 0.5rem;
-      padding-top: 3.5rem;
+      padding-top: 4rem;
     }
 
     .content-image-viewer__viewport {
