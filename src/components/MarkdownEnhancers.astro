@@ -119,13 +119,25 @@
     const remainder = normalized.slice(match[0].length)
     const [titleLead, ...introLines] = remainder.split('\n')
     const titleNodes = []
+    const introNodes = []
+    const hasParagraphBreak =
+      introLines.length > 0 ||
+      [...paragraph.childNodes].some(
+        (child) =>
+          child.nodeName?.toLowerCase() === 'br' ||
+          (child.nodeType === Node.TEXT_NODE && /\n/u.test(child.textContent || ''))
+      )
+    const implicitTitle = !titleLead.trim() && introLines.length > 0 ? introLines.shift()?.trim() ?? '' : ''
 
     if (titleLead.trim()) {
       titleNodes.push(document.createTextNode(titleLead.trim()))
+    } else if (implicitTitle) {
+      titleNodes.push(document.createTextNode(implicitTitle))
     }
 
     ;[...paragraph.childNodes].slice(1).forEach((child) => {
-      titleNodes.push(child.cloneNode(true))
+      if (hasParagraphBreak) introNodes.push(child.cloneNode(true))
+      else titleNodes.push(child.cloneNode(true))
     })
 
     if (!titleNodes.length) {
@@ -136,7 +148,8 @@
       rawType,
       foldMarker,
       titleNodes,
-      introText: introLines.join('\n').trim()
+      introText: introLines.join('\n').trim(),
+      introNodes
     }
   }
 
@@ -163,13 +176,15 @@
         const parsedMarker = parseCalloutMarker(firstParagraph)
         if (!parsedMarker) return
 
-        const { rawType, foldMarker, titleNodes, introText } = parsedMarker
+        const { rawType, foldMarker, titleNodes, introText, introNodes } = parsedMarker
         const type = calloutTypeMap[rawType] ?? 'note'
         const bodyChildren = []
 
         if (introText) {
           bodyChildren.push(createElement('p', '', introText))
         }
+
+        introNodes.forEach((child) => bodyChildren.push(child))
 
         ;[...blockquote.children].forEach((child, index) => {
           if (index === 0) return

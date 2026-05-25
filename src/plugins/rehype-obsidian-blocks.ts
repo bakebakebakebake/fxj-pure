@@ -510,12 +510,17 @@ function renderCallout(node: Element) {
   const parsedMarker = parseCalloutMarker(firstParagraph)
   if (!parsedMarker) return null
 
-  const { rawType, foldMarker, introText, titleChildren } = parsedMarker
+  const { rawType, foldMarker, introText, introChildren, titleChildren } = parsedMarker
   const type = calloutTypeMap[rawType] ?? 'note'
   const bodyChildren: RootContent[] = []
+  const titleNodes = [...titleChildren]
 
   if (introText) {
     bodyChildren.push(h('p', introText) as RootContent)
+  }
+
+  if (introChildren.length) {
+    bodyChildren.push(...introChildren)
   }
 
   const firstParagraphIndex = contentChildren.indexOf(firstParagraph)
@@ -524,9 +529,17 @@ function renderCallout(node: Element) {
     bodyChildren.push(child)
   }
 
+  if (!hasExplicitTitle(parsedMarker) && bodyChildren.length > 0) {
+    const [leadTitle, trimmedBody] = promoteLeadParagraph(bodyChildren)
+    if (leadTitle.length) {
+      titleNodes.splice(0, titleNodes.length, ...leadTitle)
+      bodyChildren.splice(0, bodyChildren.length, ...trimmedBody)
+    }
+  }
+
   return foldMarker === '+' || foldMarker === '-'
-    ? createCollapse(type, titleChildren, bodyChildren, foldMarker === '+')
-    : createCallout(type, titleChildren, bodyChildren)
+    ? createCollapse(type, titleNodes, bodyChildren, foldMarker === '+')
+    : createCallout(type, titleNodes, bodyChildren)
 }
 
 function parseCalloutMarker(paragraph: Element) {
@@ -542,13 +555,24 @@ function parseCalloutMarker(paragraph: Element) {
   const remainder = normalized.slice(match[0].length)
   const [titleLead, ...introLines] = remainder.split('\n')
   const titleChildren: RootContent[] = []
+  const introChildren: RootContent[] = []
+  const hasParagraphBreak =
+    introLines.length > 0 ||
+    paragraph.children.some((child) => isElement(child, 'br') || (child.type === 'text' && /\n/u.test(child.value)))
+  const implicitTitle = !titleLead.trim() && introLines.length > 0 ? introLines.shift()?.trim() ?? '' : ''
 
   if (titleLead.trim()) {
     titleChildren.push({ type: 'text', value: titleLead.trim() })
+  } else if (implicitTitle) {
+    titleChildren.push({ type: 'text', value: implicitTitle })
   }
 
   for (const child of paragraph.children.slice(1)) {
-    titleChildren.push(child)
+    if (hasParagraphBreak) {
+      introChildren.push(child)
+    } else {
+      titleChildren.push(child)
+    }
   }
 
   if (!titleChildren.length) {
@@ -559,8 +583,56 @@ function parseCalloutMarker(paragraph: Element) {
     rawType,
     foldMarker,
     titleChildren,
-    introText: introLines.join('\n').trim()
+    introText: introLines.join('\n').trim(),
+    introChildren,
+    hasExplicitTitle: Boolean(titleLead.trim() || implicitTitle)
   }
+}
+
+function hasExplicitTitle(parsedMarker: {
+  hasExplicitTitle: boolean
+}) {
+  return parsedMarker.hasExplicitTitle
+}
+
+function promoteLeadParagraph(bodyChildren: RootContent[]) {
+  const [firstChild, ...rest] = bodyChildren
+  if (!firstChild || !isElement(firstChild, 'p')) return [[], bodyChildren] as const
+
+  const splitIndex = firstChild.children.findIndex(
+    (child) => child.type === 'text' && child.value.includes('\n')
+  )
+
+  if (splitIndex === -1) return [[], bodyChildren] as const
+
+  const titleNodes: RootContent[] = []
+  const bodyNodes: RootContent[] = []
+
+  for (const [index, child] of firstChild.children.entries()) {
+    if (child.type !== 'text') {
+      ;(bodyNodes.length ? bodyNodes : titleNodes).push(child)
+      continue
+    }
+
+    if (index < splitIndex) {
+      titleNodes.push(child)
+      continue
+    }
+
+    const [before, ...after] = child.value.split('\n')
+    if (index === splitIndex && before.length) {
+      titleNodes.push({ ...child, value: before })
+    }
+
+    const remainder = after.join('\n').trimStart()
+    if (remainder.length) {
+      bodyNodes.push({ ...child, value: remainder })
+    }
+  }
+
+  if (!titleNodes.length || !bodyNodes.length) return [[], bodyChildren] as const
+
+  return [titleNodes, [h('p', bodyNodes) as RootContent, ...rest]] as const
 }
 
 function walkEmbedParagraphs(parent: Root | Element) {
