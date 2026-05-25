@@ -5,8 +5,9 @@ import type { CollectionEntry } from 'astro:content'
 // Plugin styles
 import 'katex/dist/katex.min.css'
 
-import { MediumZoom } from 'astro-pure/advanced'
-import { ArticleBottom, Copyright, Hero } from 'astro-pure/components/pages'
+import { ArticleBottom, Hero } from 'astro-pure/components/pages'
+import ImageViewer from '@/components/advanced/ImageViewer.astro'
+import Copyright from '@/components/pages/Copyright.astro'
 import TOC from '@/components/pages/TOC.astro'
 import PageLayout from '@/layouts/ContentLayout.astro'
 import { Comment, PageInfo } from '@/components/waline'
@@ -73,4 +74,4 @@ const primaryColor =
   <slot name='bottom-sidebar' slot='bottom-sidebar' />
 </PageLayout>
 
-{integ.mediumZoom.enable && <MediumZoom />}
+{integ.mediumZoom.enable && <ImageViewer />}

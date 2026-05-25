@@ -210,19 +210,39 @@ mark {
   border: 1px solid hsl(var(--border) / 0.9);
 }
 
+#content :where(h1, h2, h3, h4, h5, h6) {
+  color: hsl(var(--foreground) / 1);
+}
+
+#content :where(h1, h2, h3, h4, h5, h6) > .anchor {
+  color: hsl(var(--muted-foreground) / 0.7);
+}
+
+#content :where(h1, h2, h3, h4, h5, h6) > .anchor:hover {
+  color: hsl(var(--primary) / 1);
+}
+
 #content :where(blockquote):not(.obsidian-callout):not(.aside) {
-  margin-block: 1.25rem;
+  margin-block: 0.9rem;
   border-inline-start: 4px solid hsl(var(--content-quote-border));
   border-radius: 0 1rem 1rem 0;
   background: hsl(var(--content-quote-bg));
   color: hsl(var(--content-quote-fg));
   font-style: normal;
-  padding: 1rem 1.1rem;
+  padding: 0.8rem 1rem;
 }
 
 #content :where(blockquote):not(.obsidian-callout):not(.aside) :where(p, li) {
   color: inherit;
   font-style: normal;
+}
+
+#content :where(blockquote):not(.obsidian-callout):not(.aside) > :first-child {
+  margin-top: 0;
+}
+
+#content :where(blockquote):not(.obsidian-callout):not(.aside) > :last-child {
+  margin-bottom: 0;
 }
 
 #content
@@ -461,6 +481,21 @@ mark {
 
 #content img.zoomable {
   cursor: zoom-in;
+  transition:
+    filter 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.dark #content img.zoomable {
+  filter: brightness(0.82) saturate(0.92);
+}
+
+.dark #content img.zoomable:hover,
+.dark #content img.zoomable:focus-visible,
+.dark #content img.zoomable.medium-zoom-image--opened,
+.dark .content-image-viewer__image {
+  filter: brightness(1) saturate(1);
 }
 
 @media (min-width: 768px) {
