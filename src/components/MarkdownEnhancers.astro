@@ -187,7 +187,9 @@
             'summary',
             'obsidian-collapse-summary not-prose cursor-pointer font-medium'
           )
-          titleNodes.forEach((node) => summary.appendChild(node))
+          const content = createElement('span', 'obsidian-collapse-summary-content')
+          titleNodes.forEach((node) => content.appendChild(node))
+          summary.appendChild(content)
           const body = createElement('div', 'obsidian-collapse-body mt-3')
           bodyChildren.forEach((child) => body.appendChild(child))
           replacement.append(summary, body)

@@ -310,10 +310,23 @@ mark {
 
 .obsidian-collapse-summary {
   list-style: none;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
+}
+
+.obsidian-collapse-summary-content {
+  min-width: 0;
+}
+
+.obsidian-collapse-summary-content :where(p, .katex-display) {
+  margin-block: 0;
+}
+
+.obsidian-collapse-summary-content :where(.katex-display) {
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .obsidian-collapse-summary::-webkit-details-marker {
