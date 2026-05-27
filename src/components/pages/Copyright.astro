@@ -115,7 +115,9 @@ const shares = {
 </style>
 
 <script>
-  import { showToast } from 'astro-pure/utils'
+  const showToast = (detail: { message: string }) => {
+    document.dispatchEvent(new CustomEvent('toast', { detail }))
+  }
 
   const copyLink = document.getElementById('copy-link')
   copyLink?.addEventListener('click', () => {
