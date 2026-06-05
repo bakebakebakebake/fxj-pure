@@ -1,0 +1,2494 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Brand" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: FXJ Wiki
+      - generic [ref=e5]:
+        - generic [ref=e7]:
+          - link "Nav menu item" [ref=e8] [cursor=pointer]:
+            - /url: /blog
+            - text: Blog
+          - link "Nav menu item" [ref=e9] [cursor=pointer]:
+            - /url: /about
+            - text: About
+          - link "Search" [ref=e11] [cursor=pointer]:
+            - /url: /search
+            - generic [ref=e12]: Search
+            - img [ref=e13]
+        - button "Dark Theme" [ref=e18] [cursor=pointer]:
+          - generic [ref=e19]: Dark Theme
+          - img [ref=e20]
+    - generic [ref=e25]:
+      - link "中文" [ref=e26] [cursor=pointer]:
+        - /url: /blog/agent-knowledge-brief
+      - link "English" [ref=e27] [cursor=pointer]:
+        - /url: /en/blog/agent-knowledge-brief
+    - generic [ref=e28]:
+      - link "Back" [ref=e29] [cursor=pointer]:
+        - /url: /blog
+        - img [ref=e30]
+        - paragraph [ref=e32]: Back
+      - main [ref=e33]:
+        - complementary [ref=e34]:
+          - generic [ref=e35]:
+            - heading "TABLE OF CONTENTS" [level=2] [ref=e36]
+            - list [ref=e37]:
+              - listitem [ref=e38]:
+                - generic [ref=e41]:
+                  - 'button "Toggle section: Agent基础" [expanded] [ref=e42] [cursor=pointer]':
+                    - generic [ref=e43]: ▸
+                  - 'link "Scroll to section: Agent基础" [ref=e44] [cursor=pointer]':
+                    - /url: "#agent基础"
+                    - text: Agent基础
+                - list [ref=e45]:
+                  - listitem [ref=e46]:
+                    - 'link "Scroll to section: 定义与四要素" [ref=e50] [cursor=pointer]':
+                      - /url: "#定义与四要素"
+                      - text: 定义与四要素
+                  - listitem [ref=e51]:
+                    - 'link "Scroll to section: PEAS 任务环境描述模型" [ref=e55] [cursor=pointer]':
+                      - /url: "#peas-任务环境描述模型"
+                      - text: PEAS 任务环境描述模型
+                  - listitem [ref=e56]:
+                    - 'link "Scroll to section: 六类智能体演进路径" [ref=e60] [cursor=pointer]':
+                      - /url: "#六类智能体演进路径"
+                      - text: 六类智能体演进路径
+                  - listitem [ref=e61]:
+                    - 'link "Scroll to section: 三类分类维度" [ref=e65] [cursor=pointer]':
+                      - /url: "#三类分类维度"
+                      - text: 三类分类维度
+                  - listitem [ref=e66]:
+                    - 'link "Scroll to section: 运行机制：感知-思考-行动-观察循环" [ref=e70] [cursor=pointer]':
+                      - /url: "#运行机制感知-思考-行动-观察循环"
+                      - text: 运行机制：感知-思考-行动-观察循环
+                  - listitem [ref=e71]:
+                    - 'link "Scroll to section: 普通 LLM 调用与 Agent 的核心差异" [ref=e75] [cursor=pointer]':
+                      - /url: "#普通-llm-调用与-agent-的核心差异"
+                      - text: 普通 LLM 调用与 Agent 的核心差异
+                  - listitem [ref=e76]:
+                    - 'link "Scroll to section: 六大核心特征" [ref=e80] [cursor=pointer]':
+                      - /url: "#六大核心特征"
+                      - text: 六大核心特征
+              - listitem [ref=e81]:
+                - generic [ref=e83]:
+                  - 'button "Toggle section: Agent发展史" [expanded] [ref=e84] [cursor=pointer]':
+                    - generic [ref=e85]: ▸
+                  - 'link "Scroll to section: Agent发展史" [ref=e86] [cursor=pointer]':
+                    - /url: "#agent发展史"
+                    - text: Agent发展史
+                - list [ref=e87]:
+                  - listitem [ref=e88]:
+                    - 'link "Scroll to section: 符号主义（1950s–1980s）" [ref=e92] [cursor=pointer]':
+                      - /url: "#符号主义1950s1980s"
+                      - text: 符号主义（1950s–1980s）
+                  - listitem [ref=e93]:
+                    - 'link "Scroll to section: 联结主义（1980s–2010s）" [ref=e97] [cursor=pointer]':
+                      - /url: "#联结主义1980s2010s"
+                      - text: 联结主义（1980s–2010s）
+                  - listitem [ref=e98]:
+                    - 'link "Scroll to section: 深度学习（2010s–2022）" [ref=e102] [cursor=pointer]':
+                      - /url: "#深度学习2010s2022"
+                      - text: 深度学习（2010s–2022）
+                  - listitem [ref=e103]:
+                    - 'link "Scroll to section: LLM 驱动时代（2022–至今）" [ref=e107] [cursor=pointer]':
+                      - /url: "#llm-驱动时代2022至今"
+                      - text: LLM 驱动时代（2022–至今）
+                  - listitem [ref=e108]:
+                    - 'link "Scroll to section: 明斯基的”心智社会”理论" [ref=e112] [cursor=pointer]':
+                      - /url: "#明斯基的心智社会理论"
+                      - text: 明斯基的”心智社会”理论
+              - listitem [ref=e113]:
+                - generic [ref=e115]:
+                  - 'button "Toggle section: 一点点LLM基础" [expanded] [ref=e116] [cursor=pointer]':
+                    - generic [ref=e117]: ▸
+                  - 'link "Scroll to section: 一点点LLM基础" [ref=e118] [cursor=pointer]':
+                    - /url: "#一点点llm基础"
+                    - text: 一点点LLM基础
+                - list [ref=e119]:
+                  - listitem [ref=e120]:
+                    - 'link "Scroll to section: 语言模型演进" [ref=e124] [cursor=pointer]':
+                      - /url: "#语言模型演进"
+                      - text: 语言模型演进
+                  - listitem [ref=e125]:
+                    - 'link "Scroll to section: Transformer 核心架构" [ref=e129] [cursor=pointer]':
+                      - /url: "#transformer-核心架构"
+                      - text: Transformer 核心架构
+                  - listitem [ref=e130]:
+                    - 'link "Scroll to section: 三种架构变体" [ref=e134] [cursor=pointer]':
+                      - /url: "#三种架构变体"
+                      - text: 三种架构变体
+                  - listitem [ref=e135]:
+                    - 'link "Scroll to section: 分词（Tokenization）" [ref=e139] [cursor=pointer]':
+                      - /url: "#分词tokenization"
+                      - text: 分词（Tokenization）
+                  - listitem [ref=e140]:
+                    - 'link "Scroll to section: 采样参数" [ref=e144] [cursor=pointer]':
+                      - /url: "#采样参数"
+                      - text: 采样参数
+                  - listitem [ref=e145]:
+                    - 'link "Scroll to section: 上下文学习（In-Context Learning）机制" [ref=e149] [cursor=pointer]':
+                      - /url: "#上下文学习in-context-learning机制"
+                      - text: 上下文学习（In-Context Learning）机制
+                  - listitem [ref=e150]:
+                    - 'link "Scroll to section: 提示工程（Prompt Engineering）" [ref=e154] [cursor=pointer]':
+                      - /url: "#提示工程prompt-engineering"
+                      - text: 提示工程（Prompt Engineering）
+                  - listitem [ref=e155]:
+                    - 'link "Scroll to section: 训练范式" [ref=e159] [cursor=pointer]':
+                      - /url: "#训练范式"
+                      - text: 训练范式
+                  - listitem [ref=e160]:
+                    - 'link "Scroll to section: Scaling Laws 与涌现能力" [ref=e164] [cursor=pointer]':
+                      - /url: "#scaling-laws-与涌现能力"
+                      - text: Scaling Laws 与涌现能力
+                  - listitem [ref=e165]:
+                    - 'link "Scroll to section: 幻觉问题" [ref=e169] [cursor=pointer]':
+                      - /url: "#幻觉问题"
+                      - text: 幻觉问题
+                  - listitem [ref=e170]:
+                    - 'link "Scroll to section: Toolformer：让模型学会调用工具" [ref=e174] [cursor=pointer]':
+                      - /url: "#toolformer让模型学会调用工具"
+                      - text: Toolformer：让模型学会调用工具
+                  - listitem [ref=e175]:
+                    - 'link "Scroll to section: 模型选型" [ref=e179] [cursor=pointer]':
+                      - /url: "#模型选型"
+                      - text: 模型选型
+              - listitem [ref=e180]:
+                - generic [ref=e182]:
+                  - 'button "Toggle section: Agent经典范式" [expanded] [ref=e183] [cursor=pointer]':
+                    - generic [ref=e184]: ▸
+                  - 'link "Scroll to section: Agent经典范式" [ref=e185] [cursor=pointer]':
+                    - /url: "#agent经典范式"
+                    - text: Agent经典范式
+                - list [ref=e186]:
+                  - listitem [ref=e187]:
+                    - generic [ref=e189]:
+                      - 'button "Toggle section: ReAct" [ref=e190] [cursor=pointer]':
+                        - generic [ref=e191]: ▸
+                      - 'link "Scroll to section: ReAct" [ref=e192] [cursor=pointer]':
+                        - /url: "#react"
+                        - text: ReAct
+                  - listitem [ref=e193]:
+                    - 'link "Scroll to section: Plan-and-Solve" [ref=e197] [cursor=pointer]':
+                      - /url: "#plan-and-solve"
+                      - text: Plan-and-Solve
+                  - listitem [ref=e198]:
+                    - generic [ref=e200]:
+                      - 'button "Toggle section: Reflection（自我反思）" [ref=e201] [cursor=pointer]':
+                        - generic [ref=e202]: ▸
+                      - 'link "Scroll to section: Reflection（自我反思）" [ref=e203] [cursor=pointer]':
+                        - /url: "#reflection自我反思"
+                        - text: Reflection（自我反思）
+                  - listitem [ref=e204]:
+                    - 'link "Scroll to section: Tree of Thoughts（ToT）" [ref=e208] [cursor=pointer]':
+                      - /url: "#tree-of-thoughtstot"
+                      - text: Tree of Thoughts（ToT）
+              - listitem [ref=e209]:
+                - generic [ref=e211]:
+                  - 'button "Toggle section: Agent 开发框架" [expanded] [ref=e212] [cursor=pointer]':
+                    - generic [ref=e213]: ▸
+                  - 'link "Scroll to section: Agent 开发框架" [ref=e214] [cursor=pointer]':
+                    - /url: "#agent-开发框架"
+                    - text: Agent 开发框架
+                - list [ref=e215]:
+                  - listitem [ref=e216]:
+                    - 'link "Scroll to section: AutoGen（微软）" [ref=e220] [cursor=pointer]':
+                      - /url: "#autogen微软"
+                      - text: AutoGen（微软）
+                  - listitem [ref=e221]:
+                    - 'link "Scroll to section: AgentScope" [ref=e225] [cursor=pointer]':
+                      - /url: "#agentscope"
+                      - text: AgentScope
+                  - listitem [ref=e226]:
+                    - 'link "Scroll to section: CAMEL" [ref=e230] [cursor=pointer]':
+                      - /url: "#camel"
+                      - text: CAMEL
+                  - listitem [ref=e231]:
+                    - 'link "Scroll to section: LangGraph" [ref=e235] [cursor=pointer]':
+                      - /url: "#langgraph"
+                      - text: LangGraph
+                  - listitem [ref=e236]:
+                    - 'link "Scroll to section: 涌现式协作 vs 显式控制" [ref=e240] [cursor=pointer]':
+                      - /url: "#涌现式协作-vs-显式控制"
+                      - text: 涌现式协作 vs 显式控制
+              - listitem [ref=e241]:
+                - generic [ref=e243]:
+                  - 'button "Toggle section: 记忆与检索" [expanded] [ref=e244] [cursor=pointer]':
+                    - generic [ref=e245]: ▸
+                  - 'link "Scroll to section: 记忆与检索" [ref=e246] [cursor=pointer]':
+                    - /url: "#记忆与检索"
+                    - text: 记忆与检索
+                - list [ref=e247]:
+                  - listitem [ref=e248]:
+                    - 'link "Scroll to section: 两大痛点" [ref=e252] [cursor=pointer]':
+                      - /url: "#两大痛点"
+                      - text: 两大痛点
+                  - listitem [ref=e253]:
+                    - generic [ref=e255]:
+                      - 'button "Toggle section: 记忆系统架构" [ref=e256] [cursor=pointer]':
+                        - generic [ref=e257]: ▸
+                      - 'link "Scroll to section: 记忆系统架构" [ref=e258] [cursor=pointer]':
+                        - /url: "#记忆系统架构"
+                        - text: 记忆系统架构
+                  - listitem [ref=e259]:
+                    - 'link "Scroll to section: 四大记忆类型" [ref=e263] [cursor=pointer]':
+                      - /url: "#四大记忆类型"
+                      - text: 四大记忆类型
+                  - listitem [ref=e264]:
+                    - 'link "Scroll to section: 评分机制" [ref=e268] [cursor=pointer]':
+                      - /url: "#评分机制"
+                      - text: 评分机制
+                  - listitem [ref=e269]:
+                    - 'link "Scroll to section: MemoryTool 核心操作" [ref=e273] [cursor=pointer]':
+                      - /url: "#memorytool-核心操作"
+                      - text: MemoryTool 核心操作
+                  - listitem [ref=e274]:
+                    - generic [ref=e276]:
+                      - 'button "Toggle section: RAG 系统" [ref=e277] [cursor=pointer]':
+                        - generic [ref=e278]: ▸
+                      - 'link "Scroll to section: RAG 系统" [ref=e279] [cursor=pointer]':
+                        - /url: "#rag-系统"
+                        - text: RAG 系统
+                  - listitem [ref=e280]:
+                    - 'link "Scroll to section: Memory 与 RAG 的关系" [ref=e284] [cursor=pointer]':
+                      - /url: "#memory-与-rag-的关系"
+                      - text: Memory 与 RAG 的关系
+              - listitem [ref=e285]:
+                - generic [ref=e287]:
+                  - 'button "Toggle section: 上下文工程" [expanded] [ref=e288] [cursor=pointer]':
+                    - generic [ref=e289]: ▸
+                  - 'link "Scroll to section: 上下文工程" [ref=e290] [cursor=pointer]':
+                    - /url: "#上下文工程"
+                    - text: 上下文工程
+                - list [ref=e291]:
+                  - listitem [ref=e292]:
+                    - 'link "Scroll to section: 系统提示（System Prompt）设计原则" [ref=e296] [cursor=pointer]':
+                      - /url: "#系统提示system-prompt设计原则"
+                      - text: 系统提示（System Prompt）设计原则
+                  - listitem [ref=e297]:
+                    - 'link "Scroll to section: 上下文工程 vs 提示工程" [ref=e301] [cursor=pointer]':
+                      - /url: "#上下文工程-vs-提示工程"
+                      - text: 上下文工程 vs 提示工程
+                  - listitem [ref=e302]:
+                    - 'link "Scroll to section: 上下文腐蚀（Context Rot）" [ref=e306] [cursor=pointer]':
+                      - /url: "#上下文腐蚀context-rot"
+                      - text: 上下文腐蚀（Context Rot）
+                  - listitem [ref=e307]:
+                    - generic [ref=e309]:
+                      - 'button "Toggle section: GSSC 流水线" [ref=e310] [cursor=pointer]':
+                        - generic [ref=e311]: ▸
+                      - 'link "Scroll to section: GSSC 流水线" [ref=e312] [cursor=pointer]':
+                        - /url: "#gssc-流水线"
+                        - text: GSSC 流水线
+                  - listitem [ref=e313]:
+                    - 'link "Scroll to section: NoteTool（结构化笔记）" [ref=e317] [cursor=pointer]':
+                      - /url: "#notetool结构化笔记"
+                      - text: NoteTool（结构化笔记）
+                  - listitem [ref=e318]:
+                    - 'link "Scroll to section: TerminalTool（即时文件系统访问）" [ref=e322] [cursor=pointer]':
+                      - /url: "#terminaltool即时文件系统访问"
+                      - text: TerminalTool（即时文件系统访问）
+                  - listitem [ref=e323]:
+                    - 'link "Scroll to section: 长时程任务三大策略" [ref=e327] [cursor=pointer]':
+                      - /url: "#长时程任务三大策略"
+                      - text: 长时程任务三大策略
+                  - listitem [ref=e328]:
+                    - 'link "Scroll to section: 上下文工程的系统层级" [ref=e332] [cursor=pointer]':
+                      - /url: "#上下文工程的系统层级"
+                      - text: 上下文工程的系统层级
+                  - listitem [ref=e333]:
+                    - 'link "Scroll to section: 实践原则" [ref=e337] [cursor=pointer]':
+                      - /url: "#实践原则"
+                      - text: 实践原则
+              - listitem [ref=e338]:
+                - generic [ref=e340]:
+                  - 'button "Toggle section: Agent Skills" [expanded] [ref=e341] [cursor=pointer]':
+                    - generic [ref=e342]: ▸
+                  - 'link "Scroll to section: Agent Skills" [ref=e343] [cursor=pointer]':
+                    - /url: "#agent-skills"
+                    - text: Agent Skills
+                - list [ref=e344]:
+                  - listitem [ref=e345]:
+                    - 'link "Scroll to section: 渐进式披露（Progressive Disclosure）" [ref=e349] [cursor=pointer]':
+                      - /url: "#渐进式披露progressive-disclosure"
+                      - text: 渐进式披露（Progressive Disclosure）
+                  - listitem [ref=e350]:
+                    - 'link "Scroll to section: SKILL.md 规范" [ref=e354] [cursor=pointer]':
+                      - /url: "#skillmd-规范"
+                      - text: SKILL.md 规范
+                  - listitem [ref=e355]:
+                    - 'link "Scroll to section: Agent Skills 与 MCP 的关系" [ref=e359] [cursor=pointer]':
+                      - /url: "#agent-skills-与-mcp-的关系"
+                      - text: Agent Skills 与 MCP 的关系
+              - listitem [ref=e360]:
+                - generic [ref=e362]:
+                  - 'button "Toggle section: Agent通信协议" [expanded] [ref=e363] [cursor=pointer]':
+                    - generic [ref=e364]: ▸
+                  - 'link "Scroll to section: Agent通信协议" [ref=e365] [cursor=pointer]':
+                    - /url: "#agent通信协议"
+                    - text: Agent通信协议
+                - list [ref=e366]:
+                  - listitem [ref=e367]:
+                    - 'link "Scroll to section: MCP（Model Context Protocol）" [ref=e371] [cursor=pointer]':
+                      - /url: "#mcpmodel-context-protocol"
+                      - text: MCP（Model Context Protocol）
+                  - listitem [ref=e372]:
+                    - 'link "Scroll to section: A2A（Agent-to-Agent Protocol）" [ref=e376] [cursor=pointer]':
+                      - /url: "#a2aagent-to-agent-protocol"
+                      - text: A2A（Agent-to-Agent Protocol）
+                  - listitem [ref=e377]:
+                    - 'link "Scroll to section: ANP（Agent Network Protocol）" [ref=e381] [cursor=pointer]':
+                      - /url: "#anpagent-network-protocol"
+                      - text: ANP（Agent Network Protocol）
+                  - listitem [ref=e382]:
+                    - 'link "Scroll to section: 协议定位对比" [ref=e386] [cursor=pointer]':
+                      - /url: "#协议定位对比"
+                      - text: 协议定位对比
+              - listitem [ref=e387]:
+                - generic [ref=e389]:
+                  - 'button "Toggle section: Agentic-RL" [expanded] [ref=e390] [cursor=pointer]':
+                    - generic [ref=e391]: ▸
+                  - 'link "Scroll to section: Agentic-RL" [ref=e392] [cursor=pointer]':
+                    - /url: "#agentic-rl"
+                    - text: Agentic-RL
+                - list [ref=e393]:
+                  - listitem [ref=e394]:
+                    - 'link "Scroll to section: 从 LLM 训练到 Agentic RL" [ref=e398] [cursor=pointer]':
+                      - /url: "#从-llm-训练到-agentic-rl"
+                      - text: 从 LLM 训练到 Agentic RL
+                  - listitem [ref=e399]:
+                    - 'link "Scroll to section: GSM8K 数据集" [ref=e403] [cursor=pointer]':
+                      - /url: "#gsm8k-数据集"
+                      - text: GSM8K 数据集
+                  - listitem [ref=e404]:
+                    - 'link "Scroll to section: 奖励函数" [ref=e408] [cursor=pointer]':
+                      - /url: "#奖励函数"
+                      - text: 奖励函数
+                  - listitem [ref=e409]:
+                    - 'link "Scroll to section: SFT 监督微调" [ref=e413] [cursor=pointer]':
+                      - /url: "#sft-监督微调"
+                      - text: SFT 监督微调
+                  - listitem [ref=e414]:
+                    - 'link "Scroll to section: GRPO 群组相对策略优化" [ref=e418] [cursor=pointer]':
+                      - /url: "#grpo-群组相对策略优化"
+                      - text: GRPO 群组相对策略优化
+                  - listitem [ref=e419]:
+                    - 'link "Scroll to section: 技术栈" [ref=e423] [cursor=pointer]':
+                      - /url: "#技术栈"
+                      - text: 技术栈
+                  - listitem [ref=e424]:
+                    - 'link "Scroll to section: 快速上手" [ref=e428] [cursor=pointer]':
+                      - /url: "#快速上手"
+                      - text: 快速上手
+              - listitem [ref=e429]:
+                - generic [ref=e431]:
+                  - 'button "Toggle section: 性能评估" [expanded] [ref=e432] [cursor=pointer]':
+                    - generic [ref=e433]: ▸
+                  - 'link "Scroll to section: 性能评估" [ref=e434] [cursor=pointer]':
+                    - /url: "#性能评估"
+                    - text: 性能评估
+                - list [ref=e435]:
+                  - listitem [ref=e436]:
+                    - 'link "Scroll to section: 评估目标" [ref=e440] [cursor=pointer]':
+                      - /url: "#评估目标"
+                      - text: 评估目标
+                  - listitem [ref=e441]:
+                    - 'link "Scroll to section: BFCL（Berkeley Function Calling Leaderboard）" [ref=e445] [cursor=pointer]':
+                      - /url: "#bfclberkeley-function-calling-leaderboard"
+                      - text: BFCL（Berkeley Function Calling Leaderboard）
+                  - listitem [ref=e446]:
+                    - 'link "Scroll to section: GAIA（General AI Assistants）" [ref=e450] [cursor=pointer]':
+                      - /url: "#gaiageneral-ai-assistants"
+                      - text: GAIA（General AI Assistants）
+                  - listitem [ref=e451]:
+                    - 'link "Scroll to section: 数据生成质量评估" [ref=e455] [cursor=pointer]':
+                      - /url: "#数据生成质量评估"
+                      - text: 数据生成质量评估
+              - listitem [ref=e456]:
+                - generic [ref=e458]:
+                  - 'button "Toggle section: Agent 安全风险" [expanded] [ref=e459] [cursor=pointer]':
+                    - generic [ref=e460]: ▸
+                  - 'link "Scroll to section: Agent 安全风险" [ref=e461] [cursor=pointer]':
+                    - /url: "#agent-安全风险"
+                    - text: Agent 安全风险
+                - list [ref=e462]:
+                  - listitem [ref=e463]:
+                    - 'link "Scroll to section: 提示注入（Prompt Injection）" [ref=e467] [cursor=pointer]':
+                      - /url: "#提示注入prompt-injection"
+                      - text: 提示注入（Prompt Injection）
+                  - listitem [ref=e468]:
+                    - 'link "Scroll to section: 工具滥用与权限逃逸" [ref=e472] [cursor=pointer]':
+                      - /url: "#工具滥用与权限逃逸"
+                      - text: 工具滥用与权限逃逸
+                  - listitem [ref=e473]:
+                    - 'link "Scroll to section: 数据泄露" [ref=e477] [cursor=pointer]':
+                      - /url: "#数据泄露"
+                      - text: 数据泄露
+                  - listitem [ref=e478]:
+                    - 'link "Scroll to section: 输出安全" [ref=e482] [cursor=pointer]':
+                      - /url: "#输出安全"
+                      - text: 输出安全
+        - article [ref=e483]:
+          - generic [ref=e484]:
+            - generic [ref=e485]:
+              - img "Agent 系统结构示意图" [ref=e486]
+              - img "Agent 系统结构示意图" [ref=e487]
+            - generic [ref=e488]:
+              - generic [ref=e489]:
+                - generic [ref=e490]:
+                  - img [ref=e491]
+                  - time [ref=e496]: 2026年6月6日
+                  - generic [ref=e497]:
+                    - generic [ref=e498]: /
+                    - generic [ref=e499]:
+                      - text: Update
+                      - time [ref=e501]: 2026年6月6日
+                - generic [ref=e502]:
+                  - img [ref=e503]
+                  - text: 90 min read
+                - generic [ref=e507]:
+                  - img [ref=e508]
+                  - text: 中文
+                - generic [ref=e512]:
+                  - img [ref=e513]
+                  - generic [ref=e517]:
+                    - link "View more blogs with the tag agent" [ref=e518] [cursor=pointer]:
+                      - /url: /tags/agent
+                      - text: agent
+                    - text: /
+                  - generic [ref=e519]:
+                    - link "View more blogs with the tag llm" [ref=e520] [cursor=pointer]:
+                      - /url: /tags/llm
+                      - text: llm
+                    - text: /
+                  - generic [ref=e521]:
+                    - link "View more blogs with the tag rag" [ref=e522] [cursor=pointer]:
+                      - /url: /tags/rag
+                      - text: rag
+                    - text: /
+                  - generic [ref=e523]:
+                    - link "View more blogs with the tag mcp" [ref=e524] [cursor=pointer]:
+                      - /url: /tags/mcp
+                      - text: mcp
+                    - text: /
+                  - link "View more blogs with the tag prompt engineering" [ref=e526] [cursor=pointer]:
+                    - /url: /tags/prompt engineering
+                    - text: prompt engineering
+              - heading "Agent 知识的简要整理" [level=1] [ref=e527]
+              - generic [ref=e528]:
+                - blockquote [ref=e529]: 从 Agent 四要素、LLM 基础到框架、记忆、RAG、MCP 与 Agentic RL 的一份系统化入门整理。
+                - generic [ref=e530]:
+                  - text: views |
+                  - link "0 comments" [ref=e531] [cursor=pointer]:
+                    - /url: "#waline"
+          - generic [ref=e533]:
+            - heading "Agent基础#" [level=2] [ref=e534]:
+              - text: Agent基础
+              - link "#" [ref=e535] [cursor=pointer]:
+                - /url: "#agent基础"
+            - heading "定义与四要素#" [level=3] [ref=e536]:
+              - text: 定义与四要素
+              - link "#" [ref=e537] [cursor=pointer]:
+                - /url: "#定义与四要素"
+            - paragraph [ref=e538]:
+              - text: 智能体（Agent）是能够通过
+              - strong [ref=e539]: 传感器（Sensors）
+              - text: 感知所处
+              - strong [ref=e540]: 环境（Environment）
+              - text: ，并
+              - strong [ref=e541]: 自主
+              - text: 地通过
+              - strong [ref=e542]: 执行器（Actuators）
+              - text: 采取
+              - strong [ref=e543]: 行动（Action）
+              - text: 以达成特定目标的实体。
+            - table [ref=e545]:
+              - rowgroup [ref=e546]:
+                - row "要素 说明 示例" [ref=e547]:
+                  - columnheader "要素" [ref=e548]
+                  - columnheader "说明" [ref=e549]
+                  - columnheader "示例" [ref=e550]
+              - rowgroup [ref=e551]:
+                - row "环境 智能体所处的外部世界 道路交通、金融市场、游戏场景" [ref=e552]:
+                  - cell "环境" [ref=e553]:
+                    - strong [ref=e554]: 环境
+                  - cell "智能体所处的外部世界" [ref=e555]
+                  - cell "道路交通、金融市场、游戏场景" [ref=e556]
+                - row "感知 通过传感器持续获取环境状态 摄像头、麦克风、雷达、API 接口" [ref=e557]:
+                  - cell "感知" [ref=e558]:
+                    - strong [ref=e559]: 感知
+                  - cell "通过传感器持续获取环境状态" [ref=e560]
+                  - cell "摄像头、麦克风、雷达、API 接口" [ref=e561]
+                - row "行动 通过执行器改变环境状态 机械臂动作、代码调用、文本输出" [ref=e562]:
+                  - cell "行动" [ref=e563]:
+                    - strong [ref=e564]: 行动
+                  - cell "通过执行器改变环境状态" [ref=e565]
+                  - cell "机械臂动作、代码调用、文本输出" [ref=e566]
+                - row "自主性 核心特征，基于感知和内部状态独立决策 自主规划路径而非被动响应指令" [ref=e567]:
+                  - cell "自主性" [ref=e568]:
+                    - strong [ref=e569]: 自主性
+                  - cell "核心特征，基于感知和内部状态独立决策" [ref=e570]
+                  - cell "自主规划路径而非被动响应指令" [ref=e571]
+            - heading "PEAS 任务环境描述模型#" [level=3] [ref=e572]:
+              - text: PEAS 任务环境描述模型
+              - link "#" [ref=e573] [cursor=pointer]:
+                - /url: "#peas-任务环境描述模型"
+            - paragraph [ref=e574]:
+              - text: PEAS 是描述 Agent 任务环境的标准化框架，包含四个维度：
+              - strong [ref=e575]: P
+              - text: erformance（性能度量）、
+              - strong [ref=e576]: E
+              - text: nvironment（环境）、
+              - strong [ref=e577]: A
+              - text: ctuators（可采取的动作）、
+              - strong [ref=e578]: S
+              - text: ensors（可感知的信息来源）。
+            - paragraph [ref=e579]: 以自动驾驶为例：Performance 是安全抵达、燃油效率、乘客舒适度；Environment 是道路、交通信号、行人、天气；Actuators 是方向盘、油门、刹车、转向灯；Sensors 是摄像头、激光雷达、GPS、惯性测量单元。
+            - heading "六类智能体演进路径#" [level=3] [ref=e580]:
+              - text: 六类智能体演进路径
+              - link "#" [ref=e581] [cursor=pointer]:
+                - /url: "#六类智能体演进路径"
+            - paragraph [ref=e582]: 智能体的分类按决策架构从简单到复杂演进：
+            - list [ref=e583]:
+              - listitem [ref=e584]:
+                - paragraph [ref=e585]:
+                  - strong [ref=e586]: 简单反射智能体
+                  - text: （Simple Reflex Agent）：基于条件-动作规则直接响应当前感知，不维护内部状态。示例：自动恒温器。
+              - listitem [ref=e587]:
+                - paragraph [ref=e588]:
+                  - strong [ref=e589]: 基于模型的反射智能体
+                  - text: （Model-based Reflex Agent）：在反射基础上增加内部世界模型，具备初级记忆，能够处理部分可观测环境。示例：隧道中的自动驾驶汽车。
+              - listitem [ref=e590]:
+                - paragraph [ref=e591]:
+                  - strong [ref=e592]: 基于目标的智能体
+                  - text: （Goal-based Agent）：在模型基础上增加了对”目标状态”的显式表示，能够主动选择导向目标的行动。示例：GPS 路径规划系统。
+              - listitem [ref=e593]:
+                - paragraph [ref=e594]:
+                  - strong [ref=e595]: 基于效用的智能体
+                  - text: （Utility-based Agent）：在目标基础上增加了效用函数，能够在多个目标间进行权衡和优先级排序，选择最大化期望效用的行动。示例：同时考虑时间、油耗、过路费的导航系统。
+              - listitem [ref=e596]:
+                - paragraph [ref=e597]:
+                  - strong [ref=e598]: 学习型智能体
+                  - text: （Learning Agent）：包含学习元素，能够通过与环境交互积累经验，持续改进自身性能。所有学习组件包括：学习元素（改进算法）、执行元素（选择行动）、评判元素（提供反馈）、问题生成器（探索新经验）。示例：AlphaGo Zero。
+              - listitem [ref=e599]:
+                - paragraph [ref=e600]:
+                  - strong [ref=e601]: LLM 驱动智能体
+                  - text: （LLM-driven Agent）：以预训练大语言模型为”大脑”，具备极强的自然语言理解和泛化能力，能够理解模糊指令，结合规划和工具使用完成复杂任务。示例：智能旅行助手。
+            - heading "三类分类维度#" [level=3] [ref=e602]:
+              - text: 三类分类维度
+              - link "#" [ref=e603] [cursor=pointer]:
+                - /url: "#三类分类维度"
+            - paragraph [ref=e604]: 智能体可从三个维度进行分类：
+            - paragraph [ref=e605]:
+              - strong [ref=e606]: 按内部决策架构
+              - text: ：简单反射 → 基于模型 → 基于目标 → 基于效用 → 学习型。
+            - paragraph [ref=e607]:
+              - strong [ref=e608]: 按时间与反应性
+              - text: ：反应式（毫秒级响应，无规划，如安全气囊、高频交易系统）；规划式（深思熟虑后行动，如国际象棋 AI、商业计划系统）；混合式（兼顾两者，大多数 LLM Agent 属于此类）。
+            - paragraph [ref=e609]:
+              - strong [ref=e610]: 按知识表示
+              - text: ：符号主义（规则 + 逻辑，可解释性强但脆弱）；亚符号主义（神经网络，表达能力强但黑箱）；神经符号主义（融合两者，LLM Agent 为代表）。
+            - heading "运行机制：感知-思考-行动-观察循环#" [level=3] [ref=e611]:
+              - text: 运行机制：感知-思考-行动-观察循环
+              - link "#" [ref=e612] [cursor=pointer]:
+                - /url: "#运行机制感知-思考-行动-观察循环"
+            - paragraph [ref=e613]: 智能体的运行遵循一个闭环：
+            - generic [ref=e614]:
+              - code [ref=e616]:
+                - generic [ref=e617]: 感知(Perception) → 思考(Thought) → 行动(Action) → 观察(Observation) → 循环
+                - generic [ref=e618]: ├── 规划(Planning)
+                - generic [ref=e619]: └── 工具选择(Tool Selection)
+              - generic [ref=e620]: plaintext
+              - button [ref=e621] [cursor=pointer]:
+                - img [ref=e623]
+                - text: Copied!
+            - paragraph [ref=e625]: 循环中各环节的含义：
+            - list [ref=e626]:
+              - listitem [ref=e627]:
+                - strong [ref=e628]: Thought
+                - text: ：内部推理过程的自然语言”快照”，包含对当前状态的分析和下一步计划的推演
+              - listitem [ref=e629]:
+                - strong [ref=e630]: Action
+                - text: ：具体操作，以函数调用形式表示，格式为
+                - code [ref=e631]: "{工具名}[{工具输入}]"
+              - listitem [ref=e632]:
+                - strong [ref=e633]: Observation
+                - text: ：环境反馈的自然语言描述，作为下一轮推理的输入
+            - heading "普通 LLM 调用与 Agent 的核心差异#" [level=3] [ref=e634]:
+              - text: 普通 LLM 调用与 Agent 的核心差异
+              - link "#" [ref=e635] [cursor=pointer]:
+                - /url: "#普通-llm-调用与-agent-的核心差异"
+            - paragraph [ref=e636]: 普通 LLM 调用是单轮问答模式，模型收到问题后直接生成回复，缺乏对目标的持续追踪和对外部世界的干预能力。Agent 则是一个持续的控制循环，具备以下三点本质差异：
+            - list [ref=e637]:
+              - listitem [ref=e638]:
+                - text: Agent 维护明确的
+                - strong [ref=e639]: 目标状态
+                - text: ，并能在多轮交互中持续追踪目标
+              - listitem [ref=e640]:
+                - text: Agent 具备
+                - strong [ref=e641]: 行动能力
+                - text: ，能够通过工具调用影响外部环境并获取反馈
+              - listitem [ref=e642]:
+                - text: Agent 能够
+                - strong [ref=e643]: 动态调整计划
+                - text: ，在执行过程中根据中间结果修正后续策略
+            - heading "六大核心特征#" [level=3] [ref=e644]:
+              - text: 六大核心特征
+              - link "#" [ref=e645] [cursor=pointer]:
+                - /url: "#六大核心特征"
+            - paragraph [ref=e646]: LLM 驱动型 Agent 需具备六个核心能力：
+            - list [ref=e647]:
+              - listitem [ref=e648]:
+                - strong [ref=e649]: 推理（Reasoning）
+                - text: ：对问题进行逻辑分析和逐步推导
+              - listitem [ref=e650]:
+                - strong [ref=e651]: 工具使用（Tool Use）
+                - text: ：识别需要调用外部工具的场景并正确调用
+              - listitem [ref=e652]:
+                - strong [ref=e653]: 记忆（Memory）
+                - text: ：维护短期上下文和长期知识
+              - listitem [ref=e654]:
+                - strong [ref=e655]: 规划（Planning）
+                - text: ：将目标分解为可执行的子步骤
+              - listitem [ref=e656]:
+                - strong [ref=e657]: 自我改进（Self-Improvement）
+                - text: ：通过反馈机制优化自身表现
+              - listitem [ref=e658]:
+                - strong [ref=e659]: 感知（Perception）
+                - text: ：从环境中获取信息
+            - separator [ref=e660]
+            - heading "Agent发展史#" [level=2] [ref=e661]:
+              - text: Agent发展史
+              - link "#" [ref=e662] [cursor=pointer]:
+                - /url: "#agent发展史"
+            - heading "符号主义（1950s–1980s）#" [level=3] [ref=e663]:
+              - text: 符号主义（1950s–1980s）
+              - link "#" [ref=e664] [cursor=pointer]:
+                - /url: "#符号主义1950s1980s"
+            - paragraph [ref=e665]:
+              - text: 核心理论是纽厄尔与西蒙于 1976 年提出的
+              - strong [ref=e666]: 物理符号系统假说（PSSH）
+              - text: ：智能的本质 = 符号的表示 + 符号的操作。凡是能通过符号表示和符号操作完成功能的系统，就具备产生智能的必要和充分条件。
+            - paragraph [ref=e667]:
+              - strong [ref=e668]: 代表系统
+              - text: ：
+            - list [ref=e669]:
+              - listitem [ref=e670]:
+                - strong [ref=e671]: GPS（通用问题求解器，General Problem Solver）
+                - text: ：通过手段-目的分析（Means-Ends Analysis）将当前状态与目标状态之间的差异转化为可执行的行动。在定理证明和逻辑推理任务中表现良好。
+              - listitem [ref=e672]:
+                - strong [ref=e673]: MYCIN
+                - text: ：斯坦福大学开发的医疗诊断专家系统，包含 600 多条由领域专家人工编写的规则，在细菌感染诊断和抗生素推荐方面的准确率超过部分人类医生。
+              - listitem [ref=e674]:
+                - strong [ref=e675]: SHRDLU
+                - text: ：Terry Winograd 开发的积木世界智能体，能够在受限的虚拟环境中理解自然语言指令（如”把那块红色的积木放到绿色的上面”）并执行操作。
+            - paragraph [ref=e676]:
+              - strong [ref=e677]: 核心局限
+              - text: ：
+            - list [ref=e678]:
+              - listitem [ref=e679]: 知识获取瓶颈：规则需要领域专家和知识工程师逐条编写，效率极低
+              - listitem [ref=e680]: 系统脆弱性：遇到规则边界外的输入时表现急剧下降
+              - listitem [ref=e681]: 常识缺失：无法处理人类尽在不言中的常识推理
+              - listitem [ref=e682]: 框架问题（Frame Problem）：无法有效筛选哪些环境变化与当前目标相关
+            - heading "联结主义（1980s–2010s）#" [level=3] [ref=e683]:
+              - text: 联结主义（1980s–2010s）
+              - link "#" [ref=e684] [cursor=pointer]:
+                - /url: "#联结主义1980s2010s"
+            - paragraph [ref=e685]: 核心思想是让机器从数据中学习，而非依赖人工编写的规则。关键突破是 1986 年反向传播算法（Backpropagation）的提出，使得多层神经网络的训练成为可能——通过链式法则计算损失函数对每个权重的梯度，从输出层向输入层逐层传播误差信号以更新参数。
+            - paragraph [ref=e686]: 代表系统包括 TD-Gammon（使用时序差分学习的强化学习应用，通过自我对弈达到人类专家水平的西洋双陆棋 AI）和 DQN（深度 Q 网络，将深度学习与 Q-Learning 结合，在 Atari 游戏中达到超人类水平）。
+            - paragraph [ref=e687]: 联结主义的核心贡献：解决了符号主义面临的知识获取瓶颈（不再需要人工编写规则），通过大规模数据训练自动提取特征和模式。局限在于：模型解释性差、训练需要大量标注数据、容易过拟合。
+            - heading "深度学习（2010s–2022）#" [level=3] [ref=e688]:
+              - text: 深度学习（2010s–2022）
+              - link "#" [ref=e689] [cursor=pointer]:
+                - /url: "#深度学习2010s2022"
+            - paragraph [ref=e690]: 以 AlexNet（2012 年 ImageNet 比赛冠军，引入 ReLU 激活函数和 Dropout 正则化，标志着深度学习时代的开端）、AlphaGo（2016 年击败围棋世界冠军李世石，结合深度神经网络与蒙特卡洛树搜索）、ResNet（2015 年提出残差连接，解决了深层网络的退化问题，使得训练上百层成为可能）为代表。
+            - heading "LLM 驱动时代（2022–至今）#" [level=3] [ref=e691]:
+              - text: LLM 驱动时代（2022–至今）
+              - link "#" [ref=e692] [cursor=pointer]:
+                - /url: "#llm-驱动时代2022至今"
+            - paragraph [ref=e693]: 现代 Agent 采用”感知-思考-行动-观察”闭环，以 GPT 系列模型为大脑。关键节点：
+            - list [ref=e694]:
+              - listitem [ref=e695]: 2022 年：ReAct 论文提出推理与行动交织的范式；Toolformer 论文提出自监督学习方法让模型学会在文本中插入 API 调用标记
+              - listitem [ref=e696]: 2023 年：AutoGPT、BabyAGI 展示自主 Agent 的可行性；Generative Agents 论文展示 Agent 模拟社会行为
+              - listitem [ref=e697]: 2024–2025 年：MCP 协议标准化工具接入；Agentic-RL 引入强化学习；多 Agent 协作系统落地
+            - heading "明斯基的”心智社会”理论#" [level=3] [ref=e698]:
+              - text: 明斯基的”心智社会”理论
+              - link "#" [ref=e699] [cursor=pointer]:
+                - /url: "#明斯基的心智社会理论"
+            - paragraph [ref=e700]:
+              - text: 马文·明斯基提出智能来自
+              - strong [ref=e701]: 多样性协作
+              - text: ，而非单一完美的推理原则。他认为人类心智由大量相对简单的”智能体”组成，这些智能体按层次组织并相互协作。这一理论为**多智能体系统（MAS）**奠定了理论基础，也解释了为什么多 Agent 协作架构往往能超越单 Agent 的能力上限。
+            - separator [ref=e702]
+            - heading "一点点LLM基础#" [level=2] [ref=e703]:
+              - text: 一点点LLM基础
+              - link "#" [ref=e704] [cursor=pointer]:
+                - /url: "#一点点llm基础"
+            - heading "语言模型演进#" [level=3] [ref=e705]:
+              - text: 语言模型演进
+              - link "#" [ref=e706] [cursor=pointer]:
+                - /url: "#语言模型演进"
+            - paragraph [ref=e707]: N-gram 模型 → 静态词嵌入（Word2Vec、GloVe）→ 循环神经网络（RNN、LSTM）→ Transformer。
+            - paragraph [ref=e708]:
+              - text: 核心转折点是 Transformer 架构通过
+              - strong [ref=e709]: 自注意力机制
+              - text: 解决了 RNN 序列处理的两大问题：长距离依赖捕获困难和无法并行计算。
+            - heading "Transformer 核心架构#" [level=3] [ref=e710]:
+              - text: Transformer 核心架构
+              - link "#" [ref=e711] [cursor=pointer]:
+                - /url: "#transformer-核心架构"
+            - paragraph [ref=e712]:
+              - strong [ref=e713]: 自注意力机制（Self-Attention）
+              - text: ：
+            - paragraph [ref=e714]: 每个输入 token 会生成三个向量：Query（查询）、Key（键）、Value（值）。注意力权重的计算过程为：Q 与所有 K 做点积计算相似度 → Softmax 归一化得到权重 → 与 V 加权求和。由此模型在处理每个 token 时，能够动态关注序列中其他所有 token。
+            - paragraph [ref=e715]:
+              - strong [ref=e716]: 多头注意力（Multi-Head Attention）
+              - text: ：
+            - paragraph [ref=e717]: 并行计算多组 Q/K/V 注意力，每组注意力关注不同的语义子空间（语法关系、句法依赖、语义关联等），最后将所有头的输出拼接并线性变换。
+            - paragraph [ref=e718]:
+              - strong [ref=e719]: 位置编码（Positional Encoding）
+              - text: ：
+            - paragraph [ref=e720]: 由于自注意力本身不具备序列的位置信息，需要显式注入位置编码。Transformer 原始论文使用固定频率的正弦余弦函数；现代模型多采用可学习位置编码（如 GPT 系列）或旋转位置编码（RoPE，如 LLaMA 系列）。
+            - paragraph [ref=e721]:
+              - strong [ref=e722]: 前馈网络（FFN）
+              - text: ：
+            - paragraph [ref=e723]: 每个位置的表示经过两层线性变换（中间层进行特征扩展，输出层降回原维度）和非线性激活函数（如 ReLU、GELU）。FFN 在所有位置间共享参数，在注意力机制提取的上下文表示基础上进行更高层次的抽象。
+            - heading "三种架构变体#" [level=3] [ref=e724]:
+              - text: 三种架构变体
+              - link "#" [ref=e725] [cursor=pointer]:
+                - /url: "#三种架构变体"
+            - list [ref=e726]:
+              - listitem [ref=e727]:
+                - strong [ref=e728]: Encoder-Only（BERT）
+                - text: ：双向注意力，适合文本分类、序列标注、语义匹配等理解类任务。训练目标通常为掩码语言建模（MLM）。
+              - listitem [ref=e729]:
+                - strong [ref=e730]: Decoder-Only（GPT 系列）
+                - text: ：因果注意力（Causal Attention，每个 token 只能关注自身及之前的 token），适合文本生成类任务。这是当前大语言模型的主流架构选择。
+              - listitem [ref=e731]:
+                - strong [ref=e732]: Encoder-Decoder（T5）
+                - text: ：编码器做双向理解 + 解码器做自回归生成，适合序列到序列的转换任务（翻译、摘要）。
+            - heading "分词（Tokenization）#" [level=3] [ref=e733]:
+              - text: 分词（Tokenization）
+              - link "#" [ref=e734] [cursor=pointer]:
+                - /url: "#分词tokenization"
+            - paragraph [ref=e735]: 主流分词算法：
+            - list [ref=e736]:
+              - listitem [ref=e737]:
+                - strong [ref=e738]: BPE（Byte Pair Encoding）
+                - text: ：GPT 系列使用。从字符级开始，迭代合并最高频的相邻 token 对。不需要特殊标记或词表预定义，自动学习子词切分。
+              - listitem [ref=e739]:
+                - strong [ref=e740]: WordPiece
+                - text: ：BERT 使用。与 BPE 类似，但合并标准为互信息最大化（选择能最大程度提升数据似然的 pair），而非单纯的高频合并。
+              - listitem [ref=e741]:
+                - strong [ref=e742]: SentencePiece
+                - text: ：T5、LLaMA 使用。将原始文本直接视为 Unicode 字符序列，不依赖空格分割，天然支持多语言。原始模型训练中使用的是 BPE 的变体（Unigram LM）。
+              - listitem [ref=e743]:
+                - strong [ref=e744]: Tiktoken
+                - text: ：OpenAI 开发的高性能分词库，使用 BPE 算法，针对 GPT 系列模型优化，分词速度比 HuggingFace tokenizer 快数倍。
+            - paragraph [ref=e745]: 分词的粒度直接影响模型的有效上下文长度和跨语言能力。
+            - heading "采样参数#" [level=3] [ref=e746]:
+              - text: 采样参数
+              - link "#" [ref=e747] [cursor=pointer]:
+                - /url: "#采样参数"
+            - paragraph [ref=e748]: 控制 LLM 输出随机性的三个核心参数：
+            - list [ref=e749]:
+              - listitem [ref=e750]:
+                - paragraph [ref=e751]:
+                  - strong [ref=e752]: Temperature
+                  - text: ：控制概率分布的”尖锐”程度。值趋近于 0 时，最高概率 token 几乎被确定选中，输出确定性强但缺乏多样性。值较高时概率分布更平坦，低概率 token 也有机会被选中，输出更多样。通常在 0.7–0.9 用于创意任务，0.1–0.3 用于精确推理任务。
+              - listitem [ref=e753]:
+                - paragraph [ref=e754]:
+                  - strong [ref=e755]: Top-k
+                  - text: ：解码时仅从概率最高的 k 个 token 中采样，将其余 token 的概率置为零后再归一化。避免了概率分布的”长尾”被小概率 token 污染。
+              - listitem [ref=e756]:
+                - paragraph [ref=e757]:
+                  - strong [ref=e758]: Top-p（核采样）
+                  - text: ：设置累积概率阈值 p（如 0.9），仅保留使得累积概率首次超过 p 的最小 token 集合。与 Top-k 的固定数量不同，Top-p 根据当前概率分布动态调整候选集大小。
+            - paragraph [ref=e759]: 实际应用中常将 Top-k 和 Top-p 组合使用：先保留 Top-k 个 token，再从其中应用 Top-p 过滤。
+            - heading "上下文学习（In-Context Learning）机制#" [level=3] [ref=e760]:
+              - text: 上下文学习（In-Context Learning）机制
+              - link "#" [ref=e761] [cursor=pointer]:
+                - /url: "#上下文学习in-context-learning机制"
+            - paragraph [ref=e762]: ICL 是 LLM 最关键的涌现能力之一：仅通过 prompt 中放置的输入-输出示例，模型就能推断出任务模式并正确泛化，整个过程不涉及任何参数更新。
+            - paragraph [ref=e763]:
+              - strong [ref=e764]: 与微调的本质区别
+              - text: ：SFT 通过梯度更新改变模型参数，是一种”学习”；ICL 不修改模型参数，仅利用模型在预训练阶段已经习得的模式匹配能力。ICL 的效果依赖模型规模——小模型（<1B 参数）几乎不具备 ICL 能力，随着模型规模增大 ICL 能力涌现。
+            - paragraph [ref=e765]:
+              - strong [ref=e766]: ICL 的工作机制解释
+              - text: ：一种主流假说是”任务归纳”——prompt 中的示例序列激活了模型预训练阶段见过的类似模式，模型通过注意力机制定位这些模式并延续到最终输出。示例在 prompt 中扮演了”任务格式指示器”的角色，而非”新知识注入”。
+            - paragraph [ref=e767]:
+              - strong [ref=e768]: 在 Agent 中的使用方式
+              - text: ：ICL 在 Agent 系统中用于两种场景——
+              - strong [ref=e769]: 系统级静态示例
+              - text: （在系统提示词中放置固定数量、固定格式的工具调用示例，确保 Agent 始终按标准格式输出）和
+              - strong [ref=e770]: 运行时动态示例
+              - text: （根据当前上下文动态选择最相关的示例加入 prompt，通常在 RAG 场景中使用）。
+            - heading "提示工程（Prompt Engineering）#" [level=3] [ref=e771]:
+              - text: 提示工程（Prompt Engineering）
+              - link "#" [ref=e772] [cursor=pointer]:
+                - /url: "#提示工程prompt-engineering"
+            - paragraph [ref=e773]:
+              - strong [ref=e774]: 零样本提示（Zero-shot）
+              - text: ：直接给出任务描述，模型凭借训练阶段学习的泛化能力执行。适用于大模型（>100B 参数）已具备足够能力的常见任务。
+            - paragraph [ref=e775]:
+              - strong [ref=e776]: 少样本提示（Few-shot）
+              - text: ：在 prompt 中给出若干输入-输出示例，模型通过上下文学习（In-Context Learning）推断任务模式。示例数量通常在 3–10 个，过多示例可能超出上下文窗口限制。
+            - paragraph [ref=e777]:
+              - strong [ref=e778]: 思维链（Chain-of-Thought, CoT）
+              - text: ：在 prompt 中加入中间推理步骤的示例，引导模型在输出最终答案前先生成逐步推理过程。显著提升需要多步逻辑推导的任务（数学题、逻辑推理、常识推理）的准确率。可分为人工编写 CoT 示例和零样本 CoT（仅添加”Let’s think step by step”等触发词）。
+            - paragraph [ref=e779]:
+              - strong [ref=e780]: 思维树（Tree of Thoughts, ToT）
+              - text: ：将推理过程扩展为树状搜索结构。每个节点表示一种推理状态或中间结论，从根节点出发探索多条推理路径，通过 LLM 自身对每条路径进行评估打分，采用广度优先搜索（BFS）或深度优先搜索（DFS）选择最优路径。适合需要探索多种可能性、存在多条可行解题路径的复杂问题。
+            - paragraph [ref=e781]:
+              - strong [ref=e782]: 自洽性（Self-Consistency）
+              - text: ：对同一问题多次采样（使用略高的 Temperature），然后通过多数投票或加权投票选择出现频率最高的答案。利用了 LLM 每次生成结果的随机性——虽然单次可能出错，但多次采样的共识倾向于正确。
+            - heading "训练范式#" [level=3] [ref=e783]:
+              - text: 训练范式
+              - link "#" [ref=e784] [cursor=pointer]:
+                - /url: "#训练范式"
+            - paragraph [ref=e785]: LLM 的训练分为三个阶段：
+            - list [ref=e786]:
+              - listitem [ref=e787]:
+                - paragraph [ref=e788]:
+                  - strong [ref=e789]: 预训练（Pre-training）
+                  - text: ：在海量无标注文本（通常数 TB）上训练下一个 token 预测任务。此阶段模型关注文本中 token 的共现和序列模式，学到语言知识、世界知识和推理能力的基础。所需计算资源巨大（数千 GPU 小时）。
+              - listitem [ref=e790]:
+                - paragraph [ref=e791]:
+                  - strong [ref=e792]: 指令微调（Instruction Fine-tuning, SFT）
+                  - text: ：在人工标注或合成生成的指令-回复数据上继续训练。数据格式为
+                  - code [ref=e793]: "{指令, 输入, 期望输出}"
+                  - text: 三元组。具体示例：
+            - generic [ref=e794]:
+              - code [ref=e796]:
+                - generic [ref=e797]: "{"
+                - generic [ref=e798]: "\"instruction\": \"计算 25 和 37 的和\","
+                - generic [ref=e799]: "\"input\": \"\","
+                - generic [ref=e800]: "\"output\": \"25 + 37 = 62\""
+                - generic [ref=e801]: "}"
+                - generic [ref=e802]: "{"
+                - generic [ref=e803]: "\"instruction\": \"写一个 Python 函数计算斐波那契数列\","
+                - generic [ref=e804]: "\"input\": \"n = 10\","
+                - generic [ref=e805]: "\"output\": \"def fibonacci(n):\\n if n <= 1:\\n return n\\n return fibonacci(n-1) + fibonacci(n-2)\\n\\nprint(fibonacci(10))\""
+                - generic [ref=e806]: "}"
+              - generic [ref=e807]: plaintext
+              - button [ref=e808] [cursor=pointer]:
+                - img [ref=e810]
+                - text: Copied!
+            - paragraph [ref=e812]: 此阶段教会模型遵循指令和格式化回复，使其从”能补全文本”变为”能回答问题”。
+            - list [ref=e813]:
+              - listitem [ref=e814]:
+                - strong [ref=e815]: 人类反馈强化学习（RLHF）
+                - text: ：分为三个子步骤——收集人类偏好数据（对同一 prompt 的多个模型输出排序）→ 训练奖励模型（Reward Model，学会预测人类偏好）→ 用 PPO 算法优化策略模型（使模型输出最大化奖励模型评分）。RLHF 使模型输出在语言质量、事实性、安全性上更符合人类期望。
+            - paragraph [ref=e816]: LoRA（Low-Rank Adaptation）是一种参数高效的微调方法。对于预训练权重矩阵 W，LoRA 将其更新量 ΔW 分解为两个低秩矩阵 A 和 B 的乘积（ΔW = B·A），训练时只更新 A 和 B 的参数，冻结原始权重。训练完成后将低秩矩阵合并回原权重，推理时无额外延迟。以 Qwen3-0.6B 为例，使用 LoRA 微调仅需约 4GB 显存。
+            - heading "Scaling Laws 与涌现能力#" [level=3] [ref=e817]:
+              - text: Scaling Laws 与涌现能力
+              - link "#" [ref=e818] [cursor=pointer]:
+                - /url: "#scaling-laws-与涌现能力"
+            - paragraph [ref=e819]: Scaling Laws（缩放法则）揭示了模型性能与三个因素之间的幂律关系：模型参数量（N）、训练数据量（D）、计算资源量（C）。当三者在对数尺度上等比例增加时，模型性能按幂律持续提升，没有明显的收益递减拐点。
+            - paragraph [ref=e820]: 当模型规模跨越某个阈值时，会涌现出小模型不具备的能力：
+            - list [ref=e821]:
+              - listitem [ref=e822]:
+                - strong [ref=e823]: 上下文学习（In-Context Learning）
+                - text: ：仅通过 prompt 中的示例就能理解任务，无需梯度更新
+              - listitem [ref=e824]:
+                - strong [ref=e825]: 思维链推理
+                - text: ：能够执行多步逻辑推理
+              - listitem [ref=e826]:
+                - strong [ref=e827]: 指令遵循
+                - text: ：理解并以自然语言描述的执行指令
+              - listitem [ref=e828]:
+                - strong [ref=e829]: 工具调用
+                - text: ：识别需要外部工具的场景并生成结构化参数
+            - heading "幻觉问题#" [level=3] [ref=e830]:
+              - text: 幻觉问题
+              - link "#" [ref=e831] [cursor=pointer]:
+                - /url: "#幻觉问题"
+            - paragraph [ref=e832]: 幻觉指模型生成与事实不符的内容。分为三类：
+            - list [ref=e833]:
+              - listitem [ref=e834]:
+                - strong [ref=e835]: 事实性幻觉
+                - text: ：生成与已知事实矛盾的内容（如将”北京是中国的首都”写成”上海是中国的首都”）
+              - listitem [ref=e836]:
+                - strong [ref=e837]: 忠实性幻觉
+                - text: ：生成与用户指令或对话历史不一致的内容（如用户说”我叫张三”，模型回复”李四你好”）
+              - listitem [ref=e838]:
+                - strong [ref=e839]: 内在幻觉
+                - text: ：生成与模型自身训练数据中的知识相矛盾的内容
+            - paragraph [ref=e840]: 缓解方案：RAG（检索相关文档作为生成依据）、外部工具验证（调用搜索引擎或数据库核实事实）、多模型投票（多个模型独立判断事实性）、幻觉检测提示（在 prompt 中加入”如果你的回答中包含不确信的信息，请标注出来”）。
+            - heading "Toolformer：让模型学会调用工具#" [level=3] [ref=e841]:
+              - text: Toolformer：让模型学会调用工具
+              - link "#" [ref=e842] [cursor=pointer]:
+                - /url: "#toolformer让模型学会调用工具"
+            - paragraph [ref=e843]: Toolformer 是 Meta AI 于 2023 年提出的方法，核心思想是不修改模型架构，而是通过自监督学习方式让语言模型学会在适当的时机调用外部工具（计算器、搜索引擎、翻译系统等）。
+            - paragraph [ref=e844]:
+              - strong [ref=e845]: API 调用表示
+              - text: ：在文本序列中使用特殊 token 标记 API 调用的开始和结束：
+              - code [ref=e846]: <API> a_c(i_c) </API>
+              - text: （无结果状态）和
+              - code [ref=e847]: <API> a_c(i_c) → r </API>
+              - text: （有结果状态）。通过这种设计，API 调用可以无缝地插入到文本生成过程中。
+            - paragraph [ref=e848]:
+              - strong [ref=e849]: 训练数据构建
+              - text: 采用”采样-执行-过滤”三阶段：
+            - list [ref=e850]:
+              - listitem [ref=e851]:
+                - strong [ref=e852]: 采样阶段
+                - text: ：使用少量人工编写的少样本示例引导模型在文本中找到可能需要的工具调用位置，对每个位置生成
+                - code [ref=e853]: <API>
+                - text: token 的概率，保留概率高于阈值的位置
+              - listitem [ref=e854]:
+                - strong [ref=e855]: 执行阶段
+                - text: ：实际调用对应的 API，获取真实的返回结果
+              - listitem [ref=e856]:
+                - strong [ref=e857]: 过滤阶段
+                - text: ：比较使用 API 调用和不使用 API 调用两种情况下的加权交叉熵损失。仅当 API 调用能显著降低损失时才保留该样本
+            - paragraph [ref=e858]:
+              - strong [ref=e859]: 推理过程
+              - text: ：模型正常解码。当输出
+              - code [ref=e860]: →
+              - text: token 时系统暂停执行 API 调用，将结果插入文本后继续解码。
+            - paragraph [ref=e861]:
+              - strong [ref=e862]: 实验效果
+              - text: ：Toolformer（6.7B 参数）在零样本任务上超越了 GPT-3（175B 参数），且微调后未牺牲语言模型的原生能力——事实完成任务准确率从 39.8% 提升至 53.5%，数学任务准确率从 14.0% 提升至 40.4%。
+            - paragraph [ref=e863]:
+              - strong [ref=e864]: 局限
+              - text: ：仅支持单次非迭代调用（无法形成工具链）、无成本感知（不考虑 API 延迟和费用）、API 集合固定（扩展新工具需重新训练）、对提示词敏感。
+            - heading "模型选型#" [level=3] [ref=e865]:
+              - text: 模型选型
+              - link "#" [ref=e866] [cursor=pointer]:
+                - /url: "#模型选型"
+            - paragraph [ref=e867]: 闭源模型：GPT-4o（OpenAI，综合能力强、生态好）、Claude 3.5（Anthropic，长上下文和安全性突出）、Gemini 1.5（Google，多模态能力强）、文心一言、通义千问。
+            - paragraph [ref=e868]: 开源模型：LLaMA 3.1（Meta，社区生态最丰富）、Qwen2.5（阿里巴巴，中文能力和工具调用表现出色）、Mistral（Mistral AI，高效推理）、DeepSeek（深度求索，推理能力强）、ChatGLM3（智谱 AI，中文优化好）。
+            - paragraph [ref=e869]: 本地部署实践包括：量化加载（4-bit / 8-bit 降低显存需求）、GGUF 格式转换、对话交互、流式输出和性能优化。
+            - separator [ref=e870]
+            - heading "Agent经典范式#" [level=2] [ref=e871]:
+              - text: Agent经典范式
+              - link "#" [ref=e872] [cursor=pointer]:
+                - /url: "#agent经典范式"
+            - heading "ReAct#" [level=3] [ref=e873]:
+              - text: ReAct
+              - link "#" [ref=e874] [cursor=pointer]:
+                - /url: "#react"
+            - paragraph [ref=e875]: ReAct（Reasoning + Acting）由 Shunyu Yao 于 2022 年提出，是目前最广泛使用的 Agent 范式。其核心思想是将推理（Reasoning）与行动（Acting）紧密结合，形成**思考（Thought）→ 行动（Action）→ 观察（Observation）**的闭环。
+            - heading "循环结构#" [level=4] [ref=e876]:
+              - text: 循环结构
+              - link "#" [ref=e877] [cursor=pointer]:
+                - /url: "#循环结构"
+            - paragraph [ref=e878]: 整个执行过程是一个 while 循环，每次迭代包含六个步骤：
+            - list [ref=e879]:
+              - listitem [ref=e880]:
+                - strong [ref=e881]: 格式化 Prompt
+                - text: ：将系统指令、可用工具描述、当前问题、历史交互记录组装成当前轮次的 prompt
+              - listitem [ref=e882]:
+                - strong [ref=e883]: 调用 LLM
+                - text: ：将 prompt 发送给 LLM 获取回复
+              - listitem [ref=e884]:
+                - strong [ref=e885]: 解析输出
+                - text: ：从 LLM 回复中提取 Thought 和 Action 字段
+              - listitem [ref=e886]:
+                - strong [ref=e887]: 判断终止条件
+                - text: ：如果 Action 为
+                - code [ref=e888]: Finish[最终答案]
+                - text: ，则输出结果并结束循环
+              - listitem [ref=e889]:
+                - strong [ref=e890]: 执行工具
+                - text: ：如果 Action 为
+                - code [ref=e891]: "{工具名}[{工具输入}]"
+                - text: ，调用对应工具获取 Observation
+              - listitem [ref=e892]:
+                - strong [ref=e893]: 更新历史
+                - text: ：将 Action 和 Observation 追加到历史记录中，回到步骤 1 继续
+            - heading "系统 Prompt 模板#" [level=4] [ref=e894]:
+              - text: 系统 Prompt 模板
+              - link "#" [ref=e895] [cursor=pointer]:
+                - /url: "#系统-prompt-模板"
+            - generic [ref=e896]:
+              - code [ref=e898]:
+                - generic [ref=e899]: 请注意，你是一个有能力调用外部工具的智能助手。
+                - generic [ref=e901]: "可用工具如下:"
+                - generic [ref=e902]: "{tools}"
+                - generic [ref=e904]: "请严格按照以下格式进行回应:"
+                - generic [ref=e906]: "Thought: [你的思考过程，用于分析问题、拆解任务和规划下一步行动]"
+                - generic [ref=e907]: "Action: 你决定采取的行动，必须是以下格式之一:"
+                - generic [ref=e908]: "- `{tool_name}[{tool_input}]`: 调用一个可用工具。"
+                - generic [ref=e909]: "- `Finish[最终答案]`: 当你认为已经获得最终答案时。"
+                - generic [ref=e911]: "现在，请开始解决以下问题:"
+                - generic [ref=e912]: "Question: {question}"
+                - generic [ref=e913]: "History: {history}"
+              - generic [ref=e914]: plaintext
+              - button [ref=e915] [cursor=pointer]:
+                - img [ref=e917]
+                - text: Copied!
+            - heading "核心代码实现#" [level=4] [ref=e919]:
+              - text: 核心代码实现
+              - link "#" [ref=e920] [cursor=pointer]:
+                - /url: "#核心代码实现"
+            - generic [ref=e921]:
+              - code [ref=e923]:
+                - generic [ref=e924]: "class ReActAgent:"
+                - generic [ref=e925]: "def __init__(self, llm_client, tool_executor, max_steps=5):"
+                - generic [ref=e926]: self.llm_client = llm_client
+                - generic [ref=e927]: self.tool_executor = tool_executor
+                - generic [ref=e928]: self.max_steps = max_steps
+                - generic [ref=e929]: self.history = []
+                - generic [ref=e931]: "def _parse_output(self, text):"
+                - generic [ref=e932]: "\"\"\"从 LLM 回复中提取 Thought 和 Action\"\"\""
+                - generic [ref=e933]: "thought_match = re.search(r\"Thought: (.*?)Action:\", text, re.DOTALL)"
+                - generic [ref=e934]: "action_match = re.search(r\"Action: (.*)\", text, re.DOTALL)"
+                - generic [ref=e935]: thought = thought_match.group(1).strip() if thought_match else None
+                - generic [ref=e936]: action = action_match.group(1).strip() if action_match else None
+                - generic [ref=e937]: return thought, action
+                - generic [ref=e939]: "def _parse_action(self, action_text):"
+                - generic [ref=e940]: "\"\"\"解析 Action 字符串，分离工具名和参数\"\"\""
+                - generic [ref=e941]: match = re.match(r"(\w+)\[(.*)\]", action_text)
+                - generic [ref=e942]: "if match:"
+                - generic [ref=e943]: return match.group(1), match.group(2)
+                - generic [ref=e944]: return None, None
+                - generic [ref=e946]: "def run(self, question):"
+                - generic [ref=e947]: self.history = []
+                - generic [ref=e948]: "for current_step in range(self.max_steps):"
+                - generic [ref=e949]: tools_desc = self.tool_executor.get_available_tools()
+                - generic [ref=e950]: history_str = "\n".join(self.history)
+                - generic [ref=e951]: prompt = REACT_PROMPT_TEMPLATE.format(
+                - generic [ref=e952]: tools=tools_desc, question=question, history=history_str,
+                - generic [ref=e953]: )
+                - generic [ref=e954]: "messages = [{\"role\": \"user\", \"content\": prompt}]"
+                - generic [ref=e955]: response_text = self.llm_client.think(messages=messages)
+                - generic [ref=e956]: thought, action = self._parse_output(response_text)
+                - generic [ref=e958]: "if action.startswith(\"Finish\"):"
+                - generic [ref=e959]: final_answer = re.match(r"Finish\[(.*)\]", action).group(1)
+                - generic [ref=e960]: return final_answer
+                - generic [ref=e962]: tool_name, tool_input = self._parse_action(action)
+                - generic [ref=e963]: observation = self.tool_executor.execute(tool_name, tool_input)
+                - generic [ref=e964]: "self.history.append(f\"Action: {action}\")"
+                - generic [ref=e965]: "self.history.append(f\"Observation: {observation}\")"
+                - generic [ref=e967]: return None
+              - generic [ref=e968]: python
+              - button [ref=e969] [cursor=pointer]:
+                - img [ref=e971]
+                - text: Copied!
+            - heading "运行示例#" [level=4] [ref=e973]:
+              - text: 运行示例
+              - link "#" [ref=e974] [cursor=pointer]:
+                - /url: "#运行示例"
+            - paragraph [ref=e975]: 以查询”华为最新手机”为例：
+            - generic [ref=e976]:
+              - code [ref=e978]:
+                - generic [ref=e979]: "--- 第 1 步 ---"
+                - generic [ref=e980]: "Thought: 我需要查找华为最新发布的手机型号，使用搜索工具。"
+                - generic [ref=e981]: "Action: Search[华为最新手机型号及主要卖点]"
+                - generic [ref=e982]: "Observation: [结果列表：HUAWEI Pura 70 系列...Mate 60 Pro...]"
+                - generic [ref=e984]: "--- 第 2 步 ---"
+                - generic [ref=e985]: "Thought: 根据搜索结果，Pura 70 是最新发布的，我总结一下卖点。"
+                - generic [ref=e986]: "Action: Finish[华为最新旗舰是 HUAWEI Pura 70 系列，卖点包括...]"
+              - generic [ref=e987]: plaintext
+              - button [ref=e988] [cursor=pointer]:
+                - img [ref=e990]
+                - text: Copied!
+            - heading "优缺点#" [level=4] [ref=e992]:
+              - text: 优缺点
+              - link "#" [ref=e993] [cursor=pointer]:
+                - /url: "#优缺点"
+            - paragraph [ref=e994]: 优势：高可解释性（Thought 链可完整追溯决策过程）、动态规划（每步可根据上一步的结果调整策略）、工具协同（LLM 负责规划，工具负责执行）。
+            - paragraph [ref=e995]: 缺陷：强依赖模型能力（LLM 推理弱则效果差）、执行效率低（串行循环需要多次 LLM 调用）、Prompt 脆弱（格式或标点变化可能导致解析失败）、可能陷入局部最优或推理死循环。
+            - heading "Plan-and-Solve#" [level=3] [ref=e996]:
+              - text: Plan-and-Solve
+              - link "#" [ref=e997] [cursor=pointer]:
+                - /url: "#plan-and-solve"
+            - paragraph [ref=e998]:
+              - text: Plan-and-Solve 在 ReAct 的基础上增加了明确的
+              - strong [ref=e999]: 全局规划
+              - text: 阶段。Agent 首先制定一个完整的执行计划，再逐步执行，执行过程中可根据实际情况调整计划。
+            - paragraph [ref=e1000]:
+              - strong [ref=e1001]: 架构
+              - text: ：由两个组件协作完成——规划器（Planner）将复杂任务拆解为一系列逻辑清晰的子步骤（输出为结构化的步骤列表），执行器（Executor）严格按照步骤逐一落实，每一步将原始问题、完整计划、历史结果作为上下文传给模型。
+            - paragraph [ref=e1002]:
+              - strong [ref=e1003]: 核心 Prompt 模板
+              - text: ：
+            - generic [ref=e1004]:
+              - code [ref=e1006]:
+                - generic [ref=e1007]: 你是一个"先规划后执行"的智能体。
+                - generic [ref=e1008]: 可用工具如下：
+                - generic [ref=e1009]: "{tools}"
+                - generic [ref=e1011]: 请先分析问题，生成一个完整的执行计划（步骤列表），然后严格按照计划执行。
+                - generic [ref=e1013]: "问题：{question}"
+                - generic [ref=e1015]: 请先输出计划（Plan），然后按步骤执行（Execute）。
+              - generic [ref=e1016]: plaintext
+              - button [ref=e1017] [cursor=pointer]:
+                - img [ref=e1019]
+                - text: Copied!
+            - paragraph [ref=e1021]: 实际实现中，规划器和执行器的 Prompt 是分开设计的：规划器 Prompt 要求模型输出结构化的步骤列表；执行器 Prompt 传入原始问题 + 完整计划 + 已执行步骤的结果，要求模型按计划继续执行。
+            - paragraph [ref=e1022]: 与 ReAct 的区别：ReAct 适合”边走边看”的探索性任务，每一步的推理依托上一步的观察结果。Plan-and-Solve 适合逻辑路径相对明确的多步任务，如编写一段代码（先规划文件结构再逐个实现）。前者灵活但可能缺乏方向，后者稳定但缺乏灵活性。
+            - heading "Reflection（自我反思）#" [level=3] [ref=e1023]:
+              - text: Reflection（自我反思）
+              - link "#" [ref=e1024] [cursor=pointer]:
+                - /url: "#reflection自我反思"
+            - paragraph [ref=e1025]: "Reflection 范式赋予 Agent 评估自身输出并修正的能力。论文《Self-refine: Iterative refinement with self-feedback》证明：在所有任务、所有测试模型（GPT-3.5、GPT-4、Claude）上，反思模式全面碾压直接生成。"
+            - heading "流程与 Prompt 模板#" [level=4] [ref=e1026]:
+              - text: 流程与 Prompt 模板
+              - link "#" [ref=e1027] [cursor=pointer]:
+                - /url: "#流程与-prompt-模板"
+            - paragraph [ref=e1028]: 流程包含三个阶段，每个阶段对应独立的 Prompt 模板：
+            - list [ref=e1029]:
+              - listitem [ref=e1030]:
+                - strong [ref=e1031]: 生成阶段（Execution）
+                - text: ：Agent 针对任务生成初始回答
+            - generic [ref=e1032]:
+              - code [ref=e1034]:
+                - generic [ref=e1035]: 请完成以下任务：
+                - generic [ref=e1036]: "任务：{task}"
+                - generic [ref=e1037]: 请直接输出最终结果，不要包含任何多余的开头或结尾解释。
+              - generic [ref=e1038]: plaintext
+              - button [ref=e1039] [cursor=pointer]:
+                - img [ref=e1041]
+                - text: Copied!
+            - list [ref=e1043]:
+              - listitem [ref=e1044]:
+                - strong [ref=e1045]: 评估阶段（Reflection）
+                - text: ：Agent 对自己的回答进行评判，寻找事实错误、逻辑漏洞或不一致之处
+            - generic [ref=e1046]:
+              - code [ref=e1048]:
+                - generic [ref=e1049]: 你是一位极其严格的评审专家。请审查以下内容的质量、准确性和逻辑性。
+                - generic [ref=e1050]: "任务：{task}"
+                - generic [ref=e1051]: 当前内容：
+                - generic [ref=e1052]: "{content}"
+                - generic [ref=e1054]: 请指出不足之处并提供具体的改进建议。如果内容已经非常完美，达到了最高标准，请严格且仅输出"无需改进"四个字。
+              - generic [ref=e1055]: plaintext
+              - button [ref=e1056] [cursor=pointer]:
+                - img [ref=e1058]
+                - text: Copied!
+            - list [ref=e1060]:
+              - listitem [ref=e1061]:
+                - strong [ref=e1062]: 改进阶段（Refinement）
+                - text: ：基于评估结果生成改进版本，可多次迭代
+            - generic [ref=e1063]:
+              - code [ref=e1065]:
+                - generic [ref=e1066]: 请根据评审专家的反馈，优化你之前生成的内容。
+                - generic [ref=e1067]: "任务：{task}"
+                - generic [ref=e1068]: 评审员的反馈：
+                - generic [ref=e1069]: "{feedback}"
+                - generic [ref=e1070]: 请直接输出优化后的完整最新内容，不要包含任何额外的解释。
+              - generic [ref=e1071]: plaintext
+              - button [ref=e1072] [cursor=pointer]:
+                - img [ref=e1074]
+                - text: Copied!
+            - heading "Producer-Critic 模式#" [level=4] [ref=e1076]:
+              - text: Producer-Critic 模式
+              - link "#" [ref=e1077] [cursor=pointer]:
+                - /url: "#producer-critic-模式"
+            - paragraph [ref=e1078]:
+              - text: Producer（生成者）和 Critic（评审者）使用
+              - strong [ref=e1079]: 不同的系统提示词
+              - text: ，职责分离避免了”自己写自己审”的认知偏见。实际实现中可以使用不同的模型（如生成用快速模型、反思用更强模型）。
+            - heading "停止条件#" [level=4] [ref=e1080]:
+              - text: 停止条件
+              - link "#" [ref=e1081] [cursor=pointer]:
+                - /url: "#停止条件"
+            - paragraph [ref=e1082]: 反思循环的停止条件包括：Critic 认为输出已达标（返回”无需改进”信号）；达到最大迭代次数（通常 2–3 轮）；改进幅度小于设定阈值。
+            - heading "适用的自我检查维度#" [level=4] [ref=e1083]:
+              - text: 适用的自我检查维度
+              - link "#" [ref=e1084] [cursor=pointer]:
+                - /url: "#适用的自我检查维度"
+            - table [ref=e1086]:
+              - rowgroup [ref=e1087]:
+                - row "检查类型 检查内容" [ref=e1088]:
+                  - columnheader "检查类型" [ref=e1089]
+                  - columnheader "检查内容" [ref=e1090]
+              - rowgroup [ref=e1091]:
+                - row "结构自检 输出格式是否完整？是否包含所有必须字段？" [ref=e1092]:
+                  - cell "结构自检" [ref=e1093]
+                  - cell "输出格式是否完整？是否包含所有必须字段？" [ref=e1094]
+                - row "事实自检 是否包含不可验证的事实？是否可能误导用户？" [ref=e1095]:
+                  - cell "事实自检" [ref=e1096]
+                  - cell "是否包含不可验证的事实？是否可能误导用户？" [ref=e1097]
+                - row "工具行为自检 工具调用是否成功？错误信息是否为空？" [ref=e1098]:
+                  - cell "工具行为自检" [ref=e1099]
+                  - cell "工具调用是否成功？错误信息是否为空？" [ref=e1100]
+                - row "推理逻辑自检 是否存在逻辑跳跃？关键步骤缺失？未说明的假设？" [ref=e1101]:
+                  - cell "推理逻辑自检" [ref=e1102]
+                  - cell "是否存在逻辑跳跃？关键步骤缺失？未说明的假设？" [ref=e1103]
+            - paragraph [ref=e1104]: Reflection 的核心价值：在没有外部反馈时，让 Agent 利用模型自身对”正确”和”错误”的判断能力进行自我修正。在代码生成（检查语法错误和逻辑 bug）、数学推理（检查计算过程）等输出可以自我验证的任务中效果显著。
+            - heading "Tree of Thoughts（ToT）#" [level=3] [ref=e1105]:
+              - text: Tree of Thoughts（ToT）
+              - link "#" [ref=e1106] [cursor=pointer]:
+                - /url: "#tree-of-thoughtstot"
+            - paragraph [ref=e1107]: ToT 将推理过程建模为树状搜索结构，每个节点表示一种推理状态（一段思考或中间结论），从根节点（原始问题）出发探索多条可能的推理路径。
+            - paragraph [ref=e1108]:
+              - strong [ref=e1109]: 评估与搜索
+              - text: ：每个中间节点由 LLM 自身进行评估打分（“这条推理路径是否可行”），然后根据搜索策略决定下一步探索哪些路径。这种方法结合了传统搜索算法与 LLM 的语义评估能力。
+            - paragraph [ref=e1110]:
+              - strong [ref=e1111]: 两种搜索策略
+              - text: ：广度优先搜索（BFS）按层级逐层扩展，每层保留评分最高的 k 个节点，适合分支较浅但宽度大的问题。深度优先搜索（DFS）沿一条路径深入直到达到叶节点（最终答案或死路），然后回溯到上一个分支点继续探索，适合分支较深但宽度窄的问题。
+            - paragraph [ref=e1112]:
+              - strong [ref=e1113]: 适用场景
+              - text: ：需要探索多种可能性、中间结果可以独立评估的任务，如填字游戏、创意写作、数学证明路径选择。以一个填字游戏为例：每个空格节点可以填入多个候选词，LLM 评估每个候选词的合理性和与已有答案的匹配度，BFS 保留最优的几条候选路径继续探索。
+            - paragraph [ref=e1114]: ToT 的代价：每次推理需要多次 LLM 调用（每个节点都需要评估），计算成本显著高于 CoT。因此只在问题复杂度高到简单 CoT 无法解决时才值得使用。
+            - separator [ref=e1115]
+            - heading "Agent 开发框架#" [level=2] [ref=e1116]:
+              - text: Agent 开发框架
+              - link "#" [ref=e1117] [cursor=pointer]:
+                - /url: "#agent-开发框架"
+            - heading "AutoGen（微软）#" [level=3] [ref=e1118]:
+              - text: AutoGen（微软）
+              - link "#" [ref=e1119] [cursor=pointer]:
+                - /url: "#autogen微软"
+            - paragraph [ref=e1120]:
+              - text: 基于多 Agent 对话的协作框架，采用
+              - strong [ref=e1121]: 对话与消息驱动
+              - text: 的协作方式。Agent 之间的核心交互是消息传递——一个 Agent 发送消息，其他 Agent 接收并回复，消息在 Agent 之间流转驱动任务推进。
+            - paragraph [ref=e1122]:
+              - strong [ref=e1123]: 核心组件
+              - text: ：
+            - list [ref=e1124]:
+              - listitem [ref=e1125]:
+                - code [ref=e1126]: AssistantAgent
+                - text: ：封装 LLM 的助手 Agent，负责生成回复、规划任务
+              - listitem [ref=e1127]:
+                - code [ref=e1128]: UserProxyAgent
+                - text: ：代表人类用户的代理 Agent，可以执行代码、调用工具，并将执行结果反馈回对话
+              - listitem [ref=e1129]:
+                - code [ref=e1130]: RoundRobinGroupChat
+                - text: ：轮询群聊机制，按固定顺序依次让每个 Agent 发言
+              - listitem [ref=e1131]:
+                - code [ref=e1132]: TextMentionTermination("TERMINATE")
+                - text: ：当对话中出现 TERMINATE 关键词时自动结束
+            - paragraph [ref=e1133]:
+              - strong [ref=e1134]: 实战案例
+              - text: ：用 Streamlit 构建比特币价格 Web 应用。角色链为产品经理（定义需求）→ 工程师（编写 Streamlit 代码）→ 代码审查员（审查代码质量）→ 用户代理（实际执行代码并验证结果）。每个 Agent 专注于自己的角色职责，通过群聊对话迭代完善。
+            - heading "AgentScope#" [level=3] [ref=e1135]:
+              - text: AgentScope
+              - link "#" [ref=e1136] [cursor=pointer]:
+                - /url: "#agentscope"
+            - paragraph [ref=e1137]: 消息驱动的多智能体平台，强调工程化优先的设计哲学：组合式架构 + 消息驱动，适合生产级多 Agent 系统构建。
+            - paragraph [ref=e1138]:
+              - strong [ref=e1139]: 核心组件
+              - text: ：
+            - list [ref=e1140]:
+              - listitem [ref=e1141]:
+                - code [ref=e1142]: Msg
+                - text: ：统一消息格式，所有 Agent 间通信都封装为标准化的消息对象
+              - listitem [ref=e1143]:
+                - code [ref=e1144]: MsgHub
+                - text: ：消息路由中心，支持消息广播、组播、私密频道
+              - listitem [ref=e1145]:
+                - code [ref=e1146]: AgentBase
+                - text: ：Agent 基类，核心方法为
+                - code [ref=e1147]: reply()
+                - text: ，子类通过重写该方法定义自己的响应逻辑
+            - paragraph [ref=e1148]:
+              - strong [ref=e1149]: 实战案例
+              - text: ：三国狼人杀游戏。狼人夜通过 MsgHub 建立私密频道（仅狼人 Agent 能通信）；使用 Pydantic 结构化输出约束 Agent 行为（确保每个 Agent 在投票、发言时输出格式稳定）；设计了容错机制（单个 Agent 异常不中断整个游戏流程，由 MsgHub 管理异常 Agent 的消息分发）。
+            - heading "CAMEL#" [level=3] [ref=e1150]:
+              - text: CAMEL
+              - link "#" [ref=e1151] [cursor=pointer]:
+                - /url: "#camel"
+            - paragraph [ref=e1152]: 设计哲学为”轻架构、重提示”——通过巧妙地设计 prompt（角色分工 + Inception Prompting），让简单的双 Agent 结构完成复杂任务，无需复杂的工程框架。
+            - paragraph [ref=e1153]:
+              - strong [ref=e1154]: 核心模式
+              - text: ：
+            - list [ref=e1155]:
+              - listitem [ref=e1156]:
+                - strong [ref=e1157]: AI User
+                - text: ：提需求的角色，向 AI Assistant 下达任务指令
+              - listitem [ref=e1158]:
+                - strong [ref=e1159]: AI Assistant
+                - text: ：执行产出的角色，完成任务并返回结果
+              - listitem [ref=e1160]:
+                - strong [ref=e1161]: Inception Prompting
+                - text: ：在 prompt 中为每个角色注入详细的角色设定（你是谁、你有什么技能、你如何协作），让 Agent 在角色框架内自主协商任务分工
+            - paragraph [ref=e1162]:
+              - strong [ref=e1163]: 终止标志
+              - text: ：
+              - code [ref=e1164]: <CAMEL_TASK_DONE>
+              - text: ，当 AI Assistant 认为任务完成时输出该标记。
+            - paragraph [ref=e1165]:
+              - strong [ref=e1166]: 实战案例
+              - text: ：“心理学家”与”作家”双角色协作创作拖延症科普电子书。AI User（角色：心理学家）定义每章主题和核心论点，AI Assistant（角色：科普作家）撰写章节内容，通过多轮对话逐步完成全书。
+            - heading "LangGraph#" [level=3] [ref=e1167]:
+              - text: LangGraph
+              - link "#" [ref=e1168] [cursor=pointer]:
+                - /url: "#langgraph"
+            - paragraph [ref=e1169]: 将 Agent 执行流建模为有向图 / 状态机。天然支持循环（ReAct 的 thought-action-observation 循环）、条件分支（根据评估结果走不同路径）、回退（失败后回退到上一步）和 Reflection（自环实现自我评估和改进）。
+            - paragraph [ref=e1170]:
+              - strong [ref=e1171]: 三要素
+              - text: ：
+            - list [ref=e1172]:
+              - listitem [ref=e1173]:
+                - strong [ref=e1174]: State（状态）
+                - text: ：使用
+                - code [ref=e1175]: TypedDict
+                - text: 定义共享状态，所有 Node 共享并读写
+              - listitem [ref=e1176]:
+                - strong [ref=e1177]: Node（节点）
+                - text: ：函数，接收当前 State，返回 State 的部分更新
+              - listitem [ref=e1178]:
+                - strong [ref=e1179]: Edge（边）
+                - text: ：普通边（固定路径）和条件边（根据 State 的内容动态决定下一步）
+            - paragraph [ref=e1180]:
+              - strong [ref=e1181]: 实战案例
+              - text: ：三步问答助手。
+              - code [ref=e1182]: Understand
+              - text: （理解问题意图）→
+              - code [ref=e1183]: Search
+              - text: （调用 Tavily 搜索引擎检索信息）→
+              - code [ref=e1184]: Answer
+              - text: （整合信息生成回答）。任意一步失败则沿条件边回退到前一步（如 Search 失败就回到 Understand 阶段重新理解问题）。
+            - heading "涌现式协作 vs 显式控制#" [level=3] [ref=e1185]:
+              - text: 涌现式协作 vs 显式控制
+              - link "#" [ref=e1186] [cursor=pointer]:
+                - /url: "#涌现式协作-vs-显式控制"
+            - table [ref=e1188]:
+              - rowgroup [ref=e1189]:
+                - row "维度 涌现式（AutoGen / CAMEL） 显式控制（LangGraph）" [ref=e1190]:
+                  - columnheader "维度" [ref=e1191]
+                  - columnheader "涌现式（AutoGen / CAMEL）" [ref=e1192]
+                  - columnheader "显式控制（LangGraph）" [ref=e1193]
+              - rowgroup [ref=e1194]:
+                - row "控制权 去中心化，Agent 自主协商 中心化，开发者预定义流程" [ref=e1195]:
+                  - cell "控制权" [ref=e1196]
+                  - cell "去中心化，Agent 自主协商" [ref=e1197]
+                  - cell "中心化，开发者预定义流程" [ref=e1198]
+                - row "灵活性 高，适应动态变化 低，流程相对固定" [ref=e1199]:
+                  - cell "灵活性" [ref=e1200]
+                  - cell "高，适应动态变化" [ref=e1201]
+                  - cell "低，流程相对固定" [ref=e1202]
+                - row "可靠性 低，易主题漂移或死循环 高，严格按流程执行" [ref=e1203]:
+                  - cell "可靠性" [ref=e1204]
+                  - cell "低，易主题漂移或死循环" [ref=e1205]
+                  - cell "高，严格按流程执行" [ref=e1206]
+                - row "可审计性 差，行为路径不可预期 好，执行路径可完全追踪" [ref=e1207]:
+                  - cell "可审计性" [ref=e1208]
+                  - cell "差，行为路径不可预期" [ref=e1209]
+                  - cell "好，执行路径可完全追踪" [ref=e1210]
+                - row "适用场景 发散型（创意写作、代码生成） 收敛型（企业自动化、金融核保）" [ref=e1211]:
+                  - cell "适用场景" [ref=e1212]
+                  - cell "发散型（创意写作、代码生成）" [ref=e1213]
+                  - cell "收敛型（企业自动化、金融核保）" [ref=e1214]
+            - paragraph [ref=e1215]: 两个流派并非互斥。实际系统往往混合使用：外层用 LangGraph 定义稳定的大流程，内层用 AutoGen 或 CAMEL 管理发散的子任务。
+            - separator [ref=e1216]
+            - separator [ref=e1217]
+            - heading "记忆与检索#" [level=2] [ref=e1218]:
+              - text: 记忆与检索
+              - link "#" [ref=e1219] [cursor=pointer]:
+                - /url: "#记忆与检索"
+            - heading "两大痛点#" [level=3] [ref=e1220]:
+              - text: 两大痛点
+              - link "#" [ref=e1221] [cursor=pointer]:
+                - /url: "#两大痛点"
+            - paragraph [ref=e1222]:
+              - strong [ref=e1223]: LLM 无状态
+              - text: ：每次 API 调用都是独立计算，模型不会自动”记住”之前的对话内容。这导致四个问题——上下文丢失（多轮对话中重要信息被遗忘）、个性化缺失（模型无法记住用户偏好）、学习能力受限（Agent 不能在每次交互中积累经验）、一致性问题（同一用户的后续请求被视为完全新的对话）。
+            - paragraph [ref=e1224]:
+              - strong [ref=e1225]: 模型知识有限
+              - text: ：训练数据有截止日期，模型不了解事实发生在数据截止之后的事件。训练数据以通用互联网语料为主，专业领域知识覆盖不足。模型在不确定时倾向于”编造”而非”承认不知道”（幻觉）。
+            - heading "记忆系统架构#" [level=3] [ref=e1226]:
+              - text: 记忆系统架构
+              - link "#" [ref=e1227] [cursor=pointer]:
+                - /url: "#记忆系统架构"
+            - generic [ref=e1228]:
+              - code [ref=e1230]:
+                - generic [ref=e1231]: HelloAgents 记忆系统
+                - generic [ref=e1232]: ├── 基础设施层
+                - generic [ref=e1233]: │ ├── MemoryManager（统一调度入口）
+                - generic [ref=e1234]: │ ├── MemoryItem（通用记忆数据单元）
+                - generic [ref=e1235]: │ ├── MemoryConfig（每种记忆类型的独立配置）
+                - generic [ref=e1236]: │ └── BaseMemory（记忆类型的抽象基类）
+                - generic [ref=e1237]: ├── 记忆类型层
+                - generic [ref=e1238]: │ ├── WorkingMemory（工作记忆）
+                - generic [ref=e1239]: │ ├── EpisodicMemory（情景记忆）
+                - generic [ref=e1240]: │ ├── SemanticMemory（语义记忆）
+                - generic [ref=e1241]: │ └── PerceptualMemory（感知记忆）
+                - generic [ref=e1242]: ├── 存储后端层
+                - generic [ref=e1243]: │ ├── QdrantVectorStore（向量数据库，高性能语义检索）
+                - generic [ref=e1244]: │ ├── Neo4jGraphStore（图数据库，知识图谱关系管理）
+                - generic [ref=e1245]: │ └── SQLiteDocumentStore（结构化持久化存储）
+                - generic [ref=e1246]: └── 嵌入服务层
+                - generic [ref=e1247]: ├── DashScopeEmbedding（云端 API）
+                - generic [ref=e1248]: ├── LocalTransformerEmbedding（离线部署）
+                - generic [ref=e1249]: └── TFIDFEmbedding（轻量级兜底方案）
+              - generic [ref=e1250]: plaintext
+              - button [ref=e1251] [cursor=pointer]:
+                - img [ref=e1253]
+                - text: Copied!
+            - heading "嵌入模型选型#" [level=4] [ref=e1255]:
+              - text: 嵌入模型选型
+              - link "#" [ref=e1256] [cursor=pointer]:
+                - /url: "#嵌入模型选型"
+            - paragraph [ref=e1257]: 嵌入模型（Embedding Model）负责将文本转化为向量，是记忆系统中所有语义检索的基础。选择嵌入模型需考虑以下维度：
+            - table [ref=e1259]:
+              - rowgroup [ref=e1260]:
+                - row "维度 选项 权衡" [ref=e1261]:
+                  - columnheader "维度" [ref=e1262]
+                  - columnheader "选项" [ref=e1263]
+                  - columnheader "权衡" [ref=e1264]
+              - rowgroup [ref=e1265]:
+                - row "部署方式 云端 API vs 本地部署 云端方便但产生额外成本和延迟；本地隐私好但需 GPU 资源" [ref=e1266]:
+                  - cell "部署方式" [ref=e1267]
+                  - cell "云端 API vs 本地部署" [ref=e1268]
+                  - cell "云端方便但产生额外成本和延迟；本地隐私好但需 GPU 资源" [ref=e1269]
+                - row "向量维度 384d（MiniLM）vs 768d（BGE）vs 1536d（OpenAI） 维度越高表达力越强，但存储和检索成本越高" [ref=e1270]:
+                  - cell "向量维度" [ref=e1271]
+                  - cell "384d（MiniLM）vs 768d（BGE）vs 1536d（OpenAI）" [ref=e1272]
+                  - cell "维度越高表达力越强，但存储和检索成本越高" [ref=e1273]
+                - row "语言覆盖 通用英文 vs 多语言 vs 中文专用 中文场景下 BAAI/bge-large-zh-v1.5 优于通用英文模型" [ref=e1274]:
+                  - cell "语言覆盖" [ref=e1275]
+                  - cell "通用英文 vs 多语言 vs 中文专用" [ref=e1276]
+                  - cell "中文场景下 BAAI/bge-large-zh-v1.5 优于通用英文模型" [ref=e1277]
+                - row "检索精度 MTEB 基准分数 BEIR / MTEB 排行榜可作为参考依据" [ref=e1278]:
+                  - cell "检索精度" [ref=e1279]
+                  - cell "MTEB 基准分数" [ref=e1280]
+                  - cell "BEIR / MTEB 排行榜可作为参考依据" [ref=e1281]
+                - row "输入长度 512 tokens vs 8192 tokens 短模型适合句子级检索，长模型适合段落级检索" [ref=e1282]:
+                  - cell "输入长度" [ref=e1283]
+                  - cell "512 tokens vs 8192 tokens" [ref=e1284]
+                  - cell "短模型适合句子级检索，长模型适合段落级检索" [ref=e1285]
+            - paragraph [ref=e1286]: 项目中实现三种嵌入方案构成降级链路：DashScopeEmbedding（阿里云通义千问的云端 API，精度最高）→ LocalTransformerEmbedding（使用 Sentence-Transformers 库本地运行，需 GPU）→ TFIDFEmbedding（基于 TF-IDF 的零依赖兜底方案，精度最低但无需任何外部依赖和 GPU）。在 DashScope 不可用时自动降级到 LocalTransformer，再降级到 TFIDF。
+            - heading "向量数据库选型#" [level=4] [ref=e1287]:
+              - text: 向量数据库选型
+              - link "#" [ref=e1288] [cursor=pointer]:
+                - /url: "#向量数据库选型"
+            - paragraph [ref=e1289]: 项目中默认使用 Qdrant。在实际生产中选择向量数据库时，可参考以下对比：
+            - table [ref=e1291]:
+              - rowgroup [ref=e1292]:
+                - row "维度 Chroma Qdrant Milvus" [ref=e1293]:
+                  - columnheader "维度" [ref=e1294]
+                  - columnheader "Chroma" [ref=e1295]
+                  - columnheader "Qdrant" [ref=e1296]
+                  - columnheader "Milvus" [ref=e1297]
+              - rowgroup [ref=e1298]:
+                - row "架构类型 嵌入式（单进程） 独立服务 / 云部署 分布式集群" [ref=e1299]:
+                  - cell "架构类型" [ref=e1300]
+                  - cell "嵌入式（单进程）" [ref=e1301]
+                  - cell "独立服务 / 云部署" [ref=e1302]
+                  - cell "分布式集群" [ref=e1303]
+                - row "部署复杂度 低（pip install） 中（Docker 单节点） 高（K8s + etcd + MinIO）" [ref=e1304]:
+                  - cell "部署复杂度" [ref=e1305]
+                  - cell "低（pip install）" [ref=e1306]
+                  - cell "中（Docker 单节点）" [ref=e1307]
+                  - cell "高（K8s + etcd + MinIO）" [ref=e1308]
+                - row "适用规模 < 10 万条 10 万–1000 万条 > 100 万条" [ref=e1309]:
+                  - cell "适用规模" [ref=e1310]
+                  - cell "< 10 万条" [ref=e1311]
+                  - cell "10 万–1000 万条" [ref=e1312]
+                  - cell "> 100 万条" [ref=e1313]
+                - row "查询延迟 5–20ms 1–5ms 2–10ms" [ref=e1314]:
+                  - cell "查询延迟" [ref=e1315]
+                  - cell "5–20ms" [ref=e1316]
+                  - cell "1–5ms" [ref=e1317]
+                  - cell "2–10ms" [ref=e1318]
+                - row "混合搜索 基础 复杂过滤最强 完善" [ref=e1319]:
+                  - cell "混合搜索" [ref=e1320]
+                  - cell "基础" [ref=e1321]
+                  - cell "复杂过滤最强" [ref=e1322]
+                  - cell "完善" [ref=e1323]
+                - row "运维成本 零配置 中等 高" [ref=e1324]:
+                  - cell "运维成本" [ref=e1325]
+                  - cell "零配置" [ref=e1326]
+                  - cell "中等" [ref=e1327]
+                  - cell "高" [ref=e1328]
+            - paragraph [ref=e1329]: 选型建议：原型阶段可用 Chroma 快速验证 RAG；中等规模（10 万–100 万条）生产环境选 Qdrant；大规模（百万级以上）高并发场景选 Milvus 集群。
+            - heading "四大记忆类型#" [level=3] [ref=e1330]:
+              - text: 四大记忆类型
+              - link "#" [ref=e1331] [cursor=pointer]:
+                - /url: "#四大记忆类型"
+            - table [ref=e1333]:
+              - rowgroup [ref=e1334]:
+                - row "类型 类比 存储方式 检索重点 典型场景" [ref=e1335]:
+                  - columnheader "类型" [ref=e1336]
+                  - columnheader "类比" [ref=e1337]
+                  - columnheader "存储方式" [ref=e1338]
+                  - columnheader "检索重点" [ref=e1339]
+                  - columnheader "典型场景" [ref=e1340]
+              - rowgroup [ref=e1341]:
+                - row "工作记忆 便签纸 / 短期记忆 纯内存，TTL 管理，容量限制 快速访问、时间衰减、混合检索 当前会话的上下文、用户刚刚提及的信息" [ref=e1342]:
+                  - cell "工作记忆" [ref=e1343]:
+                    - strong [ref=e1344]: 工作记忆
+                  - cell "便签纸 / 短期记忆" [ref=e1345]
+                  - cell "纯内存，TTL 管理，容量限制" [ref=e1346]
+                  - cell "快速访问、时间衰减、混合检索" [ref=e1347]
+                  - cell "当前会话的上下文、用户刚刚提及的信息" [ref=e1348]
+                - row "情景记忆 日记本 SQLite + Qdrant 语义相似 + 时间近因性 + 会话过滤 发生过的事件、学过的知识、做过的操作" [ref=e1349]:
+                  - cell "情景记忆" [ref=e1350]:
+                    - strong [ref=e1351]: 情景记忆
+                  - cell "日记本" [ref=e1352]
+                  - cell "SQLite + Qdrant" [ref=e1353]
+                  - cell "语义相似 + 时间近因性 + 会话过滤" [ref=e1354]
+                  - cell "发生过的事件、学过的知识、做过的操作" [ref=e1355]
+                - row "语义记忆 知识百科 Qdrant + Neo4j 向量语义 + 图关系推理 抽象概念、概念间的关系、用户的长期偏好" [ref=e1356]:
+                  - cell "语义记忆" [ref=e1357]:
+                    - strong [ref=e1358]: 语义记忆
+                  - cell "知识百科" [ref=e1359]
+                  - cell "Qdrant + Neo4j" [ref=e1360]
+                  - cell "向量语义 + 图关系推理" [ref=e1361]
+                  - cell "抽象概念、概念间的关系、用户的长期偏好" [ref=e1362]
+                - row "感知记忆 感官输入缓存 分模态向量集合 同模态或跨模态检索 图片视觉特征、音频声学特征的暂存和匹配" [ref=e1363]:
+                  - cell "感知记忆" [ref=e1364]:
+                    - strong [ref=e1365]: 感知记忆
+                  - cell "感官输入缓存" [ref=e1366]
+                  - cell "分模态向量集合" [ref=e1367]
+                  - cell "同模态或跨模态检索" [ref=e1368]
+                  - cell "图片视觉特征、音频声学特征的暂存和匹配" [ref=e1369]
+            - heading "评分机制#" [level=3] [ref=e1370]:
+              - text: 评分机制
+              - link "#" [ref=e1371] [cursor=pointer]:
+                - /url: "#评分机制"
+            - paragraph [ref=e1372]: 不同类型记忆的检索评分公式各有侧重，突出各自的特化方向：
+            - paragraph [ref=e1373]:
+              - strong [ref=e1374]: 情景记忆
+              - text: ：
+              - code [ref=e1375]: score = (向量相似度 × 0.8 + 时间近因性 × 0.2) × (0.8 + importance × 0.4)
+            - list [ref=e1376]:
+              - listitem [ref=e1377]: 向量相似度权重高：因为情景记忆的核心是回忆”类似的事件”
+              - listitem [ref=e1378]: 时间近因性权重较低但不可忽略：较新的事件通常有更高的参考价值
+              - listitem [ref=e1379]: importance 参数调节：重要性评分（0–1），用户可以手动指定或系统自动推算
+            - paragraph [ref=e1380]:
+              - strong [ref=e1381]: 语义记忆
+              - text: ：
+              - code [ref=e1382]: score = (向量相似度 × 0.7 + 图相似度 × 0.3) × (0.8 + importance × 0.4)
+            - list [ref=e1383]:
+              - listitem [ref=e1384]: 向量相似度仍然主导但比例略低：因为语义不仅靠向量匹配
+              - listitem [ref=e1385]: 图相似度权重 0.3：通过 Neo4j 中的知识图谱关系（如 A”属于”B、C”影响”D）来衡量概念之间的关联度
+              - listitem [ref=e1386]:
+                - text: 如果 Neo4j 不可用（未配置图数据库），图相似度回退为 0，分数退化为
+                - code [ref=e1387]: 向量相似度 × (0.8 + importance × 0.4)
+            - paragraph [ref=e1388]:
+              - strong [ref=e1389]: 工作记忆
+              - text: ：
+              - code [ref=e1390]: final_score = base_relevance × 时间衰减 × (0.8 + importance × 0.4)
+            - list [ref=e1391]:
+              - listitem [ref=e1392]: 时间衰减函数：刚写入的工作记忆分数 > 较旧的（TTL 趋近到期时分数趋近于 0）
+              - listitem [ref=e1393]: 工作记忆不依赖向量检索，因为它的容量有上限（默认 N 条），直接线性遍历即可
+            - heading "MemoryTool 核心操作#" [level=3] [ref=e1394]:
+              - text: MemoryTool 核心操作
+              - link "#" [ref=e1395] [cursor=pointer]:
+                - /url: "#memorytool-核心操作"
+            - paragraph [ref=e1396]: 记忆系统通过 MemoryTool 对外暴露统一接口，支持以下操作：
+            - list [ref=e1397]:
+              - listitem [ref=e1398]:
+                - strong [ref=e1399]: add
+                - text: ：添加记忆条目，指定类型（working / episodic / semantic / perceptual）和重要性评分 importance（0–1）
+              - listitem [ref=e1400]:
+                - strong [ref=e1401]: search
+                - text: ：搜索记忆，支持按类型过滤（搜索一种或多种类型的记忆）、按最小重要性阈值筛选
+              - listitem [ref=e1402]:
+                - strong [ref=e1403]: forget
+                - text: ：遗忘，支持基于重要性策略（遗忘最低重要性的条目）、基于时间策略（遗忘最早的条目）、基于容量策略（当条目数超过上限时自动清理最不重要的）
+              - listitem [ref=e1404]:
+                - strong [ref=e1405]: consolidate
+                - text: ：整合，将短期记忆的重要信息提取并转换为长期记忆。整合算法流程为：从 WorkingMemory 中筛选出 importance 高于阈值（默认 0.6）的条目 → 将条目内容与已有 SemanticMemory 做语义匹配（判断是否存在相似度高于 0.85 的已有条目）→ 对匹配到的条目执行合并（追加引用计数并更新时间戳），对未匹配的条目新建 SemanticMemory 条目 → 从 WorkingMemory 中移除已整合的条目。consolidate 可手动触发或按固定周期（如每 10 轮交互）自动执行。
+              - listitem [ref=e1406]:
+                - strong [ref=e1407]: summary / stats / update / remove / clear_all
+                - text: ：其他管理操作
+            - heading "RAG 系统#" [level=3] [ref=e1408]:
+              - text: RAG 系统
+              - link "#" [ref=e1409] [cursor=pointer]:
+                - /url: "#rag-系统"
+            - heading "文档处理与 Chunk 策略#" [level=4] [ref=e1410]:
+              - text: 文档处理与 Chunk 策略
+              - link "#" [ref=e1411] [cursor=pointer]:
+                - /url: "#文档处理与-chunk-策略"
+            - paragraph [ref=e1412]: 任意格式文档（PDF、Word、Markdown、HTML 等）→ MarkItDown 工具统一转换为 Markdown 格式 → 解析标题层次（构建文档结构树）→ 段落语义分割（以自然段落为单位，保持语义完整性）→ Token 长度控制与 Chunk Overlap → 嵌入向量化 → 写入向量数据库（按命名空间隔离不同文档集）。
+            - paragraph [ref=e1413]: Chunk 策略选择直接影响 RAG 的检索质量。四种主流策略：
+            - table [ref=e1415]:
+              - rowgroup [ref=e1416]:
+                - row "策略 说明 召回率 适用场景" [ref=e1417]:
+                  - columnheader "策略" [ref=e1418]
+                  - columnheader "说明" [ref=e1419]
+                  - columnheader "召回率" [ref=e1420]
+                  - columnheader "适用场景" [ref=e1421]
+              - rowgroup [ref=e1422]:
+                - row "固定大小切分 按固定 token 数切分（如 512 token），简单粗暴 约 67% 粗略原型、文档结构不明确" [ref=e1423]:
+                  - cell "固定大小切分" [ref=e1424]:
+                    - strong [ref=e1425]: 固定大小切分
+                  - cell "按固定 token 数切分（如 512 token），简单粗暴" [ref=e1426]
+                  - cell "约 67%" [ref=e1427]
+                  - cell "粗略原型、文档结构不明确" [ref=e1428]
+                - row "基于结构切分 利用 HTML/Markdown 标题层级做切分点 约 74% 有清晰标题结构的文档" [ref=e1429]:
+                  - cell "基于结构切分" [ref=e1430]:
+                    - strong [ref=e1431]: 基于结构切分
+                  - cell "利用 HTML/Markdown 标题层级做切分点" [ref=e1432]
+                  - cell "约 74%" [ref=e1433]
+                  - cell "有清晰标题结构的文档" [ref=e1434]
+                - row "递归切分 按分隔符层级（段落→句子→词）迭代分割 约 80% 通用场景，兼顾粒度与语义" [ref=e1435]:
+                  - cell "递归切分" [ref=e1436]:
+                    - strong [ref=e1437]: 递归切分
+                  - cell "按分隔符层级（段落→句子→词）迭代分割" [ref=e1438]
+                  - cell "约 80%" [ref=e1439]
+                  - cell "通用场景，兼顾粒度与语义" [ref=e1440]
+                - row "语义切分 用 Embedding 相似度检测语义边界，语义突变处分割 约 91% 高质量需求、知识库型系统" [ref=e1441]:
+                  - cell "语义切分" [ref=e1442]:
+                    - strong [ref=e1443]: 语义切分
+                  - cell "用 Embedding 相似度检测语义边界，语义突变处分割" [ref=e1444]
+                  - cell "约 91%" [ref=e1445]
+                  - cell "高质量需求、知识库型系统" [ref=e1446]
+            - paragraph [ref=e1447]:
+              - strong [ref=e1448]: Parent-Child Chunk 模式
+              - text: ：小块（约 300 token）负责召回，大块（约 1200 token）负责生成。检索时命中小块，但将对应父段落放入 LLM 上下文中。小块提高了检索精确度，大块保证了生成时上下文完整。
+            - heading "检索结果重排序（Re-ranking）#" [level=4] [ref=e1449]:
+              - text: 检索结果重排序（Re-ranking）
+              - link "#" [ref=e1450] [cursor=pointer]:
+                - /url: "#检索结果重排序re-ranking"
+            - paragraph [ref=e1451]: 向量检索的第一轮结果（Top-30 到 Top-100）中，排名靠前的结果不一定最相关。重排序的目的：用更精确的模型对初筛结果二次排序。
+            - paragraph [ref=e1452]:
+              - strong [ref=e1453]: 三种重排序方法
+              - text: ：
+            - list [ref=e1454]:
+              - listitem [ref=e1455]:
+                - strong [ref=e1456]: Cross-Encoder Reranker
+                - text: ：将 query 与每个候选文档拼接后送入一个专门的排序模型（如 BGE-Reranker、Cohere Rerank），输出相关性分数。比向量检索（Bi-Encoder）更精确，但需要逐对计算、延迟更高。
+              - listitem [ref=e1457]:
+                - strong [ref=e1458]: LLM Rerank
+                - text: ：利用 LLM 对候选文档进行排序，可解释性强（LLM 可以给出排序理由），但计算成本最高。
+              - listitem [ref=e1459]:
+                - strong [ref=e1460]: 规则重排
+                - text: ：按时间近因性、来源权威性、权限级别等元数据规则做排序，不依赖模型。
+            - paragraph [ref=e1461]:
+              - strong [ref=e1462]: 推荐检索链路
+              - text: ：元数据预过滤 → 多路召回（向量 + 关键词，粗召回 30–100 条）→ 去重合并 → Cross-Encoder Rerank 选出 5–10 条 → 上下文压缩 → 送入 LLM。
+            - heading "高级检索策略#" [level=4] [ref=e1463]:
+              - text: 高级检索策略
+              - link "#" [ref=e1464] [cursor=pointer]:
+                - /url: "#高级检索策略"
+            - paragraph [ref=e1465]:
+              - strong [ref=e1466]: MQE（Multi-Query Expansion，多查询扩展）
+              - text: ：
+            - paragraph [ref=e1467]: 将用户的原始问题用 LLM 扩展成多个语义等价但表达不同的子问题（如”什么是 RAG”扩展为”RAG 的定义是什么""检索增强生成如何工作""RAG 和微调有什么区别”），每个子问题独立执行向量检索，合并所有检索结果去重后返回。MQE 提高了对模糊问题的召回率——同一个问题有多个表达方式，总有一种能匹配到文档中的相关表述。
+            - paragraph [ref=e1468]:
+              - strong [ref=e1469]: HyDE（Hypothetical Document Embeddings，假想文档嵌入）
+              - text: ：
+            - paragraph [ref=e1470]: 先让 LLM 根据用户问题生成一段”假想答案”（不需要十分准确，只需要在词汇和风格上接近目标文档），用这段假想答案的嵌入向量去检索目标文档。HyDE 利用了嵌入空间的”文本形态相似性”——问题和文档往往写法不同（问题短而口语化、文档长篇且专业），但两段假想答案和实际文档在词语层面更接近。适用于用户提问方式与知识库文档写法差异较大的场景。
+            - heading "Memory 与 RAG 的关系#" [level=3] [ref=e1471]:
+              - text: Memory 与 RAG 的关系
+              - link "#" [ref=e1472] [cursor=pointer]:
+                - /url: "#memory-与-rag-的关系"
+            - paragraph [ref=e1473]: RAG 负责找知识，Memory 负责记历程。RAG 回答当前问题（从外部知识库检索事实性信息），Memory 支撑长期个性化（记住用户的偏好、行为模式和历史交互）。RAG 的知识源可以独立更新（替换知识库即可），Memory 的内容随交互持续积累（每次交互都是增量写入）。
+            - paragraph [ref=e1474]: 典型协作模式：
+            - list [ref=e1475]:
+              - listitem [ref=e1476]: 加载新资料时：RAG 存文档 + Memory 记录”用户加载了什么资料”这一事件
+              - listitem [ref=e1477]: 提问回答时：RAG 检索资料生成答案 + Memory 记录问题和获得答案的学习轨迹
+              - listitem [ref=e1478]: 复盘学习时：Memory 回顾历史问题和笔记 + RAG 补充知识细节
+              - listitem [ref=e1479]: 制定计划时：RAG 提供领域知识 + Memory 提供用户进度和偏好
+            - separator [ref=e1480]
+            - heading "上下文工程#" [level=2] [ref=e1481]:
+              - text: 上下文工程
+              - link "#" [ref=e1482] [cursor=pointer]:
+                - /url: "#上下文工程"
+            - heading "系统提示（System Prompt）设计原则#" [level=3] [ref=e1483]:
+              - text: 系统提示（System Prompt）设计原则
+              - link "#" [ref=e1484] [cursor=pointer]:
+                - /url: "#系统提示system-prompt设计原则"
+            - paragraph [ref=e1485]: 系统提示是上下文中优先级最高的固定部分，其设计质量直接影响 Agent 的行为边界和应对复杂场景的能力。以下几点是实践中需要关注的：
+            - list [ref=e1486]:
+              - listitem [ref=e1487]:
+                - strong [ref=e1488]: 明确角色定位
+                - text: ：定义 Agent 的身份、任务范围和限制条件。例如”你是代码审查助手，专注于 Python 后端代码”。角色定义帮助模型在任务边界内推理，减少”越界”行为。
+              - listitem [ref=e1489]:
+                - strong [ref=e1490]: 工具描述标准化
+                - text: ：每个工具的名称、功能、参数、适用场景和不适用场景都需要在系统提示中明确定义。工具描述的质量决定 Agent 能否在正确场景下选择正确的工具。
+              - listitem [ref=e1491]:
+                - strong [ref=e1492]: 行为约束先于功能描述
+                - text: ：先说”禁止做什么”再说”可以做什么”。安全约束（如”不允许执行
+                - code [ref=e1493]: rm
+                - text: 命令”）放在功能描述之前，优先级更高。
+              - listitem [ref=e1494]:
+                - strong [ref=e1495]: 动态注入 vs 静态固化
+                - text: ：固定信息（角色、规则、安全约束）写在系统提示中并长期不变；运行时信息（任务描述、工具列表）由 ContextBuilder 动态拼装。不将动态信息固化在系统提示中。
+              - listitem [ref=e1496]:
+                - strong [ref=e1497]: 保持精简
+                - text: ：系统提示并非越长越好。超出必要长度的系统提示会被模型同等对待为”需要关注的上下文”，稀释对实际任务信息的关注力。核心规则应该在 500 token 以内覆盖完毕。
+            - heading "上下文工程 vs 提示工程#" [level=3] [ref=e1498]:
+              - text: 上下文工程 vs 提示工程
+              - link "#" [ref=e1499] [cursor=pointer]:
+                - /url: "#上下文工程-vs-提示工程"
+            - paragraph [ref=e1500]:
+              - text: 提示工程关注”怎么写好 prompt”，其核心问题是单轮或短任务内的指令优化。上下文工程则关注一个更广泛的问题：
+              - strong [ref=e1501]: 每一次调用模型前，应该把哪些信息、以什么结构、在多大预算内交给模型
+              - text: 。需要考虑的对象包括系统提示（固定身份和行为规则）、工具描述（可用工具的 schema 和调用说明）、对话历史（过去的交互记录）、记忆（从长期记忆中召回的相关片段）、RAG 结果（从外部知识库检索的信息）、NoteTool 输出（结构化笔记）、TerminalTool 输出（文件系统探索结果）、Agent 状态（规划进度和未完成任务）。
+            - heading "上下文腐蚀（Context Rot）#" [level=3] [ref=e1502]:
+              - text: 上下文腐蚀（Context Rot）
+              - link "#" [ref=e1503] [cursor=pointer]:
+                - /url: "#上下文腐蚀context-rot"
+            - paragraph [ref=e1504]: 随着上下文窗口中 token 数量增加，模型从中准确回忆和使用关键信息的能力下降。原因有三：
+            - list [ref=e1505]:
+              - listitem [ref=e1506]:
+                - strong [ref=e1507]: 注意力被拉薄
+                - text: ：Transformer 的自注意力需要计算所有 token 两两之间的关联。当 token 数越多，模型在每一个 token 上的注意力权重越分散，关键信息被稀释。
+              - listitem [ref=e1508]:
+                - strong [ref=e1509]: 噪声增多
+                - text: ：无关的历史记录、重复的工具输出、过期的中间计划占据了有效的上下文空间，使模型难以抓住真正重要的信息。
+              - listitem [ref=e1510]:
+                - strong [ref=e1511]: 训练分布限制
+                - text: ：模型在预训练阶段接触的文本绝大多数在几千 token 以内，对超长序列中的信息提取经验不足。
+            - heading "GSSC 流水线#" [level=3] [ref=e1512]:
+              - text: GSSC 流水线
+              - link "#" [ref=e1513] [cursor=pointer]:
+                - /url: "#gssc-流水线"
+            - paragraph [ref=e1514]: ContextBuilder 的核心框架包含四个阶段：
+            - heading "第一阶段：Gather（汇集）#" [level=4] [ref=e1515]:
+              - text: 第一阶段：Gather（汇集）
+              - link "#" [ref=e1516] [cursor=pointer]:
+                - /url: "#第一阶段gather汇集"
+            - paragraph [ref=e1517]: 从多个来源收集候选信息，包括：
+            - list [ref=e1518]:
+              - listitem [ref=e1519]:
+                - strong [ref=e1520]: 系统指令
+                - text: ：最高优先级，通常固定不变
+              - listitem [ref=e1521]:
+                - strong [ref=e1522]: MemoryTool
+                - text: ：从长期记忆中检索的相关记忆条目
+              - listitem [ref=e1523]:
+                - strong [ref=e1524]: RAGTool
+                - text: ：从外部知识库检索的知识片段
+              - listitem [ref=e1525]:
+                - strong [ref=e1526]: 对话历史
+                - text: ：仅保留最近 N 条记录（默认 N=20，可配置）
+              - listitem [ref=e1527]:
+                - strong [ref=e1528]: 自定义信息包
+                - text: ：NoteTool 的结构化笔记、TerminalTool 的输出等
+            - heading "第二阶段：Select（选择）#" [level=4] [ref=e1529]:
+              - text: 第二阶段：Select（选择）
+              - link "#" [ref=e1530] [cursor=pointer]:
+                - /url: "#第二阶段select选择"
+            - paragraph [ref=e1531]: 采用加权评分机制对候选信息进行筛选：
+            - generic [ref=e1532]:
+              - code [ref=e1534]:
+                - generic [ref=e1535]: combined_score = relevance_weight × relevance_score + recency_weight × recency_score
+              - generic [ref=e1536]: plaintext
+              - button [ref=e1537] [cursor=pointer]:
+                - img [ref=e1539]
+                - text: Copied!
+            - paragraph [ref=e1541]:
+              - text: 流程：先分离系统指令（始终保留）→ 为每个候选信息计算综合分数 → 过滤低于
+              - code [ref=e1542]: min_relevance
+              - text: 阈值的信息 → 按综合分数排序 → 贪心填充（从高分到低分逐个加入，直到 token 上限）。
+            - paragraph [ref=e1543]: 超出上限的信息不会丢弃而是保留到下一轮。下一轮 Gather 仍会考虑它们，随时间衰减的 recency_score 可能使它们再次被选中。
+            - heading "第三阶段：Structure（结构化）#" [level=4] [ref=e1544]:
+              - text: 第三阶段：Structure（结构化）
+              - link "#" [ref=e1545] [cursor=pointer]:
+                - /url: "#第三阶段structure结构化"
+            - paragraph [ref=e1546]: 将选中的信息组织为结构化的模板：
+            - generic [ref=e1547]:
+              - code [ref=e1549]:
+                - generic [ref=e1550]: "[Role & Policies] ← 系统指令（身份和规则）"
+                - generic [ref=e1551]: "[Task] ← 当前任务描述"
+                - generic [ref=e1552]: "[Evidence] ← RAG 检索结果、记忆片段"
+                - generic [ref=e1553]: "[Context] ← 对话历史摘要或近期记录"
+                - generic [ref=e1554]: "[Output] ← 输出格式要求和示例"
+              - generic [ref=e1555]: plaintext
+              - button [ref=e1556] [cursor=pointer]:
+                - img [ref=e1558]
+                - text: Copied!
+            - paragraph [ref=e1560]: 固定模板的意义在于：让模型每次看到的上下文信息在同一个位置出现，模型学会从固定位置寻找特定类型的信息。如果每次信息排列方式都不同，模型需要在推理时额外花费 attention 来定位信息。
+            - heading "第四阶段：Compress（压缩）#" [level=4] [ref=e1561]:
+              - text: 第四阶段：Compress（压缩）
+              - link "#" [ref=e1562] [cursor=pointer]:
+                - /url: "#第四阶段compress压缩"
+            - paragraph [ref=e1563]: 当所有候选信息即使经过选择仍超出上下文窗口时，对已构成但超限的上下文进行兜底压缩。压缩规则：优先压缩重复度高的信息（如多个相似文档片段只保留一个）、其次压缩时间较早且评分低的信息、最后压缩辅助性信息（如工具使用示例）。保留优先级：关键决策 > 未解决问题 > 约束条件 > 下一步行动 > 背景信息。
+            - heading "NoteTool（结构化笔记）#" [level=3] [ref=e1564]:
+              - text: NoteTool（结构化笔记）
+              - link "#" [ref=e1565] [cursor=pointer]:
+                - /url: "#notetool结构化笔记"
+            - paragraph [ref=e1566]: 面向长时程任务的结构化外部记忆。Agent 在执行过程中可以主动写入笔记，笔记内容持久化到本地文件，在后续交互中由 ContextBuilder 检索加载。
+            - paragraph [ref=e1567]: 格式为 Markdown + YAML 前置元数据。分类体系：
+            - list [ref=e1568]:
+              - listitem [ref=e1569]:
+                - strong [ref=e1570]: blocker
+                - text: ：当前卡点或阻塞项（如”xxx 模块需要 xxx 库，但当前环境未安装”）
+              - listitem [ref=e1571]:
+                - strong [ref=e1572]: action
+                - text: ：已执行或待执行的操作（如”已修改 xxx 文件，待验证”）
+              - listitem [ref=e1573]:
+                - strong [ref=e1574]: task_state
+                - text: ：任务进度状态（如”Phase 1 完成 80%，剩下 xxx 子任务”）
+              - listitem [ref=e1575]:
+                - strong [ref=e1576]: conclusion
+                - text: ：已形成的结论（如”确定了该项目的前后端分离方案”）
+              - listitem [ref=e1577]:
+                - strong [ref=e1578]: reference
+                - text: ：参考信息（如”xxx API 的文档链接""xxx 配置文件路径”）
+              - listitem [ref=e1579]:
+                - strong [ref=e1580]: scratch
+                - text: ：临时草稿和中间结果
+            - heading "TerminalTool（即时文件系统访问）#" [level=3] [ref=e1581]:
+              - text: TerminalTool（即时文件系统访问）
+              - link "#" [ref=e1582] [cursor=pointer]:
+                - /url: "#terminaltool即时文件系统访问"
+            - paragraph [ref=e1583]: 实现 JIT（Just-in-Time）上下文——在需要时才去探索文件系统，而不是把所有文件内容预先加载到上下文中。
+            - paragraph [ref=e1584]: 安全机制：
+            - list [ref=e1585]:
+              - listitem [ref=e1586]:
+                - strong [ref=e1587]: 命令白名单
+                - text: ：仅允许指定的命令（如
+                - code [ref=e1588]: ls
+                - text: 、
+                - code [ref=e1589]: cat
+                - text: 、
+                - code [ref=e1590]: find
+                - text: 、
+                - code [ref=e1591]: grep
+                - text: ）执行，禁止
+                - code [ref=e1592]: rm
+                - text: 、
+                - code [ref=e1593]: sudo
+                - text: 等危险命令
+              - listitem [ref=e1594]:
+                - strong [ref=e1595]: 工作目录沙箱
+                - text: ：限定命令只能在指定的根目录下执行，禁止
+                - code [ref=e1596]: ..
+                - text: 越级访问
+              - listitem [ref=e1597]:
+                - strong [ref=e1598]: 超时控制
+                - text: ：命令执行超过指定时限时自动终止
+              - listitem [ref=e1599]:
+                - strong [ref=e1600]: 输出大小限制
+                - text: ：命令输出的内容超过指定 token 数时自动截断
+            - paragraph [ref=e1601]: 适用场景：日志分析（按需搜索特定模式）、代码库探索（查找文件、搜索定义）、数据文件分析（预览文件结构）。
+            - heading "长时程任务三大策略#" [level=3] [ref=e1602]:
+              - text: 长时程任务三大策略
+              - link "#" [ref=e1603] [cursor=pointer]:
+                - /url: "#长时程任务三大策略"
+            - table [ref=e1605]:
+              - rowgroup [ref=e1606]:
+                - row "策略 解决的问题 典型做法 适用场景" [ref=e1607]:
+                  - columnheader "策略" [ref=e1608]
+                  - columnheader "解决的问题" [ref=e1609]
+                  - columnheader "典型做法" [ref=e1610]
+                  - columnheader "适用场景" [ref=e1611]
+              - rowgroup [ref=e1612]:
+                - row "Compaction 对话历史过长，窗口接近上限 用 LLM 高保真总结历史后重启上下文 长时间连续对话、持续研究" [ref=e1613]:
+                  - cell "Compaction" [ref=e1614]:
+                    - strong [ref=e1615]: Compaction
+                  - cell "对话历史过长，窗口接近上限" [ref=e1616]
+                  - cell "用 LLM 高保真总结历史后重启上下文" [ref=e1617]
+                  - cell "长时间连续对话、持续研究" [ref=e1618]
+                - row "Structured Note-taking 关键状态需跨窗口持续保存 将结论 / 阻塞 / 计划写入 NoteTool 多天项目维护、复杂计划" [ref=e1619]:
+                  - cell "Structured Note-taking" [ref=e1620]:
+                    - strong [ref=e1621]: Structured Note-taking
+                  - cell "关键状态需跨窗口持续保存" [ref=e1622]
+                  - cell "将结论 / 阻塞 / 计划写入 NoteTool" [ref=e1623]
+                  - cell "多天项目维护、复杂计划" [ref=e1624]
+                - row "Sub-agent 单一上下文无法容纳多方向并行探索 主 Agent 规划，子 Agent 独立探索后回传摘要 大规模代码库分析、多方排查" [ref=e1625]:
+                  - cell "Sub-agent" [ref=e1626]:
+                    - strong [ref=e1627]: Sub-agent
+                  - cell "单一上下文无法容纳多方向并行探索" [ref=e1628]
+                  - cell "主 Agent 规划，子 Agent 独立探索后回传摘要" [ref=e1629]
+                  - cell "大规模代码库分析、多方排查" [ref=e1630]
+            - heading "上下文工程的系统层级#" [level=3] [ref=e1631]:
+              - text: 上下文工程的系统层级
+              - link "#" [ref=e1632] [cursor=pointer]:
+                - /url: "#上下文工程的系统层级"
+            - paragraph [ref=e1633]:
+              - text: 上下文管理并非单一工具能解决的问题，需要在多个抽象层级上协同：
+              - strong [ref=e1634]: TerminalTool
+              - text: 工作在”即时访问层”（当前轮按需加载）→
+              - strong [ref=e1635]: MemoryTool
+              - text: 工作在”会话记忆层”（会话内到跨会话）→
+              - strong [ref=e1636]: NoteTool
+              - text: 工作在”持久笔记层”（跨天跨会话）→
+              - strong [ref=e1637]: ContextBuilder
+              - text: 工作在”上下文编排层”（每次模型调用前的信息汇总）。
+            - heading "实践原则#" [level=3] [ref=e1638]:
+              - text: 实践原则
+              - link "#" [ref=e1639] [cursor=pointer]:
+                - /url: "#实践原则"
+            - list [ref=e1640]:
+              - listitem [ref=e1641]: 上下文不是越多越好，而是越相关、越新、越结构化越好
+              - listitem [ref=e1642]: 系统提示要稳定，但不能把复杂业务流程全部硬塞进提示
+              - listitem [ref=e1643]: 工具集要小而清晰，职责单一、边界清楚
+              - listitem [ref=e1644]: 长程任务必须有外部状态层，不能只依赖对话历史
+              - listitem [ref=e1645]: JIT 上下文（TerminalTool）适合动态信息，RAG 适合稳定、语义化、可复用的知识
+              - listitem [ref=e1646]: 压缩要保留决策、约束、未解决问题和下一步
+              - listitem [ref=e1647]: 笔记必须定期整理（consolidate），否则会从”外部记忆”变成”外部噪声”
+              - listitem [ref=e1648]: 高风险工具调用必须有安全边界和人类审批
+            - separator [ref=e1649]
+            - heading "Agent Skills#" [level=2] [ref=e1650]:
+              - text: Agent Skills
+              - link "#" [ref=e1651] [cursor=pointer]:
+                - /url: "#agent-skills"
+            - paragraph [ref=e1652]: Agent Skills 规范由 Anthropic 提出，定义了如何将能力打包为可以被 Agent 发现和使用的方式。
+            - heading "渐进式披露（Progressive Disclosure）#" [level=3] [ref=e1653]:
+              - text: 渐进式披露（Progressive Disclosure）
+              - link "#" [ref=e1654] [cursor=pointer]:
+                - /url: "#渐进式披露progressive-disclosure"
+            - paragraph [ref=e1655]: 将技能信息分为三层，避免一次性将所有内容塞入上下文窗口：
+            - list [ref=e1656]:
+              - listitem [ref=e1657]:
+                - strong [ref=e1658]: 元数据层
+                - text: ：约 100 tokens 每技能，包含技能名称、一句话描述、关键标签。当 Agent 需要选择技能时，仅加载元数据层即可进行初步筛选。
+              - listitem [ref=e1659]:
+                - strong [ref=e1660]: 技能主体
+                - text: ：技能的核心信息——具体能做什么、需要什么工具、输入输出格式。当 Agent 确认使用某个技能时再加载这一层。
+              - listitem [ref=e1661]:
+                - strong [ref=e1662]: 附加资源
+                - text: ：示例代码、FAQ、详细文档。仅在 Agent 需要深入学习或在运行时遇到困难时加载。
+            - paragraph [ref=e1663]: 这种设计使 Agent 能在有限的上下文空间中同时了解多种可用能力，仅在需要时深入某个技能的细节。
+            - heading "SKILL.md 规范#" [level=3] [ref=e1664]:
+              - text: SKILL.md 规范
+              - link "#" [ref=e1665] [cursor=pointer]:
+                - /url: "#skillmd-规范"
+            - paragraph [ref=e1666]: 每个技能的描述文件，定义了以下关键字段：name（技能名称）、description（技能作用描述）、version（版本号）、allowed_tools（技能允许使用的工具列表）、workflow（工作流程说明）、best_practices（最佳实践和使用注意事项）。
+            - heading "Agent Skills 与 MCP 的关系#" [level=3] [ref=e1667]:
+              - text: Agent Skills 与 MCP 的关系
+              - link "#" [ref=e1668] [cursor=pointer]:
+                - /url: "#agent-skills-与-mcp-的关系"
+            - paragraph [ref=e1669]: MCP 解决”连接性”问题——让智能体能够访问外部工具和数据。Agent Skills 解决”能力”问题——告诉智能体如何正确使用这些工具以达到某个目标。MCP 定义了通信的底层协议（如何传输工具调用和返回），Agent Skills 定义了上层使用方法（在什么场景下应该调用哪些工具、按什么顺序调用）。
+            - separator [ref=e1670]
+            - heading "Agent通信协议#" [level=2] [ref=e1671]:
+              - text: Agent通信协议
+              - link "#" [ref=e1672] [cursor=pointer]:
+                - /url: "#agent通信协议"
+            - heading "MCP（Model Context Protocol）#" [level=3] [ref=e1673]:
+              - text: MCP（Model Context Protocol）
+              - link "#" [ref=e1674] [cursor=pointer]:
+                - /url: "#mcpmodel-context-protocol"
+            - paragraph [ref=e1675]:
+              - text: Anthropic 提出的开放协议，旨在标准化 LLM 应用程序与外部工具和数据源的交互方式。MCP 解决的是
+              - strong [ref=e1676]: 连接性问题
+              - text: ——让智能体能够访问外部工具和数据。
+            - paragraph [ref=e1677]:
+              - strong [ref=e1678]: 三层架构
+              - text: ：
+            - list [ref=e1679]:
+              - listitem [ref=e1680]:
+                - strong [ref=e1681]: Host（宿主层）
+                - text: ：需要与外部系统交互的 LLM 应用，如 Claude Desktop、IDE 插件
+              - listitem [ref=e1682]:
+                - strong [ref=e1683]: Client（客户端层）
+                - text: ：Host 内部与 MCP Server 建立连接的组件，负责管理连接生命周期
+              - listitem [ref=e1684]:
+                - strong [ref=e1685]: Server（服务器层）
+                - text: ：暴露特定能力的轻量级服务，每个 Server 负责一个功能域（文件系统、数据库、外部 API）
+            - paragraph [ref=e1686]:
+              - strong [ref=e1687]: 三大核心能力
+              - text: ：
+            - list [ref=e1688]:
+              - listitem [ref=e1689]:
+                - strong [ref=e1690]: Tools
+                - text: ：可主动调用的功能，如搜索、计算、API 请求。需要 Host 授权才能执行。
+              - listitem [ref=e1691]:
+                - strong [ref=e1692]: Resources
+                - text: ：可被读取的数据源，如文件内容、数据库记录、API 返回结果。类似 REST API 的 GET 请求。Resources 支持两种获取方式：
+                - strong [ref=e1693]: 直接读取
+                - text: （Host 按 URI 请求资源内容，一次性获取完整数据）和
+                - strong [ref=e1694]: 订阅模式
+                - text: （Host 向 Server 订阅资源变更通知，当资源内容变化时 Server 主动推送更新，无需 Host 轮询）。Resources 还支持
+                - strong [ref=e1695]: Resource Template
+                - text: ——用 URI 模板（如
+                - code [ref=e1696]: "file://{path}"
+                - text: ）定义一类资源的模式，Host 在运行时填充模板参数后即可获取具体资源。
+              - listitem [ref=e1697]:
+                - strong [ref=e1698]: Prompts
+                - text: ：预定义的 prompt 模板，指导 LLM 如何与特定资源或工具交互。
+            - paragraph [ref=e1699]:
+              - strong [ref=e1700]: 传输方式
+              - text: ：
+            - list [ref=e1701]:
+              - listitem [ref=e1702]:
+                - strong [ref=e1703]: stdio
+                - text: ：MCP Server 与 Host 在同一进程，通过标准输入输出通信，适合嵌入式和本地部署
+              - listitem [ref=e1704]:
+                - strong [ref=e1705]: SSE（Server-Sent Events）
+                - text: ：HTTP 长连接，Host 与 Server 分离，适合远程部署
+              - listitem [ref=e1706]:
+                - strong [ref=e1707]: Streamable HTTP
+                - text: ：Anthropic 引入的流式 HTTP 传输方案。相比 SSE 的改进：统一了连接生命周期管理（支持长连接和按需短连接的自动切换）、内置心跳和重连机制（客户端断连后自动恢复）、支持双向流（Server 可以向 Host 推送更新，Host 也可以主动向 Server 发送请求）。仅在需要时建立连接，空闲时自动关闭。
+            - paragraph [ref=e1708]:
+              - strong [ref=e1709]: 与 Function Calling 的关系
+              - text: ：互补而非竞争。Function Calling 是 LLM 模型的一种能力——从模型输出中识别需要调用工具的意图并生成结构化参数。MCP 是基础设施协议——统一了工具的注册、发现、调用方式。Function Calling 决定”是否需要调用工具”，MCP 决定”如何找到并调用工具”。
+            - heading "A2A（Agent-to-Agent Protocol）#" [level=3] [ref=e1710]:
+              - text: A2A（Agent-to-Agent Protocol）
+              - link "#" [ref=e1711] [cursor=pointer]:
+                - /url: "#a2aagent-to-agent-protocol"
+            - paragraph [ref=e1712]: Google 提出的点对点 Agent 协作协议，解决的是不同 Agent 系统之间的互操作问题。每个 Agent 既是服务提供者也是服务消费者。
+            - paragraph [ref=e1713]:
+              - strong [ref=e1714]: 核心组件
+              - text: ：
+            - list [ref=e1715]:
+              - listitem [ref=e1716]:
+                - strong [ref=e1717]: Agent Card
+                - text: ：Agent 的能力声明文件，JSON 格式，描述 Agent 的身份、支持的技能、接口端点。示例：
+            - generic [ref=e1718]:
+              - code [ref=e1720]:
+                - generic [ref=e1721]: "{"
+                - generic [ref=e1722]: "\"name\": \"research-assistant\","
+                - generic [ref=e1723]: "\"description\": \"Deep research agent for academic papers\","
+                - generic [ref=e1724]: "\"skills\": [\"paper_search\", \"summary_generation\", \"citation_analysis\"],"
+                - generic [ref=e1725]: "\"endpoints\": {"
+                - generic [ref=e1726]: "\"base_url\": \"http://localhost:8080\","
+                - generic [ref=e1727]: "\"tasks\": \"/tasks\","
+                - generic [ref=e1728]: "\"stream\": \"/tasks/stream\""
+                - generic [ref=e1729]: "},"
+                - generic [ref=e1730]: "\"auth\": { \"type\": \"api_key\", \"header\": \"X-API-Key\" }"
+                - generic [ref=e1731]: "}"
+              - generic [ref=e1732]: json
+              - button [ref=e1733] [cursor=pointer]:
+                - img [ref=e1735]
+                - text: Copied!
+            - list [ref=e1737]:
+              - listitem [ref=e1738]:
+                - strong [ref=e1739]: Task
+                - text: ：任务的生命周期管理，包括任务的提交、状态跟踪、取消
+              - listitem [ref=e1740]:
+                - strong [ref=e1741]: Message
+                - text: ：Agent 间的通信消息实体
+              - listitem [ref=e1742]:
+                - strong [ref=e1743]: Part
+                - text: ：消息中的内容单元，可以是一段文本、一个文件引用、一个结构化数据块
+            - paragraph [ref=e1744]: A2A 的优势：避免中心化协调器瓶颈（去除了单点故障和性能瓶颈）、天然支持流式与事件驱动通信（Agent 可以实时推送进度而非轮询）。
+            - heading "ANP（Agent Network Protocol）#" [level=3] [ref=e1745]:
+              - text: ANP（Agent Network Protocol）
+              - link "#" [ref=e1746] [cursor=pointer]:
+                - /url: "#anpagent-network-protocol"
+            - paragraph [ref=e1747]: 开源社区提出的概念性协议框架，定位于大规模智能体网络的去中心化服务发现。类似微服务架构中的服务注册中心（Consul / Etcd），但 AGent 可以主动声明和撤销自己的能力注册，其他 Agent 通过查询网络发现可用的服务。
+            - paragraph [ref=e1748]: ANP 在当前阶段生态尚不成熟，课程中作为概念性了解。
+            - heading "协议定位对比#" [level=3] [ref=e1749]:
+              - text: 协议定位对比
+              - link "#" [ref=e1750] [cursor=pointer]:
+                - /url: "#协议定位对比"
+            - paragraph [ref=e1751]: 三种协议在 Agent 生态中处于不同层次：
+            - list [ref=e1752]:
+              - listitem [ref=e1753]: MCP 负责”接入外部能力”（LLM ↔ 工具 / 数据源），解决的是垂直集成问题
+              - listitem [ref=e1754]: A2A 负责”多 Agent 编排”（Agent ↔ Agent），解决的是水平协作问题
+              - listitem [ref=e1755]: ANP 负责”大规模服务发现”（Agent ↔ 网络），解决的是组织管理问题
+            - paragraph [ref=e1756]: 三者可以共存和互补。一个典型的多 Agent 系统中：ANP 帮助 Agent 发现其他 Agent 和能力 → A2A 在发现后进行对等通信协作 → MCP 让每个 Agent 接入自己的工具和数据。
+            - separator [ref=e1757]
+            - heading "Agentic-RL#" [level=2] [ref=e1758]:
+              - text: Agentic-RL
+              - link "#" [ref=e1759] [cursor=pointer]:
+                - /url: "#agentic-rl"
+            - heading "从 LLM 训练到 Agentic RL#" [level=3] [ref=e1760]:
+              - text: 从 LLM 训练到 Agentic RL
+              - link "#" [ref=e1761] [cursor=pointer]:
+                - /url: "#从-llm-训练到-agentic-rl"
+            - paragraph [ref=e1762]: 核心思想是将 LLM 作为可学习策略，嵌入智能体的感知-决策-执行循环中，通过强化学习优化多步任务表现。传统的 Agent 构建方式依赖 prompt 工程——Agent 的行为完全由系统提示词固定，无法针对特定任务环境进行优化。Agentic RL 则允许 Agent 通过与环境交互的奖励信号来学习最优行为策略。
+            - paragraph [ref=e1763]: Agentic RL 与传统 PBRFT（即 RLHF / PPO 用于文本偏好优化）的关键差异：
+            - table [ref=e1765]:
+              - rowgroup [ref=e1766]:
+                - row "维度 传统 PBRFT Agentic RL" [ref=e1767]:
+                  - columnheader "维度" [ref=e1768]
+                  - columnheader "传统 PBRFT" [ref=e1769]
+                  - columnheader "Agentic RL" [ref=e1770]
+              - rowgroup [ref=e1771]:
+                - row "状态空间 静态 prompt + 单轮回复 多轮交互过程中动态演化的上下文" [ref=e1772]:
+                  - cell "状态空间" [ref=e1773]
+                  - cell "静态 prompt + 单轮回复" [ref=e1774]
+                  - cell "多轮交互过程中动态演化的上下文" [ref=e1775]
+                - row "行动空间 仅文本生成 文本生成 + 工具调用参数生成 + 环境操作" [ref=e1776]:
+                  - cell "行动空间" [ref=e1777]
+                  - cell "仅文本生成" [ref=e1778]
+                  - cell "文本生成 + 工具调用参数生成 + 环境操作" [ref=e1779]
+                - row "奖励设计 人类偏好评分（单次输出质量） 任务完成度累积奖励（多步序列决策效果）" [ref=e1780]:
+                  - cell "奖励设计" [ref=e1781]
+                  - cell "人类偏好评分（单次输出质量）" [ref=e1782]
+                  - cell "任务完成度累积奖励（多步序列决策效果）" [ref=e1783]
+                - row "时间跨度 T=1（单步） T≫1（多步序列）" [ref=e1784]:
+                  - cell "时间跨度" [ref=e1785]
+                  - cell "T=1（单步）" [ref=e1786]
+                  - cell "T≫1（多步序列）" [ref=e1787]
+            - heading "GSM8K 数据集#" [level=3] [ref=e1788]:
+              - text: GSM8K 数据集
+              - link "#" [ref=e1789] [cursor=pointer]:
+                - /url: "#gsm8k-数据集"
+            - paragraph [ref=e1790]: GSM8K 是小学数学应用题数据集，包含 7,473 个训练样本和 1,319 个测试样本。题目涉及加减乘除、比例、单位换算等基础数学运算，多为两步以上推理。
+            - paragraph [ref=e1791]: 在课程中的使用方式：
+            - list [ref=e1792]:
+              - listitem [ref=e1793]:
+                - strong [ref=e1794]: SFT 格式
+                - text: ：提供完整的问题和逐步解题过程，作为监督信号
+              - listitem [ref=e1795]:
+                - strong [ref=e1796]: RL 格式
+                - text: ：仅提供问题文本和最终正确答案（只给一个数字），不提供解题过程
+            - paragraph [ref=e1797]: RL 格式的设计意图：迫使模型通过自身的探索来发现正确的推理路径，而非模仿现成的解题过程。这更能反映 Agent 在真实环境中面对的”有目标无路径”的问题。
+            - heading "奖励函数#" [level=3] [ref=e1798]:
+              - text: 奖励函数
+              - link "#" [ref=e1799] [cursor=pointer]:
+                - /url: "#奖励函数"
+            - paragraph [ref=e1800]: 三种奖励函数设计，各具不同的优化目标：
+            - list [ref=e1801]:
+              - listitem [ref=e1802]:
+                - strong [ref=e1803]: AccuracyReward
+                - text: ：答案正确时奖励 +1，错误时奖励 0。这是最直接的奖励信号，但只关注最终结果的正确性，不关心推理过程的质量。
+              - listitem [ref=e1804]:
+                - strong [ref=e1805]: LengthPenaltyReward
+                - text: ：
+                - strong [ref=e1806]: 仅当答案正确时
+                - text: ，对过长的回答施加惩罚。解决 Agent”为了安全而冗余”的问题——如果一个 Agent 用了 500 token 的推理得到了正确答案，而另一个只用了 100 token，后者获得更高的奖励。
+              - listitem [ref=e1807]:
+                - strong [ref=e1808]: StepReward
+                - text: ：奖励清晰的推理步骤。鼓励模型将推理过程分解为明确的逻辑步骤，而不是长成一整段。步骤越清晰、每一步的推理越合理，奖励越高。
+            - paragraph [ref=e1809]:
+              - text: 在实际训练中，三种奖励函数通常加权组合：
+              - code [ref=e1810]: total_reward = w1 × AccuracyReward + w2 × LengthPenaltyReward + w3 × StepReward
+              - text: 。
+            - heading "SFT 监督微调#" [level=3] [ref=e1811]:
+              - text: SFT 监督微调
+              - link "#" [ref=e1812] [cursor=pointer]:
+                - /url: "#sft-监督微调"
+            - paragraph [ref=e1813]: SFT 阶段的目标是”教会模型如何回答”——输出格式、推理模式、使用工具的规范。使用 LoRA 参数高效微调（Qwen3-0.6B + LoRA 仅需约 4GB 显存）。
+            - paragraph [ref=e1814]: SFT 的作用：
+            - list [ref=e1815]:
+              - listitem [ref=e1816]: 建立基线行为：模型学会至少为每个问题生成”看起来合理”的推理轨迹
+              - listitem [ref=e1817]: 学习输出格式：模型学会在文本中嵌入推理步骤、工具调用、最终答案的结构
+              - listitem [ref=e1818]: 避免 RL 训练初期随机探索的低效：有 SFT 基线之后，RL 可以在”基本可用”的基础上做优化，而不是从零开始探索
+            - heading "GRPO 群组相对策略优化#" [level=3] [ref=e1819]:
+              - text: GRPO 群组相对策略优化
+              - link "#" [ref=e1820] [cursor=pointer]:
+                - /url: "#grpo-群组相对策略优化"
+            - paragraph [ref=e1821]:
+              - text: 与传统 PPO 相比，GRPO 的核心创新是使用
+              - strong [ref=e1822]: 组内相对奖励
+              - text: 替代 PPO 的优势函数——不需要训练一个独立的 Value Model（价值网络，用来估计状态价值的神经网络），简化了训练流程。
+            - paragraph [ref=e1823]:
+              - strong [ref=e1824]: 训练流程
+              - text: ：
+            - list [ref=e1825]:
+              - listitem [ref=e1826]: 对同一个输入问题，当前策略模型生成 N 个不同的答案（即一个”群组”，N 通常为 4–8）
+              - listitem [ref=e1827]: 使用奖励函数计算每个答案的奖励分数
+              - listitem [ref=e1828]: 计算群组内奖励的平均值
+              - listitem [ref=e1829]: 对每个答案，计算”相对优势” = 该答案的奖励 - 群组平均奖励
+              - listitem [ref=e1830]: 用相对优势作为信号更新策略模型——相对优势为正的答案对应的生成路径被强化，相对优势为负的路径被抑制
+            - paragraph [ref=e1831]: GRPO 的设计直觉：不需要一个绝对的价值判断（“这个答案值多少分”），只需要相对比较（“这个答案在这个群组里是更好还是更差”）。相对比较对奖励函数的尺度不敏感，训练更稳定。
+            - heading "技术栈#" [level=3] [ref=e1832]:
+              - text: 技术栈
+              - link "#" [ref=e1833] [cursor=pointer]:
+                - /url: "#技术栈"
+            - table [ref=e1835]:
+              - rowgroup [ref=e1836]:
+                - row "层级 组件" [ref=e1837]:
+                  - columnheader "层级" [ref=e1838]
+                  - columnheader "组件" [ref=e1839]
+              - rowgroup [ref=e1840]:
+                - row "数据集层 GSM8KDataset, create_sft_dataset(), create_rl_dataset()" [ref=e1841]:
+                  - cell "数据集层" [ref=e1842]
+                  - cell "GSM8KDataset, create_sft_dataset(), create_rl_dataset()" [ref=e1843]:
+                    - text: GSM8KDataset,
+                    - code [ref=e1844]: create_sft_dataset()
+                    - text: ","
+                    - code [ref=e1845]: create_rl_dataset()
+                - row "奖励函数层 AccuracyReward, LengthPenaltyReward, StepReward" [ref=e1846]:
+                  - cell "奖励函数层" [ref=e1847]
+                  - cell "AccuracyReward, LengthPenaltyReward, StepReward" [ref=e1848]
+                - row "训练器层 SFTTrainerWrapper, GRPOTrainerWrapper" [ref=e1849]:
+                  - cell "训练器层" [ref=e1850]
+                  - cell "SFTTrainerWrapper, GRPOTrainerWrapper" [ref=e1851]
+                - row "统一接口层 RLTrainingTool" [ref=e1852]:
+                  - cell "统一接口层" [ref=e1853]
+                  - cell "RLTrainingTool" [ref=e1854]
+            - paragraph [ref=e1855]: 技术选型方案为 HuggingFace TRL（Transformer Reinforcement Learning，HuggingFace 官方提供的强化学习训练工具库）+ Qwen3-0.6B 模型。
+            - heading "快速上手#" [level=3] [ref=e1856]:
+              - text: 快速上手
+              - link "#" [ref=e1857] [cursor=pointer]:
+                - /url: "#快速上手"
+            - generic [ref=e1858]:
+              - code [ref=e1860]:
+                - generic [ref=e1861]: from hello_agents.tools import RLTrainingTool
+                - generic [ref=e1863]: rl_tool = RLTrainingTool()
+                - generic [ref=e1865]: "# SFT 训练"
+                - generic [ref=e1866]: "rl_tool.run({"
+                - generic [ref=e1867]: "\"action\": \"train\","
+                - generic [ref=e1868]: "\"algorithm\": \"sft\","
+                - generic [ref=e1869]: "\"model_name\": \"Qwen/Qwen3-0.6B\","
+                - generic [ref=e1870]: "\"output_dir\": \"./models/quick_sft\","
+                - generic [ref=e1871]: "\"use_lora\": True"
+                - generic [ref=e1872]: "})"
+                - generic [ref=e1874]: "# GRPO 训练"
+                - generic [ref=e1875]: "rl_tool.run({"
+                - generic [ref=e1876]: "\"action\": \"train\","
+                - generic [ref=e1877]: "\"algorithm\": \"grpo\","
+                - generic [ref=e1878]: "\"model_name\": \"Qwen/Qwen3-0.6B\","
+                - generic [ref=e1879]: "\"output_dir\": \"./models/quick_grpo\","
+                - generic [ref=e1880]: "\"num_generations\": 4, # 每个问题生成 4 个答案"
+                - generic [ref=e1881]: "\"use_lora\": True"
+                - generic [ref=e1882]: "})"
+              - generic [ref=e1883]: python
+              - button [ref=e1884] [cursor=pointer]:
+                - img [ref=e1886]
+                - text: Copied!
+            - separator [ref=e1888]
+            - heading "性能评估#" [level=2] [ref=e1889]:
+              - text: 性能评估
+              - link "#" [ref=e1890] [cursor=pointer]:
+                - /url: "#性能评估"
+            - heading "评估目标#" [level=3] [ref=e1891]:
+              - text: 评估目标
+              - link "#" [ref=e1892] [cursor=pointer]:
+                - /url: "#评估目标"
+            - paragraph [ref=e1893]: 智能体评估的四个目标：
+            - list [ref=e1894]:
+              - listitem [ref=e1895]:
+                - strong [ref=e1896]: 量化性能
+                - text: ：知道系统当前达到了什么水平，是”完全可以用”还是”仅能用于 demo”
+              - listitem [ref=e1897]:
+                - strong [ref=e1898]: 对比方案
+                - text: ：在不同 Agent 方案、不同模型、不同 prompt 版本之间做出客观选择
+              - listitem [ref=e1899]:
+                - strong [ref=e1900]: 发现弱点
+                - text: ：定位系统瓶颈和改进方向——是工具调用选择不正确？记忆检索不准？还是推理能力不足？
+              - listitem [ref=e1901]:
+                - strong [ref=e1902]: 证明可靠性
+                - text: ：在发布到生产环境之前，确保系统在各类场景下行为正确
+            - heading "BFCL（Berkeley Function Calling Leaderboard）#" [level=3] [ref=e1903]:
+              - text: BFCL（Berkeley Function Calling Leaderboard）
+              - link "#" [ref=e1904] [cursor=pointer]:
+                - /url: "#bfclberkeley-function-calling-leaderboard"
+            - paragraph [ref=e1905]:
+              - text: 伯克利大学提出的评估智能体工具调用能力的基准。使用
+              - strong [ref=e1906]: AST 匹配算法
+              - text: 评估函数调用是否与期望调用完全一致（包括函数名、参数名、参数值类型、嵌套结构）。
+            - paragraph [ref=e1907]:
+              - strong [ref=e1908]: 四个评估类别
+              - text: ：
+            - list [ref=e1909]:
+              - listitem [ref=e1910]:
+                - strong [ref=e1911]: Simple
+                - text: ：单个函数调用，参数直接匹配
+              - listitem [ref=e1912]:
+                - strong [ref=e1913]: Multiple
+                - text: ：需要依次调用多个独立函数，每个调用的输出可能是下一个的输入
+              - listitem [ref=e1914]:
+                - strong [ref=e1915]: Parallel
+                - text: ：多个函数调用之间没有依赖关系，可以并行执行，需要模型在一次回复中同时产生多个工具调用
+              - listitem [ref=e1916]:
+                - strong [ref=e1917]: Irrelevance
+                - text: ：测试模型判断”何时不需要调用工具”的能力——某些问题不需要调用任何工具即可回答，模型如果过度调用工具会被扣分
+            - paragraph [ref=e1918]:
+              - strong [ref=e1919]: 三种使用方式
+              - text: ：
+            - list [ref=e1920]:
+              - listitem [ref=e1921]:
+                - strong [ref=e1922]: BFCLEvaluationTool
+                - text: （推荐）：一行代码完成评估
+              - listitem [ref=e1923]:
+                - strong [ref=e1924]: 一键评估脚本
+                - text: ：
+                - code [ref=e1925]: 04_run_bfcl_evaluation.py --category simple --samples 10
+              - listitem [ref=e1926]:
+                - strong [ref=e1927]: 直接使用 Dataset + Evaluator
+                - text: ：自定义评估流程，适用于需要修改评估逻辑的场景
+            - heading "GAIA（General AI Assistants）#" [level=3] [ref=e1928]:
+              - text: GAIA（General AI Assistants）
+              - link "#" [ref=e1929] [cursor=pointer]:
+                - /url: "#gaiageneral-ai-assistants"
+            - paragraph [ref=e1930]: 通用 AI 助手的综合能力评估基准，包含 466 个任务。GAIA 的设计理念：一个好的 AI 助手应该在完成端到端任务时表现出色，而不仅仅是回答事实性问题。任务要求 Agent 自主规划、搜索、推理、组合多源信息。
+            - paragraph [ref=e1931]:
+              - strong [ref=e1932]: 四级基准
+              - text: ：
+            - table [ref=e1934]:
+              - rowgroup [ref=e1935]:
+                - row "层级 能力要求 典型任务" [ref=e1936]:
+                  - columnheader "层级" [ref=e1937]
+                  - columnheader "能力要求" [ref=e1938]
+                  - columnheader "典型任务" [ref=e1939]
+              - rowgroup [ref=e1940]:
+                - row "基础层 文档解析、简单推理 从 PDF 中提取关键数据并计算" [ref=e1941]:
+                  - cell "基础层" [ref=e1942]
+                  - cell "文档解析、简单推理" [ref=e1943]
+                  - cell "从 PDF 中提取关键数据并计算" [ref=e1944]
+                - row "进阶层 多模态交互、资源整合 分析 PPT 内容并生成邮件，整合网络资源完成调研" [ref=e1945]:
+                  - cell "进阶层" [ref=e1946]
+                  - cell "多模态交互、资源整合" [ref=e1947]
+                  - cell "分析 PPT 内容并生成邮件，整合网络资源完成调研" [ref=e1948]
+                - row "专家层 跨领域知识迁移 结合医疗知识和法律文书审核" [ref=e1949]:
+                  - cell "专家层" [ref=e1950]
+                  - cell "跨领域知识迁移" [ref=e1951]
+                  - cell "结合医疗知识和法律文书审核" [ref=e1952]
+                - row "挑战层 动态环境适应 根据实时数据调整策略" [ref=e1953]:
+                  - cell "挑战层" [ref=e1954]
+                  - cell "动态环境适应" [ref=e1955]
+                  - cell "根据实时数据调整策略" [ref=e1956]
+            - paragraph [ref=e1957]: 数据：仅有约 8.7% 的开源 Agent 能通过全部专家层测试。主要瓶颈包括：长上下文记忆能力不足、跨模态语义对齐误差、异常处理策略缺失。
+            - heading "数据生成质量评估#" [level=3] [ref=e1958]:
+              - text: 数据生成质量评估
+              - link "#" [ref=e1959] [cursor=pointer]:
+                - /url: "#数据生成质量评估"
+            - paragraph [ref=e1960]: 针对 Agent 系统的输出（如生成的报告、翻译、摘要），除客观指标外还需要质量评估。主要方法：
+            - list [ref=e1961]:
+              - listitem [ref=e1962]:
+                - strong [ref=e1963]: LLM-as-Judge
+                - text: ：用另一个更强的 LLM 作为评价者，对 Agent 的输出按多个维度打分。典型 prompt 模板：
+            - generic [ref=e1964]:
+              - code [ref=e1966]:
+                - generic [ref=e1967]: 你是一位严格的评审者。请从以下几个维度对以下回答进行评分（1-5分）：
+                - generic [ref=e1968]: 1. 准确性：回答中的事实是否都有依据？
+                - generic [ref=e1969]: 2. 完整性：回答是否覆盖了问题的所有方面？
+                - generic [ref=e1970]: 3. 相关性：回答的内容与问题是否直接相关？
+                - generic [ref=e1971]: 4. 可读性：回答是否清晰、结构化？
+                - generic [ref=e1973]: "问题：{question}"
+                - generic [ref=e1974]: "Agent的回答：{answer}"
+                - generic [ref=e1975]: 请以JSON格式输出评分和理由。
+              - generic [ref=e1976]: plaintext
+              - button [ref=e1977] [cursor=pointer]:
+                - img [ref=e1979]
+                - text: Copied!
+            - list [ref=e1981]:
+              - listitem [ref=e1982]:
+                - strong [ref=e1983]: Win Rate
+                - text: ：将 Agent A 与 Agent B（如基线方案）的输出对比，计算人类或 LLM 评价者更偏好 A 的百分比
+            - separator [ref=e1984]
+            - heading "Agent 安全风险#" [level=2] [ref=e1985]:
+              - text: Agent 安全风险
+              - link "#" [ref=e1986] [cursor=pointer]:
+                - /url: "#agent-安全风险"
+            - heading "提示注入（Prompt Injection）#" [level=3] [ref=e1987]:
+              - text: 提示注入（Prompt Injection）
+              - link "#" [ref=e1988] [cursor=pointer]:
+                - /url: "#提示注入prompt-injection"
+            - paragraph [ref=e1989]: 提示注入是最常见的 Agent 安全问题。攻击者通过在用户输入中嵌入恶意指令，让 Agent 忽略原始系统提示并执行攻击者的意图。分为直接注入（用户输入直接包含恶意指令）和间接注入（恶意指令通过 Agent 检索到的外部文档内容传入）。
+            - paragraph [ref=e1990]:
+              - strong [ref=e1991]: 缓解策略
+              - text: ：将用户输入与系统指令在上下文中用明确的边界标记隔离；对 Agent 可以执行的工具有严格的权限控制；对于高风险操作（文件删除、数据修改、支付）设置人工确认环节。
+            - heading "工具滥用与权限逃逸#" [level=3] [ref=e1992]:
+              - text: 工具滥用与权限逃逸
+              - link "#" [ref=e1993] [cursor=pointer]:
+                - /url: "#工具滥用与权限逃逸"
+            - paragraph [ref=e1994]:
+              - text: Agent 自主调用工具的能力如果缺乏限制，可能导致：工具被调用来执行其设计范围之外的操作（如搜索工具被用来构建隐私信息）；Agent 利用了权限提升获取本不该访问的数据；工具调用的参数超出安全范围（如文件读取工具被传入
+              - code [ref=e1995]: ../../../etc/passwd
+              - text: ）。
+            - paragraph [ref=e1996]:
+              - strong [ref=e1997]: 缓解策略
+              - text: ：每个工具定义明确的参数范围约束；工具执行器的命令白名单、路径沙箱、超时控制；工具调用按风险等级分级（低风险自动执行、中风险记录日志、高风险人工确认）。
+            - heading "数据泄露#" [level=3] [ref=e1998]:
+              - text: 数据泄露
+              - link "#" [ref=e1999] [cursor=pointer]:
+                - /url: "#数据泄露"
+            - paragraph [ref=e2000]: Agent 在执行过程中可能将敏感数据（API Key、用户隐私、内部文档）作为上下文的一部分传递给外部 LLM。另一方面，Agent 也可能从外部工具获取数据后错误地暴露给未授权的用户。
+            - paragraph [ref=e2001]:
+              - strong [ref=e2002]: 缓解策略
+              - text: ：在输入上下文中自动检测和脱敏敏感信息；对 Agent 的输出进行后处理过滤；工具的执行环境隔离（TerminalTool 的工作目录沙箱）。
+            - heading "输出安全#" [level=3] [ref=e2003]:
+              - text: 输出安全
+              - link "#" [ref=e2004] [cursor=pointer]:
+                - /url: "#输出安全"
+            - paragraph [ref=e2005]: Agent 的输出可能包含虚构信息（幻觉）、误导性内容、或未经核实的断言。当 Agent 具备工具调用能力时，输出的安全边界比纯文本 LLM 更广——Agent 可能调用工具执行了操作然后告诉用户”已执行”，但实际上并未执行（或执行了不同的操作）。
+            - paragraph [ref=e2006]:
+              - strong [ref=e2007]: 缓解策略
+              - text: ：工具调用的执行结果必须如实反馈给用户；对于影响外部系统的操作，提供操作确认步骤；使用 Reflection 范式让 Agent 在执行完整操作前自我检查。
+            - separator [ref=e2008]
+      - generic [ref=e2010]:
+        - generic [ref=e2011]:
+          - img [ref=e2012]
+          - generic [ref=e2016]:
+            - generic [ref=e2017]: Agent 知识的简要整理
+            - generic [ref=e2018]: http://127.0.0.1:4325/blog/agent-knowledge-brief
+          - generic [ref=e2019]:
+            - generic [ref=e2020]:
+              - generic [ref=e2021]: Author
+              - generic [ref=e2022]: 玛卡巴卡
+            - generic [ref=e2023]:
+              - generic [ref=e2024]: Published at
+              - generic [ref=e2025]: 2026年6月6日
+            - generic [ref=e2026]:
+              - generic [ref=e2027]: Copyright
+              - link "CC BY-NC-SA 4.0" [ref=e2028] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/4.0/
+          - generic [ref=e2029]:
+            - generic [ref=e2030]:
+              - button [ref=e2031] [cursor=pointer]:
+                - img [ref=e2032]
+              - button [ref=e2036] [cursor=pointer]:
+                - img [ref=e2037]
+              - link [ref=e2041] [cursor=pointer]:
+                - /url: http://service.weibo.com/share/share.php?url=http://127.0.0.1:4325/blog/agent-knowledge-brief&title=Agent 知识的简要整理&pic=/@fs/Users/xjf/Public/Code/blog/fxj-pure/src/content/blog/agent-knowledge-brief/cover.png?origWidth=2067&origHeight=873&origFormat=png
+                - img [ref=e2042]
+              - link [ref=e2046] [cursor=pointer]:
+                - /url: https://x.com/intent/tweet?text='Agent 知识的简要整理'&url='http://127.0.0.1:4325/blog/agent-knowledge-brief'&via='玛卡巴卡'
+                - img [ref=e2047]
+              - link [ref=e2051] [cursor=pointer]:
+                - /url: https://bsky.app/intent/compose?text=Agent 知识的简要整理%0Ahttp://127.0.0.1:4325/blog/agent-knowledge-brief
+                - img [ref=e2052]
+            - generic "http://127.0.0.1:4325/blog/agent-knowledge-brief" [ref=e2056]:
+              - img [ref=e2057]
+        - link "深度学习简述" [ref=e2060] [cursor=pointer]:
+          - /url: /blog/deep-learning-brief
+          - paragraph [ref=e2061]: 深度学习简述
+          - img [ref=e2062]
+        - generic [ref=e2066]:
+          - list [ref=e2068]:
+            - listitem [ref=e2069] [cursor=pointer]:
+              - generic [ref=e2070]:
+                - img "Like" [ref=e2071]
+                - generic [ref=e2072]: 0 Like(s)
+          - generic [ref=e2074]:
+            - generic [ref=e2075]:
+              - generic [ref=e2076]:
+                - generic [ref=e2077]: NickName
+                - textbox "NickName" [ref=e2078]
+              - generic [ref=e2079]:
+                - generic [ref=e2080]: E-Mail
+                - textbox "E-Mail" [ref=e2081]
+              - generic [ref=e2082]:
+                - generic [ref=e2083]: Website
+                - textbox "Website" [ref=e2084]
+            - textbox "Welcome to comment. (Email to receive replies. Login is unnecessary)" [ref=e2085]
+            - generic [ref=e2086]:
+              - generic [ref=e2087]:
+                - link "Markdown is supported" [ref=e2088] [cursor=pointer]:
+                  - /url: https://guides.github.com/features/mastering-markdown/
+                  - img [ref=e2089]
+                - button "Emoji" [ref=e2091] [cursor=pointer]:
+                  - img [ref=e2092]
+                - button "GIF" [ref=e2094] [cursor=pointer]:
+                  - img [ref=e2095]
+                - button "Preview" [ref=e2098] [cursor=pointer]:
+                  - img [ref=e2099]
+              - generic [ref=e2102]:
+                - generic [ref=e2103]: 0 Words
+                - button "Login" [ref=e2104] [cursor=pointer]
+                - button "Submit" [ref=e2105] [cursor=pointer]
+          - generic [ref=e2106]:
+            - generic [ref=e2107]: Comments
+            - list [ref=e2108]:
+              - listitem [ref=e2109] [cursor=pointer]: Latest
+              - listitem [ref=e2110] [cursor=pointer]: Oldest
+              - listitem [ref=e2111] [cursor=pointer]: Hottest
+          - generic [ref=e2112]: No comment yet.
+          - generic [ref=e2113]:
+            - text: Powered by
+            - link "Waline" [ref=e2114] [cursor=pointer]:
+              - /url: https://github.com/walinejs/waline
+            - text: v3.6.0
+      - button "Back to Top" [ref=e2116] [cursor=pointer]:
+        - generic [ref=e2117]:
+          - generic [ref=e2118]: "10"
+          - generic [ref=e2119]: "%"
+        - img [ref=e2120]
+    - contentinfo [ref=e2124]:
+      - generic [ref=e2126]:
+        - generic [ref=e2127]:
+          - link "蜀ICP备2024053343号-1" [ref=e2130] [cursor=pointer]:
+            - /url: https://beian.miit.gov.cn/
+          - generic [ref=e2131]:
+            - text: © 2026 玛卡巴卡 &
+            - link "Site Policy" [ref=e2134] [cursor=pointer]:
+              - /url: /terms/list
+          - generic [ref=e2135]:
+            - link "Astro" [ref=e2136] [cursor=pointer]:
+              - /url: https://github.com/withastro/astro
+            - text: "&"
+            - link "Pure theme" [ref=e2137] [cursor=pointer]:
+              - /url: https://github.com/cworld1/astro-theme-pure
+            - text: powered
+        - generic [ref=e2138]:
+          - link "github" [ref=e2139] [cursor=pointer]:
+            - /url: https://github.com/bakebakebakebake
+            - img [ref=e2140]
+          - link "rss" [ref=e2144] [cursor=pointer]:
+            - /url: /rss.xml
+            - img [ref=e2145]
+  - generic [ref=e2151]:
+    - button "Menu" [ref=e2152]:
+      - img [ref=e2154]
+      - generic: Menu
+    - button "Inspect" [ref=e2158]:
+      - img [ref=e2160]
+      - generic: Inspect
+    - button "Audit" [ref=e2162]:
+      - generic [ref=e2163]:
+        - img [ref=e2164]
+        - img [ref=e2167]
+      - generic: Audit
+    - button "Settings" [ref=e2170]:
+      - img [ref=e2172]
+      - generic: Settings

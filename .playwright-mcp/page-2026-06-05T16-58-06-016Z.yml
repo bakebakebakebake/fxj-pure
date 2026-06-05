@@ -1,0 +1,204 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Brand" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: FXJ Wiki
+      - generic [ref=e5]:
+        - generic [ref=e7]:
+          - link "Nav menu item" [ref=e8] [cursor=pointer]:
+            - /url: /blog
+            - text: Blog
+          - link "Nav menu item" [ref=e9] [cursor=pointer]:
+            - /url: /about
+            - text: About
+          - link "Search" [ref=e11] [cursor=pointer]:
+            - /url: /search
+            - generic [ref=e12]: Search
+            - img [ref=e13]
+        - button "Dark Theme" [ref=e18] [cursor=pointer]:
+          - generic [ref=e19]: Dark Theme
+          - img [ref=e20]
+    - generic [ref=e25]:
+      - link "中文" [ref=e26] [cursor=pointer]:
+        - /url: /blog/raft-summary
+      - link "English" [ref=e27] [cursor=pointer]:
+        - /url: /en/blog/raft-summary
+    - generic [ref=e28]:
+      - link "Back" [ref=e29] [cursor=pointer]:
+        - /url: /en/blog
+        - img [ref=e30]
+        - paragraph [ref=e32]: Back
+      - main [ref=e33]:
+        - complementary [ref=e34]
+        - article [ref=e35]:
+          - generic [ref=e36]:
+            - img "Raft 日志提交与覆盖关系示意图" [ref=e38]
+            - generic [ref=e39]:
+              - generic [ref=e40]:
+                - img [ref=e41]
+                - time [ref=e46]: 2026年5月5日
+              - generic [ref=e47]:
+                - img [ref=e48]
+                - text: 36 min read
+              - generic [ref=e52]:
+                - img [ref=e53]
+                - text: English
+              - generic [ref=e57]:
+                - img [ref=e58]
+                - link "raft" [ref=e62] [cursor=pointer]:
+                  - /url: /en/tags/raft
+                - text: /
+                - link "mit 6.824" [ref=e63] [cursor=pointer]:
+                  - /url: /en/tags/mit 6.824
+                - text: /
+                - link "分布式" [ref=e64] [cursor=pointer]:
+                  - /url: /en/tags/分布式
+                - text: /
+                - link "共识算法" [ref=e65] [cursor=pointer]:
+                  - /url: /en/tags/共识算法
+            - heading "Raft 小结：从复制状态机到强一致读" [level=1] [ref=e66]
+            - generic [ref=e67]:
+              - blockquote [ref=e68]: This post is currently available in Chinese only. The English version will be added later.
+              - generic [ref=e69]:
+                - text: views |
+                - link "0 comments" [ref=e70] [cursor=pointer]:
+                  - /url: "#waline"
+              - paragraph [ref=e71]:
+                - text: "English version is coming soon. You can read the current Chinese version here:"
+                - link "/blog/raft-summary" [ref=e72] [cursor=pointer]:
+                  - /url: /blog/raft-summary
+          - generic [ref=e75]:
+            - paragraph [ref=e76]: English version is coming soon. This page already exists so the route, metadata, language switcher, archives and tags can all work before the full translation is ready.
+            - paragraph [ref=e77]: If you want the complete content right now, switch back to the Chinese version from the button below or the language switcher in the header.
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - img [ref=e81]
+          - generic [ref=e85]:
+            - generic [ref=e86]: Raft 小结：从复制状态机到强一致读
+            - generic [ref=e87]: http://127.0.0.1:4325/en/blog/raft-summary
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - generic [ref=e90]: Author
+              - generic [ref=e91]: 玛卡巴卡
+            - generic [ref=e92]:
+              - generic [ref=e93]: Published at
+              - generic [ref=e94]: 2026年5月5日
+            - generic [ref=e95]:
+              - generic [ref=e96]: Copyright
+              - link "CC BY-NC-SA 4.0" [ref=e97] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/4.0/
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - button [ref=e100] [cursor=pointer]:
+                - img [ref=e101]
+              - button [ref=e105] [cursor=pointer]:
+                - img [ref=e106]
+              - link [ref=e110] [cursor=pointer]:
+                - /url: http://service.weibo.com/share/share.php?url=http://127.0.0.1:4325/en/blog/raft-summary&title=Raft 小结：从复制状态机到强一致读&pic=/@fs/Users/xjf/Public/Code/blog/fxj-pure/src/content/blog/raft-summary/Pasted image 20260428220034.png?origWidth=1122&origHeight=498&origFormat=png
+                - img [ref=e111]
+              - link [ref=e115] [cursor=pointer]:
+                - /url: https://x.com/intent/tweet?text='Raft 小结：从复制状态机到强一致读'&url='http://127.0.0.1:4325/en/blog/raft-summary'&via='玛卡巴卡'
+                - img [ref=e116]
+              - link [ref=e120] [cursor=pointer]:
+                - /url: https://bsky.app/intent/compose?text=Raft 小结：从复制状态机到强一致读%0Ahttp://127.0.0.1:4325/en/blog/raft-summary
+                - img [ref=e121]
+            - generic "http://127.0.0.1:4325/en/blog/raft-summary" [ref=e125]:
+              - img [ref=e126]
+        - generic [ref=e127]:
+          - link "← 深度学习简述" [ref=e129] [cursor=pointer]:
+            - /url: /en/blog/deep-learning-brief
+            - generic [ref=e130]: ← 深度学习简述
+          - link "AtCoder Solutions 1 →" [ref=e132] [cursor=pointer]:
+            - /url: /en/blog/solutions-atcoder-1
+            - generic [ref=e133]: AtCoder Solutions 1 →
+        - link "Read in Chinese" [ref=e135] [cursor=pointer]:
+          - /url: /blog/raft-summary
+        - generic [ref=e138]:
+          - list [ref=e140]:
+            - listitem [ref=e141] [cursor=pointer]:
+              - generic [ref=e142]:
+                - img "Like" [ref=e143]
+                - generic [ref=e144]: 0 Like(s)
+          - generic [ref=e146]:
+            - generic [ref=e147]:
+              - generic [ref=e148]:
+                - generic [ref=e149]: NickName
+                - textbox "NickName" [ref=e150]
+              - generic [ref=e151]:
+                - generic [ref=e152]: E-Mail
+                - textbox "E-Mail" [ref=e153]
+              - generic [ref=e154]:
+                - generic [ref=e155]: Website
+                - textbox "Website" [ref=e156]
+            - textbox "Welcome to comment. (Email to receive replies. Login is unnecessary)" [ref=e157]
+            - generic [ref=e158]:
+              - generic [ref=e159]:
+                - link "Markdown is supported" [ref=e160] [cursor=pointer]:
+                  - /url: https://guides.github.com/features/mastering-markdown/
+                  - img [ref=e161]
+                - button "Emoji" [ref=e163] [cursor=pointer]:
+                  - img [ref=e164]
+                - button "GIF" [ref=e166] [cursor=pointer]:
+                  - img [ref=e167]
+                - button "Preview" [ref=e170] [cursor=pointer]:
+                  - img [ref=e171]
+              - generic [ref=e174]:
+                - generic [ref=e175]: 0 Words
+                - button "Login" [ref=e176] [cursor=pointer]
+                - button "Submit" [ref=e177] [cursor=pointer]
+          - generic [ref=e178]:
+            - generic [ref=e179]: Comments
+            - list [ref=e180]:
+              - listitem [ref=e181] [cursor=pointer]: Latest
+              - listitem [ref=e182] [cursor=pointer]: Oldest
+              - listitem [ref=e183] [cursor=pointer]: Hottest
+          - generic [ref=e184]: No comment yet.
+          - generic [ref=e185]:
+            - text: Powered by
+            - link "Waline" [ref=e186] [cursor=pointer]:
+              - /url: https://github.com/walinejs/waline
+            - text: v3.6.0
+      - button "Back to Top" [ref=e188] [cursor=pointer]:
+        - generic [ref=e189]:
+          - generic [ref=e190]: "10"
+          - generic [ref=e191]: "%"
+        - img [ref=e192]
+    - contentinfo [ref=e196]:
+      - generic [ref=e198]:
+        - generic [ref=e199]:
+          - link "蜀ICP备2024053343号-1" [ref=e202] [cursor=pointer]:
+            - /url: https://beian.miit.gov.cn/
+          - generic [ref=e203]:
+            - text: © 2026 MakkaPakka &
+            - link "Site Policy" [ref=e206] [cursor=pointer]:
+              - /url: /terms/list
+          - generic [ref=e207]:
+            - link "Astro" [ref=e208] [cursor=pointer]:
+              - /url: https://github.com/withastro/astro
+            - text: "&"
+            - link "Pure theme" [ref=e209] [cursor=pointer]:
+              - /url: https://github.com/cworld1/astro-theme-pure
+            - text: powered
+        - generic [ref=e210]:
+          - link "github" [ref=e211] [cursor=pointer]:
+            - /url: https://github.com/bakebakebakebake
+            - img [ref=e212]
+          - link "rss" [ref=e216] [cursor=pointer]:
+            - /url: /en/rss.xml
+            - img [ref=e217]
+  - generic [ref=e223]:
+    - button "Menu" [ref=e224]:
+      - img [ref=e226]
+      - generic: Menu
+    - button "Inspect" [ref=e230]:
+      - img [ref=e232]
+      - generic: Inspect
+    - button "Audit" [ref=e234]:
+      - generic [ref=e235]:
+        - img [ref=e236]
+        - img [ref=e239]
+      - generic: Audit
+    - button "Settings" [ref=e242]:
+      - img [ref=e244]
+      - generic: Settings

@@ -1,6 +1,6 @@
 ---
-title: Raft 小结：从复制状态机到强一致读
-description: 围绕复制状态机、选举、日志复制、安全性、成员变更、快照与只读处理的一份 Raft 学习笔记。
+title: Raft 小结
+description: 围绕复制状态机、选举、日志复制、安全性、成员变更、快照的一份 Raft 学习笔记。
 publishDate: 2026-05-05
 updatedDate: 2026-05-05
 tags:
@@ -11,18 +11,10 @@ tags:
 language: 中文
 comment: true
 draft: false
+heroImageSrc: ./Pasted image 20260501025214.png
+heroImageColor: "#d9d6c8"
 ---
 
-%% 对于 Lab 一相关的内容已经之前有看过，大概内容不难，只是对于 Go 语言的相关语法和相关的规则需要好好了解一下，因为我们并不熟悉 Go 语言
-
-
-lab2&3 主要还是对于 raft 论文需要熟悉，对于其他的论文（gfs,bigtable 等等有时间/需要再看了...）
-
-主要参考的视频：
-[解读共识算法Raft（4）安全性\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1S94y1d7iY/)
-
-鉴于在看视频的时候，很多地方都是晕晕绕绕的，感觉看不太懂。然后去 codex 问 ChatGPT 之后，好像是得到了答案，但是过了一会又忘了，又开始晕了。所以的话，我觉得还是需要一个系统的笔记来记录这个过程的
-%%
 
 状态机:
 
@@ -272,6 +264,7 @@ leaderCommit：Leader 会在 AppendEntries RPC 中把这个提交信息告知 Fo
 
 
 > [!NOTE]
+> 
 > 提交（commit）和应用日志（apply）是两个不同的过程。commit 是指 leader 已经确认日志可以安全提交；apply 才是把日志真正执行到状态机。在论文中有两个指针 `applyIndex` 和 `commitIndex`，并且 `applyIndex <= commitIndex`
 
 ## 安全性*

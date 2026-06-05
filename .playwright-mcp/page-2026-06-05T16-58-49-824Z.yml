@@ -1,0 +1,1017 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Brand" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - text: FXJ Wiki
+      - generic [ref=e5]:
+        - generic [ref=e7]:
+          - link "Nav menu item" [ref=e8] [cursor=pointer]:
+            - /url: /blog
+            - text: Blog
+          - link "Nav menu item" [ref=e9] [cursor=pointer]:
+            - /url: /about
+            - text: About
+          - link "Search" [ref=e11] [cursor=pointer]:
+            - /url: /search
+            - generic [ref=e12]: Search
+            - img [ref=e13]
+        - button "Dark Theme" [ref=e18] [cursor=pointer]:
+          - generic [ref=e19]: Dark Theme
+          - img [ref=e20]
+    - generic [ref=e25]:
+      - link "中文" [ref=e26] [cursor=pointer]:
+        - /url: /blog/raft-summary
+      - link "English" [ref=e27] [cursor=pointer]:
+        - /url: /en/blog/raft-summary
+    - generic [ref=e28]:
+      - link "Back" [ref=e29] [cursor=pointer]:
+        - /url: /blog
+        - img [ref=e30]
+        - paragraph [ref=e32]: Back
+      - main [ref=e33]:
+        - complementary [ref=e34]:
+          - generic [ref=e35]:
+            - heading "TABLE OF CONTENTS" [level=2] [ref=e36]
+            - list [ref=e37]:
+              - listitem [ref=e38]:
+                - 'link "Scroll to section: 状态简化" [ref=e42] [cursor=pointer]':
+                  - /url: "#状态简化"
+                  - text: 状态简化
+              - listitem [ref=e43]:
+                - 'link "Scroll to section: 领导者选举" [ref=e47] [cursor=pointer]':
+                  - /url: "#领导者选举"
+                  - text: 领导者选举
+              - listitem [ref=e48]:
+                - 'link "Scroll to section: 日志复制*" [ref=e52] [cursor=pointer]':
+                  - /url: "#日志复制"
+                  - text: 日志复制*
+              - listitem [ref=e53]:
+                - generic [ref=e55]:
+                  - 'button "Toggle section: 安全性*" [expanded] [ref=e56] [cursor=pointer]':
+                    - generic [ref=e57]: ▸
+                  - 'link "Scroll to section: 安全性*" [ref=e58] [cursor=pointer]':
+                    - /url: "#安全性"
+                    - text: 安全性*
+                - list [ref=e59]:
+                  - listitem [ref=e60]:
+                    - 'link "Scroll to section: 示例" [ref=e64] [cursor=pointer]':
+                      - /url: "#示例"
+                      - text: 示例
+              - listitem [ref=e65]:
+                - generic [ref=e67]:
+                  - 'button "Toggle section: 集群成员变更" [expanded] [ref=e68] [cursor=pointer]':
+                    - generic [ref=e69]: ▸
+                  - 'link "Scroll to section: 集群成员变更" [ref=e70] [cursor=pointer]':
+                    - /url: "#集群成员变更"
+                    - text: 集群成员变更
+                - list [ref=e71]:
+                  - listitem [ref=e72]:
+                    - 'link "Scroll to section: 多成员变更" [ref=e76] [cursor=pointer]':
+                      - /url: "#多成员变更"
+                      - text: 多成员变更
+                  - listitem [ref=e77]:
+                    - 'link "Scroll to section: 单节点变更" [ref=e81] [cursor=pointer]':
+                      - /url: "#单节点变更"
+                      - text: 单节点变更
+              - listitem [ref=e82]:
+                - 'link "Scroll to section: 日志压缩" [ref=e86] [cursor=pointer]':
+                  - /url: "#日志压缩"
+                  - text: 日志压缩
+              - listitem [ref=e87]:
+                - 'link "Scroll to section: 只读操作处理" [ref=e91] [cursor=pointer]':
+                  - /url: "#只读操作处理"
+                  - text: 只读操作处理
+              - listitem [ref=e92]:
+                - 'link "Scroll to section: 性能和优化" [ref=e96] [cursor=pointer]':
+                  - /url: "#性能和优化"
+                  - text: 性能和优化
+        - article [ref=e97]:
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - img "Raft 日志提交与覆盖关系示意图" [ref=e100]
+              - img "Raft 日志提交与覆盖关系示意图" [ref=e101]
+            - generic [ref=e102]:
+              - generic [ref=e103]:
+                - generic [ref=e104]:
+                  - img [ref=e105]
+                  - time [ref=e110]: 2026年5月5日
+                  - generic [ref=e111]:
+                    - generic [ref=e112]: /
+                    - generic [ref=e113]:
+                      - text: Update
+                      - time [ref=e115]: 2026年5月5日
+                - generic [ref=e116]:
+                  - img [ref=e117]
+                  - text: 36 min read
+                - generic [ref=e121]:
+                  - img [ref=e122]
+                  - text: 中文
+                - generic [ref=e126]:
+                  - img [ref=e127]
+                  - generic [ref=e131]:
+                    - link "View more blogs with the tag raft" [ref=e132] [cursor=pointer]:
+                      - /url: /tags/raft
+                      - text: raft
+                    - text: /
+                  - generic [ref=e133]:
+                    - link "View more blogs with the tag mit 6.824" [ref=e134] [cursor=pointer]:
+                      - /url: /tags/mit 6.824
+                      - text: mit 6.824
+                    - text: /
+                  - generic [ref=e135]:
+                    - link "View more blogs with the tag 分布式" [ref=e136] [cursor=pointer]:
+                      - /url: /tags/分布式
+                      - text: 分布式
+                    - text: /
+                  - link "View more blogs with the tag 共识算法" [ref=e138] [cursor=pointer]:
+                    - /url: /tags/共识算法
+                    - text: 共识算法
+              - heading "Raft 小结：从复制状态机到强一致读" [level=1] [ref=e139]
+              - generic [ref=e140]:
+                - blockquote [ref=e141]: 围绕复制状态机、选举、日志复制、安全性、成员变更、快照与只读处理的一份 Raft 学习笔记。
+                - generic [ref=e142]:
+                  - text: views |
+                  - link "0 comments" [ref=e143] [cursor=pointer]:
+                    - /url: "#waline"
+          - generic [ref=e145]:
+            - paragraph [ref=e146]: "状态机:"
+            - list [ref=e147]:
+              - listitem [ref=e148]: 有一份内部状态
+              - listitem [ref=e149]: 外界给它一个命令
+              - listitem [ref=e150]: 它按照规则更新状态，并返回结果
+            - paragraph [ref=e151]:
+              - text: 即：
+              - strong [ref=e152]: 一个按照输入命令不断演化内部状态的系统
+            - blockquote [ref=e153]:
+              - paragraph [ref=e154]:
+                - text: 复制状态机：
+                - strong [ref=e155]: 被复制出来的多个状态机副本 — replicated state machines(被复制的状态机们)
+            - paragraph [ref=e156]:
+              - text: 这个名字看起来很不直观，因为它强调的是一个
+              - strong [ref=e157]: 抽象模型
+              - text: ，并不是一个具体实现。
+            - paragraph [ref=e158]: 似乎也可以叫做「多副本命令同步系统」，但过于贴近实现，复制状态机更强调问题抽象
+            - complementary [ref=e159]:
+              - generic [ref=e160]:
+                - paragraph [ref=e161]: question
+                - blockquote [ref=e163]:
+                  - paragraph [ref=e164]:
+                    - text: 复制状态机：
+                    - strong [ref=e165]: 相同的初始状态+相同的输入=相同的结束状态
+                    - text: ，讲真，感觉有点「何意味」的感觉，这不是常识吗，还是说有什么我不知道的点需要去了解？
+            - paragraph [ref=e166]:
+              - strong [ref=e167]: 复制状态机 = 很多台机器，各自维护一份相同的“业务对象”，并且通过执行同一串命令，让它们始终保持一致。
+            - paragraph [ref=e168]: 相同的初始状态+相同的输入=相同的结束状态
+            - paragraph [ref=e169]: 但似乎这个描述本来就很直观，但直观并不代表可作为系统设计模型，我们可能已经默认了：
+            - list [ref=e170]:
+              - listitem [ref=e171]: 状态机是确定性的
+              - listitem [ref=e172]: 节点初始状态一样
+              - listitem [ref=e173]: 命令输入一样
+              - listitem [ref=e174]: 命令顺序一样
+              - listitem [ref=e175]: 节点不会中途乱执行别的东西
+            - paragraph [ref=e176]: 我们需要将这种直观变得更严谨，这样论文后续才能围绕展开：
+            - paragraph [ref=e177]: 即：
+            - list [ref=e178]:
+              - listitem [ref=e179]: 只要我保证日志一致
+              - listitem [ref=e180]: 就能保证命令顺序一致
+              - listitem [ref=e181]: 就能保证状态一致
+            - paragraph [ref=e182]:
+              - text: 也就是在做转化：
+              - strong [ref=e183]: 分布式一致性问题 -> 复制状态机问题 -> 日志一致性问题
+            - paragraph [ref=e184]:
+              - text: 论文中对于raft共识算法的简要总结：
+              - img "739" [ref=e185]
+            - heading "状态简化#" [level=2] [ref=e186]:
+              - text: 状态简化
+              - link "#" [ref=e187] [cursor=pointer]:
+                - /url: "#状态简化"
+            - paragraph [ref=e188]:
+              - text: 论文原图：
+              - img [ref=e189]
+            - paragraph [ref=e190]: 对于三种状态之间的轮转：
+            - list [ref=e191]:
+              - listitem [ref=e192]: "follower: 当Election timeout时，将自己变为 candidate，经过选举决定是成为 leader还是 follower"
+              - listitem [ref=e193]:
+                - text: Leader:当leader 看到了一个
+                - code [ref=e194]: 比自己 term 更大的消息
+                - text: ，会切回 follower
+                - list [ref=e195]:
+                  - listitem [ref=e196]: leader宕机：直接挂了，恢复回来变为 follower
+                  - listitem [ref=e197]: leader网络隔离：它自己可能还以为自己是 leader，但集群其他节点会超时并选出新 leader；等这个旧 leader 之后看到更大 term，它才会退回 follower
+                  - listitem [ref=e198]: 论文之外的，一些自定义的让 leader退位的实现
+            - paragraph [ref=e199]:
+              - strong [ref=e200]: 任期：
+              - text: 作为 raft算法中的时间线，每一段任期都从一次选举开始！保证每次选举出的 leader<=1个
+            - blockquote [ref=e201]:
+              - paragraph [ref=e202]: 通过任期可以帮助我们确认一台服务器的历史状态
+            - paragraph [ref=e203]:
+              - text: raft中的服务器之间通过
+              - strong [ref=e204]: RPC
+              - text: 来进行通信，这里的两种主要的RPC：
+            - list [ref=e205]:
+              - listitem [ref=e206]:
+                - generic [ref=e207]: RequestVoteRPC
+                - text: :候选者在选举时发起
+            - generic [ref=e208]:
+              - code [ref=e210]:
+                - generic [ref=e211]: // 请求投票RPC Request
+                - generic [ref=e212]: "type RequestVoteRequest struct {"
+                - generic [ref=e213]: term int // 自己当前的任期号
+                - generic [ref=e214]: candidateId int // 自己的ID
+                - generic [ref=e215]: lastLogIndex int // 自己最后一个日志号
+                - generic [ref=e216]: lastLogTerm int // 自己最后一个日志的任期
+                - generic [ref=e217]: "}"
+                - generic [ref=e219]: // 请求投票RPC Response
+                - generic [ref=e220]: "type RequestVoteResponse struct {"
+                - generic [ref=e221]: term int // 自己当前任期号
+                - generic [ref=e222]: voteGranted bool // 自己会不会投票给这个candidate
+                - generic [ref=e223]: "}"
+              - generic [ref=e224]: go
+              - button [ref=e225] [cursor=pointer]:
+                - img [ref=e227]
+                - text: Copied!
+            - list [ref=e229]:
+              - listitem [ref=e230]:
+                - generic [ref=e231]: AppendEntriesRPC
+                - text: :复制日志
+            - generic [ref=e232]:
+              - code [ref=e234]:
+                - generic [ref=e235]: // 追加日志RPC Request
+                - generic [ref=e236]: "type AppendEntriesRequest struct {"
+                - generic [ref=e237]: term int // 自己当前的任期号
+                - generic [ref=e238]: leaderId int // leader(也就是自己)的ID
+                - generic [ref=e239]: prevLogIndex int // 前一个日志的日志号
+                - generic [ref=e240]: prevLogTerm int // 前一个日志的任期号
+                - generic [ref=e241]: entries []byte // 当前日志体，空日志体则为心跳
+                - generic [ref=e242]: leaderCommit int // leader的已提交日志号
+                - generic [ref=e243]: "}"
+                - generic [ref=e245]: // 追加日志RPC Response
+                - generic [ref=e246]: "type AppendEntriesResponse struct {"
+                - generic [ref=e247]: term int // 自己当前任期号
+                - generic [ref=e248]: success bool // 如果follower包括前一个日志, 则返回true
+                - generic [ref=e249]: "}"
+              - generic [ref=e250]: go
+              - button [ref=e251] [cursor=pointer]:
+                - img [ref=e253]
+                - text: Copied!
+            - heading "领导者选举#" [level=2] [ref=e255]:
+              - text: 领导者选举
+              - link "#" [ref=e256] [cursor=pointer]:
+                - /url: "#领导者选举"
+            - paragraph [ref=e257]:
+              - strong [ref=e258]: 心跳机制
+              - text: ：leader会周期性的向所有的 follower发生心跳，来维持自己的地位。
+            - list [ref=e259]:
+              - listitem [ref=e260]:
+                - text: 若follower有一段时间没有收到心跳，则会认为没有可用的leader了，开始发起选举：
+                - list [ref=e261]:
+                  - listitem [ref=e262]: follower先增加自己的当前任期号
+                  - listitem [ref=e263]: 将自己的状态变为 candidate
+                  - listitem [ref=e264]: 投票给自己,并行的给其他服务器发送投票请求(RequestVoteRPC)
+            - paragraph [ref=e265]: 投票可能会有三种结果：
+            - list [ref=e266]:
+              - listitem [ref=e267]: 该节点获得超过半数的选票赢得选举->成为 leader开始发送心跳
+              - listitem [ref=e268]: 其他节点赢得选举->收到新leader的心跳之后，若新leader任期号>=自己当前的任期号，则将状态变回 follower
+              - listitem [ref=e269]:
+                - text: 没有leader->每个 candidate都在一个自己的
+                - strong [ref=e270]: 随机选举超时时间
+                - text: 后开始新一轮投票
+                - list [ref=e271]:
+                  - listitem [ref=e272]: 这里没有 leader的原因是有多个 follower同时成为 candidate，得票过于分散，无法获得超过半数选票
+            - blockquote [ref=e273]:
+              - paragraph [ref=e274]: 若 candidate没有收到超过半数选票，也没有收到新 leader的心跳，则就会在「随机选举超时时间」后再次发起选举，这并不需要各个节点达成共识
+            - complementary [ref=e275]:
+              - generic [ref=e276]:
+                - paragraph [ref=e277]: note
+                - generic [ref=e278]:
+                  - strong [ref=e279]: 随机选举超时时间
+                  - text: 的设置规则：
+                  - paragraph [ref=e280]: 只要整个系统满足这里的时间要求，Raft 就可以选举出并维持一个稳定的 leader：
+                  - list [ref=e281]:
+                    - listitem [ref=e282]:
+                      - paragraph [ref=e283]: 广播时间：一次RPC来回的时间。
+                    - listitem [ref=e284]:
+                      - paragraph [ref=e285]: 如果广播时间大于选举超时时间的话，那么在选举的时候等到 follower的选票之前就会超时，导致永远选不出 leader
+                    - listitem [ref=e286]:
+                      - paragraph [ref=e287]: 如果机器每次宕机的间隔短于选举超时时间，那么就会导致永远也完成不了选举
+                    - listitem [ref=e288]:
+                      - paragraph [ref=e289]: 广播时间 (Broadcast time) << 选举超时时间 (Election Timeout) << 平均故障时间 (MTBF)
+                  - blockquote [ref=e290]:
+                    - paragraph [ref=e291]: 广播时间和平均故障时间是由系统决定的，但是选举超时时间是我们自己选择的。Raft 的 RPC 需要接收并将信息落盘，所以广播时间大概是 0.5 毫秒到 20 毫秒。所以选举超时时间可能需要在 10 毫秒到 500 毫秒之间。大多数的服务器平均故障间隔时间都在几个月甚至更长
+            - heading "日志复制*#" [level=2] [ref=e292]:
+              - text: 日志复制*
+              - link "#" [ref=e293] [cursor=pointer]:
+                - /url: "#日志复制"
+            - complementary [ref=e294]:
+              - generic [ref=e295]:
+                - paragraph [ref=e296]: client如何知道哪个节点是最新的leader？
+                - blockquote [ref=e298]:
+                  - paragraph [ref=e299]: 客户端随机向一个节点发送请求：
+                  - list [ref=e300]:
+                    - listitem [ref=e301]: 为leader：OK
+                    - listitem [ref=e302]: 为follower：可以通过心跳来得知 leaderID
+                    - listitem [ref=e303]: 宕机了，则找另外一个节点直到成功即可
+            - list [ref=e304]:
+              - listitem [ref=e305]:
+                - text: leader接受到指令后会将指令作为一个新的日志条目追加到
+                - strong [ref=e306]: 日志
+                - text: 中去
+              - listitem [ref=e307]: leader并行的发送AppendEntries RPC给follower，让他们复制该条目；当 leader 确认该条目已经复制到多数节点后，这条日志就可以被提交；提交后，leader 再把它应用到状态机，并将结果返回给客户端
+            - complementary [ref=e308]:
+              - generic [ref=e309]:
+                - paragraph [ref=e310]: 需要着重注意的点：
+                - generic [ref=e311]:
+                  - strong [ref=e312]: 是否超过半数 follower复制后就一定会提交呢
+                  - text: ？
+                  - blockquote [ref=e313]:
+                    - paragraph [ref=e314]:
+                      - text: 不一定。复制到多数节点，和 leader 已经确认这件事、并推进
+                      - code [ref=e315]: commitIndex
+                      - text: ，中间还隔着一个过程；如果在这之前 leader 宕机，就可能出现“多数节点已经有这条日志，但它还没有被提交”的情况
+            - paragraph [ref=e316]:
+              - strong [ref=e317]: 日志：
+            - list [ref=e318]:
+              - listitem [ref=e319]: 状态机指令
+              - listitem [ref=e320]: leader任期号
+              - listitem [ref=e321]: 日志号（日志索引）
+            - blockquote [ref=e322]:
+              - paragraph [ref=e323]:
+                - strong [ref=e324]: 需要日志号和任期号两个因素才能唯一确定一个日志
+            - paragraph [ref=e325]:
+              - text: 如图：
+              - img "327" [ref=e326]
+            - paragraph [ref=e327]:
+              - text: 可以从图中看到，这里的部分节点的日志是落后很多的，那么如何让这些节点追上leader，使得
+              - strong [ref=e328]: 最终
+              - text: 所有节点的日志是完整且顺序一致的呢？
+            - complementary [ref=e329]:
+              - generic [ref=e330]:
+                - paragraph [ref=e331]: Raft 不要求所有节点在任意时刻都完全相同，它保证的是：
+                - list [ref=e333]:
+                  - listitem [ref=e334]: 已提交日志不会丢失
+                  - listitem [ref=e335]: 新 leader 一定包含所有已提交日志
+                  - listitem [ref=e336]: 落后或冲突的 follower 最终会被 leader 修正到一致状态
+            - paragraph [ref=e337]: 常见情况有三类：
+            - list [ref=e338]:
+              - listitem [ref=e339]:
+                - paragraph [ref=e340]: follower 落后 follower 只是慢，并没有宕机。leader 会持续发送 AppendEntries。 如果某条日志已经在多数节点上复制成功，leader 就可以提交并回复客户端； 即使这个慢 follower 还没跟上，也不影响这条已提交日志的安全性。 之后 leader 会继续把缺失日志补给它。
+              - listitem [ref=e341]:
+                - paragraph [ref=e342]: follower 宕机后恢复 follower 宕机一段时间后恢复，日志可能缺很多。 恢复后它会重新接收 leader 的 AppendEntries。 如果 prevLogIndex / prevLogTerm 对不上，就说明它当前日志和 leader 不一致； leader 会回退并重试，直到找到双方共同前缀，再从那里开始追加缺失日志。
+              - listitem [ref=e343]:
+                - paragraph [ref=e344]: 旧 leader 宕机后恢复 旧 leader 宕机前，可能写入过一些未提交日志。 这些未提交日志不保证保留；如果后来新 leader 的日志和它冲突，这些旧日志可以被覆盖。 旧 leader 恢复后会先变成 follower。 当它收到当前 leader 的 AppendEntries 时，如果发现冲突，就会删除自己的冲突后缀，并追加 leader 的日志，最终追平。
+            - paragraph [ref=e345]: 补充： 投票阶段会比较 candidate 的最后一条日志（lastLogTerm, lastLogIndex），这里比较的不只是已提交日志，未提交日志也会参与比较。 这样做的目的是避免明显更旧的节点当选。 但“日志更新”不等于“这些未提交日志一定会被保留”； 未提交日志本来就可能在后续被覆盖。
+            - paragraph [ref=e346]:
+              - img "345" [ref=e347]
+            - paragraph [ref=e348]:
+              - text: 「
+              - strong [ref=e349]: 一致性检查
+              - text: 」：leader在发往follower的追加条目RPC中，会放入
+              - strong [ref=e350]: 前一个日志的索引位置和任期号
+              - text: ，若 follower在日志中找不到前一个日志，那么他会拒绝这个日志，leader收到拒绝后会发送前一个日志条目，从而实现
+              - strong [ref=e351]: 逐步向前定位到 follower第一个缺失的日志位置
+            - blockquote [ref=e352]:
+              - paragraph [ref=e353]: 当然，这样的方式看起来效率非常的低，实际上是可以优化的，论文中也有说到优化思路，但实际上作者认为这是没有必要的，这样的情况出现场景很少（计算机应用中很多时候都在 trade-off，emmm 各行业也都是这样，所以可以根据需求来动态调整对应的策略）
+            - paragraph [ref=e354]: 从上面可以看到：leader 当选之后，不需要专门设计一套“修日志流程”；它只要继续正常发送 AppendEntries，落后或冲突的 follower 就会在一致性检查失败与重试过程中逐步追平
+            - paragraph [ref=e355]: leader 不会为了迁就 follower 去覆盖或删除自己的日志条目；但旧 leader 以后若恢复成 follower，它自己那段未提交且冲突的日志后缀，仍然可能被当前 leader 覆盖
+            - paragraph [ref=e356]: 从而保证：
+            - list [ref=e357]:
+              - listitem [ref=e358]: 只要过半的服务器能正常运行，raft就可以接受，复制并应用新的日志条目
+              - listitem [ref=e359]: 新的日志条目可以在一个RPC来回被复制给集群中的过半机器
+              - listitem [ref=e360]: 单个运行慢的 follower并不会影响整体性能
+            - paragraph [ref=e361]: "对于 AppendEntries RPC:"
+            - generic [ref=e362]:
+              - code [ref=e364]:
+                - generic [ref=e365]: // 追加日志RPC Request
+                - generic [ref=e366]: "type AppendEntriesRequest struct {"
+                - generic [ref=e367]: term int // 自己当前的任期号
+                - generic [ref=e368]: leaderId int // leader(也就是自己)的ID
+                - generic [ref=e369]: prevLogIndex int // 前一个日志的日志号
+                - generic [ref=e370]: prevLogTerm int // 前一个日志的任期号
+                - generic [ref=e371]: entries []byte // 当前日志体
+                - generic [ref=e372]: leaderCommit int // leader的已提交日志号
+                - generic [ref=e373]: "}"
+                - generic [ref=e375]: // 追加日志RPC Response
+                - generic [ref=e376]: "type AppendEntriesResponse struct {"
+                - generic [ref=e377]: term int // 自己当前任期号
+                - generic [ref=e378]: success bool // 如果follower包括前一个日志, 则返回true
+                - generic [ref=e379]: "}"
+              - generic [ref=e380]: go
+              - button [ref=e381] [cursor=pointer]:
+                - img [ref=e383]
+                - text: Copied!
+            - paragraph [ref=e385]: 其中， PreLogIndex 和 PreLogTerm 是来做一致性检查的，只有这两个都与 follower 当中的相同，follower 才会接受这次追加；否则就会拒绝，leader 再向前回退并重试
+            - blockquote [ref=e386]:
+              - paragraph [ref=e387]:
+                - text: 对 follower 而言，接收到了 leader 日志，还不能立即提交，因为它自己并不知道这条日志是否已经到达多数节点；只有 leader 确认达到多数后，再通过
+                - code [ref=e388]: leaderCommit
+                - text: 通知它推进提交
+            - paragraph [ref=e389]: leaderCommit：Leader 会在 AppendEntries RPC 中把这个提交信息告知 Follower(以这个变量的方式)
+            - paragraph [ref=e390]: 然后 follower 就可以把自己复制但未提交的日志设置为已提交状态，就可以应用到自己的状态机里了
+            - paragraph [ref=e391]:
+              - text: 如果
+              - code [ref=e392]: leader commit > commit index
+              - text: ，那么就把 commit index 设置为
+              - code [ref=e393]: min(leaderCommit, index of last new entry)
+            - blockquote [ref=e394]:
+              - paragraph [ref=e395]:
+                - text: 看起来有点抽象，其实就是：follower 可以把“自己本地已经有的那部分日志”提交到
+                - code [ref=e396]: leaderCommit
+                - text: 为止，不能跳过空缺位置，也不能提交自己还没收到的日志
+            - complementary [ref=e397]:
+              - generic [ref=e398]:
+                - paragraph [ref=e399]: 提交（commit）和应用日志（apply）是两个不同的过程。commit 是指 leader 已经确认日志可以安全提交；apply 才是把日志真正执行到状态机。在论文中有两个指针
+                - generic [ref=e400]:
+                  - code [ref=e401]: applyIndex
+                  - text: 和
+                  - code [ref=e402]: commitIndex
+                  - text: ，并且
+                  - code [ref=e403]: applyIndex <= commitIndex
+            - heading "安全性*#" [level=2] [ref=e404]:
+              - text: 安全性*
+              - link "#" [ref=e405] [cursor=pointer]:
+                - /url: "#安全性"
+            - paragraph [ref=e406]: 对于领导者选举和日志复制两个问题，实际上已经覆盖了共识算法的全程，但是还不能保证每一个状态机会按照相同的顺序执行相同的命令，所以 Raft 还需要通过补充完善整个算法，使得可以在各类宕机问题下都不出错
+            - list [ref=e407]:
+              - listitem [ref=e408]: Leader 宕机处理：选举限制
+              - listitem [ref=e409]: Leader 宕机处理，新 leader 是否提交之前任期之内的日志条目
+              - listitem [ref=e410]: Follower 和 Candidate 宕机处理
+              - listitem [ref=e411]: 时间与可用性限制(上面在说随机超时时间的时候，就已经说到了)
+            - paragraph [ref=e412]: 如果一个 follower 落后了 leader 若干条日志，而投票时又不去比较日志新旧，那么它就可能在下一次选举中当选；一旦这种更旧的节点成了 leader，就可能把系统带到错误历史上去。因此 Raft 必须在投票阶段限制 candidate 的日志不能比投票者更旧
+            - paragraph [ref=e413]:
+              - text: 在 RequestVote RPC 当中，有着这样的限制，如果投票者自己的日志比 Candidate 的还
+              - strong [ref=e414]: 新
+              - text: ，那么它会拒绝掉该投票请求
+            - blockquote [ref=e415]:
+              - paragraph [ref=e416]: 比较「新」的方式：通过比较 LastLogIndex 和 LastLogTerm 两个变量。如果两份日志最后条目的任期号不同，那么任期号大的日志更「新」。如果两份日志最后条目的任期号相同，那么日志号较长的那个更「新」
+            - paragraph [ref=e417]:
+              - text: 如图：
+              - img [ref=e418]
+            - paragraph [ref=e419]:
+              - text: A 当中， S1 是 leader。然后S1 崩溃了， S5 成为 leader。但是 S5 仍然能够凭借 S3 和 S4 的选票成为 leader，到了 B 阶段，接收到了第三任期的日志，到了 C 当中，S5 又崩溃了，S1当选leader，此时日志 2被复制到了多数节点，
+              - strong [ref=e420]: 但还没有被提交
+              - text: ，到了d中，S1再次崩溃，S5通过 S2-4的选票当选leader
+            - complementary [ref=e421]:
+              - generic [ref=e422]:
+                - paragraph [ref=e423]:
+                  - code [ref=e424]: no-op
+                  - text: 补丁：
+                - generic [ref=e425]:
+                  - paragraph [ref=e426]:
+                    - text: 当一个节点当选 leader 后，立刻发送一个自己任期的
+                    - strong [ref=e427]: 空日志体
+                    - text: 的 AppendEntries RPC，这样就可以把之前任期内满足条件的日志都提交了
+                  - paragraph [ref=e428]:
+                    - text: 一旦
+                    - code [ref=e429]: no-op
+                    - text: 完成复制，就可以把之前任期内符合提交条件的日志保护起来了，使得它们安全提交，目前用于生产系统的 Raft 算法都是启用
+                    - code [ref=e430]: no-op
+                    - text: 的
+            - blockquote [ref=e431]:
+              - paragraph [ref=e432]: 这里有一个问题：既然这里的 2 号日志已经被复制到了大多数节点，可是仍然被覆盖了，会不会导致不安全的问题？
+            - paragraph [ref=e433]: 这里要注意：图里想说明的不是“已提交日志也可能被覆盖”，而是“旧 term 的日志即使已经出现在多数节点上，也还不能仅凭这一点就认定它已经提交”。
+            - paragraph [ref=e434]:
+              - text: 如果某条旧 term 日志后来真的被提交了，那么之后任何能当选的新 leader 都必须包含它，已提交日志不会再被覆盖。真正可能被覆盖的，是那些
+              - strong [ref=e435]: 尚未提交
+              - text: 的旧 term 日志。所以：
+            - paragraph [ref=e436]:
+              - strong [ref=e437]: leader 不能只靠“多数副本”提交旧 term 的日志；leader 只能用“当前 term 的日志达到多数”来推进提交。
+            - paragraph [ref=e438]:
+              - strong [ref=e439]: 而一旦当前任期日志提交，它前面的旧日志也会一起提交。
+            - paragraph [ref=e440]: 对于 follower 和 candidate 当机的处理：
+            - blockquote [ref=e441]:
+              - paragraph [ref=e442]: 如果 follower 或 candidate 崩溃了，那么后续发送给他们的 RequestVote 和 AppendEntries RPC 都会失败。Raft 通过不断重试来处理这种失败。如果崩溃的机器重启了，那么这些 RPC 就会成功地完成；如果一个服务器在完成了 RPC，但是还没有响应的时候崩溃了，那它重启之后就会再次收到同样的请求。(Raft 的 RPC 都是幂等的)
+            - heading "示例#" [level=3] [ref=e443]:
+              - text: 示例
+              - link "#" [ref=e444] [cursor=pointer]:
+                - /url: "#示例"
+            - paragraph [ref=e445]: 设想一个这样的场景，现在有 5 个服务器，最开始他们 5 个都是 follower，由 S1 最先超时，拿到先发优势，成功当选 leader。S1 当选 leader 之后，就会向所有的服务器开始发送心跳,现在 S1 发送日志 1 到S2-5，S1收到的sccess 达到多数的时候，S1 本地提交，然后S1的下一个心跳将信息传递给了 follower，所有节点都提交了
+            - paragraph [ref=e446]:
+              - text: 这个时候我们再向 S1 发送一个请求， 当 S1 收到了其他机器的回复之后，在本地提交。然后 S1 在这个时候宕机了，其他的机器的第二个日志无法进行提交
+              - img "399" [ref=e447]
+            - paragraph [ref=e448]:
+              - text: 在经过选举超时，重新选出 leader S3之后,尽管 S3 会一直发送心跳，但是日志 2一直
+              - strong [ref=e449]: 无法被提交
+              - text: (因为 S3 这个时候的任期是 3，Leader 只能用当前任期的日志达到多数来提交，对于任期为 2 的日志，无法提交，只能靠后续日志的提交，将旧日志一并提交)
+            - paragraph [ref=e450]: 这个时候我们向 S3 发送请求，我们会发现，随着新日志的提交，老日志也提交了(日志 2 和日志 3 是同一时间提交的，也就是在同一个时间变为实线框的)
+            - paragraph [ref=e451]:
+              - img "450" [ref=e452]
+            - blockquote [ref=e453]:
+              - paragraph [ref=e454]: 其实想说明的就是，当前任期只能提交当前任期的日志，对于之前任期的日志，只能在后续日志提交的时候，一并被提交
+            - heading "集群成员变更#" [level=2] [ref=e455]:
+              - text: 集群成员变更
+              - link "#" [ref=e456] [cursor=pointer]:
+                - /url: "#集群成员变更"
+            - heading "多成员变更#" [level=3] [ref=e457]:
+              - text: 多成员变更
+              - link "#" [ref=e458] [cursor=pointer]:
+                - /url: "#多成员变更"
+            - paragraph [ref=e459]: 对于老配置集群和新配置集群，可能会出现两个 leader 的情况(脑裂)，所以的话，为了解决这样的问题：
+            - paragraph [ref=e460]:
+              - img "447" [ref=e461]
+            - paragraph [ref=e462]: 采用两阶段的办法：集群先从老配置切换成一个过渡的配置(联合一致)，再切换到新配置
+            - paragraph [ref=e463]: 所以问题就变成了如何在联合一致的状态，避免发生脑裂问题 配置信息作为一个日志体，包装为一个普通的 AppendEntries RPC发送给所有的 follower
+            - list [ref=e464]:
+              - listitem [ref=e465]: 第一阶段，Leader 发起C old new使整个集群进入联合一致状态。这个时候所有的 RPC 都要在新旧两个配置当中都达到大多数才算成功
+              - listitem [ref=e466]: 第二阶段，Leader 发起 C New，使整个集群进入新配置状态。这个时候所有的 RPC 只要在新配置下能够达到大多数，就算成功
+            - blockquote [ref=e467]:
+              - paragraph [ref=e468]:
+                - text: 一旦某个服务器将新配置加到自己的日志当中，它就会用
+                - strong [ref=e469]: 最新的配置
+                - text: 来做出未来所有的决定。无论该配置是否被提交，服务器总是使用日志中最新的配置。这意味着 leader 不用等待，C old new 和 C new 返回，就会直接用其中的新规则做出决策
+            - paragraph [ref=e470]: 假设 leader 可以在集群成员变更任何时候宕机，有以下三种可能：
+            - list [ref=e471]:
+              - listitem [ref=e472]: Leader 在 C old New 未提交时宕机
+              - listitem [ref=e473]: Leader 在 C old new 已提交但 C new 未发起时宕机
+              - listitem [ref=e474]: Leader 在 C New 已发起时宕机
+            - paragraph [ref=e475]:
+              - text: 如图：
+              - img "621" [ref=e476]
+            - list [ref=e477]:
+              - listitem [ref=e478]:
+                - strong [ref=e479]:
+                  - text: Leader 在
+                  - code [ref=e480]: C old,new
+                  - text: 未提交时宕机
+            - list [ref=e481]:
+              - listitem [ref=e482]:
+                - text: 集群还没有
+                - strong [ref=e483]: 真正进入
+                - text: 联合一致状态(因为还没有保证 old 多数和 new 多数都接受了它)
+                - list [ref=e484]:
+                  - listitem [ref=e485]: 有些节点可能已经收到了 C old,new
+                  - listitem [ref=e486]:
+                    - text: 有些节点还没收到 %% - 这时如果新 leader 没有
+                    - code [ref=e487]: C old,new
+                    - text: ，那就按
+                    - code [ref=e488]: C old
+                    - text: 继续选举和运行
+              - listitem [ref=e489]: 配置变更可能失败，但不会脑裂
+              - listitem [ref=e490]:
+                - text: 如果新 leader 具有
+                - code [ref=e491]: C old,new
+                - text: ，那它后续就按联合一致规则继续推进 %%
+            - paragraph [ref=e492]: 这个时候还会有两种情况：
+            - list [ref=e493]:
+              - listitem [ref=e494]:
+                - text: 新 leader 没有 C old,new：
+                - list [ref=e495]:
+                  - listitem [ref=e496]: 最新的配置仍然是C old，如果拿到 old 配置多数，就可以当选（意味着配置变更失败，系统退回旧配置继续运行）
+                  - listitem [ref=e497]: 但是保证了不会出现脑裂，因为根本还没有进入联合一致状态，仍然保证了正确性
+              - listitem [ref=e498]:
+                - text: 新 leader 具有 C old,new
+                - list [ref=e499]:
+                  - listitem [ref=e500]:
+                    - text: 最新配置为 C old new，之后按照联合一致规则继续推进，即达到「old 配置多数」&&「new 配置多数」则可以当选，当选leader后(继续推进这次配置变更)：
+                    - list [ref=e501]:
+                      - listitem [ref=e502]: 把 C old,new 继续复制出去
+                      - listitem [ref=e503]: 如果最终 old/new 两边都达到多数，C old,new 就可以提交
+                      - listitem [ref=e504]: 再继续发 C new
+            - list [ref=e505]:
+              - listitem [ref=e506]:
+                - strong [ref=e507]:
+                  - text: Leader 在
+                  - code [ref=e508]: C old,new
+                  - text: 已提交但
+                  - code [ref=e509]: C new
+                  - text: 未发起时宕机
+            - list [ref=e510]:
+              - listitem [ref=e511]:
+                - text: 集群
+                - strong [ref=e512]: 正式进入
+                - text: 联合一致状态(C old,new 已经提交了。即 old 和 new配置的多数都接受了他)
+                - list [ref=e513]:
+                  - listitem [ref=e514]: 这个时候就不再能退回以 old规则为主的世界了(可以看上面图的上方 old&new范围)
+            - paragraph [ref=e515]:
+              - text: 开启新一轮选举后，candidate想要当选，就必须满足新 leader
+              - strong [ref=e516]:
+                - text: 一定也具有
+                - code [ref=e517]: C old,new
+            - blockquote [ref=e518]:
+              - paragraph [ref=e519]:
+                - text: 这时系统可以继续处理命令，但
+                - strong [ref=e520]: 普通命令日志的提交，也要同时满足 old/new 两边多数
+            - list [ref=e521]:
+              - listitem [ref=e522]:
+                - strong [ref=e523]:
+                  - text: Leader 在
+                  - code [ref=e524]: C new
+                  - text: 已发起时宕机
+                - text: Leader 这个时候已经将 Cnew 发出去了，有的节点收到了，有的节点没有收到
+            - list [ref=e525]:
+              - listitem [ref=e526]:
+                - text: 对于已经收到 C new 的节点
+                - list [ref=e527]:
+                  - listitem [ref=e528]: 按照新配置规则行动
+              - listitem [ref=e529]:
+                - text: 还没收到 C new 的节点(最新配置为 C old new)
+                - list [ref=e530]:
+                  - listitem [ref=e531]: 按联合一致规则行动
+            - blockquote [ref=e532]:
+              - paragraph [ref=e533]:
+                - strong [ref=e534]: 每个节点总是使用自己日志中最新的配置
+            - paragraph [ref=e535]: 当leader挂了以后：
+            - list [ref=e536]:
+              - listitem [ref=e537]:
+                - text: 具有 C new 的节点当选
+                - list [ref=e538]:
+                  - listitem [ref=e539]: 继续按 C new 规则推进
+                  - listitem [ref=e540]: 把 C new 复制给其他节点
+                  - listitem [ref=e541]: 最终让 C new 提交
+              - listitem [ref=e542]:
+                - text: 不含C new 的节点当选
+                - list [ref=e543]:
+                  - listitem [ref=e544]: 它仍然按联合一致规则行动
+                  - listitem [ref=e545]:
+                    - text: 如果后续需要推进到新配置，就由这个新 leader 自己再追加一条新的
+                    - code [ref=e546]: C new
+                  - listitem [ref=e547]:
+                    - text: 之前那个未提交、且与当前日志冲突的
+                    - code [ref=e548]: C new
+                    - text: ，后续可能被覆盖
+            - paragraph [ref=e549]: 集群成员变更的几个补充规则：
+            - list [ref=e550]:
+              - listitem [ref=e551]:
+                - paragraph [ref=e552]:
+                  - strong [ref=e553]: 新增节点时，先同步日志，再开始成员变更
+                  - text: ，
+                - list [ref=e554]:
+                  - listitem [ref=e555]:
+                    - text: 让新节点在同步完成日志前不具备投票权，不参与日志计数(
+                    - strong [ref=e556]: 只读
+                    - text: 状态)
+                  - listitem [ref=e557]: 否则：新节点太落后，会拖慢复制。还可能影响正常命令提交
+              - listitem [ref=e558]:
+                - paragraph [ref=e559]:
+                  - strong [ref=e560]: 缩减节点时，leader 自己也可能被移出集群
+                - list [ref=e561]:
+                  - listitem [ref=e562]:
+                    - text: 如果
+                    - code [ref=e563]: C new
+                    - text: 里已经没有当前 leader
+                  - listitem [ref=e564]:
+                    - text: 那么
+                    - code [ref=e565]: C new
+                    - text: 提交后，它就应该主动退位
+              - listitem [ref=e566]:
+                - paragraph [ref=e567]:
+                  - strong [ref=e568]: 已出群的旧节点可能会乱发投票请求
+                - list [ref=e569]:
+                  - listitem [ref=e570]: 因为它收不到新 leader 的心跳
+                  - listitem [ref=e571]:
+                    - text: 会超时、term 增长、发送
+                    - code [ref=e572]: RequestVote
+                  - listitem [ref=e573]: 虽然它选不上，但可能扰乱当前集群
+            - paragraph [ref=e574]:
+              - text: 常见处理：
+              - strong [ref=e575]: 如果一个节点最近还确认集群里有 leader（例如在最小超时时间内收到了当前 leader 的有效心跳），就拒绝这类干扰性的投票请求
+            - heading "单节点变更#" [level=3] [ref=e576]:
+              - text: 单节点变更
+              - link "#" [ref=e577] [cursor=pointer]:
+                - /url: "#单节点变更"
+            - paragraph [ref=e578]:
+              - text: 上面的做法是论文原版的
+              - strong [ref=e579]: joint consensus
+            - paragraph [ref=e580]:
+              - text: 但在很多工程实现中，更常见的是：
+              - strong [ref=e581]: 一次只增减一个节点
+            - paragraph [ref=e582]: 原因：
+            - list [ref=e583]:
+              - listitem [ref=e584]:
+                - text: 只变一个节点时，old/new 的多数
+                - strong [ref=e585]: 天然有交集
+              - listitem [ref=e586]: 所以不会出现两个完全独立的合法 leader
+            - paragraph [ref=e587]: 例如：
+            - list [ref=e588]:
+              - listitem [ref=e589]:
+                - text: old：
+                - code [ref=e590]: "{a,b,c}"
+              - listitem [ref=e591]:
+                - text: new：
+                - code [ref=e592]: "{a,b,c,d}"
+            - paragraph [ref=e593]: 此时：
+            - list [ref=e594]:
+              - listitem [ref=e595]:
+                - text: old 多数：
+                - code [ref=e596]: 2/3
+              - listitem [ref=e597]:
+                - text: new 多数：
+                - code [ref=e598]: 3/4
+            - paragraph [ref=e599]: new 配置里的多数，不可能和 old 配置多数完全无交集，所以不会脑裂
+            - paragraph [ref=e600]: "单节点变更的结果:"
+            - list [ref=e601]:
+              - listitem [ref=e602]:
+                - text: 新 leader 具有
+                - code [ref=e603]: C new
+                - text: ：继续推进变更
+              - listitem [ref=e604]:
+                - text: 新 leader 不具有
+                - code [ref=e605]: C new
+                - text: ：变更失败，退回旧配置
+            - blockquote [ref=e606]:
+              - paragraph [ref=e607]: 单节点变更简单,更好实现,且大部分场景够用
+            - paragraph [ref=e608]:
+              - strong [ref=e609]: 单节点变更的缺点：
+            - list [ref=e610]:
+              - listitem [ref=e611]:
+                - paragraph [ref=e612]:
+                  - strong [ref=e613]: 机器替换要两步
+                - list [ref=e614]:
+                  - listitem [ref=e615]:
+                    - code [ref=e616]: "{a,b,c}"
+                    - text: "->"
+                    - code [ref=e617]: "{a,b,c,d}"
+                    - text: "->"
+                    - code [ref=e618]: "{d,b,c}"
+              - listitem [ref=e619]:
+                - paragraph [ref=e620]:
+                  - strong [ref=e621]: 会经过偶数节点阶段
+                - list [ref=e622]:
+                  - listitem [ref=e623]: 例如 3 节点扩成 4 节点
+                  - listitem [ref=e624]:
+                    - text: 如果例如发生
+                    - code [ref=e625]: 2:2
+                    - text: 网络分区，就选不出 leader
+              - listitem [ref=e626]:
+                - paragraph [ref=e627]:
+                  - strong [ref=e628]: 连续两次变更 + 中途切主，可能出错
+                - list [ref=e629]:
+                  - listitem [ref=e630]:
+                    - text: 解决方法：新 leader 先提交一条自己任期内的
+                    - code [ref=e631]: no-op
+                  - listitem [ref=e632]: 再开始下一次配置变更
+            - heading "日志压缩#" [level=2] [ref=e633]:
+              - text: 日志压缩
+              - link "#" [ref=e634] [cursor=pointer]:
+                - /url: "#日志压缩"
+            - paragraph [ref=e635]:
+              - text: raft 运行时间久了，日志会不断增长
+              - text: 如果一直不清理：
+            - list [ref=e636]:
+              - listitem [ref=e637]: 占用越来越多的磁盘/内存
+              - listitem [ref=e638]: 节点重启恢复越来越慢
+              - listitem [ref=e639]: 落后 follower 追日志也越来越慢
+            - paragraph [ref=e640]:
+              - text: raft 的做法是：
+              - strong [ref=e641]: 快照（snapshot）
+            - list [ref=e642]:
+              - listitem [ref=e643]: 把某一时刻状态机的结果保存下来
+              - listitem [ref=e644]: 然后删除这之前已经包含进快照的日志
+            - paragraph [ref=e645]: 也就是说，节点之后保留的是：
+            - list [ref=e646]:
+              - listitem [ref=e647]: 一份快照
+              - listitem [ref=e648]: 快照之后的新日志
+            - paragraph [ref=e649]:
+              - img "522" [ref=e650]
+            - paragraph [ref=e651]: 快照除了状态机数据之外，还必须记录：
+            - list [ref=e652]:
+              - listitem [ref=e653]:
+                - code [ref=e654]: lastIncludedIndex
+              - listitem [ref=e655]:
+                - code [ref=e656]: lastIncludedTerm
+            - paragraph [ref=e657]: 因为：
+            - list [ref=e658]:
+              - listitem [ref=e659]: 压缩后，前面的日志被删掉了
+              - listitem [ref=e660]: 但 raft 仍然需要知道：快照最后覆盖到哪个日志位置，以及那个位置的任期号
+            - paragraph [ref=e661]: 删日志的场景：因为这些日志已经：
+            - list [ref=e662]:
+              - listitem [ref=e663]: committed
+              - listitem [ref=e664]: applied 到状态机
+            - paragraph [ref=e665]: 既然状态机结果已经保存在快照里，就不需要再保留它们的每一条历史日志
+            - paragraph [ref=e666]: 如果一个 follower 落后太多，以至于 leader 已经把它缺失的旧日志删掉了，那么：
+            - list [ref=e667]:
+              - listitem [ref=e668]: leader 没法再用 AppendEntries 一条条补
+            - paragraph [ref=e669]: 这时 leader 会直接发：
+            - list [ref=e670]:
+              - listitem [ref=e671]:
+                - code [ref=e672]: InstallSnapshot RPC
+            - paragraph [ref=e673]: 即：不再补旧日志了，直接把快照发过去，follower 用快照恢复状态，再接着复制后续日志
+            - heading "只读操作处理#" [level=2] [ref=e674]:
+              - text: 只读操作处理
+              - link "#" [ref=e675] [cursor=pointer]:
+                - /url: "#只读操作处理"
+            - paragraph [ref=e676]: 直觉上看：
+            - list [ref=e677]:
+              - listitem [ref=e678]: 读请求直接去 leader 读就行
+            - paragraph [ref=e679]:
+              - text: 但其实这不一定是
+              - strong [ref=e680]: 线性一致读
+            - paragraph [ref=e681]: 因为：
+            - list [ref=e682]:
+              - listitem [ref=e683]: leader 可能已经和多数派断开
+              - listitem [ref=e684]: 多数派可能已经选出了新的 leader
+              - listitem [ref=e685]: 旧 leader 如果直接返回本地状态，就可能把旧值读给客户端
+            - blockquote [ref=e686]:
+              - paragraph [ref=e687]: 强一致读最稳妥的做法就是把“读”也当作一条日志走共识，这样一定安全，但成本高
+            - paragraph [ref=e688]: 更稳妥的做法：
+            - paragraph [ref=e689]:
+              - text: 要做到
+              - strong [ref=e690]: 强一致读
+              - text: ，需要满足几个条件：
+            - list [ref=e691]:
+              - listitem [ref=e692]:
+                - strong [ref=e693]: 读请求一定发给 leader
+              - listitem [ref=e694]:
+                - strong [ref=e695]: leader 在自己任期内至少提交过一条日志
+                - list [ref=e696]:
+                  - listitem [ref=e697]: 否则它不能确定之前哪些日志已经真正提交
+                  - listitem [ref=e698]:
+                    - text: 通常可以通过提交一条
+                    - code [ref=e699]: no-op
+                    - text: 来解决
+              - listitem [ref=e700]:
+                - strong [ref=e701]: leader 在读之前，要确认自己仍然是 leader
+                - list [ref=e702]:
+                  - listitem [ref=e703]: 做法：发一轮心跳，拿到多数节点回复
+              - listitem [ref=e704]:
+                - strong [ref=e705]:
+                  - text: leader记录自己已提交的日志号为
+                  - code [ref=e706]: readIndex
+                - list [ref=e707]:
+                  - listitem [ref=e708]:
+                    - text: 只要状态机已经 apply 到
+                    - code [ref=e709]: readIndex
+                  - listitem [ref=e710]: 就可以安全读取并返回
+            - paragraph [ref=e711]:
+              - text: 如果
+              - strong [ref=e712]: 不要求强一致
+              - text: ，常见办法：
+            - list [ref=e713]:
+              - listitem [ref=e714]: follower 收到读请求
+              - listitem [ref=e715]:
+                - text: 向 leader 请求
+                - code [ref=e716]: readIndex
+              - listitem [ref=e717]: follower 等自己 apply 到这个位置
+              - listitem [ref=e718]: 再返回结果
+            - paragraph [ref=e719]: 这样可以分担读压力，但语义上已经不是“直接本地随便读”
+            - heading "性能和优化#" [level=2] [ref=e720]:
+              - text: 性能和优化
+              - link "#" [ref=e721] [cursor=pointer]:
+                - /url: "#性能和优化"
+            - paragraph [ref=e722]: 理想情况下，raft 提交一条日志，最少只需要：
+            - list [ref=e723]:
+              - listitem [ref=e724]: 一轮 AppendEntries RPC 来回(其实已经足够高效)
+            - paragraph [ref=e725]: 影响性能的主要因素：
+            - list [ref=e726]:
+              - listitem [ref=e727]:
+                - paragraph [ref=e728]:
+                  - strong [ref=e729]: 选举超时
+                - list [ref=e730]:
+                  - listitem [ref=e731]: 设置不合理会影响切主速度和稳定性
+              - listitem [ref=e732]:
+                - paragraph [ref=e733]:
+                  - strong [ref=e734]: Batch
+                - list [ref=e735]:
+                  - listitem [ref=e736]: 一次日志里可以带多个命令，然后批量进行复制
+                  - listitem [ref=e737]: 节省网络开销
+              - listitem [ref=e738]:
+                - paragraph [ref=e739]:
+                  - strong [ref=e740]: Pipeline
+                - list [ref=e741]:
+                  - listitem [ref=e742]: leader 不必等上一个 RPC 回复后，才发下一个
+                  - listitem [ref=e743]: 可以持续推送日志
+              - listitem [ref=e744]:
+                - paragraph [ref=e745]:
+                  - strong [ref=e746]: 慢 follower 不影响整体提交
+                - list [ref=e747]:
+                  - listitem [ref=e748]: 只要多数节点正常，raft 就可以继续提交
+            - paragraph [ref=e749]:
+              - img "383" [ref=e750]
+            - paragraph [ref=e751]: Raft与Paxos比较：
+            - blockquote [ref=e752]:
+              - paragraph [ref=e753]: raft 不允许日志空洞，所以它在日志结构上比很多 Paxos 变体更保守；至于真实性能，还要看具体实现和工作负载
+            - list [ref=e754]:
+              - listitem [ref=e755]: 这里的Paxos，实际上指的是一个能完美处理所有日志空洞带来的边界情况，并能保证处理这些边界情况的代价，要小于允许日志空洞带来的收益的共识算法。
+              - listitem [ref=e756]: raft确实有不允许日志空洞这个性能上限，但大部分系统实现，连raft的上限，都是远远没有达到的。所以无需考虑raft本身的瓶颈。
+              - listitem [ref=e757]: raft允许日志空洞的改造 -> ParallelRaft。
+      - generic [ref=e759]:
+        - generic [ref=e760]:
+          - img [ref=e761]
+          - generic [ref=e765]:
+            - generic [ref=e766]: Raft 小结：从复制状态机到强一致读
+            - generic [ref=e767]: http://127.0.0.1:4325/blog/raft-summary
+          - generic [ref=e768]:
+            - generic [ref=e769]:
+              - generic [ref=e770]: Author
+              - generic [ref=e771]: 玛卡巴卡
+            - generic [ref=e772]:
+              - generic [ref=e773]: Published at
+              - generic [ref=e774]: 2026年5月5日
+            - generic [ref=e775]:
+              - generic [ref=e776]: Copyright
+              - link "CC BY-NC-SA 4.0" [ref=e777] [cursor=pointer]:
+                - /url: https://creativecommons.org/licenses/by/4.0/
+          - generic [ref=e778]:
+            - generic [ref=e779]:
+              - button [ref=e780] [cursor=pointer]:
+                - img [ref=e781]
+              - button [ref=e785] [cursor=pointer]:
+                - img [ref=e786]
+              - link [ref=e790] [cursor=pointer]:
+                - /url: http://service.weibo.com/share/share.php?url=http://127.0.0.1:4325/blog/raft-summary&title=Raft 小结：从复制状态机到强一致读&pic=/@fs/Users/xjf/Public/Code/blog/fxj-pure/src/content/blog/raft-summary/Pasted image 20260428220034.png?origWidth=1122&origHeight=498&origFormat=png
+                - img [ref=e791]
+              - link [ref=e795] [cursor=pointer]:
+                - /url: https://x.com/intent/tweet?text='Raft 小结：从复制状态机到强一致读'&url='http://127.0.0.1:4325/blog/raft-summary'&via='玛卡巴卡'
+                - img [ref=e796]
+              - link [ref=e800] [cursor=pointer]:
+                - /url: https://bsky.app/intent/compose?text=Raft 小结：从复制状态机到强一致读%0Ahttp://127.0.0.1:4325/blog/raft-summary
+                - img [ref=e801]
+            - generic "http://127.0.0.1:4325/blog/raft-summary" [ref=e805]:
+              - img [ref=e806]
+        - generic [ref=e807]:
+          - link "深度学习简述" [ref=e809] [cursor=pointer]:
+            - /url: /blog/deep-learning-brief
+            - img [ref=e810]
+            - paragraph [ref=e812]: 深度学习简述
+          - link "AtCoder 题解整理 1" [ref=e814] [cursor=pointer]:
+            - /url: /blog/solutions-atcoder-1
+            - paragraph [ref=e815]: AtCoder 题解整理 1
+            - img [ref=e816]
+        - generic [ref=e820]:
+          - list [ref=e822]:
+            - listitem [ref=e823] [cursor=pointer]:
+              - generic [ref=e824]:
+                - img "Like" [ref=e825]
+                - generic [ref=e826]: 0 Like(s)
+          - generic [ref=e828]:
+            - generic [ref=e829]:
+              - generic [ref=e830]:
+                - generic [ref=e831]: NickName
+                - textbox "NickName" [ref=e832]
+              - generic [ref=e833]:
+                - generic [ref=e834]: E-Mail
+                - textbox "E-Mail" [ref=e835]
+              - generic [ref=e836]:
+                - generic [ref=e837]: Website
+                - textbox "Website" [ref=e838]
+            - textbox "Welcome to comment. (Email to receive replies. Login is unnecessary)" [ref=e839]
+            - generic [ref=e840]:
+              - generic [ref=e841]:
+                - link "Markdown is supported" [ref=e842] [cursor=pointer]:
+                  - /url: https://guides.github.com/features/mastering-markdown/
+                  - img [ref=e843]
+                - button "Emoji" [ref=e845] [cursor=pointer]:
+                  - img [ref=e846]
+                - button "GIF" [ref=e848] [cursor=pointer]:
+                  - img [ref=e849]
+                - button "Preview" [ref=e852] [cursor=pointer]:
+                  - img [ref=e853]
+              - generic [ref=e856]:
+                - generic [ref=e857]: 0 Words
+                - button "Login" [ref=e858] [cursor=pointer]
+                - button "Submit" [ref=e859] [cursor=pointer]
+          - generic [ref=e860]:
+            - generic [ref=e861]: Comments
+            - list [ref=e862]:
+              - listitem [ref=e863] [cursor=pointer]: Latest
+              - listitem [ref=e864] [cursor=pointer]: Oldest
+              - listitem [ref=e865] [cursor=pointer]: Hottest
+          - img [ref=e867]
+          - generic [ref=e869]:
+            - text: Powered by
+            - link "Waline" [ref=e870] [cursor=pointer]:
+              - /url: https://github.com/walinejs/waline
+            - text: v3.6.0
+      - button "Back to Top" [ref=e872] [cursor=pointer]:
+        - generic [ref=e873]:
+          - generic [ref=e874]: "10"
+          - generic [ref=e875]: "%"
+        - img [ref=e876]
+    - contentinfo [ref=e880]:
+      - generic [ref=e882]:
+        - generic [ref=e883]:
+          - link "蜀ICP备2024053343号-1" [ref=e886] [cursor=pointer]:
+            - /url: https://beian.miit.gov.cn/
+          - generic [ref=e887]:
+            - text: © 2026 玛卡巴卡 &
+            - link "Site Policy" [ref=e890] [cursor=pointer]:
+              - /url: /terms/list
+          - generic [ref=e891]:
+            - link "Astro" [ref=e892] [cursor=pointer]:
+              - /url: https://github.com/withastro/astro
+            - text: "&"
+            - link "Pure theme" [ref=e893] [cursor=pointer]:
+              - /url: https://github.com/cworld1/astro-theme-pure
+            - text: powered
+        - generic [ref=e894]:
+          - link "github" [ref=e895] [cursor=pointer]:
+            - /url: https://github.com/bakebakebakebake
+            - img [ref=e896]
+          - link "rss" [ref=e900] [cursor=pointer]:
+            - /url: /rss.xml
+            - img [ref=e901]
+  - generic [ref=e907]:
+    - button "Menu" [ref=e908]:
+      - img [ref=e910]
+      - generic: Menu
+    - button "Inspect" [ref=e914]:
+      - img [ref=e916]
+      - generic: Inspect
+    - button "Audit" [ref=e918]:
+      - generic [ref=e919]:
+        - img [ref=e920]
+        - img [ref=e923]
+      - generic: Audit
+    - button "Settings" [ref=e926]:
+      - img [ref=e928]
+      - generic: Settings

@@ -58,6 +58,7 @@ const { selector = config.integ.mediumZoom.selector, background = 'hsl(var(--bac
     if (!images.length) return
 
     const root = createViewer()
+    const shell = root.querySelector('.content-image-viewer__shell')
     const viewport = root.querySelector('.content-image-viewer__viewport')
     const viewerImage = root.querySelector('.content-image-viewer__image')
     const zoomInButton = root.querySelector('[data-zoom-in]')
@@ -140,6 +141,10 @@ const { selector = config.integ.mediumZoom.selector, background = 'hsl(var(--bac
       const target = event.target
       if (!(target instanceof HTMLElement)) return
       if (target.dataset.viewerClose === 'true') {
+        closeViewer()
+        return
+      }
+      if (target === viewport || target === shell) {
         closeViewer()
       }
     })
