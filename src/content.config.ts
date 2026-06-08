@@ -64,7 +64,7 @@ const blog = defineCollection({
 })
 
 const blogEn = defineCollection({
-  loader: glob({ base: './src/content/blog/en', pattern: '**/*.md' }),
+  loader: glob({ base: './src/content/blog', pattern: 'en/**/*.md' }),
   schema: ({ image }) =>
     z
       .object({
