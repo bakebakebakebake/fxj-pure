@@ -9,7 +9,7 @@ import { unified } from 'unified'
 import { visit } from 'unist-util-visit'
 import config from 'virtual:config'
 
-import { getRawEnglishBlogCollection, sortLocalizedBlogByDate } from '@/utils/blog'
+import { getRawEnglishBlogCollection, normalizeBlogId, sortLocalizedBlogByDate } from '@/utils/blog'
 
 const imagesGlob = import.meta.glob<{ default: ImageMetadata }>(
   '/src/content/blog/**/*.{jpeg,jpg,png,gif,avif,webp}'
@@ -35,7 +35,7 @@ const renderContent = async (post: Awaited<ReturnType<typeof getRawEnglishBlogCo
         if (/^https?:\/\//u.test(node.url)) return
 
         const root = post.collection === 'blogEn' ? '/src/content/blog/en' : '/src/content/blog'
-        const imagePathPrefix = `${root}/${post.id}/${node.url.replace('./', '')}`
+        const imagePathPrefix = `${root}/${normalizeBlogId(post.id)}/${node.url.replace('./', '')}`
         const promise = imagesGlob[imagePathPrefix]?.().then(async (res) => {
           const imagePath = res?.default
           if (imagePath) node.url = new URL((await getImage({ src: imagePath })).src, site).toString()
@@ -59,9 +59,9 @@ const renderContent = async (post: Awaited<ReturnType<typeof getRawEnglishBlogCo
 const GET = async (context: AstroGlobal) => {
   const posts = sortLocalizedBlogByDate(
     (await getRawEnglishBlogCollection())
-      .filter((post) => post.id !== '__internal-placeholder')
+      .filter((post) => normalizeBlogId(post.id) !== '__internal-placeholder')
       .map((post) => ({
-      id: post.id,
+      id: normalizeBlogId(post.id),
       sourceId: post.id,
       isPlaceholder: false,
       locale: 'en' as const,
@@ -72,8 +72,8 @@ const GET = async (context: AstroGlobal) => {
   const siteUrl = context.site ?? new URL(import.meta.env.SITE)
   const postMap = new Map(
     (await getRawEnglishBlogCollection())
-      .filter((post) => post.id !== '__internal-placeholder')
-      .map((post) => [post.id, post])
+      .filter((post) => normalizeBlogId(post.id) !== '__internal-placeholder')
+      .map((post) => [normalizeBlogId(post.id), post])
   )
 
   return rss({

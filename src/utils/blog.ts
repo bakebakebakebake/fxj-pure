@@ -4,6 +4,8 @@ import { isEnglishContent } from './i18n'
 
 type BlogEntry = CollectionEntry<'blog'>
 type BlogEnEntry = CollectionEntry<'blogEn'>
+type AnyBlogEntry = BlogEntry | BlogEnEntry
+type LocalizedCollection = 'blog' | 'blogEn'
 
 export type LocalizedBlogPreview = {
   id: string
@@ -31,40 +33,43 @@ export type LocalizedBlogPreview = {
 export async function getZhBlogCollection() {
   return await getCollection(
     'blog',
-    ({ id, data }) => (import.meta.env.PROD ? !data.draft : true) && !id.startsWith('en/')
+    ({ id, data }: BlogEntry) => (import.meta.env.PROD ? !data.draft : true) && !id.startsWith('en/')
   )
 }
 
 export async function getRawEnglishBlogCollection() {
-  const englishMirror = await getCollection('blogEn', ({ data }) =>
+  const englishMirror = await getCollection('blogEn', ({ data }: BlogEnEntry) =>
     import.meta.env.PROD ? !data.draft : true
   )
-  const nativeEnglish = (await getZhBlogCollection()).filter((post) => isEnglishContent(post.data.language))
+  const nativeEnglish = (await getZhBlogCollection()).filter((post: BlogEntry) =>
+    isEnglishContent(post.data.language)
+  )
   return dedupeEnglishEntries([
-    ...nativeEnglish.map((post) => ({ ...post, collection: 'blog' as const })),
-    ...englishMirror.map((post) => ({ ...post, collection: 'blogEn' as const }))
+    ...nativeEnglish.map((post: BlogEntry) => ({ ...post, collection: 'blog' as const })),
+    ...englishMirror.map((post: BlogEnEntry) => ({ ...post, collection: 'blogEn' as const }))
   ])
 }
 
 export async function getLocalizedBlogPreviews(locale: Locale): Promise<LocalizedBlogPreview[]> {
   const zhPosts = await getZhBlogCollection()
   if (locale === 'zh') {
-    return await Promise.all(zhPosts.map((post) => toLocalizedPreview(post, 'zh', false)))
+    return await Promise.all(zhPosts.map((post: BlogEntry) => toLocalizedPreview(post, 'zh', false)))
   }
 
   const englishPosts = await getRawEnglishBlogCollection()
-  const englishMap = new Map(englishPosts.map((post) => [post.id, post]))
+  const englishMap = new Map(englishPosts.map((post) => [normalizeBlogId(post.id), post]))
 
-  return await Promise.all(zhPosts.map(async (zhPost) => {
-    const englishPost = englishMap.get(zhPost.id)
+  return await Promise.all(zhPosts.map(async (zhPost: BlogEntry) => {
+    const englishPost = englishMap.get(normalizeBlogId(zhPost.id))
     if (englishPost) return await toLocalizedPreview(englishPost, 'en', false, zhPost)
     return await toLocalizedPreview(zhPost, 'en', true)
   }))
 }
 
 export async function getLocalizedBlogEntry(locale: Locale, id: string) {
+  const normalizedId = normalizeBlogId(id)
   const zhPosts = await getZhBlogCollection()
-  const zhPost = zhPosts.find((post) => post.id === id)
+  const zhPost = zhPosts.find((post: BlogEntry) => normalizeBlogId(post.id) === normalizedId)
   if (!zhPost) return null
 
   if (locale === 'zh') {
@@ -76,7 +81,9 @@ export async function getLocalizedBlogEntry(locale: Locale, id: string) {
   }
 
   const englishPosts = await getRawEnglishBlogCollection()
-  const englishPost = englishPosts.find((post) => post.id === id)
+  const englishPost = englishPosts.find(
+    (post: AnyBlogEntry) => normalizeBlogId(post.id) === normalizedId
+  )
   if (englishPost) {
     return {
       kind: 'entry' as const,
@@ -118,20 +125,21 @@ export function getLocalizedTagsWithCount(posts: LocalizedBlogPreview[]) {
   return [...counts.entries()].sort((a, b) => b[1] - a[1])
 }
 
-function dedupeEnglishEntries(entries: (BlogEntry | BlogEnEntry & { collection?: 'blog' | 'blogEn' })[]) {
-  const map = new Map<string, BlogEntry | BlogEnEntry>()
+function dedupeEnglishEntries(entries: (AnyBlogEntry & { collection?: LocalizedCollection })[]) {
+  const map = new Map<string, AnyBlogEntry>()
   for (const entry of entries) {
+    const normalizedId = normalizeBlogId(entry.id)
     if (entry.collection === 'blogEn') {
-      map.set(entry.id, entry)
+      map.set(normalizedId, entry)
       continue
     }
-    if (!map.has(entry.id)) map.set(entry.id, entry)
+    if (!map.has(normalizedId)) map.set(normalizedId, entry)
   }
   return [...map.values()]
 }
 
 async function toLocalizedPreview(
-  post: BlogEntry | BlogEnEntry,
+  post: AnyBlogEntry & { collection?: LocalizedCollection },
   locale: Locale,
   isPlaceholder: boolean,
   source?: BlogEntry
@@ -144,11 +152,11 @@ async function toLocalizedPreview(
   const minutesRead = await getMinutesRead(source ?? post)
 
   return {
-    id: post.id,
+    id: normalizeBlogId(post.id),
     sourceId: post.id,
     isPlaceholder,
     locale,
-    collection: post.collection as 'blog' | 'blogEn',
+    collection: post.collection === 'blogEn' ? 'blogEn' : 'blog',
     data: {
       ...post.data,
       minutesRead,
@@ -168,4 +176,8 @@ async function toLocalizedPreview(
 async function getMinutesRead(post: BlogEntry | BlogEnEntry) {
   const { remarkPluginFrontmatter } = await render(post)
   return remarkPluginFrontmatter.minutesRead as string | undefined
+}
+
+export function normalizeBlogId(id: string) {
+  return id.replace(/^en\//u, '').replace(/\/index$/u, '').replace(/\/$/u, '')
 }
