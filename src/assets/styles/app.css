@@ -165,13 +165,30 @@ mark {
   background: hsl(var(--content-code-bg)) !important;
 }
 
+#content :where(.astro-code pre) {
+  background: hsl(var(--content-code-bg)) !important;
+}
+
 #content :where(.astro-code pre code::before, .astro-code pre code .line::before) {
   background: hsl(var(--content-code-bg)) !important;
   box-shadow: none !important;
 }
 
+#content :where(.astro-code pre code .line::before) {
+  background: hsl(var(--content-code-bg)) !important;
+  border-inline-end: 1px solid hsl(var(--border) / 0.72);
+  color: hsl(var(--muted-foreground) / 0.88) !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
 #content :where(.astro-code [data-language], .astro-code [data-line-numbers]) {
   background: hsl(var(--content-code-bg)) !important;
+}
+
+#content :where(.astro-code [data-line-numbers]::before, .astro-code pre code::before) {
+  background: hsl(var(--content-code-bg)) !important;
+  box-shadow: none !important;
 }
 
 #content :where(pre, .astro-code) code {
@@ -265,6 +282,15 @@ mark {
   color: hsl(var(--foreground) / 1);
   background: hsl(var(--obsidian-note-bg));
   border-color: hsl(var(--obsidian-note));
+}
+
+#content :where(.aside, .obsidian-callout) {
+  margin-block: 1rem !important;
+}
+
+.aside-content:empty,
+.obsidian-callout .aside-content:empty {
+  display: none;
 }
 
 .aside > .aside-container.aside-tip,

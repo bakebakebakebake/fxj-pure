@@ -150,12 +150,18 @@ function stripCommentBlocks(tree: Root) {
     const plainText = extractPlainText(node).trim()
 
     if (!inCommentBlock && plainText.startsWith('%%')) {
-      inCommentBlock = !plainText.endsWith('%%')
+      if (isStandaloneCommentDelimiter(plainText)) {
+        inCommentBlock = true
+      } else if (!plainText.endsWith('%%')) {
+        inCommentBlock = true
+      }
       continue
     }
 
     if (inCommentBlock) {
-      if (plainText.endsWith('%%')) inCommentBlock = false
+      if (isStandaloneCommentDelimiter(plainText) || plainText.endsWith('%%')) {
+        inCommentBlock = false
+      }
       continue
     }
 
@@ -525,6 +531,10 @@ function extractPlainText(node: unknown): string {
     return node.children.map((child) => extractPlainText(child)).join('')
   }
   return ''
+}
+
+function isStandaloneCommentDelimiter(value: string) {
+  return value === '%%'
 }
 
 function joinStyles(...styles: unknown[]) {

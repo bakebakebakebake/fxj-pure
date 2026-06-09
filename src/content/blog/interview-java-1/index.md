@@ -750,7 +750,8 @@ synchronizedList(List<T> list)//返回指定列表支持的同步（线程安全
 synchronizedMap(Map<K,V> m) //返回由指定映射支持的同步（线程安全的）Map。
 synchronizedSet(Set<T> s) //返回指定 set 支持的同步（线程安全的）set。
 ```
-%% 
+
+<!--
 ## Java 基础总结
 
 ##### 动态代理
@@ -1300,4 +1301,5 @@ public class MyServiceLoader<S> {
 - 遍历加载所有的实现类，这样效率还是相对较低的；
 - 当多个 `ServiceLoader` 同时 `load` 时，会有并发问题。
 
- %%
+
+-->

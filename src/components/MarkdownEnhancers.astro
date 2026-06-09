@@ -446,13 +446,14 @@
 
       if (!inCommentBlock && text.startsWith('%%')) {
         child.remove()
-        if (!text.endsWith('%%')) inCommentBlock = true
+        if (text === '%%') inCommentBlock = true
+        else if (!text.endsWith('%%')) inCommentBlock = true
         return
       }
 
       if (inCommentBlock) {
         child.remove()
-        if (text.endsWith('%%')) inCommentBlock = false
+        if (text === '%%' || text.endsWith('%%')) inCommentBlock = false
         return
       }
 

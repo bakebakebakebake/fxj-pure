@@ -68,12 +68,18 @@ function walkCommentArtifacts(parent: Root | Element) {
     const text = extractText(node).trim()
 
     if (!inCommentBlock && startsCommentBlock(text)) {
-      if (!endsCommentBlock(text)) inCommentBlock = true
+      if (isStandaloneCommentDelimiter(text)) {
+        inCommentBlock = true
+      } else if (!endsCommentBlock(text)) {
+        inCommentBlock = true
+      }
       continue
     }
 
     if (inCommentBlock) {
-      if (endsCommentBlock(text)) inCommentBlock = false
+      if (isStandaloneCommentDelimiter(text) || endsCommentBlock(text)) {
+        inCommentBlock = false
+      }
       continue
     }
 
@@ -619,6 +625,11 @@ function promoteLeadParagraph(bodyChildren: RootContent[]) {
       continue
     }
 
+    if (index > splitIndex) {
+      bodyNodes.push(child)
+      continue
+    }
+
     const [before, ...after] = child.value.split('\n')
     if (index === splitIndex && before.length) {
       titleNodes.push({ ...child, value: before })
@@ -675,4 +686,8 @@ function startsCommentBlock(value: string) {
 
 function endsCommentBlock(value: string) {
   return value.endsWith('%%')
+}
+
+function isStandaloneCommentDelimiter(value: string) {
+  return value === '%%'
 }
