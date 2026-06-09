@@ -165,6 +165,14 @@ mark {
   background: hsl(var(--content-code-bg)) !important;
 }
 
+#content :where(.astro-code > .language, .astro-code > .copy) {
+  background: hsl(var(--content-code-bg)) !important;
+}
+
+#content :where(.astro-code > .copy) {
+  border-color: hsl(var(--border) / 0.88) !important;
+}
+
 #content :where(.astro-code pre) {
   background: hsl(var(--content-code-bg)) !important;
 }
@@ -189,6 +197,11 @@ mark {
 #content :where(.astro-code [data-line-numbers]::before, .astro-code pre code::before) {
   background: hsl(var(--content-code-bg)) !important;
   box-shadow: none !important;
+}
+
+#content :where(.astro-code .title) {
+  background: hsl(var(--content-code-bg)) !important;
+  border-color: hsl(var(--border) / 0.88) !important;
 }
 
 #content :where(pre, .astro-code) code {
@@ -327,6 +340,11 @@ mark {
 .aside-content > :last-child,
 .obsidian-callout .aside-content > :last-child {
   margin-bottom: 0;
+}
+
+.aside-content :where(p),
+.obsidian-callout .aside-content :where(p) {
+  white-space: pre-line;
 }
 
 .obsidian-collapse {

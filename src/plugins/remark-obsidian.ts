@@ -148,6 +148,21 @@ function stripCommentBlocks(tree: Root) {
 
   for (const node of tree.children) {
     const plainText = extractPlainText(node).trim()
+    const htmlCommentState = readHtmlCommentState(node)
+
+    if (htmlCommentState === 'inline') {
+      continue
+    }
+
+    if (!inCommentBlock && htmlCommentState === 'start') {
+      inCommentBlock = true
+      continue
+    }
+
+    if (inCommentBlock && htmlCommentState === 'end') {
+      inCommentBlock = false
+      continue
+    }
 
     if (!inCommentBlock && plainText.startsWith('%%')) {
       if (isStandaloneCommentDelimiter(plainText)) {
@@ -535,6 +550,21 @@ function extractPlainText(node: unknown): string {
 
 function isStandaloneCommentDelimiter(value: string) {
   return value === '%%'
+}
+
+function readHtmlCommentState(node: unknown) {
+  if (!node || typeof node !== 'object' || !('type' in node) || node.type !== 'html') {
+    return null
+  }
+
+  const value = extractPlainText(node).trim()
+  if (!value || /^<!--\s*steps\s*-->$/iu.test(value)) return null
+  if (/^<!--[\s\S]*-->$/u.test(value)) return 'inline'
+  if (/^<!--(?:\s*)$/u.test(value)) return 'start'
+  if (/^(?:\s*)-->$/u.test(value)) return 'end'
+  if (value.startsWith('<!--') && !value.includes('-->')) return 'start'
+  if (value.endsWith('-->')) return 'end'
+  return null
 }
 
 function joinStyles(...styles: unknown[]) {

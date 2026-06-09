@@ -80,7 +80,7 @@ export const addLanguage = (): ShikiTransformer => {
       const span = h(
         'span',
         {
-          class: 'language ps-1 pe-3 text-sm bg-muted text-muted-foreground'
+          class: 'language ps-1 pe-3 text-sm text-muted-foreground'
         },
         this.options.lang
       )
@@ -99,7 +99,7 @@ export const addCopyButton = (timeout?: number): ShikiTransformer => {
       const button = h(
         'button',
         {
-          class: 'copy text-muted-foreground p-1 box-content border rounded bg-primary-foreground',
+          class: 'copy text-muted-foreground p-1 box-content border rounded',
           'data-code': this.source,
           onclick: `
           navigator.clipboard.writeText(this.dataset.code);

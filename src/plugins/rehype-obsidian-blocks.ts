@@ -9,11 +9,16 @@ const calloutTypeMap: Record<string, 'note' | 'tip' | 'caution' | 'danger'> = {
   tip: 'tip',
   hint: 'tip',
   important: 'tip',
+  success: 'tip',
   warning: 'caution',
   caution: 'caution',
   attention: 'caution',
+  question: 'caution',
+  example: 'note',
+  cite: 'note',
   danger: 'danger',
-  error: 'danger'
+  error: 'danger',
+  fail: 'danger'
 }
 
 const selectorMap = new Map<string, 'tabs' | 'timeline' | 'card'>([
@@ -535,14 +540,6 @@ function renderCallout(node: Element) {
     bodyChildren.push(child)
   }
 
-  if (!hasExplicitTitle(parsedMarker) && bodyChildren.length > 0) {
-    const [leadTitle, trimmedBody] = promoteLeadParagraph(bodyChildren)
-    if (leadTitle.length) {
-      titleNodes.splice(0, titleNodes.length, ...leadTitle)
-      bodyChildren.splice(0, bodyChildren.length, ...trimmedBody)
-    }
-  }
-
   return foldMarker === '+' || foldMarker === '-'
     ? createCollapse(type, titleNodes, bodyChildren, foldMarker === '+')
     : createCallout(type, titleNodes, bodyChildren)
@@ -593,57 +590,6 @@ function parseCalloutMarker(paragraph: Element) {
     introChildren,
     hasExplicitTitle: Boolean(titleLead.trim() || implicitTitle)
   }
-}
-
-function hasExplicitTitle(parsedMarker: {
-  hasExplicitTitle: boolean
-}) {
-  return parsedMarker.hasExplicitTitle
-}
-
-function promoteLeadParagraph(bodyChildren: RootContent[]) {
-  const [firstChild, ...rest] = bodyChildren
-  if (!firstChild || !isElement(firstChild, 'p')) return [[], bodyChildren] as const
-
-  const splitIndex = firstChild.children.findIndex(
-    (child) => child.type === 'text' && child.value.includes('\n')
-  )
-
-  if (splitIndex === -1) return [[], bodyChildren] as const
-
-  const titleNodes: RootContent[] = []
-  const bodyNodes: RootContent[] = []
-
-  for (const [index, child] of firstChild.children.entries()) {
-    if (child.type !== 'text') {
-      ;(bodyNodes.length ? bodyNodes : titleNodes).push(child)
-      continue
-    }
-
-    if (index < splitIndex) {
-      titleNodes.push(child)
-      continue
-    }
-
-    if (index > splitIndex) {
-      bodyNodes.push(child)
-      continue
-    }
-
-    const [before, ...after] = child.value.split('\n')
-    if (index === splitIndex && before.length) {
-      titleNodes.push({ ...child, value: before })
-    }
-
-    const remainder = after.join('\n').trimStart()
-    if (remainder.length) {
-      bodyNodes.push({ ...child, value: remainder })
-    }
-  }
-
-  if (!titleNodes.length || !bodyNodes.length) return [[], bodyChildren] as const
-
-  return [titleNodes, [h('p', bodyNodes) as RootContent, ...rest]] as const
 }
 
 function walkEmbedParagraphs(parent: Root | Element) {
