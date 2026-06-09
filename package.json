@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:check": "astro check --watch & astro dev",
-    "build": "astro-pure check && astro check && astro build",
+    "build": "rm -rf .astro dist && astro-pure check && astro check && astro build",
     "preview": "astro preview",
     "sync": "astro sync",
     "migrate:blog:obsidian": "node scripts/migrate-blog-to-obsidian.mjs",
