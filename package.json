@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:check": "astro check --watch & astro dev",
-    "build": "rm -rf .astro dist && astro-pure check && astro check && astro build",
+    "build": "rm -rf .astro node_modules/.astro dist && astro-pure check && astro check && astro build",
     "preview": "astro preview",
     "sync": "astro sync",
     "migrate:blog:obsidian": "node scripts/migrate-blog-to-obsidian.mjs",
@@ -21,7 +21,7 @@
     "format": "prettier --write  '**/*.{js,jsx,ts,tsx,md,mdx,astro}'",
     "lint": "eslint --fix 'src/**/*.{js,ts,jsx,tsx,astro}'",
     "yijiansilian": "bun lint && bun sync && bun check && bun format",
-    "clean": "rm -rf .astro .vercel dist"
+    "clean": "rm -rf .astro node_modules/.astro .vercel dist"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

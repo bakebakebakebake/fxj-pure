@@ -537,12 +537,42 @@ function renderCallout(node: Element) {
   const firstParagraphIndex = contentChildren.indexOf(firstParagraph)
   for (const child of contentChildren.slice(firstParagraphIndex + 1)) {
     if (isParentElement(child)) walkCallouts(child)
-    bodyChildren.push(child)
+    bodyChildren.push(...normalizeCalloutBodyNode(child))
   }
 
   return foldMarker === '+' || foldMarker === '-'
     ? createCollapse(type, titleNodes, bodyChildren, foldMarker === '+')
     : createCallout(type, titleNodes, bodyChildren)
+}
+
+function normalizeCalloutBodyNode(node: RootContent) {
+  if (!isElement(node, 'p')) return [node]
+
+  const paragraphs = splitParagraphByNewlines(node)
+  return paragraphs.length ? paragraphs : [node]
+}
+
+function splitParagraphByNewlines(paragraph: Element) {
+  const segments: RootContent[][] = [[]]
+
+  for (const child of paragraph.children) {
+    if (child.type !== 'text' || !child.value.includes('\n')) {
+      segments.at(-1)?.push(child as RootContent)
+      continue
+    }
+
+    const pieces = child.value.split('\n')
+
+    pieces.forEach((piece, index) => {
+      if (piece) segments.at(-1)?.push({ type: 'text', value: piece })
+      if (index < pieces.length - 1) segments.push([])
+    })
+  }
+
+  return segments
+    .map((children) => children.filter((child) => !isWhitespaceText(child)))
+    .filter((children) => children.length > 0)
+    .map((children) => h('p', children) as RootContent)
 }
 
 function parseCalloutMarker(paragraph: Element) {
